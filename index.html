@@ -7,7 +7,7 @@
 
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     
     <!-- Font Awesome for Top Bar Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,11 +20,9 @@
     <!-- Google Material Symbols (for body icons) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-
-
     
          <!-- Favicon -->
-  <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/fa62e06dd2b6ed2d1d9e77e5dd944bef2904d5d1.png">
+  <link rel="icon" href="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp">
 
 
     <!-- Meta Etiquetas -->
@@ -34,7 +32,6 @@
 <meta name="copyright" content="Copyright © 2025 Easy Listings. Todos los derechos reservados.">
 <meta name="revised" content="Martes, 26 de Agosto de 2025">
     
-
     <!-- Open Graph / Facebook -->
 <meta property="og:type" content="sitio web">
 <meta property="og:url" content="https://easylistings.website/">
@@ -171,6 +168,10 @@
             background-color: var(--border-color); 
             transform: scale(1.1); 
         }
+        
+        
+        
+        
 
         .header-banner {
             width: 100%; 
@@ -201,6 +202,13 @@
             max-width: 1080px; 
             margin: 0 auto; 
         }
+        
+        
+        
+        
+        
+        
+        
 
         /* Badge hover effect */
         .hero-badge { 
@@ -227,6 +235,10 @@
             transform-origin: 70% 70%; 
         }
         
+        
+        
+        
+        
         /* Text hover effect */
         .hover-primary { 
             transition: color 0.3s ease; 
@@ -235,11 +247,15 @@
         .hover-primary:hover { 
             color: var(--primary); 
         }
+        
+        
+        
 
         .primary-btn {
             background-color: var(--primary); 
             color: white; 
             transition: all 0.3s ease;
+            padding: 15px 24px;
         }
         
         .primary-btn:hover { 
@@ -537,9 +553,16 @@
             top: 0; 
         }
         
+        
+        
+        
+        
         .material-symbols-outlined { 
             vertical-align: middle; 
         }
+        
+        
+        
 
         /* Back to top button */
         #backToTopBtn {
@@ -568,6 +591,11 @@
             visibility: visible; 
             transform: translateY(0);
         }
+        
+        
+        
+        
+        
 
         .bebell-footer p {
             align-items: center;
@@ -598,6 +626,9 @@
             50% { transform: scale(1.3); }
             100% { transform: scale(1); }
         }
+        
+        
+        
 
         /* FAQ Component Section */
         #faq {
@@ -633,6 +664,11 @@
         .faq-item.active .material-symbols-outlined {
             transform: rotate(180deg);
         }
+        
+        
+        
+        
+        
 
         /* Testimonial Section */
         .testimonial-section {
@@ -664,6 +700,12 @@
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(2px);
         }
+        
+        
+        
+        
+        
+        
 
         .testimonial-signature {
             font-family: 'Caveat', cursive;
@@ -723,7 +765,7 @@
             .fb-comments-container {
                 padding: 0rem;
             }
-}
+
 
 
 
@@ -780,7 +822,7 @@
             }
 
 
- .bebell-footer p {
+ 			.bebell-footer p {
             align-items: center;
             text-align: center;
             font-size: 10px;
@@ -789,15 +831,11 @@
             padding: 10px;
         }
 
-
-
-
-   /* Active state when FAQ is open */
-        .faq-item.active .faq-answer {
+   		/* Active state when FAQ is open */
+        	.faq-item.active .faq-answer {
             display: block;
             max-height: 500px;
         }
-
 
            .testimonial-signature {
                 font-size: 1.75rem;
@@ -832,6 +870,8 @@
     .theme-image-container:hover #theme-image-hover {
         opacity: 1;
     }
+    
+    
 
 
 /* Facebook Comments Styling */
@@ -866,19 +906,11 @@
 }
 
 
-
-
     </style>
 
 
-
-
 <!-- Facebook SDK -->
-
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
-
-
-
 
 </head>
 <body class="antialiased">
@@ -889,9 +921,9 @@
     <!-- Barra de Menú Superior -->
     <div class="top-menu-bar">
         <div class="top-menu-content">
-            <div class="logo-container">
-                <img id="appLogo" src="https://bucket.mlcdn.com/a/3336/3336910/images/fa62e06dd2b6ed2d1d9e77e5dd944bef2904d5d1.png" alt="Logo de Easy Listings">
-                <span id="appBrandNameDisplay">Easy Listings</span>
+            <div class="logo-container gap-2">
+                <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Logo de Easy Listings">
+                <span id="appBrandNameDisplay">Easy<span class="text-[#df1783]">Listings</span></span>
             </div>
             <div class="top-menu-actions">
 
@@ -899,7 +931,9 @@
                 <div class="fab" title="Inglés / English 🇺🇸" onclick="window.open('https://bebell-digital-solutions.github.io/easy-listings-website/english', '_self')"><i class="fa fa-globe"></i></div>
                 <div class="fab" title="Soporte" onclick="window.open('https://helpcenter.easylistings.website', '_blank')"><i class="fa fa-info-circle"></i></div>
                 <div class="fab" id="darkModeToggle" title="Cambiar Tema" style="margin-right: 10px;"><i class="fas fa-moon"></i></div>
-                <a href="#pricing" class="primary-btn font-semibold px-4 py-2 rounded-lg text-sm hidden sm:block">Crea Tu Catálogo</a>
+                
+                <a href="#pricing" class="primary-btn font-semibold px-6 py-4 rounded-xl text-md hidden sm:block">Crea Tu Listing</a>
+                
             </div>
         </div>
     </div>
@@ -915,13 +949,22 @@
             <div class="hero-badge inline-block bg-[var(--primary)] text-white font-semibold px-4 py-2 rounded-full mb-6">
                 ¡Hola! <div class="waving-hand">👋</div>
             </div>
+            
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-white section-headline">Muestra Tus Propiedades, No Tu Álbum de Fotos.</h1>
+            
             <p class="max-w-3xl mx-auto text-lg md:text-xl mb-8 text-gray-200">
+            
                 <span class="hover-primary"><strong>Easy Listings</strong></span> convierte tus imágenes caóticas en un catálogo impresionante y adaptable a móviles que captura leads automáticamente.<strong> Hazlo tuyo.</strong>
             </p>
+            
+            
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="#pricing" class="primary-btn text-lg font-bold px-8 py-4 rounded-lg w-full sm:w-auto">Obtén Mi Oferta Vitalicia $49</a>
-                <button id="openVideoModal" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-lg font-semibold px-8 py-4 rounded-lg transition w-full sm:w-auto">Ver Video Demostrativo</button>
+            
+                <a href="#pricing" class="primary-btn text-lg font-bold px-8 py-4 rounded-xl w-full sm:w-auto">Obtén Mi Oferta Vitalicia $49</a>
+                
+                
+                <button id="openVideoModal" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-lg font-semibold px-8 py-4 rounded-xl transition w-full sm:w-auto">Ver Video Demostrativo</button>
+                
             </div>
         </div>
     </header>
@@ -953,23 +996,25 @@
             </div>
     
 
+
+
         <!-- Versión Alternativa -->
     
             <div class="p-8 md:p-12 mb-0">
                 <div class="text-center mb-8">
-                    <h3 class="text-2xl font-bold mb-2">Confiado por Líderes de la Industria</h3>
+                    <h3 class="text-2xl font-bold mb-2">Integraciones Poderosas</h3>
                     <p class="text-sm text-[var(--text-light)] max-w-3xl mx-auto">
-                        Nuestra tecnología impulsa a profesionales inmobiliarios en todo el mundo
+           Easy Listings ofrece integraciones con líderes de la industraa
                     </p>
                 </div>
 
-                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8">
             
 <!-- Google -->
                     <div class="logo-item">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" 
                              alt="Google" 
-                             class="h-10 object-contain mx-auto">
+                             class="h-8 object-contain mx-auto">
                     </div>
 
 
@@ -978,27 +1023,31 @@
                     <div class="logo-item">
                         <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2cb4bb6a11eb0c8fd783e24b6e4cf3144af06679.png" 
                              alt="Google Sheets" 
-                             class="h-14 object-contain mx-auto">
+                             class="h-12 object-contain mx-auto">
                     </div>
                     
                     
-
-<!-- WhatsApp -->
-                    <div class="logo-item">
-                        <img src="https://bucket.mlcdn.com/a/3336/3336910/images/879d9dfcf77ccc6eb5e173013f3ecae3372f0545.png" 
-                             alt="WhatsApp" 
-                             class="h-14 object-contain mx-auto">
-                    </div>
-
-
                     
-                    <!-- Meta -->
+                     <!-- Meta -->
                     <div class="logo-item">
                         <img src="https://bucket.mlcdn.com/a/3336/3336910/images/707e380e0b4338a3c8a76c60fb416582ec3fbca4.png" 
                              alt="Meta" 
-                             class="h-12 object-contain mx-auto">
+                             class="h-10 object-contain mx-auto">
                     </div>
-                </div>
+               
+                    
+                    
+
+					<!-- WhatsApp -->
+                    <div class="logo-item">
+                        <img src="https://bucket.mlcdn.com/a/3336/3336910/images/879d9dfcf77ccc6eb5e173013f3ecae3372f0545.png" 
+                             alt="WhatsApp" 
+                             class="h-10 object-contain mx-auto">
+                    </div>
+
+
+                    
+                 </div>   
             </div>
         </section>
 
@@ -1426,7 +1475,7 @@
         <h2 class="text-white text-3xl md:text-4xl font-bold text-center mb-12 section-headline">Exhibieron, <span class="hover-primary">Causaron una Buena Impresión</span>, Cerraron Tratos</h2>
         
         <div class="card rounded-xl p-14 md:p-20 bg-gradient-to-b from-[#DF1783] to-[#DF1783] border-0 shadow-xl">
-            <img src="https://bucket.mlcdn.com/a/3336/3336910/images/7df974a7f62f6085550d30ad893258cee11795eb.png" alt="Especialista en Propiedades de Lujo Carla M." class="w-24 h-24 rounded-full mx-auto mb-6">
+            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/easylistings-button.webp" alt="Especialista en Propiedades de Lujo Carla M." class="w-24 h-24 rounded-full mx-auto mb-6">
             <p class="text-xl text-white md:text-2xl italic mb-6">"Antes me aterraba la idea de enviar listados a clientes de alto valor. <span class="hover-primary">Easy Listings</span> lo cambió todo. Ahora exhibo mis propiedades en una galería que rivaliza con las de las mejores agencias. La captura automática de leads es la joya oculta—organizó mi flujo de trabajo por completo."</p>
             <p class="testimonial-signature">Elizabeth Then, Especialista en Propiedades de Lujo</p>
 
@@ -1443,14 +1492,19 @@
 
 
 
+
+
+
+
+
 <!-- Pie de Página -->
 <footer class="bg-[var(--secondary)] text-white pt-6">
     <div class="container mx-auto px-6 py-16">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div class="col-span-2 md:col-span-1">
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/fa62e06dd2b6ed2d1d9e77e5dd944bef2904d5d1.png" alt="Logo de Easy Listings" class="h-10 w-10 rounded-lg">
-                    <span class="text-xl font-bold">Easy Listings</span>
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Logo de Easy Listings" class="h-8 w-8 rounded-lg">
+                    <span class="text-xl font-bold">EasyListings</span>
                 </div>
                 <p class="text-[var(--text-light)]">Exhibe Tus Propiedades. Define Tu Marca.</p>
             </div>
