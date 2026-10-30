@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Easy Listings — Panel de Control</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js for Data Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Chart.js for visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              pink: '#d91670',
+              pinkHover: '#be1260',
+              pinkLight: '#f48fb1',
+              navy: '#0f172a',
+              bg: '#fbfcfe',
+              border: '#e5e7eb',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fbfcfe;
+      color: #0f172a;
+    }
+
+    /* Interactive Button Hover Animations */
+    .btn-interactive {
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-interactive:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px -3px rgba(15, 23, 42, 0.12), 0 3px 6px -2px rgba(15, 23, 42, 0.06);
+    }
+    .btn-interactive:active {
+      transform: translateY(0px) scale(0.98);
+    }
+
+    .btn-pink-interactive {
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-pink-interactive:hover {
+      background-color: #b8115d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px -4px rgba(217, 22, 112, 0.4);
+    }
+    .btn-pink-interactive:active {
+      transform: translateY(0px) scale(0.98);
+    }
+
+    /* Sidebar Navigation Item Transitions */
+    .nav-item {
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .nav-item:hover {
+      background-color: #fdf2f7;
+      color: #d91670;
+      padding-left: 1.25rem;
+    }
+    .nav-item.active {
+      background-color: #fdf2f7;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 4px;
+      background-color: #d91670;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* Subtle Page Fade Animation */
+    .tab-pane {
+      animation: fadeIn 0.22s ease-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Custom Form Inputs Matching Screenshots */
+    .form-input {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.875rem;
+      color: #0f172a;
+      background-color: #ffffff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-input:hover {
+      border-color: #9ca3af;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #d91670;
+      box-shadow: 0 0 0 3px rgba(217, 22, 112, 0.12);
+    }
+
+    /* Custom Color Input Styling */
+    input[type="color"].color-swatch {
+      -webkit-appearance: none;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      width: 100%;
+      height: 40px;
+      padding: 3px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    input[type="color"].color-swatch:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+    input[type="color"].color-swatch::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+    input[type="color"].color-swatch::-webkit-color-swatch {
+      border: none;
+      border-radius: 0.3rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row bg-[#fbfcfe] text-[#0f172a] antialiased selection:bg-[#d91670]/15 selection:text-[#d91670]">
+
+  <!-- ================= LEFT SIDEBAR NAVIGATION ================= -->
+  <aside class="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex-shrink-0 flex flex-col justify-between md:min-h-screen sticky top-0 z-30">
+    <div>
+      <!-- Top Brand Header with Logo Image on top of Brandname -->
+      <div class="pt-7 pb-6 px-6 border-b border-gray-100 flex flex-col items-center text-center">
+        <a href="#resumen" onclick="switchTab('resumen'); return false;" class="group flex flex-col items-center focus:outline-none">
+          <!-- Logo Image container with automatic fallback to crisp SVG if external URL is unavailable -->
+          <div class="w-16 h-16 mb-2.5 rounded-2xl bg-gradient-to-b from-white to-pink-50/40 border border-gray-100 shadow-sm flex items-center justify-center p-2 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md">
+            <img
+              src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp"
+              alt="Easy Listings Logo"
+              class="w-full h-full object-contain"
+              onerror="this.style.display='none'; document.getElementById('fallback-logo-svg').classList.remove('hidden');"
+            />
+            <!-- Crisp Vector Real Estate Logo Fallback -->
+            <svg id="fallback-logo-svg" class="hidden w-11 h-11" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="6" width="52" height="52" rx="14" fill="#0f172a"/>
+              <path d="M18 33L32 20L46 33" stroke="#d91670" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M23 30V45H41V30" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="29" y="35" width="6" height="10" rx="1" fill="#d91670"/>
+            </svg>
+          </div>
+          <!-- Brand Name -->
+          <div class="text-[22px] font-extrabold tracking-tight leading-none">
+            <span class="text-[#0f172a]">Easy</span><span class="text-[#d91670]">Listings</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-3.5 space-y-1 overflow-x-auto md:overflow-x-visible flex md:flex-col gap-1 md:gap-0.5" aria-label="Menú principal">
+        <button onclick="switchTab('resumen')" id="nav-resumen" class="nav-item active w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <span>Resumen</span>
+        </button>
+
+        <button onclick="switchTab('propiedades')" id="nav-propiedades" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          <span>Propiedades</span>
+        </button>
+
+        <button onclick="switchTab('importar')" id="nav-importar" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+          </svg>
+          <span>Importar CSV</span>
+        </button>
+
+        <button onclick="switchTab('contactos')" id="nav-contactos" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span>Contactos</span>
+        </button>
+
+        <button onclick="switchTab('correos')" id="nav-correos" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span>Correos</span>
+        </button>
+
+        <button onclick="switchTab('equipo')" id="nav-equipo" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <span>Equipo</span>
+        </button>
+
+        <button onclick="switchTab('marca')" id="nav-marca" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+          <span>Marca y contacto</span>
+        </button>
+
+        <button onclick="switchTab('dominio')" id="nav-dominio" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+          </svg>
+          <span>Dominio y correo</span>
+        </button>
+
+        <button onclick="switchTab('facturacion')" id="nav-facturacion" class="nav-item w-full text-left px-4 py-2.5 rounded-lg text-[14px] text-slate-700 flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-4 h-4 opacity-75 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+          </svg>
+          <span>Facturación</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Bottom Sidebar Account Pill -->
+    <div class="hidden md:block p-4 border-t border-gray-100">
+      <div class="px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
+        <div class="truncate">
+          <p class="text-xs font-bold text-slate-800 truncate">Casa RealEstate</p>
+          <p class="text-[11px] text-slate-500 truncate">Individual · Activa</p>
+        </div>
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" title="Cuenta activa"></span>
+      </div>
+    </div>
+  </aside>
+  
+  
+  
+  
+  
+  
+
+  <!-- ================= RIGHT CONTENT AREA ================= -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- Top Utility Header Bar (Matches Screenshot Top-Right Controls) -->
+    <header class="bg-white border-b border-gray-200 px-6 lg:px-10 py-3.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-20">
+      <div class="flex items-center gap-2 text-xs text-slate-400">
+        <span>Panel de administración</span>
+        <span>/</span>
+        <span id="breadcrumb-current" class="font-medium text-slate-600">Resumen</span>
+      </div>
+
+      <div class="flex items-center gap-4 text-[13px]">
+        
+
+        <a href="https://easylisting-ruddy.vercel.app/s/av-monumental-no-6" target="_blank" rel="noopener noreferrer" class="btn-interactive text-[#d91670] font-medium hover:underline inline-flex items-center gap-1 px-2 py-1 rounded-md hover:bg-pink-50/60">
+          <span>Ver sitio</span>
+          <span class="text-xs">↗</span>
+        </a>
+
+        <span class="text-slate-500 hidden sm:inline">bebell.digitalsolutions@gmail.com</span>
+
+        <!-- Language Switcher -->
+        <div class="inline-flex items-center gap-1">
+          <button type="button" class="btn-interactive bg-[#0f172a] text-white text-[11px] font-bold px-2 py-1 rounded">
+            ES
+          </button>
+          <button type="button" class="btn-interactive text-slate-600 hover:text-slate-900 text-[11px] font-medium px-1.5 py-1 rounded hover:bg-slate-100">
+            EN
+          </button>
+        </div>
+
+        <button type="button" class="btn-interactive text-slate-700 hover:text-[#d91670] font-medium px-2 py-1 rounded-md hover:bg-slate-50">
+          Cerrar sesión
+        </button>
+      </div>
+    </header>
+    
+    
+    
+    
+    
+    
+
+    <!-- Main Page Container -->
+    <main class="flex-1 px-6 sm:px-10 py-8 max-w-[1200px] w-full mx-auto pb-24">
+
+      <!-- =========================================================
+           TAB 1: RESUMEN (Screenshot 1)
+           ========================================================= -->
+      <section id="tab-resumen" class="tab-pane space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Casa RealEstate</h1>
+            <p class="text-[14px] text-slate-600 mt-0.5">Individual · Activa</p>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <button type="button" onclick="switchTab('correos')" class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[13px] font-bold px-4 py-2.5 rounded-lg hover:bg-gray-50 flex items-center gap-1.5 shadow-sm">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              Enviar Correo
+            </button>
+            <button type="button" onclick="switchTab('propiedades')" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg flex items-center gap-1.5 shadow-sm shadow-pink-500/20">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+              Nueva Propiedad
+            </button>
+          </div>
+        </div>
+
+        <!-- Tu sitio Card -->
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+          <p class="text-[12px] text-slate-500 mb-1">Tu sitio</p>
+          <div class="flex items-center gap-3">
+            <a href="https://easylisting-ruddy.vercel.app/s/av-monumental-no-6" id="public-url" target="_blank" rel="noopener noreferrer" class="text-[#d91670] font-bold text-[15px] sm:text-[16px] hover:underline break-all transition-transform duration-200 hover:translate-x-0.5">
+              https://easylisting-ruddy.vercel.app/s/av-monumental-no-6
+            </a>
+            <button type="button" onclick="copyToClipboard('public-url', this)" class="btn-interactive shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 p-1.5 rounded-md flex items-center justify-center transition-colors" title="Copiar enlace">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 KPI Cards Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+          <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col justify-between min-h-[96px] transition-all duration-200 hover:border-gray-300 hover:shadow-sm">
+            <span class="text-[12px] text-slate-500">Propiedades</span>
+            <span class="text-[24px] font-bold text-[#0f172a] leading-tight mt-1">2</span>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col justify-between min-h-[96px] transition-all duration-200 hover:border-gray-300 hover:shadow-sm">
+            <span class="text-[12px] text-slate-500">Publicadas</span>
+            <span class="text-[24px] font-bold text-[#0f172a] leading-tight mt-1">2</span>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col justify-between min-h-[96px] transition-all duration-200 hover:border-gray-300 hover:shadow-sm">
+            <span class="text-[12px] text-slate-500">Ocultas</span>
+            <span class="text-[24px] font-bold text-[#0f172a] leading-tight mt-1">0</span>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col justify-between min-h-[96px] transition-all duration-200 hover:border-gray-300 hover:shadow-sm">
+            <span class="text-[12px] text-slate-500 leading-snug">Alertas activas de compradores</span>
+            <span class="text-[24px] font-bold text-[#0f172a] leading-tight mt-1">0</span>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-4 flex flex-col justify-between min-h-[96px] transition-all duration-200 hover:border-gray-300 hover:shadow-sm">
+            <span class="text-[12px] text-slate-500">Consultas (30 días)</span>
+            <span class="text-[24px] font-bold text-[#0f172a] leading-tight mt-1">0</span>
+          </div>
+        </div>
+
+        <!-- Visitor Tracking & Visualizations Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Main Chart: Line & Bar -->
+          <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)] lg:col-span-2">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-[14px] font-bold text-[#0f172a]">Visitantes (Día, Sem, Mes, Año)</h2>
+              <select class="text-[12px] border border-gray-300 rounded px-2 py-1 text-slate-600 focus:outline-none focus:border-[#d91670]">
+                <option>Diario</option>
+                <option>Semanal</option>
+                <option selected>Mensual</option>
+                <option>Anual</option>
+              </select>
+            </div>
+            <div class="relative h-[220px] w-full">
+              <canvas id="visitorsChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Donut Chart: Traffic Sources -->
+          <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col">
+            <h2 class="text-[14px] font-bold text-[#0f172a] mb-2">Fuentes de Tráfico</h2>
+            <div class="relative flex-1 min-h-[160px] w-full flex items-center justify-center">
+              <canvas id="sourcesChart"></canvas>
+            </div>
+            <div class="mt-3 flex flex-col gap-1.5 text-[12px] text-slate-600">
+              <div class="flex justify-between items-center"><span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#d91670]"></span> Directo</span> <span class="font-medium text-[#0f172a]">45%</span></div>
+              <div class="flex justify-between items-center"><span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#f48fb1]"></span> Redes Sociales</span> <span class="font-medium text-[#0f172a]">35%</span></div>
+              <div class="flex justify-between items-center"><span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#0f172a]"></span> Referidos</span> <span class="font-medium text-[#0f172a]">20%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Heatmap -->
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)] overflow-hidden">
+          <h2 class="text-[14px] font-bold text-[#0f172a] mb-1">Actividad del Usuario (Heatmap)</h2>
+          <p class="text-[12px] text-slate-500 mb-4">Interacciones y visitas registradas diariamente.</p>
+          <div class="flex items-center gap-1 overflow-x-auto pb-2" id="activity-heatmap" style="scrollbar-width: thin;">
+            <!-- Heatmap generated via JS -->
+          </div>
+          <div class="mt-3 flex items-center justify-end gap-2 text-[11px] text-slate-500">
+            <span>Menos</span>
+            <span class="w-3 h-3 rounded-sm bg-gray-100"></span>
+            <span class="w-3 h-3 rounded-sm bg-[#fdf2f7]"></span>
+            <span class="w-3 h-3 rounded-sm bg-[#f48fb1]"></span>
+            <span class="w-3 h-3 rounded-sm bg-[#d91670]"></span>
+            <span class="w-3 h-3 rounded-sm bg-[#900e4a]"></span>
+            <span>Más</span>
+          </div>
+        </div>
+
+        <!-- Resultados de los últimos 30 días -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+          <h2 class="text-[14px] font-bold text-[#0f172a]">Resultados de los últimos 30 días</h2>
+          <p class="text-[12px] text-slate-500 mt-0.5">Lo que te trajo tu sitio. Cada visitante cuenta una vez al día, sin cookies.</p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-4 pb-5 border-b border-gray-100">
+            <div>
+              <p class="text-[11.5px] text-slate-500">Visitas al sitio</p>
+              <p class="text-[20px] font-bold text-[#0f172a] mt-0.5">2</p>
+            </div>
+            <div>
+              <p class="text-[11.5px] text-slate-500">Vistas de propiedades</p>
+              <p class="text-[20px] font-bold text-[#0f172a] mt-0.5">1</p>
+            </div>
+            <div>
+              <p class="text-[11.5px] text-slate-500">Clics a WhatsApp</p>
+              <p class="text-[20px] font-bold text-[#0f172a] mt-0.5">0</p>
+            </div>
+            <div>
+              <p class="text-[11.5px] text-slate-500">Suscripciones a alertas</p>
+              <p class="text-[20px] font-bold text-[#0f172a] mt-0.5">0</p>
+            </div>
+            <div>
+              <p class="text-[11.5px] text-slate-500">Consultas</p>
+              <p class="text-[20px] font-bold text-[#0f172a] mt-0.5">0</p>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h3 class="text-[12.5px] font-bold text-[#0f172a]">Propiedades más vistas</h3>
+            <div class="flex items-center justify-between text-[13px] mt-2.5">
+              <span class="text-[#0f172a]">Casa en Arroyo Hondo</span>
+              <span class="text-slate-500 text-[12.5px]">1 vistas · 0 WhatsApp</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW: Visitor Statistics & Visual Data -->
+        <div class="space-y-4">
+          <h2 class="text-[18px] font-bold text-[#0f172a] tracking-tight">Estadísticas de Tráfico y Actividad</h2>
+          
+          <!-- Visitor Trackers Grid -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+            <div class="bg-gradient-to-br from-white to-slate-50 border border-gray-200 rounded-xl p-4 flex flex-col transition-all duration-200 hover:border-gray-300">
+              <span class="text-[11.5px] font-semibold text-slate-500 uppercase tracking-wider">Hoy</span>
+              <span class="text-[26px] font-extrabold text-[#0f172a] leading-tight mt-1">12</span>
+              <span class="text-[11px] text-emerald-500 font-medium mt-1">↑ 20% vs ayer</span>
+            </div>
+            <div class="bg-gradient-to-br from-white to-slate-50 border border-gray-200 rounded-xl p-4 flex flex-col transition-all duration-200 hover:border-gray-300">
+              <span class="text-[11.5px] font-semibold text-slate-500 uppercase tracking-wider">Esta Semana</span>
+              <span class="text-[26px] font-extrabold text-[#0f172a] leading-tight mt-1">84</span>
+              <span class="text-[11px] text-emerald-500 font-medium mt-1">↑ 5% vs sem. pasada</span>
+            </div>
+            <div class="bg-gradient-to-br from-white to-slate-50 border border-gray-200 rounded-xl p-4 flex flex-col transition-all duration-200 hover:border-gray-300">
+              <span class="text-[11.5px] font-semibold text-slate-500 uppercase tracking-wider">Este Mes</span>
+              <span class="text-[26px] font-extrabold text-[#0f172a] leading-tight mt-1">340</span>
+              <span class="text-[11px] text-rose-500 font-medium mt-1">↓ 2% vs mes pasado</span>
+            </div>
+            <div class="bg-gradient-to-br from-white to-slate-50 border border-gray-200 rounded-xl p-4 flex flex-col transition-all duration-200 hover:border-gray-300">
+              <span class="text-[11.5px] font-semibold text-slate-500 uppercase tracking-wider">Este Año</span>
+              <span class="text-[26px] font-extrabold text-[#0f172a] leading-tight mt-1">4,020</span>
+              <span class="text-[11px] text-slate-400 font-medium mt-1">En curso</span>
+            </div>
+          </div>
+
+          <!-- Charts Row 1: Line & Donut -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)] lg:col-span-2">
+              <h3 class="text-[13px] font-bold text-[#0f172a] mb-4">Visitantes en el tiempo</h3>
+              <div class="h-[220px] w-full">
+                <canvas id="chart-line"></canvas>
+              </div>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <h3 class="text-[13px] font-bold text-[#0f172a] mb-4">Fuentes de Tráfico</h3>
+              <div class="h-[220px] w-full flex items-center justify-center">
+                <canvas id="chart-donut"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row 2: Bar & Heatmap -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <h3 class="text-[13px] font-bold text-[#0f172a] mb-4">Vistas por Propiedad</h3>
+              <div class="h-[200px] w-full">
+                <canvas id="chart-bar"></canvas>
+              </div>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-[13px] font-bold text-[#0f172a]">Actividad de Usuarios (Heatmap)</h3>
+                <span class="text-[11px] text-slate-500">Últimas 26 semanas</span>
+              </div>
+              <div class="flex-1 flex items-center justify-center overflow-x-auto pb-2">
+                <div id="heatmap-container" class="flex gap-[3px] min-w-max">
+                  <!-- Heatmap generated via JS -->
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-1.5 mt-2 text-[10px] text-slate-500">
+                <span>Menos</span>
+                <div class="w-2.5 h-2.5 rounded-[2px] bg-slate-100"></div>
+                <div class="w-2.5 h-2.5 rounded-[2px] bg-pink-200"></div>
+                <div class="w-2.5 h-2.5 rounded-[2px] bg-[#d91670] opacity-80"></div>
+                <div class="w-2.5 h-2.5 rounded-[2px] bg-[#9d1052]"></div>
+                <span>Más</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primeros pasos -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+          <h2 class="text-[14px] font-bold text-[#0f172a]">Primeros pasos</h2>
+          <ol class="text-[13px] text-slate-700 space-y-2 mt-3">
+            <li>1. Agrega tu logo, colores y número de WhatsApp</li>
+            <li>2. Importa tus propiedades desde un archivo CSV o agrégalas una por una</li>
+            <li>3. Comparte el enlace de tu sitio</li>
+          </ol>
+
+          <div class="flex flex-wrap items-center gap-2.5 mt-5">
+            <button type="button" onclick="switchTab('marca')" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg">
+              Marca y contacto
+            </button>
+            <button type="button" onclick="switchTab('importar')" class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[13px] font-bold px-4 py-2.5 rounded-lg hover:bg-gray-50">
+              Importar CSV
+            </button>
+            <button type="button" onclick="switchTab('propiedades')" class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[13px] font-bold px-4 py-2.5 rounded-lg hover:bg-gray-50">
+              Agregar propiedad
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 2: PROPIEDADES (Screenshot 2)
+           ========================================================= -->
+      <section id="tab-propiedades" class="tab-pane hidden space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Propiedades</h1>
+          <div class="flex items-center gap-2.5">
+            <button type="button" onclick="switchTab('importar')" class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[13px] font-bold px-4 py-2.5 rounded-lg hover:bg-gray-50">
+              Importar CSV
+            </button>
+            <button type="button" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg">
+              Agregar propiedad
+            </button>
+          </div>
+        </div>
+
+        <!-- Properties Table Card -->
+        <div class="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[600px]">
+            <thead>
+              <tr class="border-b border-gray-100 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="pb-3 pt-1">TÍTULO</th>
+                <th class="pb-3 pt-1">TIPO DE PROPIEDAD</th>
+                <th class="pb-3 pt-1">ZONA O SECTOR</th>
+                <th class="pb-3 pt-1 text-right pr-6">PRECIO</th>
+                <th class="pb-3 pt-1">ESTADO</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 text-[13px]">
+              <!-- Row 1 -->
+              <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer">
+                <td class="py-3.5 pr-4">
+                  <div class="flex items-center gap-3">
+                    <img
+                      src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=200&q=80"
+                      alt="Casa en Arroyo Hondo"
+                      class="w-12 h-9 rounded object-cover border border-gray-200 shrink-0"
+                      onerror="this.src='https://placehold.co/96x72/e2e8f0/475569?text=ARH'"
+                    />
+                    <div>
+                      <p class="font-medium text-[#0f172a]">Casa en Arroyo Hondo</p>
+                      <p class="text-[11px] text-slate-400">ARH-102</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 text-[#0f172a]">Casa · En venta</td>
+                <td class="py-3.5 text-[#0f172a]">Arroyo Hondo</td>
+                <td class="py-3.5 text-[#0f172a] text-right pr-6 font-medium">US$ 9,800,000</td>
+                <td class="py-3.5 text-[#0f172a]">Disponible</td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer">
+                <td class="py-3.5 pr-4">
+                  <div class="flex items-center gap-3">
+                    <img
+                      src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=200&q=80"
+                      alt="Apartamento en Naco"
+                      class="w-12 h-9 rounded object-cover border border-gray-200 shrink-0"
+                      onerror="this.src='https://placehold.co/96x72/e2e8f0/475569?text=NA'"
+                    />
+                    <div>
+                      <p class="font-medium text-[#0f172a]">Apartamento en Naco</p>
+                      <p class="text-[11px] text-slate-400">NA-102</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 text-[#0f172a]">Apartamento · En alquiler</td>
+                <td class="py-3.5 text-[#0f172a]">Naco</td>
+                <td class="py-3.5 text-[#0f172a] text-right pr-6 font-medium">US$ 852</td>
+                <td class="py-3.5 text-[#0f172a]">Disponible</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 3: IMPORTAR CSV (Screenshot 3)
+           ========================================================= -->
+      <section id="tab-importar" class="tab-pane hidden space-y-5">
+        <div>
+          <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Importar propiedades desde CSV</h1>
+          <p class="text-[14px] text-slate-600 mt-1">
+            Sube el archivo exportado de tu plataforma actual o de una hoja de cálculo. Nosotros emparejamos las columnas.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-5 flex flex-wrap items-center justify-between gap-4 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+          <button type="button" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg">
+            Elegir archivo CSV
+          </button>
+
+          <button type="button" class="btn-interactive text-[#d91670] text-[13px] font-medium hover:underline px-2 py-1 rounded">
+            Descargar nuestra plantilla
+          </button>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 4: CONTACTOS (Screenshot 4)
+           ========================================================= -->
+      <section id="tab-contactos" class="tab-pane hidden space-y-4">
+        <div>
+          <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Contactos</h1>
+          <p class="text-[14px] text-slate-600 mt-1">
+            Compradores que se suscribieron a alertas, enviaron una consulta o fueron importados.
+          </p>
+        </div>
+
+        <!-- Card 1: Empty Contacts -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+          <p class="text-[13.5px] text-slate-600">
+            Aún no hay contactos. Los compradores aparecen aquí cuando se suscriben a alertas o envían una consulta desde tu sitio.
+          </p>
+        </div>
+
+        <!-- Card 2: Consultas recientes -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+          <h2 class="text-[14px] font-bold text-[#0f172a]">Consultas recientes</h2>
+          <p class="text-[12.5px] text-slate-500 mt-1.5">Aún no hay consultas.</p>
+        </div>
+
+        <!-- Card 3: Importar contactos -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] space-y-3.5">
+          <div>
+            <h2 class="text-[14px] font-bold text-[#0f172a]">Importar contactos</h2>
+            <p class="text-[12px] text-slate-500 mt-0.5">
+              CSV con una columna de correo y, opcionalmente, nombre, teléfono y etiquetas.
+            </p>
+          </div>
+
+          <div class="text-[12.5px] text-[#0f172a] flex items-center gap-1.5 pt-1">
+            <button type="button" class="btn-interactive font-medium text-[#0f172a] hover:text-[#d91670]">Choose File</button>
+            <span class="text-slate-600">No file chosen</span>
+          </div>
+
+          <label class="flex items-center gap-2 text-[12.5px] text-slate-700 cursor-pointer select-none">
+            <input type="checkbox" class="rounded border-gray-300 text-[#d91670] focus:ring-[#d91670]" />
+            <span>Estas personas aceptaron recibir correos míos sobre propiedades.</span>
+          </label>
+
+          <div class="pt-1">
+            <button type="button" class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[13px] font-bold px-4 py-2 rounded-lg hover:bg-gray-50">
+              Importar contactos
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 5: CORREOS (Screenshot 5)
+           ========================================================= -->
+      <section id="tab-correos" class="tab-pane hidden space-y-4">
+        <div>
+          <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Correos</h1>
+          <p class="text-[14px] text-slate-600 mt-1">
+            Envía un mensaje o propiedades nuevas a tus contactos. Las alertas para compradores salen automáticamente.
+          </p>
+        </div>
+
+        <!-- Light Blue Info Banner -->
+        <div class="bg-[#eff8ff] border border-[#c7e6fd] rounded-xl px-4 py-3 text-[12.5px] text-[#0b4f71] space-y-0.5">
+          <p>Alertas activas: 0 · Correos enviados en los últimos 30 días: 0</p>
+          <p>Límite diario de envíos: 300. Quedan hoy: 300.</p>
+        </div>
+
+        <!-- Email Composer Form Card -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] space-y-4">
+          <div>
+            <label class="block text-[12px] text-slate-600 mb-1.5">Asunto</label>
+            <input type="text" class="form-input" />
+          </div>
+
+          <div>
+            <label class="block text-[12px] text-slate-600 mb-1.5">Mensaje</label>
+            <textarea rows="6" class="form-input resize-y"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-[12px] text-slate-600 mb-1.5">Propiedades destacadas (opcional)</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="border border-gray-200 rounded-lg px-3.5 py-2.5 flex items-center justify-between cursor-pointer hover:border-gray-300 transition-colors">
+                <span class="flex items-center gap-2 text-[13px] text-[#0f172a]">
+                  <input type="checkbox" class="rounded border-gray-300 text-[#d91670] focus:ring-[#d91670]" />
+                  <span>Apartamento en Naco</span>
+                </span>
+                <span class="text-[12px] text-slate-500">US$ 852</span>
+              </label>
+
+              <label class="border border-gray-200 rounded-lg px-3.5 py-2.5 flex items-center justify-between cursor-pointer hover:border-gray-300 transition-colors">
+                <span class="flex items-center gap-2 text-[13px] text-[#0f172a]">
+                  <input type="checkbox" class="rounded border-gray-300 text-[#d91670] focus:ring-[#d91670]" />
+                  <span>Casa en Arroyo Hondo</span>
+                </span>
+                <span class="text-[12px] text-slate-500">US$ 9,800,000</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-1.5 pt-1">
+            <label class="block text-[12px] text-slate-600">Enviar a</label>
+            <label class="inline-flex items-center gap-2 text-[13px] text-[#0f172a] cursor-pointer">
+              <input type="radio" name="enviar_a" checked class="text-[#d91670] focus:ring-[#d91670] accent-[#d91670]" />
+              <span>Todos los contactos suscritos</span>
+            </label>
+            <p class="text-[12px] text-slate-500">0 contactos pueden recibir este correo.</p>
+          </div>
+
+          <div class="pt-1">
+            <button type="button" class="btn-interactive bg-[#ec8ab3] hover:bg-[#e070a0] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg">
+              Enviar correo
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 6: EQUIPO (Screenshot 7)
+           ========================================================= -->
+      <section id="tab-equipo" class="tab-pane hidden space-y-4">
+        <div>
+          <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Equipo</h1>
+          <p class="text-[14px] text-slate-600 mt-1">
+            Los agentes de tu agencia. Las propiedades asignadas a un agente usan su WhatsApp.
+          </p>
+        </div>
+
+        <!-- Card 1: Mis datos de contacto -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+          <h2 class="text-[14px] font-bold text-[#0f172a]">Mis datos de contacto</h2>
+          <p class="text-[12px] text-slate-500 mt-0.5">
+            Los compradores te escriben a este WhatsApp por las propiedades asignadas a ti.
+          </p>
+
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-end gap-3">
+            <div class="flex-1">
+              <label class="block text-[12px] text-slate-600 mb-1">WhatsApp (con código de país)</label>
+              <input type="text" value="8094013970" class="form-input" />
+            </div>
+
+            <div class="flex-1">
+              <label class="block text-[12px] text-slate-600 mb-1">Teléfono</label>
+              <input type="text" value="3059900196" class="form-input" />
+            </div>
+
+            <button type="button" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg shrink-0">
+              Guardar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: 1 de 1 agentes -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] space-y-4">
+          <p class="text-[12px] text-slate-500">1 de 1 agentes</p>
+
+          <div>
+            <p class="text-[13.5px] font-medium text-[#0f172a]">
+              Bebell Digital Solutions <span class="text-slate-400 font-normal">(tú)</span>
+            </p>
+            <p class="text-[12px] text-slate-500 mt-0.5">
+              bebell.digitalsolutions@gmail.com · Titular · 0 propiedades
+            </p>
+          </div>
+
+          <div class="bg-[#eff8ff] border border-[#c7e6fd] rounded-lg px-4 py-3 text-[12.5px] text-[#0b4f71]">
+            Invitar agentes es parte del plan Agencia.
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 7: MARCA Y CONTACTO (Screenshot 6)
+           ========================================================= -->
+      <section id="tab-marca" class="tab-pane hidden space-y-4">
+        <div>
+          <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Marca y contacto</h1>
+          <p class="text-[14px] text-slate-600 mt-1">Así ven tu sitio los compradores.</p>
+        </div>
+
+        <!-- Card 1: Identidad -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] space-y-4">
+          <h2 class="text-[14px] font-bold text-[#0f172a]">Identidad</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Nombre de la marca</label>
+              <input type="text" value="Casa RealEstate" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Eslogan</label>
+              <input type="text" value="Tu próxima casa está con nosotros!" class="form-input" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Enlace del logo</label>
+              <input type="text" value="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Enlace de tu foto de perfil</label>
+              <input type="text" value="https://ik.imagekit.io/bebell/Easy%20Listings/User-profiles/1E293b%20" class="form-input" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[12px] text-slate-600 mb-1">Enlace de la imagen de portada</label>
+            <input type="text" value="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/6.webp?updatedAt=1793293431004" class="form-input" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Color principal</label>
+              <input type="color" value="#05054c" class="color-swatch" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Color del precio</label>
+              <input type="color" value="#0d42a1" class="color-swatch" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Idioma del sitio</label>
+              <select class="form-input">
+                <option selected>Español</option>
+                <option>English</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Contacto -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] space-y-4">
+          <h2 class="text-[14px] font-bold text-[#0f172a]">Contacto</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Número de WhatsApp (con código de país)</label>
+              <input type="text" value="18094013970" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Mensaje de WhatsApp</label>
+              <input type="text" value="Me interesa la propiedad [ID]." class="form-input" />
+              <p class="text-[11px] text-slate-500 mt-1">[ID] se reemplaza por la referencia de la propiedad.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Correo de contacto</label>
+              <input type="email" value="bebell.digitalsolutions@gmail.com" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Teléfono</label>
+              <input type="text" value="3059900196" class="form-input" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[12px] text-slate-600 mb-1">Dirección de la oficina (se muestra en el mapa)</label>
+            <input type="text" value="Av. Monumental, No. 6, Parque Verde, Los Peralejos, Santo Domingo, República Dominicana" class="form-input" />
+          </div>
+        </div>
+
+        <!-- Card 3: Redes sociales -->
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] space-y-4">
+          <h2 class="text-[14px] font-bold text-[#0f172a]">Redes sociales</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Facebook</label>
+              <input type="url" value="https://facebook.com/" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Instagram</label>
+              <input type="url" value="https://instagram.com/" class="form-input" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">LinkedIn</label>
+              <input type="url" value="https://linkedin.com/" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">YouTube</label>
+              <input type="url" value="https://youtube.com/" class="form-input" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">X</label>
+              <input type="url" value="" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-[12px] text-slate-600 mb-1">Web</label>
+              <input type="url" value="https://bebelldigitalsolutions.com/" class="form-input" />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-end pt-1">
+          <button type="button" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-5 py-2.5 rounded-lg">
+            Guardar
+          </button>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 8: DOMINIO Y CORREO (Screenshot 8)
+           ========================================================= -->
+      <section id="tab-dominio" class="tab-pane hidden space-y-4">
+        <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Dominio y correo</h1>
+
+        <div class="bg-[#eff8ff] border border-[#c7e6fd] rounded-xl px-4 py-3.5 text-[13px] text-[#0b4f71]">
+          Tu propio dominio y dirección de envío son parte del plan Agencia.
+        </div>
+
+        <div>
+          <button type="button" onclick="switchTab('facturacion')" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg">
+            Elegir un plan
+          </button>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+           TAB 9: FACTURACIÓN (Screenshot 9)
+           ========================================================= -->
+      <section id="tab-facturacion" class="tab-pane hidden space-y-4">
+        <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Plan y facturación</h1>
+
+        <!-- Blue Status Box -->
+        <div class="bg-[#eff8ff] border border-[#c7e6fd] rounded-xl px-4 py-3 text-[13px] text-[#0b4f71]">
+          Tu cuenta está activa.
+        </div>
+
+        <!-- Amber Notice Box -->
+        <div class="bg-[#fefce8] border border-[#fde68a] rounded-xl px-4 py-3 text-[13px] text-[#78350f]">
+          El pago en línea aún no está configurado. Contáctanos para activar tu plan.
+        </div>
+
+        <!-- Pricing Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+          <!-- Plan Individual -->
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+            <h2 class="text-[16px] font-bold text-[#0f172a]">Individual</h2>
+            <div class="mt-2 flex items-baseline gap-1">
+              <span class="text-[28px] font-extrabold text-[#0f172a]">US$ 99</span>
+              <span class="text-[13px] text-slate-500">/ año</span>
+            </div>
+
+            <ul class="mt-4 space-y-2 text-[13px] text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Tu sitio en nombre.easylisting-ruddy.vercel.app</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Propiedades ilimitadas</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Logo y colores de tu marca</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Importación CSV</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Alertas y correos para compradores</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Contacto por WhatsApp</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Plan Agencia -->
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+            <h2 class="text-[16px] font-bold text-[#0f172a]">Agencia</h2>
+            <div class="mt-2 flex items-baseline gap-1">
+              <span class="text-[28px] font-extrabold text-[#0f172a]">US$ 299</span>
+              <span class="text-[13px] text-slate-500">/ año</span>
+            </div>
+
+            <ul class="mt-4 space-y-2 text-[13px] text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Todo lo del plan Individual</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Hasta 10 agentes</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Tu propio dominio</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Correos desde tu propia dirección</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-600">✓</span>
+                <span>Sin la marca Easy Listings</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= FLOATING "COMENTARIOS" BUTTON ================= -->
+  <button
+    type="button"
+    class="btn-interactive fixed bottom-5 right-5 z-40 bg-[#0f172a] hover:bg-[#1e293b] text-white text-[13px] font-bold px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2"
+  >
+    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+    <span>Comentarios</span>
+  </button>
+
+  <!-- ================= TAB SWITCHING LOGIC ================= -->
+  <script>
+    // --- Copy to Clipboard Utility ---
+    function copyToClipboard(elementId, btnElement) {
+      const el = document.getElementById(elementId);
+      if(el) {
+        const text = el.textContent.trim();
+        const tempInput = document.createElement("input");
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        
+        // Temporarily change copy icon to success checkmark
+        if(btnElement) {
+          const originalHTML = btnElement.innerHTML;
+          btnElement.innerHTML = `<svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>`;
+          setTimeout(() => { btnElement.innerHTML = originalHTML; }, 2000);
+        }
+      }
+    }
+
+    // --- Chart.js & Heatmap Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Heatmap Generation
+      const heatmapContainer = document.getElementById('activity-heatmap');
+      if (heatmapContainer) {
+        const cols = 45; // Approx Weeks
+        const rows = 7;  // Days
+        let heatmapHTML = '<div class="flex gap-1">';
+        const colors = ['bg-gray-100', 'bg-[#fdf2f7]', 'bg-[#f48fb1]', 'bg-[#d91670]', 'bg-[#900e4a]'];
+        
+        for (let c = 0; c < cols; c++) {
+          heatmapHTML += '<div class="flex flex-col gap-1">';
+          for (let r = 0; r < rows; r++) {
+            const rand = Math.random();
+            let colorIdx = 0;
+            // Weighted randomization toward lower activity for a realistic heatmap
+            if(rand > 0.92) colorIdx = 4;
+            else if(rand > 0.8) colorIdx = 3;
+            else if(rand > 0.6) colorIdx = 2;
+            else if(rand > 0.4) colorIdx = 1;
+            
+            heatmapHTML += `<div class="w-3.5 h-3.5 rounded-sm ${colors[colorIdx]} transition-transform hover:scale-125 cursor-pointer" title="Interacciones: ${Math.floor(rand * 50)}"></div>`;
+          }
+          heatmapHTML += '</div>';
+        }
+        heatmapHTML += '</div>';
+        heatmapContainer.innerHTML = heatmapHTML;
+      }
+
+      // 2. Line & Bar Chart Combo (Visitantes)
+      const ctxVisits = document.getElementById('visitorsChart');
+      if (ctxVisits) {
+        new Chart(ctxVisits, {
+          type: 'line',
+          data: {
+            labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+            datasets: [
+              {
+                type: 'line',
+                label: 'Vistas de propiedades',
+                data: [12, 19, 15, 25, 22, 30, 28],
+                borderColor: '#d91670',
+                backgroundColor: '#d91670',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: false
+              },
+              {
+                type: 'bar',
+                label: 'Visitas al sitio',
+                data: [15, 25, 20, 35, 30, 45, 40],
+                backgroundColor: '#e5e7eb',
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { family: 'Inter', size: 11 } } } },
+            scales: {
+              y: { beginAtZero: true, grid: { borderDash: [4, 4], color: '#f3f4f6' } },
+              x: { grid: { display: false } }
+            }
+          }
+        });
+      }
+
+      // 3. Donut Chart (Fuentes de Tráfico)
+      const ctxSources = document.getElementById('sourcesChart');
+      if (ctxSources) {
+        new Chart(ctxSources, {
+          type: 'doughnut',
+          data: {
+            labels: ['Directo', 'Redes Sociales', 'Referidos'],
+            datasets: [{
+              data: [45, 35, 20],
+              backgroundColor: ['#d91670', '#f48fb1', '#0f172a'],
+              borderWidth: 0,
+              hoverOffset: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
+    });
+
+    const TABS = {
+      resumen: 'Resumen',
+      propiedades: 'Propiedades',
+      importar: 'Importar CSV',
+      contactos: 'Contactos',
+      correos: 'Correos',
+      equipo: 'Equipo',
+      marca: 'Marca y contacto',
+      dominio: 'Dominio y correo',
+      facturacion: 'Facturación'
+    };
+
+    function switchTab(tabKey) {
+      if (!TABS[tabKey]) return;
+
+      // Hide all tab panes & remove active state from sidebar buttons
+      Object.keys(TABS).forEach((key) => {
+        const pane = document.getElementById(`tab-${key}`);
+        const navBtn = document.getElementById(`nav-${key}`);
+        if (pane) pane.classList.add('hidden');
+        if (navBtn) navBtn.classList.remove('active');
+      });
+
+      // Show selected tab pane & activate sidebar button
+      const activePane = document.getElementById(`tab-${tabKey}`);
+      const activeNavBtn = document.getElementById(`nav-${tabKey}`);
+      if (activePane) activePane.classList.remove('hidden');
+      if (activeNavBtn) activeNavBtn.classList.add('active');
+
+      // Update top breadcrumb
+      const breadcrumb = document.getElementById('breadcrumb-current');
+      if (breadcrumb) breadcrumb.textContent = TABS[tabKey];
+
+      // Scroll smoothly to top of content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- NEW: Copy URL Function ---
+    function copyUrl() {
+      const url = document.getElementById('site-url').innerText;
+      const btn = document.getElementById('btn-copy-url');
+      const originalHtml = btn.innerHTML;
+      
+      navigator.clipboard.writeText(url).then(() => {
+        // Visual Success Checkmark
+        btn.innerHTML = '<svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+        setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
+      }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        btn.innerHTML = '<svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+        setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
+      });
+    }
+
+    // --- NEW: Render Charts and Heatmap ---
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. GitHub-Style Heatmap Generation
+      const heatmapContainer = document.getElementById('heatmap-container');
+      if(heatmapContainer) {
+        const weeks = 26; // Half a year
+        const daysPerWeek = 7;
+        let html = '';
+        for(let w = 0; w < weeks; w++) {
+          html += '<div class="flex flex-col gap-[3px]">';
+          for(let d = 0; d < daysPerWeek; d++) {
+            const rand = Math.random();
+            let colorClass = 'bg-slate-100'; // Default intensity (0)
+            if (rand > 0.94) colorClass = 'bg-[#9d1052]'; // High intensity
+            else if (rand > 0.82) colorClass = 'bg-[#d91670] opacity-80'; // Medium-high
+            else if (rand > 0.60) colorClass = 'bg-pink-200'; // Low intensity
+            
+            html += `<div class="w-[11px] h-[11px] sm:w-3 sm:h-3 rounded-[2px] ${colorClass} hover:ring-1 ring-slate-400 transition-all cursor-pointer" title="Nivel de actividad"></div>`;
+          }
+          html += '</div>';
+        }
+        heatmapContainer.innerHTML = html;
+      }
+
+      // Default Chart.js Settings matching our Tailwind Theme
+      Chart.defaults.font.family = "'Inter', sans-serif";
+      Chart.defaults.color = '#64748b';
+      Chart.defaults.scale.grid.color = '#f1f5f9';
+
+      // 2. Line Chart (Visitors over time)
+      const ctxLine = document.getElementById('chart-line');
+      if(ctxLine) {
+        new Chart(ctxLine, {
+          type: 'line',
+          data: {
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'],
+            datasets: [{
+              label: 'Visitantes',
+              data: [150, 230, 200, 320, 280, 450, 400, 520],
+              borderColor: '#d91670',
+              backgroundColor: 'rgba(217, 22, 112, 0.1)',
+              borderWidth: 2,
+              pointBackgroundColor: '#ffffff',
+              pointBorderColor: '#d91670',
+              pointBorderWidth: 2,
+              pointRadius: 4,
+              fill: true,
+              tension: 0.4 // Smooth curve
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, border: { display: false } },
+              x: { border: { display: false }, grid: { display: false } }
+            }
+          }
+        });
+      }
+
+      // 3. Donut Chart (Traffic Sources)
+      const ctxDonut = document.getElementById('chart-donut');
+      if(ctxDonut) {
+        new Chart(ctxDonut, {
+          type: 'doughnut',
+          data: {
+            labels: ['Directo', 'Orgánico', 'Social', 'Referidos'],
+            datasets: [{
+              data: [45, 25, 20, 10],
+              backgroundColor: ['#d91670', '#f48fb1', '#0f172a', '#94a3b8'],
+              borderWidth: 0,
+              hoverOffset: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%', // Donut thickness
+            plugins: {
+              legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true, padding: 15 } }
+            }
+          }
+        });
+      }
+
+      // 4. Bar Chart (Views per property)
+      const ctxBar = document.getElementById('chart-bar');
+      if(ctxBar) {
+        new Chart(ctxBar, {
+          type: 'bar',
+          data: {
+            labels: ['Casa Arroyo Hondo', 'Apto Naco', 'Villa PC', 'Local Piantini'],
+            datasets: [{
+              label: 'Vistas',
+              data: [120, 85, 40, 25],
+              backgroundColor: '#0f172a',
+              borderRadius: 4,
+              barThickness: 24
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, border: { display: false } },
+              x: { border: { display: false }, grid: { display: false } }
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
