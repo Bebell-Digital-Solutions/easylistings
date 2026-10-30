@@ -564,6 +564,18 @@
       </section>
 
 
+
+
+
+
+
+
+
+      
+
+      <!-- =========================================================
+           TAB 2: PROPIEDADES (Screenshot 2)
+           ========================================================= -->
       <!-- =========================================================
            TAB 2: PROPIEDADES (Screenshot 2)
            ========================================================= -->
@@ -574,9 +586,18 @@
             <button type="button" onclick="switchTab('importar')" class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[13px] font-bold px-4 py-2.5 rounded-lg hover:bg-gray-50">
               Importar CSV
             </button>
+
+
+            <button type="button" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg">
+              Importar desde Instagram
+            </button>
+
+            
             <button type="button" class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg">
               Agregar propiedad
             </button>
+
+            
           </div>
         </div>
 
@@ -612,7 +633,14 @@
                 <td class="py-3.5 text-[#0f172a]">Casa · En venta</td>
                 <td class="py-3.5 text-[#0f172a]">Arroyo Hondo</td>
                 <td class="py-3.5 text-[#0f172a] text-right pr-6 font-medium">US$ 9,800,000</td>
-                <td class="py-3.5 text-[#0f172a]">Disponible</td>
+                <td class="py-3.5 text-[#0f172a]">
+                  <select class="status-dropdown bg-transparent border border-gray-200 rounded-lg px-2.5 py-1.5 text-[13px] font-medium text-[#0f172a] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors">
+                    <option value="disponible" selected>Disponible</option>
+                    <option value="vendido">Vendido</option>
+                    <option value="alquilado">Alquilado</option>
+                    <option value="reservado">Reservado</option>
+                  </select>
+                </td>
               </tr>
 
               <!-- Row 2 -->
@@ -634,12 +662,28 @@
                 <td class="py-3.5 text-[#0f172a]">Apartamento · En alquiler</td>
                 <td class="py-3.5 text-[#0f172a]">Naco</td>
                 <td class="py-3.5 text-[#0f172a] text-right pr-6 font-medium">US$ 852</td>
-                <td class="py-3.5 text-[#0f172a]">Disponible</td>
+                <td class="py-3.5 text-[#0f172a]">
+                  <select class="status-dropdown bg-transparent border border-gray-200 rounded-lg px-2.5 py-1.5 text-[13px] font-medium text-[#0f172a] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors">
+                    <option value="disponible" selected>Disponible</option>
+                    <option value="vendido">Vendido</option>
+                    <option value="alquilado">Alquilado</option>
+                    <option value="reservado">Reservado</option>
+                  </select>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
+
+
+
+
+
+
+
+
+      
 
 
       <!-- =========================================================
@@ -663,6 +707,16 @@
           </button>
         </div>
       </section>
+
+
+
+
+
+
+
+
+
+      
 
 
       <!-- =========================================================
