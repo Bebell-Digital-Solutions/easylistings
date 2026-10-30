@@ -794,8 +794,15 @@
            TAB 4: CONTACTOS (Screenshot 4)
            ========================================================= -->
       <section id="tab-contactos" class="tab-pane hidden space-y-4">
-        <div class="flex items-center justify-between gap-4">
+        <div>
   <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Contactos</h1>
+  <p class="text-[14px] text-slate-600 mt-1">
+    Compradores que se suscribieron a alertas, enviaron una consulta o fueron importados.
+  </p>
+</div>
+
+<!-- Button row sitting directly on top of the first card -->
+<div class="flex justify-end -mb-2">
   <button
     type="button"
     onclick="openContactModal()"
@@ -804,9 +811,6 @@
     Agregar contacto
   </button>
 </div>
-<p class="text-[14px] text-slate-600 -mt-2">
-  Compradores que se suscribieron a alertas, enviaron una consulta o fueron importados.
-</p>
 
         <!-- Card 1: Empty Contacts -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
