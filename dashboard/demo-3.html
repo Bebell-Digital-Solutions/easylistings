@@ -829,23 +829,27 @@
            TAB 4: CONTACTOS (Screenshot 4)
            ========================================================= -->
       <section id="tab-contactos" class="tab-pane hidden space-y-4">
-        <div>
-  <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Contactos</h1>
-  <p class="text-[14px] text-slate-600 mt-1">
-    Compradores que se suscribieron a alertas, enviaron una consulta o fueron importados.
-  </p>
+        <!-- Header: 2-column grid — text left, button right -->
+<div class="grid grid-cols-[1fr_auto] items-start gap-4">
+  <div>
+    <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Contactos</h1>
+    <p class="text-[14px] text-slate-600 mt-1">
+      Compradores que se suscribieron a alertas, enviaron una consulta o fueron importados.
+    </p>
+  </div>
+
+  <!-- Right column: button aligned to the right, pulled down toward the first card -->
+  <div class="flex justify-end self-end -mb-2">
+    <button
+      type="button"
+      onclick="openContactModal()"
+      class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg shrink-0"
+    >
+      Agregar contacto
+    </button>
+  </div>
 </div>
 
-<!-- Button row sitting directly on top of the first card -->
-<div class="flex justify-end -mb-2">
-  <button
-    type="button"
-    onclick="openContactModal()"
-    class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg shrink-0"
-  >
-    Agregar contacto
-  </button>
-</div>
 
         <!-- Card 1: Empty Contacts -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
