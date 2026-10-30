@@ -790,16 +790,24 @@
 
       
 
-
-      <!-- =========================================================
+<!-- =========================================================
            TAB 4: CONTACTOS (Screenshot 4)
            ========================================================= -->
       <section id="tab-contactos" class="tab-pane hidden space-y-4">
-        <div>
-          <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Contactos</h1>
-          <p class="text-[14px] text-slate-600 mt-1">
-            Compradores que se suscribieron a alertas, enviaron una consulta o fueron importados.
-          </p>
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 class="text-[24px] font-bold text-[#0f172a] tracking-tight">Contactos</h1>
+            <p class="text-[14px] text-slate-600 mt-1">
+              Compradores que se suscribieron a alertas, enviaron una consulta o fueron importados.
+            </p>
+          </div>
+          <button
+            type="button"
+            onclick="openContactModal()"
+            class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2.5 rounded-lg shrink-0"
+          >
+            Agregar contacto
+          </button>
         </div>
 
         <!-- Card 1: Empty Contacts -->
@@ -842,6 +850,345 @@
         </div>
       </section>
 
+      <!-- =========================================================
+           MODAL: AGREGAR CONTACTO
+           ========================================================= -->
+      <div
+        id="contactModalOverlay"
+        class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4"
+        onclick="if (event.target === this) closeContactModal()"
+      >
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+          <!-- Modal header -->
+          <div class="flex items-start justify-between px-6 py-4 border-b border-gray-200">
+            <div>
+              <h2 class="text-[18px] font-bold text-[#0f172a] tracking-tight">Agregar contacto</h2>
+              <p class="text-[12.5px] text-slate-500 mt-0.5">Registra un comprador, prospecto o inversionista.</p>
+            </div>
+            <button
+              type="button"
+              onclick="closeContactModal()"
+              class="text-slate-400 hover:text-[#0f172a] transition-colors p-1 -m-1"
+              aria-label="Cerrar"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <form id="contactForm" onsubmit="handleContactSubmit(event)" class="overflow-y-auto px-6 py-5 space-y-5">
+
+            <!-- Datos personales -->
+            <fieldset class="space-y-3">
+              <legend class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Datos personales</legend>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label for="contactFirstName" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Nombre <span class="text-[#d91670]">*</span></label>
+                  <input
+                    id="contactFirstName"
+                    name="firstName"
+                    type="text"
+                    required
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                    placeholder="Ej. María"
+                  />
+                </div>
+                <div>
+                  <label for="contactLastName" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Apellido</label>
+                  <input
+                    id="contactLastName"
+                    name="lastName"
+                    type="text"
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                    placeholder="Ej. Pérez"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label for="contactEmail" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Correo electrónico <span class="text-[#d91670]">*</span></label>
+                  <input
+                    id="contactEmail"
+                    name="email"
+                    type="email"
+                    required
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                    placeholder="maria@ejemplo.com"
+                  />
+                </div>
+                <div>
+                  <label for="contactPhone" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Teléfono / WhatsApp</label>
+                  <input
+                    id="contactPhone"
+                    name="phone"
+                    type="tel"
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                    placeholder="+1 (809) 000-0000"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label for="contactType" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Tipo de contacto</label>
+                  <select
+                    id="contactType"
+                    name="contactType"
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer"
+                  >
+                    <option value="comprador">Comprador</option>
+                    <option value="vendedor">Vendedor</option>
+                    <option value="arrendatario">Arrendatario</option>
+                    <option value="inversionista">Inversionista</option>
+                    <option value="agente">Agente / Colega</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="contactSource" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Origen del contacto</label>
+                  <select
+                    id="contactSource"
+                    name="source"
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer"
+                  >
+                    <option value="sitio">Sitio web</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="llamada">Llamada</option>
+                    <option value="referido">Referido</option>
+                    <option value="importado">Importado</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Preferencias de búsqueda -->
+            <fieldset class="space-y-3 pt-2 border-t border-gray-100">
+              <legend class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 pt-2">Preferencias de búsqueda</legend>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label for="contactPropertyType" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Tipo de propiedad buscada</label>
+                  <select
+                    id="contactPropertyType"
+                    name="propertyType"
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer"
+                  >
+                    <option value="">Sin preferencia</option>
+                    <option value="casa">Casa</option>
+                    <option value="apartamento">Apartamento</option>
+                    <option value="terreno">Terreno</option>
+                    <option value="local">Local comercial</option>
+                    <option value="oficina">Oficina</option>
+                    <option value="villa">Villa</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="contactOperation" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Operación</label>
+                  <select
+                    id="contactOperation"
+                    name="operation"
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer"
+                  >
+                    <option value="">Sin preferencia</option>
+                    <option value="venta">Compra / Venta</option>
+                    <option value="alquiler">Alquiler</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label for="contactZone" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Zona o sector de interés</label>
+                  <input
+                    id="contactZone"
+                    name="zone"
+                    type="text"
+                    class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                    placeholder="Ej. Naco, Piantini"
+                  />
+                </div>
+                <div>
+                  <label for="contactBudget" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Presupuesto (US$)</label>
+                  <div class="flex items-center gap-2">
+                    <input
+                      id="contactBudgetMin"
+                      name="budgetMin"
+                      type="number"
+                      min="0"
+                      class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                      placeholder="Mín."
+                    />
+                    <span class="text-slate-400 text-[12px]">—</span>
+                    <input
+                      id="contactBudgetMax"
+                      name="budgetMax"
+                      type="number"
+                      min="0"
+                      class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                      placeholder="Máx."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div>
+                  <label for="contactBedrooms" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Habitaciones</label>
+                  <select id="contactBedrooms" name="bedrooms" class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer">
+                    <option value="">Cualquiera</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                    <option value="5">5+</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="contactBathrooms" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Baños</label>
+                  <select id="contactBathrooms" name="bathrooms" class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer">
+                    <option value="">Cualquiera</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                  </select>
+                </div>
+                <div class="col-span-2">
+                  <label for="contactParking" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Parqueos</label>
+                  <select id="contactParking" name="parking" class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer">
+                    <option value="">Cualquiera</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Etiquetas -->
+            <fieldset class="space-y-2 pt-2 border-t border-gray-100">
+              <legend class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 pt-2">Etiquetas</legend>
+
+              <div id="contactTagsContainer" class="flex flex-wrap gap-1.5 mb-1.5"></div>
+
+              <div class="flex items-center gap-2">
+                <input
+                  id="contactTagInput"
+                  type="text"
+                  class="flex-1 px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors"
+                  placeholder="Escribe una etiqueta y presiona Enter"
+                  onkeydown="handleTagKeydown(event)"
+                />
+                <button
+                  type="button"
+                  onclick="addContactTag()"
+                  class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[12.5px] font-bold px-3 py-2 rounded-lg hover:bg-gray-50"
+                >
+                  Agregar
+                </button>
+              </div>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="text-[11px] text-slate-400 mr-1 self-center">Sugerencias:</span>
+                <button type="button" onclick="addContactTag('Inversionista')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full px-2.5 py-1 transition-colors">Inversionista</button>
+                <button type="button" onclick="addContactTag('Primera vivienda')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full px-2.5 py-1 transition-colors">Primera vivienda</button>
+                <button type="button" onclick="addContactTag('Cliente VIP')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full px-2.5 py-1 transition-colors">Cliente VIP</button>
+                <button type="button" onclick="addContactTag('Contado')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full px-2.5 py-1 transition-colors">Contado</button>
+                <button type="button" onclick="addContactTag('Financiamiento')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full px-2.5 py-1 transition-colors">Financiamiento</button>
+              </div>
+            </fieldset>
+
+            <!-- Alertas automatizadas y notas -->
+            <fieldset class="space-y-3 pt-2 border-t border-gray-100">
+              <legend class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 pt-2">Alertas y seguimiento</legend>
+
+              <label class="flex items-start gap-2.5 p-3 rounded-lg border border-gray-200 hover:bg-slate-50 cursor-pointer transition-colors">
+                <input
+                  id="contactAlertsEnabled"
+                  name="alertsEnabled"
+                  type="checkbox"
+                  class="mt-0.5 w-4 h-4 rounded border-gray-300 text-[#d91670] focus:ring-[#d91670] cursor-pointer"
+                />
+                <span class="text-[12.5px] text-[#0f172a]">
+                  <span class="font-semibold">Activar alertas automatizadas</span>
+                  <span class="block text-[11.5px] text-slate-500 mt-0.5">Enviar correos automáticos cuando una propiedad coincida con sus preferencias.</span>
+                </span>
+              </label>
+
+              <div id="contactAlertFrequencyWrapper" class="hidden pl-1">
+                <label for="contactAlertFrequency" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Frecuencia de alertas</label>
+                <select
+                  id="contactAlertFrequency"
+                  name="alertFrequency"
+                  class="w-full sm:w-64 px-3 py-2 text-[13px] border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors cursor-pointer"
+                >
+                  <option value="instantaneo">Instantáneo</option>
+                  <option value="diario">Resumen diario</option>
+                  <option value="semanal" selected>Resumen semanal</option>
+                  <option value="mensual">Resumen mensual</option>
+                </select>
+              </div>
+
+              <label class="flex items-center gap-2 text-[12.5px] text-slate-700 cursor-pointer select-none">
+                <input
+                  id="contactConsent"
+                  name="consent"
+                  type="checkbox"
+                  class="rounded border-gray-300 text-[#d91670] focus:ring-[#d91670]"
+                />
+                <span>El contacto aceptó recibir correos sobre propiedades.</span>
+              </label>
+
+              <div>
+                <label for="contactNotes" class="block text-[12.5px] font-medium text-[#0f172a] mb-1">Notas internas</label>
+                <textarea
+                  id="contactNotes"
+                  name="notes"
+                  rows="3"
+                  class="w-full px-3 py-2 text-[13px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d91670]/20 focus:border-[#d91670] transition-colors resize-y"
+                  placeholder="Ej. Busca casa familiar, tiene financiamiento preaprobado..."
+                ></textarea>
+              </div>
+            </fieldset>
+
+            <p id="contactFormError" class="hidden text-[12.5px] text-red-600 font-medium"></p>
+          </form>
+
+          <!-- Modal footer -->
+          <div class="flex items-center justify-end gap-2.5 px-6 py-4 border-t border-gray-200 bg-slate-50">
+            <button
+              type="button"
+              onclick="closeContactModal()"
+              class="btn-interactive bg-white border border-gray-300 text-[#0f172a] text-[13px] font-bold px-4 py-2 rounded-lg hover:bg-gray-50"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              onclick="document.getElementById('contactForm').requestSubmit()"
+              class="btn-pink-interactive bg-[#d91670] text-white text-[13px] font-bold px-4 py-2 rounded-lg"
+            >
+              Guardar contacto
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      
 
       <!-- =========================================================
            TAB 5: CORREOS (Screenshot 5)
@@ -911,6 +1258,17 @@
       </section>
 
 
+
+
+
+
+
+
+
+
+      
+
+
       <!-- =========================================================
            TAB 6: EQUIPO (Screenshot 7)
            ========================================================= -->
@@ -966,8 +1324,18 @@
       </section>
 
 
+
+
+
+
+
+
+
+
+      
+
       <!-- =========================================================
-           TAB 7: MARCA Y CONTACTO (Screenshot 6)
+           TAB 7: Configuraciones(Screenshot 6)
            ========================================================= -->
       <section id="tab-marca" class="tab-pane hidden space-y-4">
         <div>
@@ -1104,6 +1472,17 @@
       </section>
 
 
+
+
+
+
+
+
+
+
+
+      
+
       <!-- =========================================================
            TAB 8: DOMINIO Y CORREO (Screenshot 8)
            ========================================================= -->
@@ -1122,6 +1501,18 @@
       </section>
 
 
+
+
+
+
+
+
+
+
+
+
+
+      
       <!-- =========================================================
            TAB 9: FACTURACIÓN (Screenshot 9)
            ========================================================= -->
@@ -1580,6 +1971,200 @@
 
 
 
+
+
+
+<!--- Contact form logic --->
+
+  
+      <script>
+        // =========================================================
+        // CONTACT MODAL — state & helpers
+        // =========================================================
+        let contactTags = [];
+
+        function openContactModal() {
+          resetContactForm();
+          const overlay = document.getElementById('contactModalOverlay');
+          overlay.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          setTimeout(() => document.getElementById('contactFirstName').focus(), 50);
+        }
+
+        function closeContactModal() {
+          document.getElementById('contactModalOverlay').classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+
+        // Close modal with ESC
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') {
+            const overlay = document.getElementById('contactModalOverlay');
+            if (overlay && !overlay.classList.contains('hidden')) closeContactModal();
+          }
+        });
+
+        function resetContactForm() {
+          document.getElementById('contactForm').reset();
+          contactTags = [];
+          renderContactTags();
+          document.getElementById('contactFormError').classList.add('hidden');
+          document.getElementById('contactAlertFrequencyWrapper').classList.add('hidden');
+          document.getElementById('contactTagInput').value = '';
+        }
+
+        // =========================================================
+        // TAGS
+        // =========================================================
+        function handleTagKeydown(event) {
+          if (event.key === 'Enter' || event.key === ',') {
+            event.preventDefault();
+            addContactTag();
+          }
+        }
+
+        function addContactTag(tagFromSuggestion) {
+          const input = document.getElementById('contactTagInput');
+          const raw = typeof tagFromSuggestion === 'string' ? tagFromSuggestion : input.value;
+          const tag = raw.trim().replace(/,+$/, '');
+
+          if (!tag) return;
+          if (contactTags.some(t => t.toLowerCase() === tag.toLowerCase())) {
+            input.value = '';
+            return;
+          }
+
+          contactTags.push(tag);
+          input.value = '';
+          renderContactTags();
+        }
+
+        function removeContactTag(tag) {
+          contactTags = contactTags.filter(t => t !== tag);
+          renderContactTags();
+        }
+
+        function renderContactTags() {
+          const container = document.getElementById('contactTagsContainer');
+          container.innerHTML = '';
+
+          if (contactTags.length === 0) {
+            container.innerHTML = '<span class="text-[11.5px] text-slate-400 italic">Sin etiquetas</span>';
+            return;
+          }
+
+          contactTags.forEach(tag => {
+            const chip = document.createElement('span');
+            chip.className = 'inline-flex items-center gap-1.5 bg-[#d91670]/10 text-[#d91670] text-[11.5px] font-semibold rounded-full pl-2.5 pr-1.5 py-1';
+
+            const label = document.createElement('span');
+            label.textContent = tag;
+
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'hover:bg-[#d91670]/20 rounded-full p-0.5 transition-colors';
+            btn.setAttribute('aria-label', 'Quitar etiqueta ' + tag);
+            btn.innerHTML = '<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>';
+            btn.onclick = () => removeContactTag(tag);
+
+            chip.appendChild(label);
+            chip.appendChild(btn);
+            container.appendChild(chip);
+          });
+        }
+
+        // =========================================================
+        // ALERT FREQUENCY TOGGLE
+        // =========================================================
+        document.getElementById('contactAlertsEnabled').addEventListener('change', function (e) {
+          document.getElementById('contactAlertFrequencyWrapper').classList.toggle('hidden', !e.target.checked);
+        });
+
+        // =========================================================
+        // SUBMIT
+        // =========================================================
+        function handleContactSubmit(event) {
+          event.preventDefault();
+
+          const form = document.getElementById('contactForm');
+          const errorEl = document.getElementById('contactFormError');
+          errorEl.classList.add('hidden');
+          errorEl.textContent = '';
+
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          const data = {
+            firstName: form.firstName.value.trim(),
+            lastName: form.lastName.value.trim(),
+            email: form.email.value.trim(),
+            phone: form.phone.value.trim(),
+            contactType: form.contactType.value,
+            source: form.source.value,
+            preferences: {
+              propertyType: form.propertyType.value || null,
+              operation: form.operation.value || null,
+              zone: form.zone.value.trim(),
+              budgetMin: form.budgetMin.value ? Number(form.budgetMin.value) : null,
+              budgetMax: form.budgetMax.value ? Number(form.budgetMax.value) : null,
+              bedrooms: form.bedrooms.value || null,
+              bathrooms: form.bathrooms.value || null,
+              parking: form.parking.value || null,
+            },
+            tags: [...contactTags],
+            alerts: {
+              enabled: form.alertsEnabled.checked,
+              frequency: form.alertsEnabled.checked ? form.alertFrequency.value : null,
+            },
+            consent: form.consent.checked,
+            notes: form.notes.value.trim(),
+            createdAt: new Date().toISOString(),
+          };
+
+          // --- DEMO: log to console and show a confirmation ---
+          console.log('Nuevo contacto:', data);
+
+          // Replace this console.log with your real API call, e.g.:
+          // fetch('/api/contacts', {
+          //   method: 'POST',
+          //   headers: { 'Content-Type': 'application/json' },
+          //   body: JSON.stringify(data),
+          // }).then(r => r.json()).then(...)
+
+          closeContactModal();
+          showContactToast(`${data.firstName} ${data.lastName}`.trim() + ' fue agregado como contacto.');
+        }
+
+        // =========================================================
+        // TOAST (lightweight feedback)
+        // =========================================================
+        function showContactToast(message) {
+          const toast = document.createElement('div');
+          toast.className = 'fixed bottom-6 right-6 z-[60] bg-[#0f172a] text-white text-[13px] font-medium px-4 py-3 rounded-lg shadow-lg flex items-center gap-2.5 transition-opacity duration-300';
+          toast.innerHTML = '<svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span></span>';
+          toast.querySelector('span').textContent = message;
+          document.body.appendChild(toast);
+
+          setTimeout(() => { toast.style.opacity = '0'; }, 3200);
+          setTimeout(() => toast.remove(), 3600);
+        }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   
 </body>
 </html>
