@@ -241,6 +241,21 @@ body {
 
 
 
+
+
+/* ---------- Layout ---------- */
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem 4rem; }
+
+
+.controls-container {
+	display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+	gap: 1.5rem; padding: 2.3rem; border-radius: 12px;
+	max-width: 800px; width: 100%; margin-left: auto; margin-right: auto;
+}
+
+
+
+
 /* Updated search bar container */
 .search-bar { 
 	position: relative; 
@@ -269,18 +284,22 @@ body {
 	border-color: var(--primary);
 }
 
+
+
 /* Left search icon inside input */
 .search-bar > i { 
 	position: absolute; 
 	left: 18px; 
 	top: 50%; 
 	transform: translateY(-50%); 
-	color: white; 
+	color: var(--text-light); 
 	pointer-events: none; /* Prevents clicking the icon */
     font-size: 1rem;
 	z-index: 2;
 }
 
+	
+	
 /* New circular search button on the right */
 .search-submit-btn {
 	display: inline-flex;
@@ -316,28 +335,21 @@ body {
 	margin: 0;
 }
 
-
-/* ---------- Layout ---------- */
-.container { max-width: 1400px; margin: 0 auto; padding: 2rem 4rem; }
-
-
-.controls-container {
-	display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-	gap: 1.5rem; padding: 2.3rem; border-radius: 12px;
-	max-width: 800px; width: 100%; margin-left: auto; margin-right: auto;
-}
-
-
-.search-bar { position: relative; flex-grow: 1; max-width: 780px; }
-
-
-.search-bar input { width: 100%; padding: 12px 20px 12px 45px; border-radius: 30px; border: 1px solid var(--border-color); background-color: var(--bg); color: var(--text); font-size: 1rem; }
-
-
-.search-bar i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-light); }
-
-
-.btn { background-color: var(--primary); color: white; border: none; padding: 15px 24px; border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; text-align: center; }
+.btn { 
+	background-color: var(--primary); 
+	color: white; 
+	border: none; 
+	padding: 15px 24px; 
+	border-radius: 50px; 
+	cursor: pointer; 
+	font-weight: 600; 
+	transition: all 0.3s ease; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	gap: 8px; 
+	text-decoration: none; 
+	text-align: center; }
 
 
 .btn.btn-danger { background-color: #e53e3e; }
