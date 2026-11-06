@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyListings · Footer Reveal</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { brand: { blue: '#1A00FF', green: '#4BFF4B' } },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --primary: #DF1783;
+            --primary-hover: #c71575;
+            --primary-light: #fdeefa;
+            --secondary: #2d3748;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --border-color: #e2e8f0;
+            --faq-bg: #2d3748;
+            --submenu-hover: #fdeefa;
+        }
+        
+        
+        
+
+        .dark-mode {
+            --primary: #DF1783;
+            --primary-hover: #e63a97;
+            --primary-light: #2d1a2a;
+            --secondary: #1a202c;
+            --text: #f7fafc;
+            --text-light: #a0aec0;
+            --bg: #1a202c;
+            --card-bg: #2d3748;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -1px rgba(0,0,0,0.2);
+            --border-color: #4a5568;
+            --faq-bg: #1a202c;
+            --submenu-hover: rgba(223, 23, 131, 0.15);
+            
+        }
+        
+        
+
+        html { 
+        box-sizing: border-box; 
+        overflow-x: hidden; 
+        scroll-behavior: smooth; 
+        }
+        
+        
+        
+        *, *:before, *:after { 
+        box-sizing: inherit; 
+        margin: 0; 
+        padding: 0; 
+        }
+        
+        
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+
+
+
+
+
+        /* ========== TOP MENU BAR ========== */
+        .top-menu-bar {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 1200px;
+            z-index: 1100;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .top-menu-bar.full-width {
+            width: 100%;
+            max-width: 100%;
+            left: 0;
+            transform: translateX(0);
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            padding: 0 1.5rem;
+            top: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        /* NOTE: .hidden class removed entirely — navbar always stays visible */
+
+        .top-menu-content {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        
+        
+
+        .logo-container { 
+        display: flex; 
+        align-items: center; 
+        gap: 0.5rem; 
+        flex-shrink: 0; 
+        }
+        
+        
+        
+        
+        #appLogo { height: 40px; width: 40px; object-fit: cover; border-radius: 8px; }
+        #appBrandNameDisplay { 
+        font-size: 1.5rem; 
+        font-weight: 900; color: var(--text); 
+        white-space: nowrap; 
+        }
+        
+        
+        
+        .brand-accent { 
+        color: #df1783; 
+        }
+
+
+
+        .top-menu-actions { 
+        display: flex; 
+        align-items: center; 
+        gap: 0.5rem; 
+        flex-shrink: 0; 
+        }
+        
+        
+        
+        
+
+        .fab {
+            width: 40px; height: 40px; border-radius: 50%;
+            background-color: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border-color);
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+        
+        
+        
+        .fab:hover { 
+        background-color: var(--border-color); 
+        transform: scale(1.1); 
+        }
+        
+        
+        
+
+        .primary-btn {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 22px;
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        
+        
+        
+        .primary-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+
+
+        /* ========== NAV MENU ========== */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0 auto;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            line-height: 1;
+        }
+
+        .nav-link:hover { background: var(--bg); color: var(--primary); }
+        .nav-item.open .nav-link { background: var(--bg); color: var(--primary); }
+
+        .nav-link .chevron { width: 14px; height: 14px; transition: transform 0.25s ease; opacity: 0.6; }
+        .nav-item.open .nav-link .chevron { transform: rotate(180deg); }
+
+
+
+
+
+        .submenu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            min-width: 240px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+            padding: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+
+
+        .submenu::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background: var(--card-bg);
+            border-left: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+            border-radius: 3px 0 0 0;
+        }
+        
+        
+        
+
+        .nav-item.open .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        
+        
+
+        .submenu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.65rem 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+        
+        
+        
+
+        .submenu-link i { 
+        width: 16px; 
+        text-align: center; 
+        color: var(--text-light); 
+        transition: color 0.2s; 
+        flex-shrink: 0; 
+        }
+        
+        
+        
+        .submenu-link:hover { 
+        background: var(--submenu-hover); 
+        color: var(--primary); 
+        }
+        
+        
+        .submenu-link:hover i { 
+        color: var(--primary); 
+        }
+        
+        
+
+
+
+        /* ========== HERO ========== */
+        .header-banner {
+            width: 100%;
+            padding: 200px 2rem 5rem 2rem;
+            text-align: center;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        
+        
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(45, 55, 72, 0.75);
+            z-index: 1;
+        }
+        
+        
+        
+        .header-content { 
+        position: relative; 
+        z-index: 2; 
+        max-width: 1080px; 
+        margin: 0 auto; 
+        }
+        
+        
+
+        .hero-badge {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+        }
+        
+        
+        .hero-badge:hover { 
+        transform: translateY(-3px); 
+        box-shadow: 0 10px 20px -10px var(--primary); 
+        }
+        
+        
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(20deg); }
+            75% { transform: rotate(-15deg); }
+        }
+        
+        
+        .waving-hand { 
+        display: inline-block; 
+        animation: wave 1.5s infinite; 
+        transform-origin: 70% 70%; 
+        }
+        
+        
+
+        /* ========== GENERAL ========== */
+        h1, h2, h3, h4 { 
+        color: var(--text); 
+        }
+        
+        
+        
+        p { 
+        color: var(--text-light); 
+        }
+
+
+        .hero-title, .hero-subtitle { 
+        color: white !important; 
+        }
+        
+        
+
+        .section-dummy { 
+        padding: 6rem 1rem; 
+        background: var(--bg); 
+        border-top: 1px solid var(--border-color); 
+        border-bottom: 1px solid var(--border-color); 
+        }
+        
+        
+        .section-dummy h2 { 
+        color: var(--text); 
+        }
+
+
+
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+        }
+        
+        
+        #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        
+        
+        #backToTopBtn:hover { background-color: var(--primary-hover); transform: translateY(-3px) scale(1.05); }
+        
+        
+        
+
+        /* ========== BRAND GLOW ========== */
+        .brand-glow {
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0,0,0,0.6), 0 0 40px rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.4);
+            letter-spacing: 0.05em;
+        }
+        
+        
+        
+
+        /* ========== FOOTER — preserved structure from original ========== */
+        .site-footer {
+            position: relative;
+            z-index: 10;
+            padding: 6rem 1.5rem 3rem 1.5rem;
+            margin-top: auto;
+            background: var(--secondary);
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        
+
+        .footer-heading {
+            color: #a0aec0 !important;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        
+        
+        .footer-link {
+            color: white !important;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        
+        
+        
+        
+        .footer-link:hover { c
+        olor: var(--primary) !important; 
+        }
+        
+        
+        
+
+        .footer-support-card {
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: border-color 0.3s, background 0.3s;
+            width: 100%;
+            max-width: 360px;
+            aspect-ratio: 3/2;
+        }
+        
+        
+        
+
+        /* ========== VIDEO MODAL ========== */
+        .video-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.88);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .video-modal.active { display: flex; }
+
+        .video-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            z-index: 1010;
+            transition: transform 0.2s ease;
+        }
+        
+        
+        
+        .close-modal:hover { transform: scale(1.1); }
+        
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+        }
+        
+        
+        .video-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+            #appBrandNameDisplay { font-size: 1.25rem; }
+        }
+        
+
+        @media (max-width: 768px) {
+            #appBrandNameDisplay { font-size: 1.15rem; }
+            #desktopCta { display: none; }
+            .header-banner { padding: 150px 1rem 4rem 1rem; }
+            .top-menu-bar { width: calc(100% - 1rem); }
+            .top-menu-bar.full-width { padding: 0 1rem; }
+        }
+        
+
+        @media (max-width: 480px) {
+            #appBrandNameDisplay { font-size: 1rem; }
+            .fab { width: 36px; height: 36px; font-size: 0.85rem; }
+            .header-banner { padding: 130px 1rem 3rem 1rem; }
+            h1 { font-size: 1.9rem; }
+        }
+        
+        
+    </style>
+</head>
+<body>
+
+
+
+    <!-- ================= CURTAIN WRAPPER ================= -->
+    <div class="relative z-10 bg-white mb-[100vh] curtain-shadow rounded-b-[2rem] transition-shadow duration-300" style="background: var(--bg);">
+    
+    
+    
+    
+
+        <!-- ================= TOP MENU BAR ================= -->
+        <div class="top-menu-bar" id="topMenuBar">
+            <div class="top-menu-content">
+                <div class="logo-container">
+                    <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Easy Listings Logo">
+                    <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+                </div>
+
+                <nav class="nav-menu" aria-label="Main navigation">
+                    <div class="nav-item">
+                        <a href="#acerca" class="nav-link" data-i18n="nav_about">Acerca de</a>
+                    </div>
+
+                    <div class="nav-item" id="funcionesNavItem">
+                        <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
+                            <span data-i18n="nav_features">Funciones</span>
+                            <i data-lucide="chevron-down" class="chevron"></i>
+                        </button>
+                        <div class="submenu" role="menu" aria-label="Funciones submenu">
+                            <a href="#funciones" class="submenu-link" role="menuitem">
+                                <i data-lucide="layout-grid"></i> <span data-i18n="sub_catalog">Catálogo de Propiedades</span>
+                            </a>
+                            <a href="#funciones" class="submenu-link" role="menuitem">
+                                <i data-lucide="users"></i> <span data-i18n="sub_leads">Captura de Leads</span>
+                            </a>
+                            <a href="#funciones" class="submenu-link" role="menuitem">
+                                <i data-lucide="smartphone"></i> <span data-i18n="sub_mobile">Optimizado para Móviles</span>
+                            </a>
+                            <a href="#funciones" class="submenu-link" role="menuitem">
+                                <i data-lucide="palette"></i> <span data-i18n="sub_brand">Personalización de Marca</span>
+                            </a>
+                            <a href="#funciones" class="submenu-link" role="menuitem">
+                                <i data-lucide="bar-chart-3"></i> <span data-i18n="sub_analytics">Analíticas</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item">
+                        <a href="#pricing" class="nav-link" data-i18n="nav_pricing">Planes</a>
+                    </div>
+                </nav>
+
+                <div class="top-menu-actions">
+                    <div class="fab" id="languageToggle" title="English / Español" aria-label="Toggle language">
+                        <span id="langLabel" style="font-weight:700;font-size:0.8rem;">EN</span>
+                    </div>
+                    <div class="fab" title="Soporte" onclick="window.open('https://helpcenter.easylistings.website', '_blank')"><i class="fa fa-info-circle"></i></div>
+                    <div class="fab" id="darkModeToggle" title="Cambiar Tema"><i class="fas fa-moon"></i></div>
+                    <a href="#pricing" class="primary-btn hidden sm:inline-block" id="desktopCta" data-i18n="nav_cta">Crea Tu Listing</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+
+        <!-- ================= HERO ================= -->
+        <header class="header-banner" id="mainHeader">
+            <div class="header-content">
+                <div class="hero-badge inline-block bg-[var(--primary)] text-white font-semibold px-4 py-2 rounded-full mb-6">
+                    <span data-i18n="hero_greeting">¡Bienvenido!</span> <span class="waving-hand">👋</span>
+                </div>
+                <h1 class="hero-title text-4xl md:text-6xl font-extrabold leading-tight mb-4" data-i18n="hero_title">Muestra Tus Propiedades, No Tu Álbum de Fotos.</h1>
+                <p class="hero-subtitle max-w-3xl mx-auto text-lg md:text-xl mb-8" data-i18n="hero_subtitle">Easy Listings convierte tus imágenes caóticas en un catálogo impresionante y adaptable a móviles que captura leads automáticamente. Hazlo tuyo.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#pricing" class="primary-btn text-lg w-full sm:w-auto" data-i18n="hero_cta">Obtén Mi Oferta Vitalicia $49</a>
+                    <button id="openVideoModal" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-lg font-semibold px-8 py-3 rounded-xl transition w-full sm:w-auto" data-i18n="hero_video">Ver Video Demostrativo</button>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30"></div>
+            
+        </header>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        <!-- DUMMY CONTENT -->
+        <section class="section-dummy" id="acerca">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block p-4 rounded-2xl mb-6" style="background: var(--border-color);">
+                    <svg class="w-12 h-12 animate-bounce" style="color: var(--text-light);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-4" data-i18n="dummy_title">Sigue desplazándote</h2>
+                <p class="text-lg" data-i18n="dummy_text">Desplázate más allá del pie de página para ver el efecto de revelado fijo en acción.</p>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </section>
+
+        <section style="min-height: 40vh; background: var(--card-bg);"></section>
+
+        <!-- ================= FOOTER — ORIGINAL STRUCTURE PRESERVED ================= -->
+        <footer class="site-footer">
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+
+                <!-- Left Info -->
+                <div class="flex flex-col gap-2 md:col-span-3">
+                    <div class="flex items-center gap-2 text-white font-bold tracking-tight text-md">
+                        <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo" class="w-8 h-8 object-contain rounded-lg">
+                        EasyListings
+                    </div>
+                    <div class="text-gray-500 text-sm mt-2" data-i18n="footer_tagline">
+                        Exhibe Tus Propiedades. Define Tu Marca.
+                    </div>
+                </div>
+
+                <!-- Center Links — ORIGINAL structure restored -->
+                <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                    <div class="flex flex-col gap-3">
+                        <div class="footer-heading" data-i18n="footer_col_about">Acerca</div>
+                        <a href="#" class="footer-link" data-i18n="nav_pricing">Planes</a>
+                        <a href="#" class="footer-link" data-i18n="footer_about_us">Sobre nosotros</a>
+                        <a href="#" class="footer-link" data-i18n="footer_terms">Terminos de Uso</a>
+                        <a href="#" class="footer-link" data-i18n="footer_privacy">Privacidad</a>
+                        <a href="#" class="footer-link" data-i18n="footer_contact">Contacto</a>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <div class="footer-heading" data-i18n="footer_col_community">Comunidad</div>
+                        <a href="#" class="footer-link" data-i18n="footer_help">Centro de Ayuda</a>
+                        <a href="#" class="footer-link" data-i18n="footer_affiliates">Afiliados</a>
+                        <a href="#" class="footer-link" data-i18n="footer_blog">Blog</a>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <div class="footer-heading" data-i18n="footer_col_features">Funciones</div>
+                        <a href="#" class="footer-link">Text-to-Video</a>
+                        <a href="#" class="footer-link">AI Models</a>
+                        <a href="#" class="footer-link">Characters</a>
+                        <a href="#" class="footer-link">Products</a>
+                        <a href="#" class="footer-link">Brand</a>
+                        <a href="#" class="footer-link">AI Narration</a>
+                        <a href="#" class="footer-link">AI Captions</a>
+                        <a href="#" class="footer-link">AI B-Roll</a>
+                        <a href="#" class="footer-link">AI Video Editor</a>
+                        <a href="#" class="footer-link">AI Animation</a>
+                        <a href="#" class="footer-link">Script to Video</a>
+                        <a href="#" class="footer-link">Custom Styles</a>
+                        <a href="#" class="footer-link">MCP</a>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Support Card — original markup -->
+                <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end">
+                    <div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30"></div>
+                    
+                    
+                    <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[var(--primary)] transition-colors group" style="background: var(--card-bg);">
+                    
+                    
+                        <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                            <div class="flex items-center gap-2 mb-2">
+                            
+                                <h4 class="font-bold text-lg sm:text-xl md:text-base lg:text-xl" style="color: var(--text);" data-i18n="support_title">Online Support</h4>
+                                
+                                <span class="text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider" style="background: rgba(223,23,131,0.12); color: var(--primary); border: 1px solid rgba(223,23,131,0.3);">24/7</span>
+                                
+                            </div>
+                            
+                            <p class="text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug" style="color: var(--text-light);" data-i18n="support_text">Contact us if you have any questions. Our team is here to help you.</p>
+                            
+                            
+                            <button onclick="window.open('https://wa.me/18296203970?text=%C2%A1Hola!%20%F0%9F%91%8B%20Estoy%20interesado%2Fa%20en%20los%20servicios%20de%20EasyListings.', '_blank')" class="bg-[#df1783] hover:bg-[#c0146f] text-white text-xs sm:text-sm md:text-[11px] lg:text-sm font-semibold py-2 px-3 md:py-1.5 md:px-2.5 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#df1783] shadow-sm w-fit">
+                                <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white"></i>
+                                <span data-i18n="support_cta">Message Us</span>
+                            </button>
+                        </div>
+                        <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pink-support-agent.webp" alt="24/7 Support" class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+
+            <!-- Bottom bar -->
+            <div class="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="border-top: 1px solid var(--border-color); color: var(--text-light);">
+                <div class="flex items-center gap-2">
+                    <span data-i18n="footer_credit">Desarrollado en 🇩🇴 por Bebell Digital Solutions.</span>
+                </div>
+                <div data-i18n="footer_copyright">Copyright © 2026 EasyListings • Todos los derechos reservados.</div>
+            </div>
+        </footer>
+    </div>
+    <!-- ================= END CURTAIN ================= -->
+    
+    
+    
+    
+    
+
+    <!-- ================= FIXED REVEAL SECTION ================= -->
+    <div class="fixed bottom-0 left-0 w-full h-screen z-0 flex flex-col items-center justify-end pb-24 px-4 overflow-hidden selection:bg-white selection:text-black"
+         style="background-image: url('https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/background-banner.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+         
+         
+        <div class="absolute inset-0" style="background: rgba(0,0,0,0.10);"></div>
+        
+        
+        <div class="flex-1 w-full max-w-2xl flex items-center justify-center relative animate-float">
+        
+        
+            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp?updatedAt=1793038323330" alt="Brand Mascot" class="w-full max-h-[24vh] object-contain drop-shadow-2xl" />
+        </div>
+        
+        
+        <h2 class="relative z-10 text-[14vw] font-black leading-[0.9] tracking-tighter w-full text-center mb-6 brand-glow select-none animate-float">EasyListings</h2>
+        
+        
+        <p class="relative z-10 text-[24px] md:text-[34px] font-black leading-[1] tracking-wide w-full text-center mb-8 brand-glow select-none" data-i18n="reveal_tagline">Exhibe Tus Propiedades. Define Tu Marca.</p>
+        
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Back to Top -->
+    <button id="backToTopBtn" aria-label="Back to top">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+
+
+
+
+
+
+
+
+    <!-- Video Modal -->
+    <div id="youtubeVideoModal" class="video-modal">
+        <div class="video-modal-content">
+            <button id="closeYoutubeModal" class="close-modal" aria-label="Close video">✕</button>
+            <div class="video-container">
+                <iframe id="youtubePlayer" src="" allow="autoplay; encrypted-media" allowfullscreen title="Demo video"></iframe>
+            </div>
+            <div class="p-4 flex justify-center" style="background: var(--card-bg);">
+                <a href="#pricing" id="modalPricingButton" class="primary-btn" data-i18n="hero_cta">Obtén Mi Oferta Vitalicia $49</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>lucide.createIcons();</script>
+
+    <script>
+        /* ============================================================
+           TRANSLATIONS
+           ============================================================ */
+        const TRANSLATIONS = {
+            es: {
+                nav_about: "Acerca de",
+                nav_features: "Funciones",
+                nav_pricing: "Planes",
+                nav_cta: "Crea Tu Listing",
+                hero_greeting: "¡Bienvenido!",
+                hero_title: "Muestra Tus Propiedades, No Tu Álbum de Fotos.",
+                hero_subtitle: "Easy Listings convierte tus imágenes caóticas en un catálogo impresionante y adaptable a móviles que captura leads automáticamente. Hazlo tuyo.",
+                hero_cta: "Obtén Mi Oferta Vitalicia $49",
+                hero_video: "Ver Video Demostrativo",
+                dummy_title: "Sigue desplazándote",
+                dummy_text: "Desplázate más allá del pie de página para ver el efecto de revelado fijo en acción.",
+                footer_tagline: "Exhibe Tus Propiedades. Define Tu Marca.",
+                footer_col_about: "Acerca",
+                footer_col_community: "Comunidad",
+                footer_col_features: "Funciones",
+                footer_about_us: "Sobre nosotros",
+                footer_terms: "Terminos de Uso",
+                footer_privacy: "Privacidad",
+                footer_contact: "Contacto",
+                footer_help: "Centro de Ayuda",
+                footer_affiliates: "Afiliados",
+                footer_blog: "Blog",
+                support_title: "Online Support",
+                support_text: "Contact us if you have any questions. Our team is here to help you.",
+                support_cta: "Message Us",
+                footer_credit: "Desarrollado en 🇩🇴 por Bebell Digital Solutions.",
+                footer_copyright: "Copyright © 2026 EasyListings • Todos los derechos reservados.",
+                reveal_tagline: "Exhibe Tus Propiedades. Define Tu Marca.",
+                sub_catalog: "Catálogo de Propiedades",
+                sub_leads: "Captura de Leads",
+                sub_mobile: "Optimizado para Móviles",
+                sub_brand: "Personalización de Marca",
+                sub_analytics: "Analíticas"
+            },
+            en: {
+                nav_about: "About",
+                nav_features: "Features",
+                nav_pricing: "Pricing",
+                nav_cta: "Create Your Listing",
+                hero_greeting: "Welcome!",
+                hero_title: "Show Your Properties, Not Your Photo Album.",
+                hero_subtitle: "Easy Listings turns your chaotic photos into a stunning, mobile-optimized catalog that automatically captures leads. Make it yours.",
+                hero_cta: "Get My Lifetime Deal $49",
+                hero_video: "Watch Demo Video",
+                dummy_title: "Keep scrolling down",
+                dummy_text: "Scroll past the footer to see the sticky reveal effect in action.",
+                footer_tagline: "Show Your Properties. Define Your Brand.",
+                footer_col_about: "About",
+                footer_col_community: "Community",
+                footer_col_features: "Features",
+                footer_about_us: "About us",
+                footer_terms: "Terms of Use",
+                footer_privacy: "Privacy",
+                footer_contact: "Contact",
+                footer_help: "Help Center",
+                footer_affiliates: "Affiliates",
+                footer_blog: "Blog",
+                support_title: "Online Support",
+                support_text: "Contact us if you have any questions. Our team is here to help you.",
+                support_cta: "Message Us",
+                footer_credit: "Built in 🇩🇴 by Bebell Digital Solutions.",
+                footer_copyright: "Copyright © 2026 EasyListings • All rights reserved.",
+                reveal_tagline: "Show Your Properties. Define Your Brand.",
+                sub_catalog: "Property Catalog",
+                sub_leads: "Lead Capture",
+                sub_mobile: "Mobile Optimized",
+                sub_brand: "Brand Customization",
+                sub_analytics: "Analytics"
+            }
+        };
+
+        let currentLang = 'es';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            const dict = TRANSLATIONS[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) {
+                    el.textContent = dict[key];
+                }
+            });
+            document.getElementById('langLabel').textContent = lang === 'es' ? 'EN' : 'ES';
+            localStorage.setItem('language', lang);
+        }
+
+        /* ============================================================
+           INIT
+           ============================================================ */
+        document.addEventListener('DOMContentLoaded', function () {
+
+            /* ---------- LANGUAGE ---------- */
+            const savedLang = localStorage.getItem('language');
+            applyLanguage(savedLang === 'en' ? 'en' : 'es');
+
+            document.getElementById('languageToggle').addEventListener('click', () => {
+                applyLanguage(currentLang === 'es' ? 'en' : 'es');
+            });
+
+            /* ---------- DARK MODE ---------- */
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const themeIcon = darkModeToggle.querySelector('i');
+
+            function setTheme(isDark) {
+                if (isDark) {
+                    body.classList.add('dark-mode');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    body.classList.remove('dark-mode');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            if (localStorage.getItem('theme') === 'dark') setTheme(true);
+
+            darkModeToggle.addEventListener('click', () => {
+                setTheme(!body.classList.contains('dark-mode'));
+            });
+
+            /* ---------- TOP MENU SCROLL — ALWAYS VISIBLE, full-width after 50px ---------- */
+            const topMenuBar = document.getElementById('topMenuBar');
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            function updateTopMenu() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Full width after 50px — NEVER hide
+                if (scrollTop > 50) {
+                    topMenuBar.classList.add('full-width');
+                } else {
+                    topMenuBar.classList.remove('full-width');
+                }
+
+                // Back to top button
+                if (scrollTop > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            }
+
+            window.addEventListener('scroll', updateTopMenu, { passive: true });
+            updateTopMenu();
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            /* ---------- SUBMENU ---------- */
+            const funcionesNavItem = document.getElementById('funcionesNavItem');
+            const funcionesToggle = document.getElementById('funcionesToggle');
+
+            function closeSubmenu() {
+                funcionesNavItem.classList.remove('open');
+                funcionesToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            funcionesToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = funcionesNavItem.classList.toggle('open');
+                funcionesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!funcionesNavItem.contains(e.target)) closeSubmenu();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeSubmenu();
+            });
+
+            document.querySelectorAll('.submenu-link').forEach(link => {
+                link.addEventListener('click', closeSubmenu);
+            });
+
+            /* ---------- VIDEO MODAL ---------- */
+            const videoModal = document.getElementById('youtubeVideoModal');
+            const openVideoBtn = document.getElementById('openVideoModal');
+            const closeVideoBtn = document.getElementById('closeYoutubeModal');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            const modalPricingButton = document.getElementById('modalPricingButton');
+            const youtubeVideoId = 'dQw4w9WgXcQ';
+
+            function openVideo() {
+                youtubePlayer.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`;
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeVideo() {
+                videoModal.classList.remove('active');
+                youtubePlayer.src = '';
+                document.body.style.overflow = '';
+            }
+
+            openVideoBtn.addEventListener('click', openVideo);
+            closeVideoBtn.addEventListener('click', closeVideo);
+
+            modalPricingButton.addEventListener('click', () => {
+                closeVideo();
+            });
+
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) closeVideo();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) closeVideo();
+            });
+        });
+    </script>
+</body>
+</html>
