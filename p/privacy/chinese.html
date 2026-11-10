@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐私政策 | EasyListings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { brand: { blue: '#1A00FF', green: '#4BFF4B' } },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #DF1783;
+            --primary-hover: #c71575;
+            --primary-light: #fdeefa;
+            --secondary: #2d3748;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #FAF8F5;
+            --bg-alt: #F2EFE9;
+            --card-bg: #FFFFFF;
+            --fg: #0E0E10;
+            --muted: #5C5C63;
+            --border: #E5E1DA;
+            --shadow-sm: 0 4px 20px -2px rgba(14, 14, 16, 0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(14, 14, 16, 0.12);
+        }
+        html { box-sizing: border-box; overflow-x: hidden; scroll-behavior: smooth; }
+        *, *:before, *:after { box-sizing: inherit; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+        .top-menu-bar {
+            position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 2rem); max-width: 1200px; z-index: 1100;
+            background-color: var(--card-bg); box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border); border-radius: 12px;
+            padding: 0 1rem; transition: all 0.3s ease-in-out;
+        }
+        .top-menu-bar.full-width {
+            width: 100%; max-width: 100%; left: 0; transform: translateX(0);
+            border-radius: 0; border-left: none; border-right: none;
+            padding: 0 1.5rem; top: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .top-menu-content {
+            height: 70px; display: flex; align-items: center;
+            justify-content: space-between; gap: 1rem;
+        }
+        .logo-container { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        #appLogo { height: 40px; width: 40px; object-fit: cover; border-radius: 8px; }
+        #appBrandNameDisplay { font-size: 1.5rem; font-weight: 900; color: var(--text); white-space: nowrap; }
+        .brand-accent { color: #df1783; }
+        .top-menu-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        .nav-menu { display: flex; align-items: center; gap: 0.25rem; margin: 0 auto; }
+        .nav-item { position: relative; }
+        .nav-link {
+            display: flex; align-items: center; gap: 0.35rem;
+            padding: 0.55rem 1rem; font-size: 0.95rem; font-weight: 600;
+            color: var(--text); text-decoration: none; border-radius: 8px;
+            transition: background 0.2s, color 0.2s; white-space: nowrap;
+            cursor: pointer; border: none; background: transparent;
+            font-family: inherit; line-height: 1;
+        }
+        .nav-link:hover { background: var(--bg); color: var(--primary); }
+        .nav-item.open .nav-link { background: var(--bg); color: var(--primary); }
+        .nav-link .chevron { width: 14px; height: 14px; transition: transform 0.25s ease; opacity: 0.6; }
+        .nav-item.open .nav-link .chevron { transform: rotate(180deg); }
+        .submenu {
+            position: absolute; top: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%) translateY(-6px); min-width: 250px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+            padding: 0.5rem; opacity: 0; visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1200; display: flex; flex-direction: column; gap: 0.15rem;
+        }
+        .submenu::before {
+            content: ''; position: absolute; top: -6px; left: 50%;
+            transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px;
+            background: var(--card-bg); border-left: 1px solid var(--border);
+            border-top: 1px solid var(--border); border-radius: 3px 0 0 0;
+        }
+        .nav-item.open .submenu {
+            opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+        }
+        .submenu-link {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.65rem 0.9rem; font-size: 0.875rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: 8px;
+            transition: background 0.2s, color 0.2s; white-space: nowrap;
+        }
+        .submenu-link i { width: 12px; text-align: center; color: #df1783; transition: color 0.2s; flex-shrink: 0; }
+        .submenu-link:hover { background: var(--primary-light); color: var(--primary); }
+        .submenu-link:hover i { color: var(--primary); }
+        .primary-btn {
+            background-color: var(--primary); color: white; transition: all 0.3s ease;
+            padding: 12px 22px; display: inline-block; text-decoration: none;
+            border-radius: 12px; font-weight: 600; cursor: pointer;
+            border: none; font-family: inherit;
+        }
+        .primary-btn:hover {
+            background-color: var(--primary-hover); transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+        .fab {
+            width: 40px; height: 40px; border-radius: 50%;
+            background-color: var(--bg); color: var(--text);
+            border: 1px solid var(--border);
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem;
+        }
+        .fab:hover { background-color: var(--border); transform: scale(1.1); }
+        .lang-dropdown { position: relative; display: inline-block; font-family: system-ui, -apple-system, sans-serif; }
+        .lang-trigger {
+            display: flex; align-items: center; gap: 8px; padding: 8px 14px;
+            background: #fff; border: 1px solid #d0d5dd; border-radius: 8px;
+            cursor: pointer; font-size: 14px; font-weight: 600; color: #1d2939;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .lang-trigger:hover { border-color: #98a2b3; }
+        .lang-trigger .flag { font-size: 18px; line-height: 1; }
+        .lang-trigger .chevron { margin-left: 4px; width: 14px; height: 14px; color: #667085; transition: transform 0.2s ease; }
+        .lang-dropdown.open .chevron { transform: rotate(180deg); }
+        .lang-menu {
+            position: absolute; top: calc(100% + 6px); left: 0; min-width: 100%;
+            padding: 6px; margin: 0; list-style: none; background: #fff;
+            border: 1px solid #d0d5dd; border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+            opacity: 0; visibility: hidden; transform: translateY(-6px);
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            z-index: 100;
+        }
+        .lang-dropdown.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 8px; width: 100%;
+            padding: 8px 12px; background: none; border: none; border-radius: 6px;
+            cursor: pointer; font-size: 14px; font-weight: 600; color: #1d2939;
+            text-align: left; transition: background 0.1s ease; text-decoration: none;
+        }
+        .lang-option:hover { background: #f2f4f7; }
+        .lang-option .flag { font-size: 18px; line-height: 1; }
+        .site-footer {
+            position: relative; z-index: 10; padding: 6rem 1.5rem 3rem 1.5rem;
+            margin-top: auto; background: var(--secondary);
+            border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;
+            color: var(--text); transition: background 0.3s, color 0.3s;
+        }
+        .footer-heading {
+            color: #a0aec0 !important; font-size: 0.75rem; letter-spacing: 0.1em;
+            text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .footer-link {
+            color: white !important; text-decoration: none; font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-link:hover { color: var(--primary) !important; }
+        .footer-support-card {
+            background: var(--card-bg); border: 1px solid var(--primary);
+            border-radius: 1rem; padding: 1.5rem; position: relative;
+            overflow: hidden; box-shadow: var(--shadow-sm);
+            transition: border-color 0.3s, background 0.3s;
+            width: 100%; max-width: 360px; aspect-ratio: 3/2;
+        }
+        .privacy-content {
+            padding: 8rem 1.5rem 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .privacy-content h1 {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            color: var(--fg);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .privacy-content .meta {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .privacy-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+        .privacy-content h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .privacy-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .privacy-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.25rem;
+        }
+        .privacy-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .privacy-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0.25rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .privacy-content .highlight-box {
+            background: var(--bg-alt);
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+        .privacy-content .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text);
+        }
+        .privacy-content a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .privacy-content a:hover {
+            color: var(--primary-hover);
+        }
+        .privacy-content .contact-info {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+        .privacy-content .contact-info p {
+            margin-bottom: 0.35rem;
+            color: var(--text);
+        }
+        .privacy-content .contact-info strong {
+            color: var(--fg);
+        }
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+        }
+        @media (max-width: 768px) {
+            .privacy-content { padding: 6rem 1rem 3rem 1rem; }
+            .privacy-content h2 { font-size: 1.3rem; }
+        }
+        #backToTopBtn {
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            background-color: var(--primary); color: white; border: none; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1000; opacity: 0; visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+        }
+        #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTopBtn:hover { background-color: var(--primary-hover); transform: translateY(-3px) scale(1.05); }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#DF1783] selection:text-white">
+
+    <!-- ================= TOP MENU BAR ================= -->
+    <div class="top-menu-bar" id="topMenuBar">
+        <div class="top-menu-content">
+            <div class="logo-container">
+                <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Easy Listings Logo">
+                <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+            </div>
+
+            <nav class="nav-menu" aria-label="主导航">
+                <div class="nav-item">
+                    <a href="https://easylistings.website/#acerca" class="nav-link">关于</a>
+                </div>
+
+                <div class="nav-item" id="funcionesNavItem">
+                    <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
+                        <span>功能</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+                    <div class="submenu" role="menu" aria-label="功能子菜单">
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="layout-grid"></i> <span>房源目录</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="users"></i> <span>线索获取</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="smartphone"></i> <span>移动端优化</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="palette"></i> <span>品牌定制</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="bar-chart-3"></i> <span>数据分析</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="https://easylistings.website/#pricing" class="nav-link">价格</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="https://easylistings.website/contact" class="nav-link">联系我们</a>
+                </div>
+            </nav>
+
+            <div class="top-menu-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="flag" id="currentFlag">🇨🇳</span>
+                        <span id="currentCode">ZH</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+
+                    <ul class="lang-menu" id="langMenu" role="listbox" aria-label="选择语言">
+                        <li role="option" aria-selected="false">
+                            <a href="/privacidad" class="lang-option" data-flag="🇩🇴" data-code="ES" data-lang="es">
+                                <span class="flag">🇩🇴</span> ES
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/english" class="lang-option" data-flag="🇺🇸" data-code="EN" data-lang="en">
+                                <span class="flag">🇺🇸</span> EN
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="true">
+                            <a href="/francais" class="lang-option" data-flag="🇫🇷" data-code="FR" data-lang="fr">
+                                <span class="flag">🇫🇷</span> FR
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/italiano" class="lang-option" data-flag="🇮🇹" data-code="IT" data-lang="it">
+                                <span class="flag">🇮🇹</span> IT
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/deutsch" class="lang-option" data-flag="🇩🇪" data-code="DE" data-lang="de">
+                                <span class="flag">🇩🇪</span> DE
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/russkiy" class="lang-option" data-flag="🇷🇺" data-code="RU" data-lang="ru">
+                                <span class="flag">🇷🇺</span> RU
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/zhongwen" class="lang-option" data-flag="🇨🇳" data-code="ZH" data-lang="zh">
+                                <span class="flag">🇨🇳</span> ZH
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/nihongo" class="lang-option" data-flag="🇯🇵" data-code="JA" data-lang="ja">
+                                <span class="flag">🇯🇵</span> JA
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="https://app.easylistings.website" class="primary-btn hidden sm:inline-block" id="desktopCta">登录</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PRIVACY POLICY CONTENT ================= -->
+    <main class="privacy-content">
+        <h1>隐私政策</h1>
+        <div class="meta">
+            <p><strong>Easy Listings</strong></p>
+            <p><strong>生效日期：</strong>2026年11月10日 &nbsp;|&nbsp; <strong>最后更新：</strong>2026年11月10日</p>
+        </div>
+
+        <h2>1. 引言</h2>
+        <p>欢迎使用 Easy Listings。</p>
+        <p>Easy Listings（"Easy Listings"、"我们"、"我们的"或"我方"）尊重您的隐私，并致力于保护访问或使用我们的网站、应用程序、软件、房源列表页面、集成及相关服务（统称"服务"）的个人的个人信息。</p>
+        <p>本隐私政策说明了当您与 Easy Listings 互动时，我们如何收集、接收、使用、存储、处理、披露和保护个人信息。</p>
+        <p>本政策适用于：</p>
+        <ul>
+            <li>浏览我们网站的访客。</li>
+            <li>注册用户和账户持有人。</li>
+            <li>房地产经纪人、经纪公司和代理机构。</li>
+            <li>房产所有者、卖家和房东。</li>
+            <li>潜在买家、租户及其他房产咨询者。</li>
+            <li>通过房源列表表单提交信息的个人。</li>
+            <li>将第三方服务或集成连接到我们平台的个人。</li>
+        </ul>
+        <p>我们按照适用的隐私和数据保护法律处理个人信息，包括多米尼加共和国宪法、第172-13号法律，以及在适用情况下适用的国际隐私法规。</p>
+        <p>通过访问或使用我们的服务，您确认已阅读本隐私政策。</p>
+
+        <h2>2. 我们是谁</h2>
+        <p>Easy Listings 是一个软件平台，旨在帮助房地产专业人士创建、管理、发布和分发房源列表，并管理与潜在客户的互动。</p>
+        <div class="highlight-box">
+            <p><strong>平台：</strong>Easy Listings<br>
+            <strong>运营公司：</strong>Easy Listings<br>
+            <strong>注册地址：</strong>多米尼加共和国<br>
+            <strong>注册国家：</strong>多米尼加共和国<br>
+            <strong>网站：</strong><a href="https://easylistings.website" target="_blank" rel="noopener">https://easylistings.website</a><br>
+            <strong>隐私联系：</strong><a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+        </div>
+        <p>如对隐私有任何疑问、请求或投诉，您可以使用上述信息与我们联系。</p>
+        <p>就适用的数据保护法律而言，Easy Listings 可能作为：</p>
+        <ul>
+            <li>数据控制者——当其确定为其自身业务运营处理个人信息的原因和方式时。</li>
+            <li>数据处理者或服务提供商——当其代表使用我们平台的房地产经纪人、经纪公司、代理机构或其他商业客户处理个人信息时。</li>
+        </ul>
+        <p>当经纪人、经纪公司或代理机构通过其房源列表收集潜在买家或租户的信息时，该专业人士或企业可能是该信息的控制者。Easy Listings 通常提供技术基础设施，代表他们处理该信息。</p>
+
+        <h2>3. 我们收集的个人信息</h2>
+        <p>根据您与我们服务的互动方式，我们可能会收集以下类别的信息。</p>
+
+        <h3>3.1 账户和身份信息</h3>
+        <p>当您注册或创建账户时，我们可能会收集：</p>
+        <ul>
+            <li>全名。</li>
+            <li>电子邮箱地址。</li>
+            <li>电话号码。</li>
+            <li>用户名。</li>
+            <li>密码凭据，使用适当的安全措施存储。</li>
+            <li>企业或代理机构名称。</li>
+            <li>专业信息。</li>
+            <li>账户偏好设置。</li>
+            <li>个人资料照片或徽标。</li>
+            <li>账户角色和权限。</li>
+        </ul>
+
+        <h3>3.2 房产和房地产信息</h3>
+        <p>当用户创建或管理房源列表时，我们可能会收集：</p>
+        <ul>
+            <li>房产地址和位置。</li>
+            <li>房产描述。</li>
+            <li>要价和租金。</li>
+            <li>房产照片和视频。</li>
+            <li>房产特征和规格。</li>
+            <li>用户提供的所有权或列表信息。</li>
+            <li>可用性和房产状态。</li>
+            <li>与列表相关的联系方式。</li>
+            <li>用户自愿提供的其他信息。</li>
+        </ul>
+        <p>当用户发布列表时，房产信息可能会公开展示。</p>
+        <p>用户有责任确保其拥有发布房产信息和相关材料所需的权利和许可。</p>
+
+        <h3>3.3 潜在客户和线索信息</h3>
+        <p>当访客通过房源列表、联系表单或其他平台功能提交咨询时，我们可能会收集：</p>
+        <ul>
+            <li>全名。</li>
+            <li>电子邮箱地址。</li>
+            <li>电话号码。</li>
+            <li>国家和位置。</li>
+            <li>首选联系方式。</li>
+            <li>房产偏好。</li>
+            <li>预算和购买或租赁偏好。</li>
+            <li>消息和咨询。</li>
+            <li>通过表单自愿提交的其他信息。</li>
+        </ul>
+        <p>该信息可能会提供给负责相关房源列表的房地产专业人士或企业。</p>
+
+        <h3>3.4 验证和了解你的客户（KYC）信息</h3>
+        <p>某些用户或房地产企业可能会使用旨在收集客户验证或了解你的客户（KYC）信息的功能。</p>
+        <p>在此类功能可用并已激活的情况下，信息可能包括身份证明详情、支持文件以及为验证或合法合规目的自愿提交的其他信息。</p>
+        <p>敏感身份证明文件仅在相关功能已启用且存在合法目的时才会被收集。</p>
+        <p>收集此信息的用户有责任确保其拥有适当的法律依据并提供所需的隐私声明。</p>
+
+        <h3>3.5 付款和订阅信息</h3>
+        <p>当您购买订阅或付费服务时，我们可能会收集：</p>
+        <ul>
+            <li>订阅计划。</li>
+            <li>账单详情。</li>
+            <li>交易标识符。</li>
+            <li>付款状态。</li>
+            <li>发票信息。</li>
+            <li>账单历史记录。</li>
+        </ul>
+        <p>付款可能由独立的第三方支付提供商处理。</p>
+        <p>当付款处理由外部提供商处理时，Easy Listings 不打算在自己的服务器上存储完整的支付卡号或安全码。</p>
+        <p>支付提供商根据其自身的隐私政策和适用义务处理付款信息。</p>
+
+        <h3>3.6 技术和设备信息</h3>
+        <p>当您访问我们的服务时，我们可能会自动收集：</p>
+        <ul>
+            <li>互联网协议（IP）地址。</li>
+            <li>浏览器类型和版本。</li>
+            <li>设备类型和操作系统。</li>
+            <li>语言偏好。</li>
+            <li>从技术信息中得出的近似地理位置。</li>
+            <li>来源网站。</li>
+            <li>访问的页面。</li>
+            <li>访问时间戳。</li>
+            <li>会话信息。</li>
+            <li>诊断和错误信息。</li>
+            <li>Cookie 及类似技术。</li>
+        </ul>
+
+        <h3>3.7 第三方身份验证信息</h3>
+        <p>如果您选择使用第三方服务（如 Google、Meta 或 Pinterest）进行连接或身份验证，我们可能会收到您授权这些服务与我们共享的信息。</p>
+        <p>根据集成情况，这可能包括：</p>
+        <ul>
+            <li>账户标识符。</li>
+            <li>姓名。</li>
+            <li>电子邮箱地址。</li>
+            <li>个人资料信息。</li>
+            <li>身份验证令牌。</li>
+            <li>授权的账户或企业信息。</li>
+            <li>执行您所请求的集成所需的信息。</li>
+        </ul>
+        <p>我们仅访问您的授权、适用提供商的 API 权限及其开发者政策所允许的信息。</p>
+
+        <h2>4. 我们如何使用您的信息</h2>
+        <p>我们将个人信息用于合法的商业和运营目的，包括：</p>
+        <ol style="padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.25rem;">
+            <li>创建和管理用户账户。</li>
+            <li>提供对 Easy Listings 的访问。</li>
+            <li>创建、发布和管理房源列表。</li>
+            <li>将潜在客户与房地产专业人士联系起来。</li>
+            <li>处理咨询和通信。</li>
+            <li>管理订阅和计费。</li>
+            <li>提供客户支持。</li>
+            <li>对用户进行身份验证并保护账户安全。</li>
+            <li>连接授权的第三方集成。</li>
+            <li>提供分析和平台性能监控。</li>
+            <li>检测欺诈、滥用和未经授权的活动。</li>
+            <li>维护平台功能。</li>
+            <li>改进我们的产品和服务。</li>
+            <li>传达重要的服务公告。</li>
+            <li>在法律允许的情况下发送促销通信，并在需要时征得您的同意。</li>
+            <li>遵守法律义务。</li>
+            <li>确立、行使或抗辩法律主张。</li>
+        </ol>
+        <p>除非适用法律允许或要求，否则我们不会将个人信息用于与向您披露的目的不相符的用途。</p>
+
+        <h2>5. 处理的合法依据</h2>
+        <p>在适用法律要求的情况下，我们基于以下一项或多项合法依据处理个人信息：</p>
+        <ul>
+            <li><strong>同意：</strong>您已许可某项特定的处理活动。</li>
+            <li><strong>合同必要性：</strong>处理对于提供您所请求的服务或履行与您的合同是必要的。</li>
+            <li><strong>合法利益：</strong>处理对于合法的商业目的是必要的，前提是您的权利和利益不凌驾于这些利益之上。</li>
+            <li><strong>法律义务：</strong>处理对于遵守适用法律或合法请求是必要的。</li>
+            <li><strong>重大利益或公共利益：</strong>在相关法律认可并适用的情况下。</li>
+        </ul>
+        <p>当处理依赖于同意时，您可以撤回同意。撤回不影响撤回前已进行的处理的合法性。</p>
+
+        <h2>6. 第三方服务和数据共享</h2>
+        <p>当运营我们的服务、满足您的请求或遵守适用法律所必需时，我们可能会与第三方共享个人信息。</p>
+        <p>这些方可能包括：</p>
+
+        <h3>6.1 技术和托管提供商</h3>
+        <p>支持我们基础设施、托管、数据库、存储、安全、通信和软件运营的提供商。</p>
+
+        <h3>6.2 支付提供商</h3>
+        <p>负责处理付款、订阅和计费交易的第三方公司。</p>
+
+        <h3>6.3 身份验证和集成提供商</h3>
+        <p>例如：</p>
+        <ul>
+            <li>Google。</li>
+            <li>Meta。</li>
+            <li>Pinterest。</li>
+            <li>其他授权的社交媒体、分析和集成提供商。</li>
+        </ul>
+        <p>当您授权集成时，信息可能会与相关提供商交换，以执行您所请求的功能。</p>
+
+        <h3>6.4 房地产专业人士和企业</h3>
+        <p>通过房源列表或咨询表单提交的信息可能会与负责该列表的经纪人、经纪公司、代理机构、房产所有者或其他授权接收方共享。</p>
+        <p>Easy Listings 不控制独立的房地产专业人士在收到信息后如何使用这些信息。这些接收方对其自身的隐私实践和适用的法律义务负责。</p>
+
+        <h3>6.5 专业和法律服务</h3>
+        <p>当合理必要以遵守法律义务、保护我们的权利或处理法律主张时，我们可能会向律师、会计师、审计师、监管机构、执法机构或其他方披露信息。</p>
+
+        <h3>6.6 业务转让</h3>
+        <p>个人信息可能会在合并、收购、重组、资产出售或其他商业交易中转移，但须遵守适用的法律要求。</p>
+        <p>未经适当的法律依据，我们不授权第三方将通过我们服务获得的个人信息用于无关用途。</p>
+
+        <h2>7. Google 用户数据和有限使用</h2>
+        <p>当 Easy Listings 与 Google 服务或 API 集成时，我们对 Google 用户数据的访问和使用将遵守适用的 Google API 服务用户数据政策，包括其有限使用要求。</p>
+        <p>具体而言：</p>
+        <ul>
+            <li>我们仅访问提供您授权功能所必需的 Google 用户数据。</li>
+            <li>我们仅将 Google 用户数据用于向您披露且经 Google 适用政策允许的目的。</li>
+            <li>我们不会将 Google 用户数据用于广告目的。</li>
+            <li>我们不会出售 Google 用户数据。</li>
+            <li>我们不会使用 Google 用户数据来开发或改进广义的人工智能或机器学习模型。</li>
+            <li>除非 Google 适用政策允许（例如为了提供或改进面向用户的功能、遵守适用法律或防范安全威胁），否则我们不会将 Google 用户数据传输给第三方。</li>
+            <li>我们将 Google 用户数据的访问限制在授权人员和需要为允许目的访问的服务提供商范围内。</li>
+        </ul>
+        <p>在需要时，我们将在访问 Google 用户数据之前提供额外的披露并获得适当的授权。</p>
+
+        <h2>8. 国际数据传输</h2>
+        <p>Easy Listings 可能会使用位于不同国家的基础设施、托管提供商和技术服务。</p>
+        <p>因此，您的个人信息可能会被传输到、存储或处理于您居住国以外的地区。</p>
+        <p>国际传输可能涉及数据保护法律与您所在司法管辖区不同的国家。</p>
+        <p>在适用情况下，我们将实施适当的保障措施，其中可能包括：</p>
+        <ul>
+            <li>合同数据保护义务。</li>
+            <li>标准合同条款。</li>
+            <li>适当的安全措施。</li>
+            <li>其他合法的国际传输机制。</li>
+        </ul>
+        <p>我们将根据适用的数据保护法律处理国际传输。</p>
+
+        <h2>9. Cookie 和跟踪技术</h2>
+        <p>我们的服务可能会使用 Cookie、像素、本地存储和类似技术。</p>
+        <p>这些技术可用于：</p>
+        <ul>
+            <li>维护用户会话。</li>
+            <li>记住偏好设置。</li>
+            <li>对用户进行身份验证。</li>
+            <li>改善网站性能。</li>
+            <li>了解网站流量。</li>
+            <li>分析平台使用情况。</li>
+            <li>衡量营销效果。</li>
+            <li>支持授权的广告和社交媒体集成。</li>
+        </ul>
+        <p>Cookie 可分为：</p>
+        <ul>
+            <li><strong>必要 Cookie：</strong>身份验证、安全和核心网站功能所必需。</li>
+            <li><strong>功能性 Cookie：</strong>用于记住用户偏好和设置。</li>
+            <li><strong>分析性 Cookie：</strong>用于了解访客如何与我们的服务互动。</li>
+            <li><strong>营销 Cookie：</strong>在允许的情况下，用于广告测量、归因和相关营销活动。</li>
+        </ul>
+        <p>在适用法律要求的情况下，我们将在放置非必要 Cookie 或参与其他基于同意的跟踪活动之前获得同意。</p>
+        <p>您可以通过浏览器设置以及（在可用的情况下）我们的 Cookie 偏好控制来管理 Cookie。</p>
+        <p>禁用某些 Cookie 可能会影响某些服务的功能。</p>
+
+        <h2>10. 数据保留</h2>
+        <p>我们仅在合理必要的时间内保留个人信息以实现本隐私政策所述目的，但须遵守适用的法律要求。</p>
+        <p>保留期限可能因信息类型和收集目的而异。</p>
+        <p>示例包括：</p>
+        <ul>
+            <li><strong>账户信息：</strong>在您的账户保持活动期间，以及之后为法律、安全或行政目的所必需的合理期间。</li>
+            <li><strong>房源列表：</strong>在账户持有人发布或维护期间，但须遵守适用的删除请求和法律义务。</li>
+            <li><strong>客户咨询：</strong>为相关房地产交易、客户关系或适用保留要求所合理必要的期间。</li>
+            <li><strong>付款记录：</strong>按照适用的会计、税务和金融法规要求。</li>
+            <li><strong>技术日志：</strong>用于安全、故障排除和运营目的。</li>
+            <li><strong>第三方集成数据：</strong>为提供授权集成所必需的期间，或按照适用提供商的政策要求。</li>
+        </ul>
+        <p>当不再需要个人信息时，我们将采取合理步骤删除、匿名化或安全处置。</p>
+        <p>某些信息可能会在加密备份中保留一段有限时间，或在法律要求的情况下予以保留。</p>
+
+        <h2>11. 您的隐私权</h2>
+        <p>根据您的居住国家和适用法律，您可能有权：</p>
+        <ol style="padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.25rem;">
+            <li>请求确认我们是否处理您的个人信息。</li>
+            <li>请求访问我们持有的关于您的个人信息。</li>
+            <li>请求更正不准确或不完整的信息。</li>
+            <li>请求删除个人信息，但须遵守适用的法律例外。</li>
+            <li>请求限制某些处理活动。</li>
+            <li>反对某些处理活动。</li>
+            <li>撤回先前授予的同意。</li>
+            <li>在适用情况下请求以可移植格式获取您的个人信息副本。</li>
+            <li>在法律要求的情况下选择退出某些广告、共享或画像活动。</li>
+            <li>向主管数据保护或监管机构提出投诉。</li>
+        </ol>
+        <p>我们将根据适用的法律要求和时间表评估并回应隐私请求。</p>
+
+        <h3>11.1 多米尼加共和国隐私权</h3>
+        <p>对于受多米尼加共和国法律保护的个人，我们认可《多米尼加宪法》第44条确立的宪法保护以及第172-13号法律规定的权利。</p>
+        <p>这些保护包括与以下方面相关的权利：</p>
+        <ul>
+            <li>个人隐私和私密性。</li>
+            <li>访问公共或私人数据库中持有的个人信息。</li>
+            <li>了解个人信息的用途和目的。</li>
+            <li>个人数据的适当处理。</li>
+            <li>对不准确或不当处理的信息进行更正和适用救济。</li>
+        </ul>
+
+        <h3>11.2 欧洲经济区和英国</h3>
+        <p>在适用 GDPR 或英国 GDPR 的情况下，个人可以行使适用权利，包括访问、更正、删除、限制、反对、数据可移植性和撤回同意。</p>
+        <p>个人还可以向其主管监督机构提出投诉。</p>
+
+        <h3>11.3 加利福尼亚州居民</h3>
+        <p>在适用经《加利福尼亚隐私权法》修订的《加利福尼亚消费者隐私法》的情况下，符合条件的加利福尼亚州居民可能有权：</p>
+        <ul>
+            <li>了解收集哪些类别的个人信息。</li>
+            <li>访问特定的个人信息。</li>
+            <li>请求删除。</li>
+            <li>请求更正。</li>
+            <li>选择退出适用法律所定义的出售或共享个人信息。</li>
+            <li>限制敏感个人信息的某些使用和披露。</li>
+            <li>在行使隐私权时获得平等对待。</li>
+        </ul>
+        <p>我们不会因个人行使适用隐私法所保护的权利而对其歧视。</p>
+
+        <h3>11.4 其他国际司法管辖区</h3>
+        <p>在适用法律要求的情况下，我们将尊重额外的隐私权，包括巴西的《通用数据保护法》（LGPD）、加拿大适用的联邦和省隐私法以及其他相关的国家或地区隐私法规。</p>
+
+        <h2>12. 如何请求访问或删除</h2>
+        <p>您可以通过以下方式请求访问、更正或删除您的个人信息：</p>
+        <div class="contact-info">
+            <p><strong>电子邮箱：</strong><a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+        </div>
+        <p>请提供：</p>
+        <ul>
+            <li>您的全名。</li>
+            <li>与您的账户或咨询相关的电子邮箱地址。</li>
+            <li>您的请求性质。</li>
+            <li>足以帮助我们验证您身份的信息。</li>
+        </ul>
+        <p>当合理必要以验证您的身份并防止未经授权的披露时，我们可能会要求提供额外信息。</p>
+        <p>如果您是注册用户，您也可以联系账户管理员或使用可用的账户管理功能来管理您的信息。</p>
+
+        <h3>12.1 第三方账户和集成删除</h3>
+        <p>如果您将 Google、Meta、Pinterest 或其他第三方账户连接到 Easy Listings，您可以通过适用的第三方账户设置撤销相关授权。</p>
+        <p>您也可以通过联系我们请求删除相关信息。</p>
+        <p>撤销第三方授权不会自动删除先前收集的信息。在适用情况下，您必须提交删除请求。</p>
+
+        <h3>12.2 房源列表访客的删除请求</h3>
+        <p>通过房产咨询表单提交信息的访客可以通过联系我们请求删除其信息。</p>
+        <p>当独立的房地产经纪人、经纪公司或代理机构控制相关信息时，我们可能会将请求转发给该企业，或视情况将您引导至其隐私联系人。</p>
+        <p>我们将采取合理步骤协助处理涉及代表我们客户处理的信息的请求。</p>
+
+        <h2>13. 数据安全</h2>
+        <p>我们实施合理的技术、行政和组织保障措施，旨在保护个人信息免遭：</p>
+        <ul>
+            <li>未经授权的访问。</li>
+            <li>意外披露。</li>
+            <li>更改。</li>
+            <li>丢失。</li>
+            <li>破坏。</li>
+            <li>未经授权的处理。</li>
+        </ul>
+        <p>根据信息和我们服务的性质，这些措施可能包括：</p>
+        <ul>
+            <li>访问控制和账户权限。</li>
+            <li>安全的身份验证实践。</li>
+            <li>在适当情况下进行加密。</li>
+            <li>安全的托管和基础设施。</li>
+            <li>监控和安全日志记录。</li>
+            <li>备份程序。</li>
+            <li>受限的管理访问。</li>
+            <li>内部安全程序。</li>
+        </ul>
+        <p>没有任何互联网传输或电子存储系统可以被保证完全安全。</p>
+        <p>尽管我们采取了合理的预防措施，但我们无法保证绝对安全。</p>
+        <p>如果发生个人数据泄露，我们将采取适当步骤进行调查、缓解，并在适用法律要求时提供通知。</p>
+
+        <h2>14. 儿童隐私</h2>
+        <p>Easy Listings 面向成年人和专业用户。</p>
+        <p>我们的服务不面向13岁以下的儿童，且我们不会在无合法有效授权的情况下故意收集13岁以下儿童的个人信息。</p>
+        <p>如果适用法律规定了更高的最低年龄或要求父母或监护人同意，我们将遵守这些要求。</p>
+        <p>如果我们发现在违反适用法律的情况下收集了儿童的个人信息，我们将采取合理步骤处理该情况，包括在适当情况下予以删除。</p>
+
+        <h2>15. 第三方网站和服务</h2>
+        <p>我们的服务可能包含指向第三方网站、平台、应用程序和服务的链接。</p>
+        <p>这些服务可能拥有独立的隐私政策和数据处理实践。</p>
+        <p>Easy Listings 不对我们不运营的外部服务的隐私实践、内容或安全负责。</p>
+        <p>我们鼓励用户在提供个人信息或授权集成之前查看第三方服务的隐私政策。</p>
+
+        <h2>16. 公开房源列表和用户生成内容</h2>
+        <p>Easy Listings 允许用户发布房产信息和相关内容。</p>
+        <p>公开发布的信息可能会被任何访问房源列表页面的人访问。</p>
+        <p>这可能包括：</p>
+        <ul>
+            <li>房产照片和描述。</li>
+            <li>房产位置。</li>
+            <li>价格。</li>
+            <li>经纪人或代理机构的联系方式。</li>
+            <li>企业简介。</li>
+            <li>账户持有人有意公开的其他信息。</li>
+        </ul>
+        <p>用户不应在无适当授权的情况下发布敏感个人信息、机密文件或属于他人的信息。</p>
+        <p>一旦信息被公开发布，第三方可能会独立复制、保存或再分发。</p>
+        <p>我们无法保证删除由我们无法控制的第三方持有的副本。</p>
+
+        <h2>17. 代表客户处理数据</h2>
+        <p>房地产经纪人、经纪公司、代理机构和其他商业客户可能会使用 Easy Listings 收集、组织和管理其自身客户和潜在客户的个人信息。</p>
+        <p>在这些情况下：</p>
+        <ul>
+            <li>客户确定收集信息的目的。</li>
+            <li>客户负责提供适当的隐私声明并获得所需的同意。</li>
+            <li>客户负责确保其拥有收集和处理信息的合法依据。</li>
+            <li>Easy Listings 根据其合同义务和授权指示处理信息。</li>
+            <li>Easy Listings 可能会使用授权的服务提供商来支持其服务的交付。</li>
+        </ul>
+        <p>商业客户对其通过平台收集的个人信息负有自身的合规义务。</p>
+        <p>在需要时，Easy Listings 可能会与其商业客户签订单独的数据处理协议。</p>
+
+        <h2>18. 自动化处理和人工智能</h2>
+        <p>Easy Listings 的某些功能可能会使用自动化技术来支持平台功能、内容组织、推荐、分析或其他请求的服务。</p>
+        <p>在使用自动化处理的情况下，我们将根据适用的隐私法律处理相关信息。</p>
+        <p>我们不打算在没有适用法律要求的保障措施的情况下，仅通过自动化处理做出产生法律或类似重大影响的决定。</p>
+        <p>在适用情况下，个人可以请求有关相关自动化处理的信息，并根据适用法律行使其权利。</p>
+
+        <h2>19. 本隐私政策的变更</h2>
+        <p>我们可能会定期更新本隐私政策，以反映：</p>
+        <ul>
+            <li>我们服务的变化。</li>
+            <li>新的集成和功能。</li>
+            <li>我们数据处理活动的变化。</li>
+            <li>新的法律或监管要求。</li>
+            <li>我们业务运营的变化。</li>
+        </ul>
+        <p>当我们进行变更时，我们将更新本政策开头显示的"最后更新"日期。</p>
+        <p>在适用法律要求的情况下，我们将在实施重大变更之前提供额外通知或获得新的同意。</p>
+        <p>我们鼓励用户定期查看此页面。</p>
+
+        <h2>20. 适用法律和管辖权</h2>
+        <p>本隐私政策旨在按照 Easy Listings 运营所在以及其用户所在司法管辖区的适用隐私和数据保护法律运作。</p>
+        <p>对于受多米尼加共和国法律管辖的事项，应适用《多米尼加共和国宪法》、第172-13号法律和其他适用立法的相关规定。</p>
+        <p>本隐私政策中的任何内容均无意排除、限制或放弃个人根据适用于其的法律可能拥有的任何强制性隐私权或消费者保护。</p>
+        <p>如果强制性当地立法提供更高程度的保护，则该立法在要求的范围内优先适用。</p>
+
+        <h2>21. 联系信息</h2>
+        <p>如对本隐私政策或个人信息的处理有任何疑问、担忧、投诉或请求，请联系我们：</p>
+        <div class="contact-info">
+            <p><strong>Easy Listings</strong></p>
+            <p><strong>运营公司：</strong>Easy Listings</p>
+            <p><strong>地址：</strong>多米尼加共和国</p>
+            <p><strong>国家：</strong>多米尼加共和国</p>
+            <p><strong>电子邮箱：</strong><a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+            <p><strong>网站：</strong><a href="https://easylistings.website" target="_blank" rel="noopener">https://easylistings.website</a></p>
+        </div>
+        <p>我们将审查与隐私相关的通信，并根据适用的法律要求作出回应。</p>
+
+        <p style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--muted); text-align: center;">
+            © 2026 Easy Listings。保留所有权利。
+        </p>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div class="flex flex-col gap-2 md:col-span-3">
+                <div class="flex items-center gap-2 text-white font-bold tracking-tight text-lg">
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo" class="w-8 h-8 object-contain rounded-lg">
+                    EasyListings
+                </div>
+                <div class="text-gray-300 text-sm mt-2">
+                    展示您的房源。定义您的品牌。
+                </div>
+
+                <div class="pt-2 flex flex-col items-start">
+                    <img src="https://ik.imagekit.io/bebell/Badge/google-partner-badge-pink.svg" class="self-start block h-12 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Google Partner Badge">
+                    <p class="text-[10px] text-slate-500 mt-4 mb-2 uppercase tracking-widest font-bold">安全支付处理</p>
+                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/ba7caa40fbb46e4528aaae8b0128896c5e8ff915.png" class="self-start block h-5 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Secure PayPal Payments">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">产品</div>
+                    <a href="https://easylistings.website/" class="footer-link">首页</a>
+                    <a href="https://easylistings.website/about-us" class="footer-link">关于我们</a>
+                    <a href="https://easylistings.website/pricing" class="footer-link">价格</a>
+                    <a href="https://easylistings.website/p/terms" class="footer-link">使用条款</a>
+                    <a href="/zhongwen/privacy" class="footer-link">隐私</a>
+                    <a href="https://easylistings.website/contact" class="footer-link">联系我们</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">社区</div>
+                    <a href="https://ayuda.easylistings.website" class="footer-link">帮助中心</a>
+                    <a href="https://afiliados.easylistings.website" class="footer-link">合作伙伴</a>
+                    <a href="https://easylistings.website/blog" class="footer-link">博客</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">功能</div>
+                    <a href="https://easylistings.website/funciones/resumen" class="footer-link">数据分析</a>
+                    <a href="https://easylistings.website/funciones/catalogo" class="footer-link">目录</a>
+                    <a href="https://easylistings.website/funciones/pipeline" class="footer-link">销售管道</a>
+                    <a href="https://easylistings.website/funciones/contactos" class="footer-link">联系人</a>
+                    <a href="https://easylistings.website/funciones/idiomas" class="footer-link">多语言</a>
+                    <a href="https://easylistings.website/funciones/seo" class="footer-link">域名 + SEO</a>
+                    <a href="https://easylistings.website/funciones/bandeja" class="footer-link">收件箱</a>
+                    <a href="https://easylistings.website/funciones/asistencia-ia" class="footer-link">AI 助手</a>
+                    <a href="https://easylistings.website/funciones/automatizaciones" class="footer-link">自动化</a>
+                    <a href="#" class="footer-link">内容创作</a>
+                    <a href="https://easylistings.website/funciones/widget-incrustado" class="footer-link">嵌入小部件</a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end">
+                <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[var(--primary)] transition-colors group" style="background: var(--bg-alt);">
+                    <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h4 class="font-bold text-lg sm:text-xl md:text-base lg:text-xl" style="color: var(--text);">在线支持</h4>
+                            <span class="text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider" style="background: rgba(223,23,131,0.12); color: var(--primary); border: 1px solid rgba(223,23,131,0.3);">24/7</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug" style="color: var(--text);">如有任何问题，请联系我们。我们的团队随时为您提供帮助。</p>
+                        <button onclick="window.open('https://easylistings.website/support', '_blank')" class="bg-[#df1783] hover:bg-[#c0146f] text-white text-xs sm:text-sm md:text-[11px] lg:text-sm font-semibold py-2 px-3 md:py-1.5 md:px-2.5 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#df1783] shadow-sm w-fit">
+                            <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white"></i>
+                            <span>给我们留言</span>
+                        </button>
+                    </div>
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pink-support-agent.webp" alt="24/7 Support" class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity" />
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="border-top: 1px solid var(--text-light); color: var(--text-light);">
+            <div class="flex items-center gap-2">
+                <span>由 Bebell Digital Solutions 在 🇩🇴 打造。</span>
+            </div>
+            <div>版权所有 © 2026 EasyListings • 保留所有权利。</div>
+        </div>
+    </footer>
+
+    <button id="backToTopBtn" aria-label="返回顶部">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            const topMenuBar = document.getElementById('topMenuBar');
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            function updateTopMenu() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (topMenuBar) {
+                    if (scrollTop > 50) topMenuBar.classList.add('full-width');
+                    else topMenuBar.classList.remove('full-width');
+                }
+                if (backToTopBtn) {
+                    if (scrollTop > 300) backToTopBtn.classList.add('show');
+                    else backToTopBtn.classList.remove('show');
+                }
+            }
+            window.addEventListener('scroll', updateTopMenu, { passive: true });
+            updateTopMenu();
+
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
+
+            const funcionesNavItem = document.getElementById('funcionesNavItem');
+            const funcionesToggle = document.getElementById('funcionesToggle');
+
+            function closeSubmenu() {
+                if (!funcionesNavItem || !funcionesToggle) return;
+                funcionesNavItem.classList.remove('open');
+                funcionesToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            if (funcionesNavItem && funcionesToggle) {
+                funcionesToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isOpen = funcionesNavItem.classList.toggle('open');
+                    funcionesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!funcionesNavItem.contains(e.target)) closeSubmenu();
+                });
+
+                document.querySelectorAll('.submenu-link').forEach(link => {
+                    link.addEventListener('click', closeSubmenu);
+                });
+            }
+
+            const langDropdown = document.getElementById('langDropdown');
+            const langTrigger = document.getElementById('langTrigger');
+
+            function toggleLangDropdown(open) {
+                if (!langDropdown || !langTrigger) return;
+                const willOpen = open ?? !langDropdown.classList.contains('open');
+                langDropdown.classList.toggle('open', willOpen);
+                langTrigger.setAttribute('aria-expanded', String(willOpen));
+            }
+
+            if (langTrigger) {
+                langTrigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleLangDropdown();
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (langDropdown && !langDropdown.contains(e.target)) toggleLangDropdown(false);
+            });
+
+            const path = window.location.pathname;
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(opt => {
+                const href = opt.getAttribute('href');
+                const li = opt.closest('li');
+                if (href && path.startsWith(href.split('/').slice(0, 2).join('/'))) {
+                    li.setAttribute('aria-selected', 'true');
+                    document.getElementById('currentFlag').textContent = opt.getAttribute('data-flag');
+                    document.getElementById('currentCode').textContent = opt.getAttribute('data-code');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeSubmenu();
+                    if (langDropdown && langDropdown.classList.contains('open')) {
+                        toggleLangDropdown(false);
+                    }
+                }
+            });
+
+            if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                gsap.utils.toArray('.privacy-content h2').forEach((el) => {
+                    gsap.from(el, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
