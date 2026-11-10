@@ -180,54 +180,100 @@
         
 
         .fab {
-            width: 40px; height: 40px; border-radius: 50%;
-            background-color: var(--bg); color: var(--text);
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%;
+            background-color: var(--bg); 
+            color: var(--text);
             border: 1px solid var(--border-color);
-            display: flex; justify-content: center; align-items: center;
-            cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            font-size: 0.95rem;
         }
         
         
         
-        .fab:hover { background-color: var(--border-color); transform: scale(1.1); }
+        .fab:hover { 
+            background-color: var(--border-color); 
+            transform: scale(1.1); 
+        }
         
         
 
-        .lang-dropdown { position: relative; display: inline-block; font-family: system-ui, -apple-system, sans-serif; }
+        .lang-dropdown { 
+            position: relative; 
+            display: inline-block; 
+            font-family: system-ui, -apple-system, sans-serif; 
+        }
         
         
         
         .lang-trigger {
-            display: flex; align-items: center; gap: 8px; padding: 8px 14px;
-            background: #fff; border: 1px solid #d0d5dd; border-radius: 8px;
-            cursor: pointer; font-size: 14px; font-weight: 600; color: #1d2939;
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            padding: 8px 14px;
+            background: #fff; 
+            border: 1px solid #d0d5dd; 
+            border-radius: 8px;
+            cursor: pointer; 
+            font-size: 14px; 
+            font-weight: 600; color: #1d2939;
             transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
         
         
-        .lang-trigger:hover { border-color: #98a2b3; }
+        .lang-trigger:hover { 
+            border-color: #98a2b3; }
         
         
         
-        .lang-trigger:focus-visible { outline: none; border-color: #667085; box-shadow: 0 0 0 3px rgba(102, 112, 133, 0.15); }
+        .lang-trigger:focus-visible { 
+            outline: none; 
+            border-color: #667085; 
+            box-shadow: 0 0 0 3px rgba(102, 112, 133, 0.15); 
+        }
         
         
-        .lang-trigger .flag { font-size: 18px; line-height: 1; }
+        .lang-trigger .flag { 
+            font-size: 18px; 
+            line-height: 1; 
+        }
         
         
-        .lang-trigger .chevron { margin-left: 4px; width: 14px; height: 14px; color: #667085; transition: transform 0.2s ease; }
+        .lang-trigger .chevron { 
+            margin-left: 4px; 
+            width: 14px; 
+            height: 14px; 
+            color: #667085; 
+            transition: transform 0.2s ease; 
+        }
         
         
         
-        .lang-dropdown.open .chevron { transform: rotate(180deg); }
+        .lang-dropdown.open .chevron { 
+            transform: rotate(180deg); 
+        }
         
         
         .lang-menu {
-            position: absolute; top: calc(100% + 6px); left: 0; min-width: 100%;
-            padding: 6px; margin: 0; list-style: none; background: #fff;
-            border: 1px solid #d0d5dd; border-radius: 8px;
+            position: absolute; 
+            top: calc(100% + 6px); 
+            left: 0; 
+            min-width: 100%;
+            padding: 6px; 
+            margin: 0; 
+            list-style: none; 
+            background: #fff;
+            border: 1px solid #d0d5dd; 
+            border-radius: 8px;
             box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
-            opacity: 0; visibility: hidden; transform: translateY(-6px);
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-6px);
             transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
             z-index: 100;
         }
@@ -340,28 +386,56 @@
         
         
         
-        .submenu-link i { width: 12px; text-align: center; color: #df1783; transition: color 0.2s; flex-shrink: 0; }
-        .submenu-link:hover { background: var(--submenu-hover); color: var(--primary); }
-        .submenu-link:hover i { color: var(--primary); }
+        .submenu-link i { 
+            width: 12px; 
+            text-align: center; 
+            color: #df1783; 
+            transition: color 0.2s; 
+            flex-shrink: 0; 
+        }
+
+
+        
+        .submenu-link:hover { 
+            background: var(--submenu-hover); 
+            color: var(--primary); 
+        }
+
+        
+        .submenu-link:hover i { 
+            color: var(--primary); }
         
         
 
         .header-banner {
-            width: 100%; padding: 200px 2rem 5rem 2rem; text-align: center;
+            width: 100%; 
+            padding: 200px 2rem 5rem 2rem; 
+            text-align: center;
             position: relative;
             background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover; background-position: center; color: white; overflow: hidden;
+            background-size: cover; 
+            background-position: center; 
+            color: white; 
+            overflow: hidden;
         }
         
         
         
         .header-banner::before {
-            content: ''; position: absolute; inset: 0;
-            background-color: rgba(45, 55, 72, 0.75); z-index: 1;
+            content: ''; 
+            position: absolute; 
+            inset: 0;
+            background-color: rgba(45, 55, 72, 0.75); 
+            z-index: 1;
         }
         
         
-        .header-content { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; }
+        .header-content { 
+            position: relative; 
+            z-index: 2; 
+            max-width: 1080px; 
+            margin: 0 auto; 
+        }
 
 
 
@@ -369,11 +443,15 @@
 
         .hero-badge {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-family: 'Caveat', cursive; font-size: 1.5rem;
+            font-family: 'Caveat', cursive; 
+            font-size: 1.5rem;
         }
         
         
-        .hero-badge:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -10px var(--primary); }
+        .hero-badge:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px -10px var(--primary); 
+        }
         
         
         
@@ -2243,7 +2321,6 @@
             feat9Title: "Automatizaciones",
             feat9Desc: "Publica en Facebook, Instagram, TikTok, Pinterest y Google desde el mismo lugar.",
             featLinkText: "Explorar función",
-
             /* Steps */
             stepsEyebrow: "Rápido y sin código",
             stepsH2: "Publica tu catálogo en 3 pasos",
@@ -2253,28 +2330,23 @@
             step2Body: "Importa desde Excel, Google Sheets, CSV o crea propiedades desde cero.",
             step3Title: "Publica y da seguimiento",
             step3Body: "Selecciona un plan y publica en un clic. Gestiona cada cliente desde el CRM.",
-
             /* Live demo */
             liveDemoEyebrow: "TU CATÁLOGO DE PROPIEDADES",
             demoTitle: "Descubre EasyListings en Vivo",
             demoText: "Así ven tus clientes tus propiedades: bilingüe, con precios en DOP o USD, botón de WhatsApp en cada listing y búsqueda optimizada para móvil. Prueba EasyListings:",
             demoMacbookHint: "↑ Pasa el cursor sobre el MacBook para deslizar la vista previa o haz clic para probar el catálogo real",
-
             /* Integrations */
             integrationsEyebrow: "INTEGRACIONES ESTRATÉGICAS",
             integrationsH2: "Conecta EasyListings con las herramientas que ya usas",
             intCustomDomain: "Google Calendar",
             integrationsCta: "Ver todas las integraciones →",
-
             /* Use cases */
             useCasesEyebrow: "Diseñado para agentes inmobiliarios",
             uc1Link: "Ver solución para agentes →",
             uc2Link: "Ver solución para agencias →",
             uc3Link: "Ver solución para constructoras →",
-
             /* Blog */
             blogEyebrow: "Nuestras Noticias",
-
             /* FAQ */
             faqEyebrow: "FAQ · Schema.org",
             faqH2: "Preguntas frecuentes",
@@ -2294,7 +2366,6 @@
             faq7A: "Sí, desde Excel o CSV.",
             faq8Q: "8. ¿EasyListings es para agentes individuales o agencias?",
             faq8A: "Ambos. Hay planes para agentes independientes, agencias y brokers.",
-
             /* Footer */
             footer_tagline: "Exhibe Tus Propiedades. Define Tu Marca.",
             footer_col_about: "Producto",
