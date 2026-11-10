@@ -1864,6 +1864,34 @@
                     <h2 class="mt-4 text-3xl md:text-[36px] font-bold text-[#061c38] leading-[1.15] mb-8 tracking-tight">
                         Explora nuestras novedades así como también artículos y consejos relacionados.
                     </h2>
+
+
+
+      <!-- === NAV CIRCLE BUTTONS (left/right) === -->
+      <div class="flex items-center gap-3 mb-6" id="carouselNavButtons">
+        <button
+          id="carouselPrev"
+          aria-label="Anterior"
+          class="w-10 h-10 rounded-full border border-gray-300 bg-white text-gray-600 flex items-center justify-center hover:border-[#df1783] hover:text-[#df1783] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button
+          id="carouselNext"
+          aria-label="Siguiente"
+          class="w-10 h-10 rounded-full border border-gray-300 bg-white text-gray-600 flex items-center justify-center hover:border-[#df1783] hover:text-[#df1783] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+
+
+                    
                     <a href="#" class="inline-flex items-center text-gray-400 hover:text-[#df1783] transition-colors text-[16px]">
                         Sala de prensa
                         <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1871,6 +1899,8 @@
                         </svg>
                     </a>
                 </div>
+
+
 
                 <div id="scroll-container" class="w-full md:w-[62%] flex overflow-x-auto no-scrollbar snap-x snap-mandatory">
                     <div class="flex pt-2 pb-8">
@@ -1897,9 +1927,6 @@
                                 </div>
                             </div>
                         </article>
-                        
-                        
-                        
                         
                         
 
@@ -3705,6 +3732,118 @@
         }
     })();
     </script>
+
+
+
+
+<!-- ================= SCRIPT ================= -->
+<script>
+  (function() {
+    const container = document.getElementById('scroll-container');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+
+    // ---- 1. Navigation buttons ----
+    function scrollByAmount(direction) {
+      const card = container.querySelector('article');
+      if (!card) return;
+      // Card width + margin (mr-4 = 1rem = 16px)
+      const cardWidth = card.offsetWidth + 16;
+      container.scrollBy({
+        left: direction * cardWidth,
+        behavior: 'smooth'
+      });
+    }
+
+    prevBtn.addEventListener('click', () => scrollByAmount(-1));
+    nextBtn.addEventListener('click', () => scrollByAmount(1));
+
+    // ---- 2. Update button disabled state ----
+    function updateButtons() {
+      const scrollLeft = container.scrollLeft;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      // Use a small tolerance to avoid flicker
+      prevBtn.disabled = scrollLeft <= 1;
+      nextBtn.disabled = scrollLeft >= maxScroll - 1;
+    }
+
+    container.addEventListener('scroll', updateButtons);
+    // Initial state
+    updateButtons();
+    // Re-check after images load (widths might change)
+    window.addEventListener('load', updateButtons);
+    setTimeout(updateButtons, 300);
+
+    // ---- 3. Grab-to-scroll ----
+    let isDown = false;
+    let startX;
+    let startScrollLeft;
+    let hasDragged = false;
+
+    container.addEventListener('mousedown', (e) => {
+      // Only left click
+      if (e.button !== 0) return;
+      isDown = true;
+      hasDragged = false;
+      startX = e.pageX;
+      startScrollLeft = container.scrollLeft;
+      container.style.cursor = 'grabbing';
+      // Prevent text selection while dragging
+      container.style.userSelect = 'none';
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 3) hasDragged = true;
+      container.scrollLeft = startScrollLeft - dx;
+    });
+
+    function stopDrag() {
+      if (!isDown) return;
+      isDown = false;
+      container.style.cursor = 'grab';
+      container.style.userSelect = '';
+    }
+
+    container.addEventListener('mouseup', stopDrag);
+    container.addEventListener('mouseleave', stopDrag);
+    // Also handle mouseup outside the container
+    window.addEventListener('mouseup', stopDrag);
+
+    // Prevent click on links/buttons when dragging
+    container.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    // ---- 4. Touch support (optional but nice) ----
+    // Native touch scrolling already works; we just keep cursor styles consistent.
+    // No extra JS needed for touch.
+
+    // ---- 5. Keyboard accessibility (optional) ----
+    container.setAttribute('tabindex', '0');
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollByAmount(-1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollByAmount(1);
+      }
+    });
+  })();
+</script>
+
+
+
+
+
+
+    
 
 </body>
 </html>
