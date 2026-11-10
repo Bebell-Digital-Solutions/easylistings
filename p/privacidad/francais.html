@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de Confidentialité | EasyListings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { brand: { blue: '#1A00FF', green: '#4BFF4B' } },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #DF1783;
+            --primary-hover: #c71575;
+            --primary-light: #fdeefa;
+            --secondary: #2d3748;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #FAF8F5;
+            --bg-alt: #F2EFE9;
+            --card-bg: #FFFFFF;
+            --fg: #0E0E10;
+            --muted: #5C5C63;
+            --border: #E5E1DA;
+            --shadow-sm: 0 4px 20px -2px rgba(14, 14, 16, 0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(14, 14, 16, 0.12);
+        }
+        html { box-sizing: border-box; overflow-x: hidden; scroll-behavior: smooth; }
+        *, *:before, *:after { box-sizing: inherit; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+        .top-menu-bar {
+            position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 2rem); max-width: 1200px; z-index: 1100;
+            background-color: var(--card-bg); box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border); border-radius: 12px;
+            padding: 0 1rem; transition: all 0.3s ease-in-out;
+        }
+        .top-menu-bar.full-width {
+            width: 100%; max-width: 100%; left: 0; transform: translateX(0);
+            border-radius: 0; border-left: none; border-right: none;
+            padding: 0 1.5rem; top: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .top-menu-content {
+            height: 70px; display: flex; align-items: center;
+            justify-content: space-between; gap: 1rem;
+        }
+        .logo-container { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        #appLogo { height: 40px; width: 40px; object-fit: cover; border-radius: 8px; }
+        #appBrandNameDisplay { font-size: 1.5rem; font-weight: 900; color: var(--text); white-space: nowrap; }
+        .brand-accent { color: #df1783; }
+        .top-menu-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        .nav-menu { display: flex; align-items: center; gap: 0.25rem; margin: 0 auto; }
+        .nav-item { position: relative; }
+        .nav-link {
+            display: flex; align-items: center; gap: 0.35rem;
+            padding: 0.55rem 1rem; font-size: 0.95rem; font-weight: 600;
+            color: var(--text); text-decoration: none; border-radius: 8px;
+            transition: background 0.2s, color 0.2s; white-space: nowrap;
+            cursor: pointer; border: none; background: transparent;
+            font-family: inherit; line-height: 1;
+        }
+        .nav-link:hover { background: var(--bg); color: var(--primary); }
+        .nav-item.open .nav-link { background: var(--bg); color: var(--primary); }
+        .nav-link .chevron { width: 14px; height: 14px; transition: transform 0.25s ease; opacity: 0.6; }
+        .nav-item.open .nav-link .chevron { transform: rotate(180deg); }
+        .submenu {
+            position: absolute; top: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%) translateY(-6px); min-width: 250px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+            padding: 0.5rem; opacity: 0; visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1200; display: flex; flex-direction: column; gap: 0.15rem;
+        }
+        .submenu::before {
+            content: ''; position: absolute; top: -6px; left: 50%;
+            transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px;
+            background: var(--card-bg); border-left: 1px solid var(--border);
+            border-top: 1px solid var(--border); border-radius: 3px 0 0 0;
+        }
+        .nav-item.open .submenu {
+            opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+        }
+        .submenu-link {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.65rem 0.9rem; font-size: 0.875rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: 8px;
+            transition: background 0.2s, color 0.2s; white-space: nowrap;
+        }
+        .submenu-link i { width: 12px; text-align: center; color: #df1783; transition: color 0.2s; flex-shrink: 0; }
+        .submenu-link:hover { background: var(--primary-light); color: var(--primary); }
+        .submenu-link:hover i { color: var(--primary); }
+        .primary-btn {
+            background-color: var(--primary); color: white; transition: all 0.3s ease;
+            padding: 12px 22px; display: inline-block; text-decoration: none;
+            border-radius: 12px; font-weight: 600; cursor: pointer;
+            border: none; font-family: inherit;
+        }
+        .primary-btn:hover {
+            background-color: var(--primary-hover); transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+        .fab {
+            width: 40px; height: 40px; border-radius: 50%;
+            background-color: var(--bg); color: var(--text);
+            border: 1px solid var(--border);
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem;
+        }
+        .fab:hover { background-color: var(--border); transform: scale(1.1); }
+        .lang-dropdown { position: relative; display: inline-block; font-family: system-ui, -apple-system, sans-serif; }
+        .lang-trigger {
+            display: flex; align-items: center; gap: 8px; padding: 8px 14px;
+            background: #fff; border: 1px solid #d0d5dd; border-radius: 8px;
+            cursor: pointer; font-size: 14px; font-weight: 600; color: #1d2939;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .lang-trigger:hover { border-color: #98a2b3; }
+        .lang-trigger .flag { font-size: 18px; line-height: 1; }
+        .lang-trigger .chevron { margin-left: 4px; width: 14px; height: 14px; color: #667085; transition: transform 0.2s ease; }
+        .lang-dropdown.open .chevron { transform: rotate(180deg); }
+        .lang-menu {
+            position: absolute; top: calc(100% + 6px); left: 0; min-width: 100%;
+            padding: 6px; margin: 0; list-style: none; background: #fff;
+            border: 1px solid #d0d5dd; border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+            opacity: 0; visibility: hidden; transform: translateY(-6px);
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            z-index: 100;
+        }
+        .lang-dropdown.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 8px; width: 100%;
+            padding: 8px 12px; background: none; border: none; border-radius: 6px;
+            cursor: pointer; font-size: 14px; font-weight: 600; color: #1d2939;
+            text-align: left; transition: background 0.1s ease; text-decoration: none;
+        }
+        .lang-option:hover { background: #f2f4f7; }
+        .lang-option .flag { font-size: 18px; line-height: 1; }
+        .site-footer {
+            position: relative; z-index: 10; padding: 6rem 1.5rem 3rem 1.5rem;
+            margin-top: auto; background: var(--secondary);
+            border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;
+            color: var(--text); transition: background 0.3s, color 0.3s;
+        }
+        .footer-heading {
+            color: #a0aec0 !important; font-size: 0.75rem; letter-spacing: 0.1em;
+            text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .footer-link {
+            color: white !important; text-decoration: none; font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-link:hover { color: var(--primary) !important; }
+        .footer-support-card {
+            background: var(--card-bg); border: 1px solid var(--primary);
+            border-radius: 1rem; padding: 1.5rem; position: relative;
+            overflow: hidden; box-shadow: var(--shadow-sm);
+            transition: border-color 0.3s, background 0.3s;
+            width: 100%; max-width: 360px; aspect-ratio: 3/2;
+        }
+        .privacy-content {
+            padding: 8rem 1.5rem 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .privacy-content h1 {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            color: var(--fg);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .privacy-content .meta {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .privacy-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+        .privacy-content h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .privacy-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .privacy-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.25rem;
+        }
+        .privacy-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .privacy-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0.25rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .privacy-content .highlight-box {
+            background: var(--bg-alt);
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+        .privacy-content .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text);
+        }
+        .privacy-content a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .privacy-content a:hover {
+            color: var(--primary-hover);
+        }
+        .privacy-content .contact-info {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+        .privacy-content .contact-info p {
+            margin-bottom: 0.35rem;
+            color: var(--text);
+        }
+        .privacy-content .contact-info strong {
+            color: var(--fg);
+        }
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+        }
+        @media (max-width: 768px) {
+            .privacy-content { padding: 6rem 1rem 3rem 1rem; }
+            .privacy-content h2 { font-size: 1.3rem; }
+        }
+        #backToTopBtn {
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            background-color: var(--primary); color: white; border: none; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1000; opacity: 0; visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+        }
+        #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTopBtn:hover { background-color: var(--primary-hover); transform: translateY(-3px) scale(1.05); }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#DF1783] selection:text-white">
+
+    <!-- ================= TOP MENU BAR ================= -->
+    <div class="top-menu-bar" id="topMenuBar">
+        <div class="top-menu-content">
+            <div class="logo-container">
+                <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Easy Listings Logo">
+                <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+            </div>
+
+            <nav class="nav-menu" aria-label="Navigation principale">
+                <div class="nav-item">
+                    <a href="https://easylistings.website/#acerca" class="nav-link">À propos</a>
+                </div>
+
+                <div class="nav-item" id="funcionesNavItem">
+                    <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
+                        <span>Fonctionnalités</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+                    <div class="submenu" role="menu" aria-label="Sous-menu Fonctionnalités">
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="layout-grid"></i> <span>Catalogue de biens</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="users"></i> <span>Capture de prospects</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="smartphone"></i> <span>Optimisé pour mobile</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="palette"></i> <span>Personnalisation de la marque</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="bar-chart-3"></i> <span>Analytique</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="https://easylistings.website/#pricing" class="nav-link">Tarifs</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="https://easylistings.website/contact" class="nav-link">Contact</a>
+                </div>
+            </nav>
+
+            <div class="top-menu-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="flag" id="currentFlag">🇫🇷</span>
+                        <span id="currentCode">FR</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+
+                    <ul class="lang-menu" id="langMenu" role="listbox" aria-label="Sélectionner la langue">
+                        <li role="option" aria-selected="false">
+                            <a href="/privacidad" class="lang-option" data-flag="🇩🇴" data-code="ES" data-lang="es">
+                                <span class="flag">🇩🇴</span> ES
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/english" class="lang-option" data-flag="🇺🇸" data-code="EN" data-lang="en">
+                                <span class="flag">🇺🇸</span> EN
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="true">
+                            <a href="/francais" class="lang-option" data-flag="🇫🇷" data-code="FR" data-lang="fr">
+                                <span class="flag">🇫🇷</span> FR
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/italiano" class="lang-option" data-flag="🇮🇹" data-code="IT" data-lang="it">
+                                <span class="flag">🇮🇹</span> IT
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/deutsch" class="lang-option" data-flag="🇩🇪" data-code="DE" data-lang="de">
+                                <span class="flag">🇩🇪</span> DE
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/russkiy" class="lang-option" data-flag="🇷🇺" data-code="RU" data-lang="ru">
+                                <span class="flag">🇷🇺</span> RU
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/zhongwen" class="lang-option" data-flag="🇨🇳" data-code="ZH" data-lang="zh">
+                                <span class="flag">🇨🇳</span> ZH
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/nihongo" class="lang-option" data-flag="🇯🇵" data-code="JA" data-lang="ja">
+                                <span class="flag">🇯🇵</span> JA
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="https://app.easylistings.website" class="primary-btn hidden sm:inline-block" id="desktopCta">Se connecter</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PRIVACY POLICY CONTENT ================= -->
+    <main class="privacy-content">
+        <h1>Politique de Confidentialité</h1>
+        <div class="meta">
+            <p><strong>Easy Listings</strong></p>
+            <p><strong>Date d'entrée en vigueur :</strong> 10 novembre 2026 &nbsp;|&nbsp; <strong>Dernière mise à jour :</strong> 10 novembre 2026</p>
+        </div>
+
+        <h2>1. Introduction</h2>
+        <p>Bienvenue sur Easy Listings.</p>
+        <p>Easy Listings (« Easy Listings », « nous », « notre » ou « nos ») respecte votre vie privée et s'engage à protéger les informations personnelles des personnes qui accèdent à nos sites web, applications, logiciels, pages de listes de biens, intégrations et services connexes (collectivement, les « Services ») ou les utilisent.</p>
+        <p>La présente Politique de Confidentialité explique comment nous collectons, recevons, utilisons, stockons, traitons, divulguons et protégeons les informations personnelles lorsque vous interagissez avec Easy Listings.</p>
+        <p>Cette politique s'applique à :</p>
+        <ul>
+            <li>Les visiteurs qui naviguent sur nos sites web.</li>
+            <li>Les utilisateurs enregistrés et les titulaires de comptes.</li>
+            <li>Les agents immobiliers, courtiers et agences.</li>
+            <li>Les propriétaires de biens, vendeurs et bailleurs.</li>
+            <li>Les acheteurs potentiels, locataires et autres demandes relatives aux biens.</li>
+            <li>Les personnes qui soumettent des informations via les formulaires de listes de biens.</li>
+            <li>Les personnes qui connectent des services ou intégrations tiers à notre plateforme.</li>
+        </ul>
+        <p>Nous traitons les informations personnelles conformément à la législation applicable en matière de protection de la vie privée et des données, y compris la Constitution de la République Dominicaine, la Loi n° 172-13 et, le cas échéant, les réglementations internationales en matière de vie privée.</p>
+        <p>En accédant à nos Services ou en les utilisant, vous reconnaissez avoir lu la présente Politique de Confidentialité.</p>
+
+        <h2>2. Qui sommes-nous</h2>
+        <p>Easy Listings est une plateforme logicielle conçue pour aider les professionnels de l'immobilier à créer, gérer, publier et distribuer des listes de biens et à gérer les interactions avec les clients potentiels.</p>
+        <div class="highlight-box">
+            <p><strong>Plateforme :</strong> Easy Listings<br>
+            <strong>Société exploitante :</strong> Easy Listings<br>
+            <strong>Adresse enregistrée :</strong> République Dominicaine<br>
+            <strong>Pays d'enregistrement :</strong> République Dominicaine<br>
+            <strong>Site web :</strong> <a href="https://easylistings.website" target="_blank" rel="noopener">https://easylistings.website</a><br>
+            <strong>Contact vie privée :</strong> <a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+        </div>
+        <p>Pour toute question, demande ou plainte relative à la vie privée, vous pouvez nous contacter en utilisant les informations ci-dessus.</p>
+        <p>Aux fins de la législation applicable en matière de protection des données, Easy Listings peut agir en tant que :</p>
+        <ul>
+            <li>Responsable du traitement lorsqu'elle détermine pourquoi et comment les informations personnelles sont traitées pour ses propres opérations commerciales.</li>
+            <li>Sous-traitant ou fournisseur de services lorsqu'elle traite des informations personnelles pour le compte d'agents immobiliers, de courtiers, d'agences ou d'autres clients commerciaux qui utilisent notre plateforme.</li>
+        </ul>
+        <p>Lorsqu'un agent, un courtier ou une agence collecte des informations auprès d'acheteurs ou de locataires potentiels via ses listes de biens, ce professionnel ou cette entreprise peut être le responsable de ces informations. Easy Listings fournit généralement l'infrastructure technique pour traiter ces informations en leur nom.</p>
+
+        <h2>3. Informations personnelles que nous collectons</h2>
+        <p>Selon la manière dont vous interagissez avec nos Services, nous pouvons collecter les catégories d'informations suivantes.</p>
+
+        <h3>3.1 Informations de compte et d'identification</h3>
+        <p>Lorsque vous vous inscrivez ou créez un compte, nous pouvons collecter :</p>
+        <ul>
+            <li>Nom complet.</li>
+            <li>Adresse e-mail.</li>
+            <li>Numéro de téléphone.</li>
+            <li>Nom d'utilisateur.</li>
+            <li>Identifiants de mot de passe, stockés à l'aide de mesures de sécurité appropriées.</li>
+            <li>Nom de l'entreprise ou de l'agence.</li>
+            <li>Informations professionnelles.</li>
+            <li>Préférences de compte.</li>
+            <li>Photographies de profil ou logos.</li>
+            <li>Rôle et permissions du compte.</li>
+        </ul>
+
+        <h3>3.2 Informations sur les biens et l'immobilier</h3>
+        <p>Lorsque les utilisateurs créent ou gèrent des listes de biens, nous pouvons collecter :</p>
+        <ul>
+            <li>Adresses et emplacements des biens.</li>
+            <li>Descriptions des biens.</li>
+            <li>Prix de vente et loyers.</li>
+            <li>Photographies et vidéos des biens.</li>
+            <li>Caractéristiques et spécifications des biens.</li>
+            <li>Informations de propriété ou de liste fournies par les utilisateurs.</li>
+            <li>Disponibilité et statut du bien.</li>
+            <li>Coordonnées associées aux listes.</li>
+            <li>Autres informations fournies volontairement par les utilisateurs.</li>
+        </ul>
+        <p>Les informations sur les biens peuvent être affichées publiquement lorsqu'un utilisateur publie une liste.</p>
+        <p>Les utilisateurs sont responsables de s'assurer qu'ils disposent des droits et autorisations nécessaires pour publier les informations sur les biens et les documents associés.</p>
+
+        <h3>3.3 Informations sur les clients potentiels et les prospects</h3>
+        <p>Lorsque des visiteurs soumettent des demandes via les listes de biens, les formulaires de contact ou d'autres fonctionnalités de la plateforme, nous pouvons collecter :</p>
+        <ul>
+            <li>Nom complet.</li>
+            <li>Adresse e-mail.</li>
+            <li>Numéro de téléphone.</li>
+            <li>Pays et localisation.</li>
+            <li>Méthode de contact préférée.</li>
+            <li>Préférences en matière de biens.</li>
+            <li>Budget et préférences d'achat ou de location.</li>
+            <li>Messages et demandes.</li>
+            <li>Autres informations soumises volontairement via les formulaires.</li>
+        </ul>
+        <p>Ces informations peuvent être mises à la disposition du professionnel de l'immobilier ou de l'entreprise responsable de la liste de biens concernée.</p>
+
+        <h3>3.4 Informations de vérification et de connaissance du client</h3>
+        <p>Certains utilisateurs ou entreprises immobilières peuvent utiliser des fonctionnalités conçues pour collecter des informations de vérification client ou de Connaissance du Client (KYC).</p>
+        <p>Lorsque ces fonctionnalités sont disponibles et activées, les informations peuvent inclure des détails d'identification, des documents justificatifs et d'autres informations soumises volontairement à des fins de vérification ou de conformité légale.</p>
+        <p>Les documents d'identification sensibles ne seront collectés que si la fonctionnalité concernée est activée et qu'un objectif légitime existe.</p>
+        <p>Les utilisateurs qui collectent ces informations sont responsables de s'assurer qu'ils disposent d'une base légale appropriée et qu'ils fournissent les avis de confidentialité requis.</p>
+
+        <h3>3.5 Informations de paiement et d'abonnement</h3>
+        <p>Lorsque vous achetez un abonnement ou un service payant, nous pouvons collecter :</p>
+        <ul>
+            <li>Plan d'abonnement.</li>
+            <li>Détails de facturation.</li>
+            <li>Identifiants de transaction.</li>
+            <li>Statut du paiement.</li>
+            <li>Informations de facture.</li>
+            <li>Historique de facturation.</li>
+        </ul>
+        <p>Les paiements peuvent être traités par des prestataires de paiement tiers indépendants.</p>
+        <p>Easy Listings n'a pas l'intention de stocker des numéros complets de cartes de paiement ou des codes de sécurité sur ses propres serveurs lorsque le traitement des paiements est géré par un prestataire externe.</p>
+        <p>Les prestataires de paiement traitent les informations de paiement conformément à leurs propres politiques de confidentialité et obligations applicables.</p>
+
+        <h3>3.6 Informations techniques et sur l'appareil</h3>
+        <p>Lorsque vous accédez à nos Services, nous pouvons collecter automatiquement :</p>
+        <ul>
+            <li>Adresse de protocole Internet (IP).</li>
+            <li>Type et version du navigateur.</li>
+            <li>Type d'appareil et système d'exploitation.</li>
+            <li>Préférences linguistiques.</li>
+            <li>Localisation géographique approximative dérivée d'informations techniques.</li>
+            <li>Site web de référence.</li>
+            <li>Pages visitées.</li>
+            <li>Horodatages d'accès.</li>
+            <li>Informations de session.</li>
+            <li>Informations de diagnostic et d'erreur.</li>
+            <li>Cookies et technologies similaires.</li>
+        </ul>
+
+        <h3>3.7 Informations d'authentification tierces</h3>
+        <p>Si vous choisissez de vous connecter ou de vous authentifier à l'aide de services tiers, tels que Google, Meta ou Pinterest, nous pouvons recevoir des informations que vous autorisez ces services à partager avec nous.</p>
+        <p>Selon l'intégration, cela peut inclure :</p>
+        <ul>
+            <li>Identifiants de compte.</li>
+            <li>Nom.</li>
+            <li>Adresse e-mail.</li>
+            <li>Informations de profil.</li>
+            <li>Jetons d'authentification.</li>
+            <li>Informations de compte ou d'entreprise autorisées.</li>
+            <li>Informations nécessaires à l'exécution de l'intégration que vous avez demandée.</li>
+        </ul>
+        <p>Nous n'accédons qu'aux informations autorisées par votre autorisation, les permissions API du fournisseur concerné et ses politiques pour les développeurs.</p>
+
+        <h2>4. Comment nous utilisons vos informations</h2>
+        <p>Nous utilisons les informations personnelles à des fins commerciales et opérationnelles légitimes, notamment :</p>
+        <ol style="padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.25rem;">
+            <li>Créer et gérer des comptes utilisateurs.</li>
+            <li>Fournir l'accès à Easy Listings.</li>
+            <li>Créer, publier et gérer des listes de biens.</li>
+            <li>Mettre en relation les clients potentiels avec les professionnels de l'immobilier.</li>
+            <li>Traiter les demandes et les communications.</li>
+            <li>Gérer les abonnements et la facturation.</li>
+            <li>Fournir un support client.</li>
+            <li>Authentifier les utilisateurs et sécuriser les comptes.</li>
+            <li>Connecter les intégrations tierces autorisées.</li>
+            <li>Fournir des analyses et surveiller les performances de la plateforme.</li>
+            <li>Détecter la fraude, les abus et les activités non autorisées.</li>
+            <li>Maintenir la fonctionnalité de la plateforme.</li>
+            <li>Améliorer nos produits et services.</li>
+            <li>Communiquer les annonces de service importantes.</li>
+            <li>Envoyer des communications promotionnelles lorsque la loi le permet et, si nécessaire, avec votre consentement.</li>
+            <li>Respecter les obligations légales.</li>
+            <li>Établir, exercer ou défendre des réclamations légales.</li>
+        </ol>
+        <p>Nous n'utiliserons pas les informations personnelles à des fins incompatibles avec les finalités divulguées, sauf si la loi applicable le permet ou l'exige.</p>
+
+        <h2>5. Base légale du traitement</h2>
+        <p>Lorsque la loi applicable l'exige, nous traitons les informations personnelles sur la base d'un ou plusieurs des fondements légaux suivants :</p>
+        <ul>
+            <li><strong>Consentement :</strong> Vous avez donné votre permission pour une activité de traitement spécifique.</li>
+            <li><strong>Nécessité contractuelle :</strong> Le traitement est nécessaire pour fournir les Services que vous avez demandés ou pour exécuter un contrat avec vous.</li>
+            <li><strong>Intérêts légitimes :</strong> Le traitement est nécessaire à des fins commerciales légitimes, à condition que vos droits et intérêts ne prévalent pas sur ces intérêts.</li>
+            <li><strong>Obligations légales :</strong> Le traitement est nécessaire pour se conformer aux lois applicables ou aux demandes légales.</li>
+            <li><strong>Intérêts vitaux ou intérêt public :</strong> Lorsque cela est reconnu et applicable en vertu de la législation concernée.</li>
+        </ul>
+        <p>Vous pouvez retirer votre consentement lorsque le traitement repose sur le consentement. Le retrait n'affecte pas la licéité du traitement effectué avant le retrait.</p>
+
+        <h2>6. Services tiers et partage de données</h2>
+        <p>Nous pouvons partager des informations personnelles avec des tiers lorsque cela est nécessaire pour exploiter nos Services, répondre à vos demandes ou nous conformer à la loi applicable.</p>
+        <p>Ces parties peuvent inclure :</p>
+
+        <h3>6.1 Fournisseurs de technologie et d'hébergement</h3>
+        <p>Les fournisseurs qui soutiennent notre infrastructure, notre hébergement, nos bases de données, notre stockage, notre sécurité, nos communications et nos opérations logicielles.</p>
+
+        <h3>6.2 Prestataires de paiement</h3>
+        <p>Des entreprises tierces responsables du traitement des paiements, des abonnements et des transactions de facturation.</p>
+
+        <h3>6.3 Fournisseurs d'authentification et d'intégration</h3>
+        <p>Des services tels que :</p>
+        <ul>
+            <li>Google.</li>
+            <li>Meta.</li>
+            <li>Pinterest.</li>
+            <li>D'autres fournisseurs autorisés de réseaux sociaux, d'analyse et d'intégration.</li>
+        </ul>
+        <p>Lorsque vous autorisez une intégration, des informations peuvent être échangées avec le fournisseur concerné pour exécuter la fonctionnalité que vous avez demandée.</p>
+
+        <h3>6.4 Professionnels et entreprises immobilières</h3>
+        <p>Les informations soumises via une liste de biens ou un formulaire de demande peuvent être partagées avec l'agent, le courtier, l'agence, le propriétaire ou tout autre destinataire autorisé responsable de cette liste.</p>
+        <p>Easy Listings ne contrôle pas la manière dont les professionnels de l'immobilier indépendants utilisent les informations après les avoir reçues. Ces destinataires sont responsables de leurs propres pratiques en matière de confidentialité et des obligations légales applicables.</p>
+
+        <h3>6.5 Services professionnels et juridiques</h3>
+        <p>Nous pouvons divulguer des informations à des avocats, comptables, auditeurs, régulateurs, autorités policières ou autres parties lorsque cela est raisonnablement nécessaire pour respecter des obligations légales, protéger nos droits ou répondre à des réclamations légales.</p>
+
+        <h3>6.6 Transferts commerciaux</h3>
+        <p>Les informations personnelles peuvent être transférées dans le cadre d'une fusion, d'une acquisition, d'une restructuration, d'une vente d'actifs ou d'une autre transaction commerciale, sous réserve des exigences légales applicables.</p>
+        <p>Nous n'autorisons pas les tiers à utiliser les informations personnelles obtenues via nos Services à des fins non liées sans base légale appropriée.</p>
+
+        <h2>7. Données utilisateur Google et utilisation limitée</h2>
+        <p>Lorsque Easy Listings s'intègre aux services ou API Google, notre accès et notre utilisation des données utilisateur Google seront conformes à la Politique de Données Utilisateur des Services API Google applicable, y compris ses exigences d'Utilisation Limitée.</p>
+        <p>Plus précisément :</p>
+        <ul>
+            <li>Nous n'accédons qu'aux données utilisateur Google nécessaires pour fournir la fonctionnalité que vous autorisez.</li>
+            <li>Nous utilisons les données utilisateur Google uniquement aux fins divulguées et autorisées par les politiques applicables de Google.</li>
+            <li>Nous n'utilisons pas les données utilisateur Google à des fins publicitaires.</li>
+            <li>Nous ne vendons pas les données utilisateur Google.</li>
+            <li>Nous n'utilisons pas les données utilisateur Google pour développer ou améliorer des modèles généralisés d'intelligence artificielle ou d'apprentissage automatique.</li>
+            <li>Nous ne transférons pas les données utilisateur Google à des tiers, sauf comme autorisé par les politiques applicables de Google, par exemple lorsque cela est nécessaire pour fournir ou améliorer des fonctionnalités destinées à l'utilisateur, se conformer à la loi applicable ou se protéger contre les menaces de sécurité.</li>
+            <li>Nous limitons l'accès aux données utilisateur Google au personnel autorisé et aux fournisseurs de services qui ont besoin d'un accès pour des finalités autorisées.</li>
+        </ul>
+        <p>Lorsque cela est requis, nous fournirons des divulgations supplémentaires et obtiendrons l'autorisation appropriée avant d'accéder aux données utilisateur Google.</p>
+
+        <h2>8. Transferts internationaux de données</h2>
+        <p>Easy Listings peut utiliser des infrastructures, des fournisseurs d'hébergement et des services technologiques situés dans différents pays.</p>
+        <p>Par conséquent, vos informations personnelles peuvent être transférées, stockées ou traitées en dehors du pays où vous résidez.</p>
+        <p>Les transferts internationaux peuvent impliquer des pays dont les lois de protection des données diffèrent de celles de votre juridiction.</p>
+        <p>Le cas échéant, nous mettrons en œuvre des garanties appropriées, qui peuvent inclure :</p>
+        <ul>
+            <li>Des obligations contractuelles de protection des données.</li>
+            <li>Des Clauses Contractuelles Types.</li>
+            <li>Des mesures de sécurité appropriées.</li>
+            <li>D'autres mécanismes légaux de transfert international.</li>
+        </ul>
+        <p>Nous traiterons les transferts internationaux conformément à la législation applicable en matière de protection des données.</p>
+
+        <h2>9. Cookies et technologies de suivi</h2>
+        <p>Nos Services peuvent utiliser des cookies, des pixels, le stockage local et des technologies similaires.</p>
+        <p>Ces technologies peuvent être utilisées pour :</p>
+        <ul>
+            <li>Maintenir les sessions utilisateur.</li>
+            <li>Mémoriser les préférences.</li>
+            <li>Authentifier les utilisateurs.</li>
+            <li>Améliorer les performances du site web.</li>
+            <li>Comprendre le trafic du site web.</li>
+            <li>Analyser l'utilisation de la plateforme.</li>
+            <li>Mesurer l'efficacité du marketing.</li>
+            <li>Prendre en charge les intégrations publicitaires et de réseaux sociaux autorisées.</li>
+        </ul>
+        <p>Les cookies peuvent être classés comme suit :</p>
+        <ul>
+            <li><strong>Cookies essentiels :</strong> Nécessaires à l'authentification, à la sécurité et aux fonctionnalités de base du site web.</li>
+            <li><strong>Cookies fonctionnels :</strong> Utilisés pour mémoriser les préférences et paramètres de l'utilisateur.</li>
+            <li><strong>Cookies analytiques :</strong> Utilisés pour comprendre comment les visiteurs interagissent avec nos Services.</li>
+            <li><strong>Cookies marketing :</strong> Utilisés pour la mesure publicitaire, l'attribution et les activités marketing pertinentes lorsque cela est autorisé.</li>
+        </ul>
+        <p>Lorsque la loi applicable l'exige, nous obtiendrons le consentement avant de placer des cookies non essentiels ou de nous engager dans d'autres activités de suivi basées sur le consentement.</p>
+        <p>Vous pouvez contrôler les cookies via les paramètres de votre navigateur et, le cas échéant, nos contrôles de préférences en matière de cookies.</p>
+        <p>La désactivation de certains cookies peut affecter la fonctionnalité de certains Services.</p>
+
+        <h2>10. Conservation des données</h2>
+        <p>Nous conservons les informations personnelles uniquement pendant la durée raisonnablement nécessaire pour atteindre les finalités décrites dans la présente Politique de Confidentialité, sous réserve des exigences légales applicables.</p>
+        <p>Les périodes de conservation peuvent varier en fonction du type d'informations et de la finalité pour laquelle elles ont été collectées.</p>
+        <p>Les exemples incluent :</p>
+        <ul>
+            <li><strong>Informations de compte :</strong> Tant que votre compte reste actif et pendant une période raisonnable par la suite lorsque cela est nécessaire à des fins légales, de sécurité ou administratives.</li>
+            <li><strong>Listes de biens :</strong> Tant qu'elles sont publiées ou maintenues par le titulaire du compte, sous réserve des demandes de suppression et des obligations légales applicables.</li>
+            <li><strong>Demandes de clients :</strong> Pendant la durée raisonnablement nécessaire à la transaction immobilière concernée, à la relation client ou aux exigences de conservation applicables.</li>
+            <li><strong>Dossiers de paiement :</strong> Selon les exigences des réglementations comptables, fiscales et financières applicables.</li>
+            <li><strong>Journaux techniques :</strong> À des fins de sécurité, de dépannage et d'exploitation.</li>
+            <li><strong>Données d'intégration tierces :</strong> Pendant la durée nécessaire pour fournir l'intégration autorisée ou selon les exigences des politiques du fournisseur concerné.</li>
+        </ul>
+        <p>Lorsque les informations personnelles ne sont plus nécessaires, nous prendrons des mesures raisonnables pour les supprimer, les anonymiser ou les détruire de manière sécurisée.</p>
+        <p>Certaines informations peuvent rester dans des sauvegardes chiffrées pendant une période limitée ou être conservées lorsque la loi l'exige.</p>
+
+        <h2>11. Vos droits en matière de vie privée</h2>
+        <p>Selon votre pays de résidence et la législation applicable, vous pouvez avoir le droit de :</p>
+        <ol style="padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.25rem;">
+            <li>Demander confirmation de savoir si nous traitons vos informations personnelles.</li>
+            <li>Demander l'accès aux informations personnelles que nous détenons à votre sujet.</li>
+            <li>Demander la correction d'informations inexactes ou incomplètes.</li>
+            <li>Demander la suppression d'informations personnelles, sous réserve des exceptions légales applicables.</li>
+            <li>Demander la limitation de certaines activités de traitement.</li>
+            <li>Vous opposer à certaines activités de traitement.</li>
+            <li>Retirer un consentement précédemment accordé.</li>
+            <li>Demander une copie de vos informations personnelles dans un format portable lorsque cela est applicable.</li>
+            <li>Refuser certaines activités de publicité, de partage ou de profilage lorsque la loi l'exige.</li>
+            <li>Déposer une plainte auprès d'une autorité compétente en matière de protection des données ou de réglementation.</li>
+        </ol>
+        <p>Nous évaluerons et répondrons aux demandes de vie privée conformément aux exigences et délais légaux applicables.</p>
+
+        <h3>11.1 Droits en matière de vie privée en République Dominicaine</h3>
+        <p>Pour les personnes protégées par la loi de la République Dominicaine, nous reconnaissons les protections constitutionnelles établies par l'article 44 de la Constitution Dominicaine et les droits prévus par la Loi n° 172-13.</p>
+        <p>Ces protections incluent les droits relatifs à :</p>
+        <ul>
+            <li>La vie privée et l'intimité personnelle.</li>
+            <li>L'accès aux informations personnelles détenues dans des bases de données publiques ou privées.</li>
+            <li>La connaissance de l'utilisation et de la finalité des informations personnelles.</li>
+            <li>Le traitement approprié des données personnelles.</li>
+            <li>La correction et les recours applicables concernant les informations inexactes ou traitées de manière inappropriée.</li>
+        </ul>
+
+        <h3>11.2 Espace Économique Européen et Royaume-Uni</h3>
+        <p>Lorsque le RGPD ou le RGPD britannique s'applique, les personnes peuvent exercer les droits applicables, notamment l'accès, la rectification, l'effacement, la limitation, l'opposition, la portabilité des données et le retrait du consentement.</p>
+        <p>Les personnes peuvent également déposer des plaintes auprès de leur autorité de contrôle compétente.</p>
+
+        <h3>11.3 Résidents de Californie</h3>
+        <p>Lorsque la California Consumer Privacy Act, telle que modifiée par la California Privacy Rights Act, s'applique, les résidents californiens éligibles peuvent avoir le droit de :</p>
+        <ul>
+            <li>Savoir quelles catégories d'informations personnelles sont collectées.</li>
+            <li>Accéder à des informations personnelles spécifiques.</li>
+            <li>Demander la suppression.</li>
+            <li>Demander la correction.</li>
+            <li>Refuser la vente ou le partage d'informations personnelles tel que défini par la loi applicable.</li>
+            <li>Limiter certaines utilisations et divulgations d'informations personnelles sensibles.</li>
+            <li>Recevoir un traitement équitable lors de l'exercice des droits en matière de vie privée.</li>
+        </ul>
+        <p>Nous ne discriminerons pas les personnes pour l'exercice de droits protégés par la législation applicable en matière de vie privée.</p>
+
+        <h3>11.4 Autres juridictions internationales</h3>
+        <p>Nous respecterons les droits supplémentaires en matière de vie privée lorsque la législation applicable l'exige, y compris la Lei Geral de Proteção de Dados (LGPD) du Brésil, les lois fédérales et provinciales canadiennes applicables en matière de vie privée et d'autres réglementations nationales ou régionales pertinentes en matière de vie privée.</p>
+
+        <h2>12. Comment demander l'accès ou la suppression</h2>
+        <p>Vous pouvez demander l'accès, la correction ou la suppression de vos informations personnelles en contactant :</p>
+        <div class="contact-info">
+            <p><strong>E-mail :</strong> <a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+        </div>
+        <p>Veuillez inclure :</p>
+        <ul>
+            <li>Votre nom complet.</li>
+            <li>L'adresse e-mail associée à votre compte ou à votre demande.</li>
+            <li>La nature de votre demande.</li>
+            <li>Des informations suffisantes pour nous aider à vérifier votre identité.</li>
+        </ul>
+        <p>Nous pouvons demander des informations supplémentaires lorsqu'il est raisonnablement nécessaire de vérifier votre identité et de prévenir les divulgations non autorisées.</p>
+        <p>Si vous êtes un utilisateur enregistré, vous pouvez également contacter l'administrateur du compte ou utiliser les fonctionnalités de gestion de compte disponibles pour gérer vos informations.</p>
+
+        <h3>12.1 Suppression de compte et d'intégration tiers</h3>
+        <p>Si vous avez connecté Google, Meta, Pinterest ou un autre compte tiers à Easy Listings, vous pouvez révoquer l'autorisation concernée via les paramètres du compte tiers applicable.</p>
+        <p>Vous pouvez également demander la suppression des informations associées en nous contactant.</p>
+        <p>La révocation de l'autorisation tierce ne supprime pas automatiquement les informations précédemment collectées. Vous devez soumettre une demande de suppression le cas échéant.</p>
+
+        <h3>12.2 Demandes de suppression des visiteurs de listes de biens</h3>
+        <p>Les visiteurs qui soumettent des informations via des formulaires de demande de biens peuvent demander la suppression de leurs informations en nous contactant.</p>
+        <p>Lorsqu'un agent immobilier, un courtier ou une agence indépendante contrôle les informations concernées, nous pouvons transmettre la demande à cette entreprise ou vous diriger vers son contact en matière de vie privée, selon le cas.</p>
+        <p>Nous prendrons des mesures raisonnables pour aider aux demandes concernant les informations traitées pour le compte de nos clients.</p>
+
+        <h2>13. Sécurité des données</h2>
+        <p>Nous mettons en œuvre des garanties techniques, administratives et organisationnelles raisonnables conçues pour protéger les informations personnelles contre :</p>
+        <ul>
+            <li>L'accès non autorisé.</li>
+            <li>La divulgation accidentelle.</li>
+            <li>L'altération.</li>
+            <li>La perte.</li>
+            <li>La destruction.</li>
+            <li>Le traitement non autorisé.</li>
+        </ul>
+        <p>Selon la nature des informations et de nos Services, ces mesures peuvent inclure :</p>
+        <ul>
+            <li>Contrôles d'accès et permissions de compte.</li>
+            <li>Pratiques d'authentification sécurisées.</li>
+            <li>Chiffrement le cas échéant.</li>
+            <li>Hébergement et infrastructure sécurisés.</li>
+            <li>Surveillance et journalisation de sécurité.</li>
+            <li>Procédures de sauvegarde.</li>
+            <li>Accès administratif restreint.</li>
+            <li>Procédures de sécurité internes.</li>
+        </ul>
+        <p>Aucune transmission par Internet ou système de stockage électronique ne peut être garantie comme totalement sécurisée.</p>
+        <p>Bien que nous prenions des précautions raisonnables, nous ne pouvons pas garantir une sécurité absolue.</p>
+        <p>En cas de violation de données personnelles, nous prendrons les mesures appropriées pour enquêter, atténuer et fournir des notifications lorsque la loi applicable l'exige.</p>
+
+        <h2>14. Vie privée des enfants</h2>
+        <p>Easy Listings est destiné aux adultes et aux utilisateurs professionnels.</p>
+        <p>Nos Services ne s'adressent pas aux enfants de moins de 13 ans, et nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans sans autorisation légalement valide.</p>
+        <p>Lorsque les lois applicables établissent un âge minimum plus élevé ou exigent le consentement des parents ou tuteurs, nous respecterons ces exigences.</p>
+        <p>Si nous prenons connaissance que des informations personnelles ont été collectées auprès d'un enfant en violation de la loi applicable, nous prendrons des mesures raisonnables pour remédier à la situation, y compris la suppression le cas échéant.</p>
+
+        <h2>15. Sites web et services tiers</h2>
+        <p>Nos Services peuvent contenir des liens vers des sites web, plateformes, applications et services tiers.</p>
+        <p>Ces services peuvent avoir des politiques de confidentialité et des pratiques de traitement des données indépendantes.</p>
+        <p>Easy Listings n'est pas responsable des pratiques de confidentialité, du contenu ou de la sécurité des services externes que nous n'exploitons pas.</p>
+        <p>Nous encourageons les utilisateurs à consulter les politiques de confidentialité des services tiers avant de fournir des informations personnelles ou d'autoriser des intégrations.</p>
+
+        <h2>16. Listes publiques de biens et contenu généré par l'utilisateur</h2>
+        <p>Easy Listings permet aux utilisateurs de publier des informations sur les biens et du contenu connexe.</p>
+        <p>Les informations publiées publiquement peuvent être accessibles à toute personne qui visite une page de liste de biens.</p>
+        <p>Cela peut inclure :</p>
+        <ul>
+            <li>Photographies et descriptions des biens.</li>
+            <li>Localisation du bien.</li>
+            <li>Prix.</li>
+            <li>Coordonnées de l'agent ou de l'agence.</li>
+            <li>Profils d'entreprise.</li>
+            <li>Autres informations rendues publiques intentionnellement par le titulaire du compte.</li>
+        </ul>
+        <p>Les utilisateurs ne doivent pas publier d'informations personnelles sensibles, de documents confidentiels ou d'informations appartenant à une autre personne sans l'autorisation appropriée.</p>
+        <p>Une fois les informations publiées publiquement, des tiers peuvent les copier, les enregistrer ou les redistribuer de manière indépendante.</p>
+        <p>Nous ne pouvons pas garantir la suppression des copies détenues par des tiers hors de notre contrôle.</p>
+
+        <h2>17. Traitement des données pour le compte des clients</h2>
+        <p>Les agents immobiliers, courtiers, agences et autres clients commerciaux peuvent utiliser Easy Listings pour collecter, organiser et gérer les informations personnelles de leurs propres clients et prospects.</p>
+        <p>Dans ces situations :</p>
+        <ul>
+            <li>Le client détermine les finalités pour lesquelles les informations sont collectées.</li>
+            <li>Le client est responsable de fournir les avis de confidentialité appropriés et d'obtenir le consentement requis.</li>
+            <li>Le client est responsable de s'assurer qu'il dispose d'une base légale pour collecter et traiter les informations.</li>
+            <li>Easy Listings traite les informations conformément à ses obligations contractuelles et aux instructions autorisées.</li>
+            <li>Easy Listings peut utiliser des fournisseurs de services autorisés pour soutenir la fourniture de ses Services.</li>
+        </ul>
+        <p>Les clients commerciaux sont responsables de leurs propres obligations de conformité concernant les informations personnelles qu'ils collectent via la plateforme.</p>
+        <p>Lorsque cela est requis, Easy Listings peut conclure des Accords de Traitement des Données distincts avec ses clients commerciaux.</p>
+
+        <h2>18. Traitement automatisé et intelligence artificielle</h2>
+        <p>Certaines fonctionnalités d'Easy Listings peuvent utiliser des technologies automatisées pour soutenir la fonctionnalité de la plateforme, l'organisation du contenu, les recommandations, l'analyse ou d'autres services demandés.</p>
+        <p>Lorsque le traitement automatisé est utilisé, nous traiterons les informations pertinentes conformément à la législation applicable en matière de vie privée.</p>
+        <p>Nous n'avons pas l'intention de prendre des décisions produisant des effets juridiques ou d'importance similaire uniquement par un traitement automatisé sans les garanties requises par la loi applicable.</p>
+        <p>Le cas échéant, les personnes peuvent demander des informations sur le traitement automatisé pertinent et exercer leurs droits en vertu de la législation applicable.</p>
+
+        <h2>19. Modifications de la présente Politique de Confidentialité</h2>
+        <p>Nous pouvons mettre à jour la présente Politique de Confidentialité périodiquement pour refléter :</p>
+        <ul>
+            <li>Des modifications de nos Services.</li>
+            <li>De nouvelles intégrations et fonctionnalités.</li>
+            <li>Des modifications de nos activités de traitement des données.</li>
+            <li>De nouvelles exigences légales ou réglementaires.</li>
+            <li>Des modifications de nos opérations commerciales.</li>
+        </ul>
+        <p>Lorsque nous apportons des modifications, nous mettrons à jour la date de « Dernière mise à jour » affichée au début de cette politique.</p>
+        <p>Lorsque la loi applicable l'exige, nous fournirons un avis supplémentaire ou obtiendrons un consentement renouvelé avant de mettre en œuvre des modifications importantes.</p>
+        <p>Nous encourageons les utilisateurs à consulter cette page périodiquement.</p>
+
+        <h2>20. Droit applicable et juridiction</h2>
+        <p>La présente Politique de Confidentialité est destinée à fonctionner conformément aux lois applicables en matière de vie privée et de protection des données dans les juridictions où Easy Listings opère et où se trouvent ses utilisateurs.</p>
+        <p>Pour les questions régies par la loi de la République Dominicaine, les dispositions pertinentes de la Constitution de la République Dominicaine, la Loi n° 172-13 et d'autres législations applicables s'appliqueront.</p>
+        <p>Rien dans la présente Politique de Confidentialité n'a pour but d'exclure, de restreindre ou de renoncer à des droits obligatoires en matière de vie privée ou à des protections des consommateurs que les personnes peuvent avoir en vertu des lois qui leur sont applicables.</p>
+        <p>Lorsque la législation locale obligatoire offre une protection plus étendue, cette législation prévaudra dans la mesure requise.</p>
+
+        <h2>21. Informations de contact</h2>
+        <p>Pour toute question, préoccupation, plainte ou demande concernant la présente Politique de Confidentialité ou le traitement des informations personnelles, contactez-nous :</p>
+        <div class="contact-info">
+            <p><strong>Easy Listings</strong></p>
+            <p><strong>Société exploitante :</strong> Easy Listings</p>
+            <p><strong>Adresse :</strong> République Dominicaine</p>
+            <p><strong>Pays :</strong> République Dominicaine</p>
+            <p><strong>E-mail :</strong> <a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+            <p><strong>Site web :</strong> <a href="https://easylistings.website" target="_blank" rel="noopener">https://easylistings.website</a></p>
+        </div>
+        <p>Nous examinerons les communications relatives à la vie privée et répondrons conformément aux exigences légales applicables.</p>
+
+        <p style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--muted); text-align: center;">
+            © 2026 Easy Listings. Tous droits réservés.
+        </p>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div class="flex flex-col gap-2 md:col-span-3">
+                <div class="flex items-center gap-2 text-white font-bold tracking-tight text-lg">
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo" class="w-8 h-8 object-contain rounded-lg">
+                    EasyListings
+                </div>
+                <div class="text-gray-300 text-sm mt-2">
+                    Affichez vos biens. Affirmez votre marque.
+                </div>
+
+                <div class="pt-2 flex flex-col items-start">
+                    <img src="https://ik.imagekit.io/bebell/Badge/google-partner-badge-pink.svg" class="self-start block h-12 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Google Partner Badge">
+                    <p class="text-[10px] text-slate-500 mt-4 mb-2 uppercase tracking-widest font-bold">Traitement des paiements sécurisé</p>
+                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/ba7caa40fbb46e4528aaae8b0128896c5e8ff915.png" class="self-start block h-5 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Secure PayPal Payments">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">Produit</div>
+                    <a href="https://easylistings.website/" class="footer-link">Accueil</a>
+                    <a href="https://easylistings.website/about-us" class="footer-link">À propos</a>
+                    <a href="https://easylistings.website/pricing" class="footer-link">Tarifs</a>
+                    <a href="https://easylistings.website/p/terms" class="footer-link">Conditions d'utilisation</a>
+                    <a href="/francais/confidentialite" class="footer-link">Confidentialité</a>
+                    <a href="https://easylistings.website/contact" class="footer-link">Contact</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">Communauté</div>
+                    <a href="https://ayuda.easylistings.website" class="footer-link">Centre d'aide</a>
+                    <a href="https://afiliados.easylistings.website" class="footer-link">Affiliés</a>
+                    <a href="https://easylistings.website/blog" class="footer-link">Blog</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">Fonctionnalités</div>
+                    <a href="https://easylistings.website/funciones/resumen" class="footer-link">Analytique</a>
+                    <a href="https://easylistings.website/funciones/catalogo" class="footer-link">Catalogue</a>
+                    <a href="https://easylistings.website/funciones/pipeline" class="footer-link">Pipeline</a>
+                    <a href="https://easylistings.website/funciones/contactos" class="footer-link">Contacts</a>
+                    <a href="https://easylistings.website/funciones/idiomas" class="footer-link">Multilingue</a>
+                    <a href="https://easylistings.website/funciones/seo" class="footer-link">Domaine + SEO</a>
+                    <a href="https://easylistings.website/funciones/bandeja" class="footer-link">Boîte de réception</a>
+                    <a href="https://easylistings.website/funciones/asistencia-ia" class="footer-link">Assistance IA</a>
+                    <a href="https://easylistings.website/funciones/automatizaciones" class="footer-link">Automatisations</a>
+                    <a href="#" class="footer-link">Création de contenu</a>
+                    <a href="https://easylistings.website/funciones/widget-incrustado" class="footer-link">Widget intégré</a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end">
+                <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[var(--primary)] transition-colors group" style="background: var(--bg-alt);">
+                    <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h4 class="font-bold text-lg sm:text-xl md:text-base lg:text-xl" style="color: var(--text);">Assistance en ligne</h4>
+                            <span class="text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider" style="background: rgba(223,23,131,0.12); color: var(--primary); border: 1px solid rgba(223,23,131,0.3);">24/7</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug" style="color: var(--text);">Contactez-nous si vous avez des questions. Notre équipe est là pour vous aider.</p>
+                        <button onclick="window.open('https://easylistings.website/support', '_blank')" class="bg-[#df1783] hover:bg-[#c0146f] text-white text-xs sm:text-sm md:text-[11px] lg:text-sm font-semibold py-2 px-3 md:py-1.5 md:px-2.5 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#df1783] shadow-sm w-fit">
+                            <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white"></i>
+                            <span>Écrivez-nous</span>
+                        </button>
+                    </div>
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pink-support-agent.webp" alt="24/7 Support" class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity" />
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="border-top: 1px solid var(--text-light); color: var(--text-light);">
+            <div class="flex items-center gap-2">
+                <span>Conçu en 🇩🇴 par Bebell Digital Solutions.</span>
+            </div>
+            <div>Copyright © 2026 EasyListings • Tous droits réservés.</div>
+        </div>
+    </footer>
+
+    <button id="backToTopBtn" aria-label="Retour en haut">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            const topMenuBar = document.getElementById('topMenuBar');
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            function updateTopMenu() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (topMenuBar) {
+                    if (scrollTop > 50) topMenuBar.classList.add('full-width');
+                    else topMenuBar.classList.remove('full-width');
+                }
+                if (backToTopBtn) {
+                    if (scrollTop > 300) backToTopBtn.classList.add('show');
+                    else backToTopBtn.classList.remove('show');
+                }
+            }
+            window.addEventListener('scroll', updateTopMenu, { passive: true });
+            updateTopMenu();
+
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
+
+            const funcionesNavItem = document.getElementById('funcionesNavItem');
+            const funcionesToggle = document.getElementById('funcionesToggle');
+
+            function closeSubmenu() {
+                if (!funcionesNavItem || !funcionesToggle) return;
+                funcionesNavItem.classList.remove('open');
+                funcionesToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            if (funcionesNavItem && funcionesToggle) {
+                funcionesToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isOpen = funcionesNavItem.classList.toggle('open');
+                    funcionesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!funcionesNavItem.contains(e.target)) closeSubmenu();
+                });
+
+                document.querySelectorAll('.submenu-link').forEach(link => {
+                    link.addEventListener('click', closeSubmenu);
+                });
+            }
+
+            const langDropdown = document.getElementById('langDropdown');
+            const langTrigger = document.getElementById('langTrigger');
+
+            function toggleLangDropdown(open) {
+                if (!langDropdown || !langTrigger) return;
+                const willOpen = open ?? !langDropdown.classList.contains('open');
+                langDropdown.classList.toggle('open', willOpen);
+                langTrigger.setAttribute('aria-expanded', String(willOpen));
+            }
+
+            if (langTrigger) {
+                langTrigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleLangDropdown();
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (langDropdown && !langDropdown.contains(e.target)) toggleLangDropdown(false);
+            });
+
+            const path = window.location.pathname;
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(opt => {
+                const href = opt.getAttribute('href');
+                const li = opt.closest('li');
+                if (href && path.startsWith(href.split('/').slice(0, 2).join('/'))) {
+                    li.setAttribute('aria-selected', 'true');
+                    document.getElementById('currentFlag').textContent = opt.getAttribute('data-flag');
+                    document.getElementById('currentCode').textContent = opt.getAttribute('data-code');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeSubmenu();
+                    if (langDropdown && langDropdown.classList.contains('open')) {
+                        toggleLangDropdown(false);
+                    }
+                }
+            });
+
+            if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                gsap.utils.toArray('.privacy-content h2').forEach((el) => {
+                    gsap.from(el, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
