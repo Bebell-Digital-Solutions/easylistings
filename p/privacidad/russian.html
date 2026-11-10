@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности | EasyListings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { brand: { blue: '#1A00FF', green: '#4BFF4B' } },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #DF1783;
+            --primary-hover: #c71575;
+            --primary-light: #fdeefa;
+            --secondary: #2d3748;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #FAF8F5;
+            --bg-alt: #F2EFE9;
+            --card-bg: #FFFFFF;
+            --fg: #0E0E10;
+            --muted: #5C5C63;
+            --border: #E5E1DA;
+            --shadow-sm: 0 4px 20px -2px rgba(14, 14, 16, 0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(14, 14, 16, 0.12);
+        }
+        html { box-sizing: border-box; overflow-x: hidden; scroll-behavior: smooth; }
+        *, *:before, *:after { box-sizing: inherit; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+        .top-menu-bar {
+            position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 2rem); max-width: 1200px; z-index: 1100;
+            background-color: var(--card-bg); box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border); border-radius: 12px;
+            padding: 0 1rem; transition: all 0.3s ease-in-out;
+        }
+        .top-menu-bar.full-width {
+            width: 100%; max-width: 100%; left: 0; transform: translateX(0);
+            border-radius: 0; border-left: none; border-right: none;
+            padding: 0 1.5rem; top: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .top-menu-content {
+            height: 70px; display: flex; align-items: center;
+            justify-content: space-between; gap: 1rem;
+        }
+        .logo-container { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        #appLogo { height: 40px; width: 40px; object-fit: cover; border-radius: 8px; }
+        #appBrandNameDisplay { font-size: 1.5rem; font-weight: 900; color: var(--text); white-space: nowrap; }
+        .brand-accent { color: #df1783; }
+        .top-menu-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        .nav-menu { display: flex; align-items: center; gap: 0.25rem; margin: 0 auto; }
+        .nav-item { position: relative; }
+        .nav-link {
+            display: flex; align-items: center; gap: 0.35rem;
+            padding: 0.55rem 1rem; font-size: 0.95rem; font-weight: 600;
+            color: var(--text); text-decoration: none; border-radius: 8px;
+            transition: background 0.2s, color 0.2s; white-space: nowrap;
+            cursor: pointer; border: none; background: transparent;
+            font-family: inherit; line-height: 1;
+        }
+        .nav-link:hover { background: var(--bg); color: var(--primary); }
+        .nav-item.open .nav-link { background: var(--bg); color: var(--primary); }
+        .nav-link .chevron { width: 14px; height: 14px; transition: transform 0.25s ease; opacity: 0.6; }
+        .nav-item.open .nav-link .chevron { transform: rotate(180deg); }
+        .submenu {
+            position: absolute; top: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%) translateY(-6px); min-width: 250px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+            padding: 0.5rem; opacity: 0; visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1200; display: flex; flex-direction: column; gap: 0.15rem;
+        }
+        .submenu::before {
+            content: ''; position: absolute; top: -6px; left: 50%;
+            transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px;
+            background: var(--card-bg); border-left: 1px solid var(--border);
+            border-top: 1px solid var(--border); border-radius: 3px 0 0 0;
+        }
+        .nav-item.open .submenu {
+            opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+        }
+        .submenu-link {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.65rem 0.9rem; font-size: 0.875rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: 8px;
+            transition: background 0.2s, color 0.2s; white-space: nowrap;
+        }
+        .submenu-link i { width: 12px; text-align: center; color: #df1783; transition: color 0.2s; flex-shrink: 0; }
+        .submenu-link:hover { background: var(--primary-light); color: var(--primary); }
+        .submenu-link:hover i { color: var(--primary); }
+        .primary-btn {
+            background-color: var(--primary); color: white; transition: all 0.3s ease;
+            padding: 12px 22px; display: inline-block; text-decoration: none;
+            border-radius: 12px; font-weight: 600; cursor: pointer;
+            border: none; font-family: inherit;
+        }
+        .primary-btn:hover {
+            background-color: var(--primary-hover); transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+        .fab {
+            width: 40px; height: 40px; border-radius: 50%;
+            background-color: var(--bg); color: var(--text);
+            border: 1px solid var(--border);
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem;
+        }
+        .fab:hover { background-color: var(--border); transform: scale(1.1); }
+        .lang-dropdown { position: relative; display: inline-block; font-family: system-ui, -apple-system, sans-serif; }
+        .lang-trigger {
+            display: flex; align-items: center; gap: 8px; padding: 8px 14px;
+            background: #fff; border: 1px solid #d0d5dd; border-radius: 8px;
+            cursor: pointer; font-size: 14px; font-weight: 600; color: #1d2939;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .lang-trigger:hover { border-color: #98a2b3; }
+        .lang-trigger .flag { font-size: 18px; line-height: 1; }
+        .lang-trigger .chevron { margin-left: 4px; width: 14px; height: 14px; color: #667085; transition: transform 0.2s ease; }
+        .lang-dropdown.open .chevron { transform: rotate(180deg); }
+        .lang-menu {
+            position: absolute; top: calc(100% + 6px); left: 0; min-width: 100%;
+            padding: 6px; margin: 0; list-style: none; background: #fff;
+            border: 1px solid #d0d5dd; border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+            opacity: 0; visibility: hidden; transform: translateY(-6px);
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            z-index: 100;
+        }
+        .lang-dropdown.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 8px; width: 100%;
+            padding: 8px 12px; background: none; border: none; border-radius: 6px;
+            cursor: pointer; font-size: 14px; font-weight: 600; color: #1d2939;
+            text-align: left; transition: background 0.1s ease; text-decoration: none;
+        }
+        .lang-option:hover { background: #f2f4f7; }
+        .lang-option .flag { font-size: 18px; line-height: 1; }
+        .site-footer {
+            position: relative; z-index: 10; padding: 6rem 1.5rem 3rem 1.5rem;
+            margin-top: auto; background: var(--secondary);
+            border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;
+            color: var(--text); transition: background 0.3s, color 0.3s;
+        }
+        .footer-heading {
+            color: #a0aec0 !important; font-size: 0.75rem; letter-spacing: 0.1em;
+            text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .footer-link {
+            color: white !important; text-decoration: none; font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-link:hover { color: var(--primary) !important; }
+        .footer-support-card {
+            background: var(--card-bg); border: 1px solid var(--primary);
+            border-radius: 1rem; padding: 1.5rem; position: relative;
+            overflow: hidden; box-shadow: var(--shadow-sm);
+            transition: border-color 0.3s, background 0.3s;
+            width: 100%; max-width: 360px; aspect-ratio: 3/2;
+        }
+        .privacy-content {
+            padding: 8rem 1.5rem 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .privacy-content h1 {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            color: var(--fg);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .privacy-content .meta {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .privacy-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+        .privacy-content h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--fg);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .privacy-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .privacy-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.25rem;
+        }
+        .privacy-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .privacy-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0.25rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .privacy-content .highlight-box {
+            background: var(--bg-alt);
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+        .privacy-content .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text);
+        }
+        .privacy-content a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .privacy-content a:hover {
+            color: var(--primary-hover);
+        }
+        .privacy-content .contact-info {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+        .privacy-content .contact-info p {
+            margin-bottom: 0.35rem;
+            color: var(--text);
+        }
+        .privacy-content .contact-info strong {
+            color: var(--fg);
+        }
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+        }
+        @media (max-width: 768px) {
+            .privacy-content { padding: 6rem 1rem 3rem 1rem; }
+            .privacy-content h2 { font-size: 1.3rem; }
+        }
+        #backToTopBtn {
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            background-color: var(--primary); color: white; border: none; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1000; opacity: 0; visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+        }
+        #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTopBtn:hover { background-color: var(--primary-hover); transform: translateY(-3px) scale(1.05); }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#DF1783] selection:text-white">
+
+    <!-- ================= TOP MENU BAR ================= -->
+    <div class="top-menu-bar" id="topMenuBar">
+        <div class="top-menu-content">
+            <div class="logo-container">
+                <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Easy Listings Logo">
+                <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+            </div>
+
+            <nav class="nav-menu" aria-label="Основная навигация">
+                <div class="nav-item">
+                    <a href="https://easylistings.website/#acerca" class="nav-link">О нас</a>
+                </div>
+
+                <div class="nav-item" id="funcionesNavItem">
+                    <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
+                        <span>Возможности</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+                    <div class="submenu" role="menu" aria-label="Подменю Возможности">
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="layout-grid"></i> <span>Каталог недвижимости</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="users"></i> <span>Сбор лидов</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="smartphone"></i> <span>Оптимизировано для мобильных</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="palette"></i> <span>Настройка бренда</span>
+                        </a>
+                        <a href="https://easylistings.website/#funciones" class="submenu-link" role="menuitem">
+                            <i data-lucide="bar-chart-3"></i> <span>Аналитика</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="https://easylistings.website/#pricing" class="nav-link">Тарифы</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="https://easylistings.website/contact" class="nav-link">Контакты</a>
+                </div>
+            </nav>
+
+            <div class="top-menu-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="flag" id="currentFlag">🇷🇺</span>
+                        <span id="currentCode">RU</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+
+                    <ul class="lang-menu" id="langMenu" role="listbox" aria-label="Выбрать язык">
+                        <li role="option" aria-selected="false">
+                            <a href="/privacidad" class="lang-option" data-flag="🇩🇴" data-code="ES" data-lang="es">
+                                <span class="flag">🇩🇴</span> ES
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/english" class="lang-option" data-flag="🇺🇸" data-code="EN" data-lang="en">
+                                <span class="flag">🇺🇸</span> EN
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="true">
+                            <a href="/francais" class="lang-option" data-flag="🇫🇷" data-code="FR" data-lang="fr">
+                                <span class="flag">🇫🇷</span> FR
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/italiano" class="lang-option" data-flag="🇮🇹" data-code="IT" data-lang="it">
+                                <span class="flag">🇮🇹</span> IT
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/deutsch" class="lang-option" data-flag="🇩🇪" data-code="DE" data-lang="de">
+                                <span class="flag">🇩🇪</span> DE
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/russkiy" class="lang-option" data-flag="🇷🇺" data-code="RU" data-lang="ru">
+                                <span class="flag">🇷🇺</span> RU
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/zhongwen" class="lang-option" data-flag="🇨🇳" data-code="ZH" data-lang="zh">
+                                <span class="flag">🇨🇳</span> ZH
+                            </a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="/nihongo" class="lang-option" data-flag="🇯🇵" data-code="JA" data-lang="ja">
+                                <span class="flag">🇯🇵</span> JA
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="https://app.easylistings.website" class="primary-btn hidden sm:inline-block" id="desktopCta">Войти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PRIVACY POLICY CONTENT ================= -->
+    <main class="privacy-content">
+        <h1>Политика конфиденциальности</h1>
+        <div class="meta">
+            <p><strong>Easy Listings</strong></p>
+            <p><strong>Дата вступления в силу:</strong> 10 ноября 2026 г. &nbsp;|&nbsp; <strong>Последнее обновление:</strong> 10 ноября 2026 г.</p>
+        </div>
+
+        <h2>1. Введение</h2>
+        <p>Добро пожаловать в Easy Listings.</p>
+        <p>Easy Listings («Easy Listings», «мы», «наш» или «нас») уважает вашу конфиденциальность и обязуется защищать персональные данные лиц, которые получают доступ к нашим веб-сайтам, приложениям, программному обеспечению, страницам объявлений о недвижимости, интеграциям и связанным с ними услугам (совместно именуемым «Услуги»), или используют их.</p>
+        <p>Настоящая Политика конфиденциальности объясняет, как мы собираем, получаем, используем, храним, обрабатываем, раскрываем и защищаем персональные данные, когда вы взаимодействуете с Easy Listings.</p>
+        <p>Настоящая политика применяется к:</p>
+        <ul>
+            <li>Посетителям, просматривающим наши веб-сайты.</li>
+            <li>Зарегистрированным пользователям и владельцам учетных записей.</li>
+            <li>Агентам по недвижимости, брокерам и агентствам.</li>
+            <li>Владельцам недвижимости, продавцам и арендодателям.</li>
+            <li>Потенциальным покупателям, арендаторам и другим лицам, запрашивающим информацию о недвижимости.</li>
+            <li>Лицам, которые отправляют информацию через формы объявлений о недвижимости.</li>
+            <li>Лицам, которые подключают сторонние сервисы или интеграции к нашей платформе.</li>
+        </ul>
+        <p>Мы обрабатываем персональные данные в соответствии с применимым законодательством о конфиденциальности и защите данных, включая Конституцию Доминиканской Республики, Закон № 172-13 и, где применимо, международные нормативы о конфиденциальности.</p>
+        <p>Получая доступ к нашим Услугам или используя их, вы подтверждаете, что прочитали настоящую Политику конфиденциальности.</p>
+
+        <h2>2. Кто мы</h2>
+        <p>Easy Listings — это программная платформа, предназначенная для того, чтобы помогать профессионалам в сфере недвижимости создавать, управлять, публиковать и распространять объявления о недвижимости, а также управлять взаимодействием с потенциальными клиентами.</p>
+        <div class="highlight-box">
+            <p><strong>Платформа:</strong> Easy Listings<br>
+            <strong>Операционная компания:</strong> Easy Listings<br>
+            <strong>Юридический адрес:</strong> Доминиканская Республика<br>
+            <strong>Страна регистрации:</strong> Доминиканская Республика<br>
+            <strong>Веб-сайт:</strong> <a href="https://easylistings.website" target="_blank" rel="noopener">https://easylistings.website</a><br>
+            <strong>Контакт по вопросам конфиденциальности:</strong> <a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+        </div>
+        <p>По вопросам, запросам или жалобам, связанным с конфиденциальностью, вы можете связаться с нами, используя приведенную выше информацию.</p>
+        <p>В целях применимого законодательства о защите данных Easy Listings может выступать как:</p>
+        <ul>
+            <li>Контролер данных, когда определяет, почему и как обрабатываются персональные данные для его собственной коммерческой деятельности.</li>
+            <li>Обработчик данных или поставщик услуг, когда обрабатывает персональные данные от имени агентов по недвижимости, брокеров, агентств или других деловых клиентов, использующих нашу платформу.</li>
+        </ul>
+        <p>Когда агент, брокер или агентство собирает информацию от потенциальных покупателей или арендаторов через свои объявления о недвижимости, этот специалист или компания могут быть контролером этой информации. Easy Listings, как правило, предоставляет техническую инфраструктуру для обработки этой информации от их имени.</p>
+
+        <h2>3. Персональные данные, которые мы собираем</h2>
+        <p>В зависимости от того, как вы взаимодействуете с нашими Услугами, мы можем собирать следующие категории информации.</p>
+
+        <h3>3.1 Информация об учетной записи и идентификационные данные</h3>
+        <p>Когда вы регистрируетесь или создаете учетную запись, мы можем собирать:</p>
+        <ul>
+            <li>Полное имя.</li>
+            <li>Адрес электронной почты.</li>
+            <li>Номер телефона.</li>
+            <li>Имя пользователя.</li>
+            <li>Учетные данные пароля, хранящиеся с использованием соответствующих мер безопасности.</li>
+            <li>Название компании или агентства.</li>
+            <li>Профессиональная информация.</li>
+            <li>Настройки учетной записи.</li>
+            <li>Фотографии профиля или логотипы.</li>
+            <li>Роль и разрешения учетной записи.</li>
+        </ul>
+
+        <h3>3.2 Информация о недвижимости и объектах</h3>
+        <p>Когда пользователи создают или управляют объявлениями о недвижимости, мы можем собирать:</p>
+        <ul>
+            <li>Адреса и местоположения объектов недвижимости.</li>
+            <li>Описания объектов недвижимости.</li>
+            <li>Цены продажи и аренды.</li>
+            <li>Фотографии и видео объектов недвижимости.</li>
+            <li>Характеристики и спецификации объекта недвижимости.</li>
+            <li>Информацию о праве собственности или объявлении, предоставленную пользователями.</li>
+            <li>Доступность и статус объекта недвижимости.</li>
+            <li>Контактные данные, связанные с объявлениями.</li>
+            <li>Другую информацию, добровольно предоставленную пользователями.</li>
+        </ul>
+        <p>Информация о недвижимости может отображаться публично, когда пользователь публикует объявление.</p>
+        <p>Пользователи несут ответственность за обеспечение наличия у них необходимых прав и разрешений для публикации информации о недвижимости и связанных с ней материалов.</p>
+
+        <h3>3.3 Информация о потенциальных клиентах и лидах</h3>
+        <p>Когда посетители отправляют запросы через объявления о недвижимости, контактные формы или другие функции платформы, мы можем собирать:</p>
+        <ul>
+            <li>Полное имя.</li>
+            <li>Адрес электронной почты.</li>
+            <li>Номер телефона.</li>
+            <li>Страна и местоположение.</li>
+            <li>Предпочтительный способ связи.</li>
+            <li>Предпочтения по недвижимости.</li>
+            <li>Бюджет и предпочтения по покупке или аренде.</li>
+            <li>Сообщения и запросы.</li>
+            <li>Другую информацию, добровольно отправленную через формы.</li>
+        </ul>
+        <p>Эта информация может быть предоставлена профессионалу в сфере недвижимости или компании, ответственной за соответствующее объявление о недвижимости.</p>
+
+        <h3>3.4 Информация для проверки и Know Your Customer</h3>
+        <p>Некоторые пользователи или компании в сфере недвижимости могут использовать функции, предназначенные для сбора информации о проверке клиента или Know Your Customer (KYC).</p>
+        <p>Если такие функции доступны и активированы, информация может включать идентификационные данные, подтверждающие документы и другую информацию, добровольно предоставленную для целей проверки или соблюдения законодательства.</p>
+        <p>Конфиденциальные идентификационные документы будут собираться только в том случае, если соответствующая функция включена и существует законная цель.</p>
+        <p>Пользователи, собирающие эту информацию, несут ответственность за обеспечение наличия у них надлежащей правовой основы и предоставление требуемых уведомлений о конфиденциальности.</p>
+
+        <h3>3.5 Информация о платежах и подписках</h3>
+        <p>Когда вы приобретаете подписку или платную услугу, мы можем собирать:</p>
+        <ul>
+            <li>План подписки.</li>
+            <li>Данные для выставления счетов.</li>
+            <li>Идентификаторы транзакций.</li>
+            <li>Статус платежа.</li>
+            <li>Информацию о счете-фактуре.</li>
+            <li>Историю выставления счетов.</li>
+        </ul>
+        <p>Платежи могут обрабатываться независимыми сторонними поставщиками платежных услуг.</p>
+        <p>Easy Listings не намерена хранить полные номера платежных карт или коды безопасности на своих собственных серверах, когда обработка платежей осуществляется внешним поставщиком.</p>
+        <p>Поставщики платежных услуг обрабатывают платежную информацию в соответствии со своими собственными политиками конфиденциальности и применимыми обязательствами.</p>
+
+        <h3>3.6 Техническая информация и информация об устройстве</h3>
+        <p>Когда вы получаете доступ к нашим Услугам, мы можем автоматически собирать:</p>
+        <ul>
+            <li>IP-адрес (адрес Интернет-протокола).</li>
+            <li>Тип и версию браузера.</li>
+            <li>Тип устройства и операционную систему.</li>
+            <li>Языковые предпочтения.</li>
+            <li>Приблизительное географическое местоположение, полученное из технической информации.</li>
+            <li>Ссылающийся веб-сайт.</li>
+            <li>Посещенные страницы.</li>
+            <li>Отметки времени доступа.</li>
+            <li>Информацию о сеансе.</li>
+            <li>Диагностическую информацию и информацию об ошибках.</li>
+            <li>Файлы cookie и аналогичные технологии.</li>
+        </ul>
+
+        <h3>3.7 Информация аутентификации третьих сторон</h3>
+        <p>Если вы решите подключиться или пройти аутентификацию с использованием сторонних сервисов, таких как Google, Meta или Pinterest, мы можем получать информацию, которую вы разрешаете этим сервисам передавать нам.</p>
+        <p>В зависимости от интеграции это может включать:</p>
+        <ul>
+            <li>Идентификаторы учетной записи.</li>
+            <li>Имя.</li>
+            <li>Адрес электронной почты.</li>
+            <li>Информацию профиля.</li>
+            <li>Токены аутентификации.</li>
+            <li>Информацию об авторизованной учетной записи или компании.</li>
+            <li>Информацию, необходимую для выполнения запрошенной вами интеграции.</li>
+        </ul>
+        <p>Мы получаем доступ только к информации, разрешенной вашей авторизацией, разрешениями API соответствующего поставщика и его политиками для разработчиков.</p>
+
+        <h2>4. Как мы используем вашу информацию</h2>
+        <p>Мы используем персональные данные для законных деловых и операционных целей, включая:</p>
+        <ol style="padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.25rem;">
+            <li>Создание и управление учетными записями пользователей.</li>
+            <li>Предоставление доступа к Easy Listings.</li>
+            <li>Создание, публикацию и управление объявлениями о недвижимости.</li>
+            <li>Связывание потенциальных клиентов с профессионалами в сфере недвижимости.</li>
+            <li>Обработку запросов и сообщений.</li>
+            <li>Управление подписками и выставлением счетов.</li>
+            <li>Предоставление поддержки клиентов.</li>
+            <li>Аутентификацию пользователей и защиту учетных записей.</li>
+            <li>Подключение авторизованных сторонних интеграций.</li>
+            <li>Предоставление аналитики и мониторинг производительности платформы.</li>
+            <li>Выявление мошенничества, злоупотреблений и несанкционированной деятельности.</li>
+            <li>Поддержание функциональности платформы.</li>
+            <li>Улучшение наших продуктов и услуг.</li>
+            <li>Сообщение важных объявлений об услугах.</li>
+            <li>Отправку рекламных сообщений, где это разрешено законом и, когда требуется, с вашего согласия.</li>
+            <li>Соблюдение юридических обязательств.</li>
+            <li>Установление, осуществление или защиту правовых требований.</li>
+        </ol>
+        <p>Мы не будем использовать персональные данные для целей, несовместимых с раскрытыми вам целями, если это не разрешено или не требуется применимым законодательством.</p>
+
+        <h2>5. Правовая основа обработки</h2>
+        <p>Если это требуется применимым законодательством, мы обрабатываем персональные данные на основании одного или нескольких следующих правовых оснований:</p>
+        <ul>
+            <li><strong>Согласие:</strong> Вы дали разрешение на конкретную деятельность по обработке.</li>
+            <li><strong>Договорная необходимость:</strong> Обработка необходима для предоставления запрошенных вами Услуг или исполнения договора с вами.</li>
+            <li><strong>Законные интересы:</strong> Обработка необходима для законных деловых целей при условии, что ваши права и интересы не превалируют над этими интересами.</li>
+            <li><strong>Юридические обязательства:</strong> Обработка необходима для соблюдения применимых законов или законных запросов.</li>
+            <li><strong>Жизненно важные интересы или общественный интерес:</strong> Если это признано и применимо в соответствии с соответствующим законодательством.</li>
+        </ul>
+        <p>Вы можете отозвать согласие, если обработка основана на согласии. Отзыв не влияет на законность обработки, осуществленной до отзыва.</p>
+
+        <h2>6. Сторонние сервисы и передача данных</h2>
+        <p>Мы можем передавать персональные данные третьим лицам, когда это необходимо для работы наших Услуг, выполнения ваших запросов или соблюдения применимого законодательства.</p>
+        <p>Эти стороны могут включать:</p>
+
+        <h3>6.1 Поставщики технологий и хостинга</h3>
+        <p>Поставщики, которые поддерживают нашу инфраструктуру, хостинг, базы данных, хранение, безопасность, коммуникации и программные операции.</p>
+
+        <h3>6.2 Поставщики платежных услуг</h3>
+        <p>Третьи компании, ответственные за обработку платежей, подписок и транзакций по выставлению счетов.</p>
+
+        <h3>6.3 Поставщики аутентификации и интеграции</h3>
+        <p>Такие сервисы, как:</p>
+        <ul>
+            <li>Google.</li>
+            <li>Meta.</li>
+            <li>Pinterest.</li>
+            <li>Другие авторизованные поставщики социальных сетей, аналитики и интеграций.</li>
+        </ul>
+        <p>Когда вы авторизуете интеграцию, информация может передаваться соответствующему поставщику для выполнения запрошенной вами функциональности.</p>
+
+        <h3>6.4 Профессионалы и компании в сфере недвижимости</h3>
+        <p>Информация, отправленная через объявление о недвижимости или форму запроса, может быть передана агенту, брокеру, агентству, владельцу недвижимости или другому авторизованному получателю, ответственному за это объявление.</p>
+        <p>Easy Listings не контролирует, как независимые профессионалы в сфере недвижимости используют информацию после ее получения. Эти получатели несут ответственность за свои собственные практики конфиденциальности и применимые юридические обязательства.</p>
+
+        <h3>6.5 Профессиональные и юридические услуги</h3>
+        <p>Мы можем раскрывать информацию юристам, бухгалтерам, аудиторам, регулирующим органам, правоохранительным органам или другим сторонам, когда это разумно необходимо для соблюдения юридических обязательств, защиты наших прав или рассмотрения правовых требований.</p>
+
+        <h3>6.6 Передача бизнеса</h3>
+        <p>Персональные данные могут быть переданы в рамках слияния, поглощения, реструктуризации, продажи активов или другой коммерческой сделки при условии соблюдения применимых юридических требований.</p>
+        <p>Мы не разрешаем третьим лицам использовать персональные данные, полученные через наши Услуги, для несвязанных целей без надлежащей правовой основы.</p>
+
+        <h2>7. Данные пользователей Google и ограниченное использование</h2>
+        <p>Когда Easy Listings интегрируется с сервисами или API Google, наш доступ к данным пользователей Google и их использование будут соответствовать применимой Политике использования данных пользователей API-сервисов Google, включая ее требования об ограниченном использовании.</p>
+        <p>В частности:</p>
+        <ul>
+            <li>Мы получаем доступ только к тем данным пользователей Google, которые необходимы для предоставления авторизованной вами функциональности.</li>
+            <li>Мы используем данные пользователей Google только для целей, раскрытых вам и разрешенных применимыми политиками Google.</li>
+            <li>Мы не используем данные пользователей Google в рекламных целях.</li>
+            <li>Мы не продаем данные пользователей Google.</li>
+            <li>Мы не используем данные пользователей Google для разработки или улучшения обобщенных моделей искусственного интеллекта или машинного обучения.</li>
+            <li>Мы не передаем данные пользователей Google третьим лицам, за исключением случаев, разрешенных применимыми политиками Google, например, когда это необходимо для предоставления или улучшения функций для пользователей, соблюдения применимого законодательства или защиты от угроз безопасности.</li>
+            <li>Мы ограничиваем доступ к данным пользователей Google авторизованным сотрудникам и поставщикам услуг, которым необходим доступ для разрешенных целей.</li>
+        </ul>
+        <p>Когда это требуется, мы предоставим дополнительные раскрытия и получим соответствующую авторизацию перед доступом к данным пользователей Google.</p>
+
+        <h2>8. Международная передача данных</h2>
+        <p>Easy Listings может использовать инфраструктуру, поставщиков хостинга и технологические услуги, расположенные в разных странах.</p>
+        <p>Следовательно, ваши персональные данные могут передаваться, храниться или обрабатываться за пределами страны вашего проживания.</p>
+        <p>Международная передача может включать страны с иными законами о защите данных, чем в вашей юрисдикции.</p>
+        <p>Где это применимо, мы внедрим соответствующие гарантии, которые могут включать:</p>
+        <ul>
+            <li>Договорные обязательства по защите данных.</li>
+            <li>Стандартные договорные условия.</li>
+            <li>Соответствующие меры безопасности.</li>
+            <li>Другие законные механизмы международной передачи.</li>
+        </ul>
+        <p>Мы будем обрабатывать международные передачи в соответствии с применимым законодательством о защите данных.</p>
+
+        <h2>9. Файлы cookie и технологии отслеживания</h2>
+        <p>Наши Услуги могут использовать файлы cookie, пиксели, локальное хранилище и аналогичные технологии.</p>
+        <p>Эти технологии могут использоваться для:</p>
+        <ul>
+            <li>Поддержания сеансов пользователей.</li>
+            <li>Запоминания предпочтений.</li>
+            <li>Аутентификации пользователей.</li>
+            <li>Улучшения производительности веб-сайта.</li>
+            <li>Понимания трафика веб-сайта.</li>
+            <li>Анализа использования платформы.</li>
+            <li>Измерения эффективности маркетинга.</li>
+            <li>Поддержки авторизованных рекламных интеграций и интеграций с социальными сетями.</li>
+        </ul>
+        <p>Файлы cookie могут быть классифицированы как:</p>
+        <ul>
+            <li><strong>Необходимые файлы cookie:</strong> Необходимы для аутентификации, безопасности и основных функций веб-сайта.</li>
+            <li><strong>Функциональные файлы cookie:</strong> Используются для запоминания предпочтений и настроек пользователя.</li>
+            <li><strong>Аналитические файлы cookie:</strong> Используются для понимания того, как посетители взаимодействуют с нашими Услугами.</li>
+            <li><strong>Маркетинговые файлы cookie:</strong> Используются для измерения рекламы, атрибуции и соответствующих маркетинговых мероприятий, где это разрешено.</li>
+        </ul>
+        <p>Если это требуется применимым законодательством, мы получим согласие перед размещением необязательных файлов cookie или участием в других видах отслеживания на основе согласия.</p>
+        <p>Вы можете управлять файлами cookie через настройки браузера и, где это доступно, через наши элементы управления предпочтениями файлов cookie.</p>
+        <p>Отключение некоторых файлов cookie может повлиять на функциональность некоторых Услуг.</p>
+
+        <h2>10. Хранение данных</h2>
+        <p>Мы храним персональные данные только в течение разумного периода, необходимого для выполнения целей, описанных в настоящей Политике конфиденциальности, при условии соблюдения применимых юридических требований.</p>
+        <p>Сроки хранения могут различаться в зависимости от типа информации и цели, для которой она была собрана.</p>
+        <p>Примеры включают:</p>
+        <ul>
+            <li><strong>Информация об учетной записи:</strong> Пока ваша учетная запись остается активной, и в течение разумного периода после этого, когда это необходимо для юридических, безопасности или административных целей.</li>
+            <li><strong>Объявления о недвижимости:</strong> Пока они опубликованы или поддерживаются владельцем учетной записи, с учетом применимых запросов на удаление и юридических обязательств.</li>
+            <li><strong>Запросы клиентов:</strong> В течение разумного периода, необходимого для соответствующей сделки с недвижимостью, отношений с клиентом или применимых требований к хранению.</li>
+            <li><strong>Записи о платежах:</strong> Как того требуют применимые правила бухгалтерского учета, налогообложения и финансов.</li>
+            <li><strong>Технические журналы:</strong> В целях безопасности, устранения неполадок и операционных целей.</li>
+            <li><strong>Данные интеграции с третьими сторонами:</strong> В течение времени, необходимого для предоставления авторизованной интеграции, или как того требуют политики соответствующего поставщика.</li>
+        </ul>
+        <p>Когда персональные данные больше не требуются, мы предпримем разумные шаги для их удаления, анонимизации или безопасного уничтожения.</p>
+        <p>Определенная информация может оставаться в зашифрованных резервных копиях в течение ограниченного периода или сохраняться, когда это требуется по закону.</p>
+
+        <h2>11. Ваши права на конфиденциальность</h2>
+        <p>В зависимости от вашей страны проживания и применимого законодательства вы можете иметь право:</p>
+        <ol style="padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.25rem;">
+            <li>Запросить подтверждение того, обрабатываем ли мы ваши персональные данные.</li>
+            <li>Запросить доступ к персональным данным, которые мы храним о вас.</li>
+            <li>Запросить исправление неточной или неполной информации.</li>
+            <li>Запросить удаление персональных данных с учетом применимых юридических исключений.</li>
+            <li>Запросить ограничение определенных видов обработки.</li>
+            <li>Возразить против определенных видов обработки.</li>
+            <li>Отозвать ранее предоставленное согласие.</li>
+            <li>Запросить копию ваших персональных данных в переносимом формате, где это применимо.</li>
+            <li>Отказаться от определенных видов рекламы, обмена или профилирования, где это требуется по закону.</li>
+            <li>Подать жалобу в компетентный орган по защите данных или регулирующий орган.</li>
+        </ol>
+        <p>Мы будем рассматривать и отвечать на запросы о конфиденциальности в соответствии с применимыми юридическими требованиями и сроками.</p>
+
+        <h3>11.1 Права на конфиденциальность в Доминиканской Республике</h3>
+        <p>Для лиц, защищенных законодательством Доминиканской Республики, мы признаем конституционные гарантии, установленные статьей 44 Конституции Доминиканской Республики, и права, предусмотренные Законом № 172-13.</p>
+        <p>Эти гарантии включают права, касающиеся:</p>
+        <ul>
+            <li>Личной конфиденциальности и неприкосновенности частной жизни.</li>
+            <li>Доступа к персональным данным, содержащимся в публичных или частных базах данных.</li>
+            <li>Знания об использовании и цели персональных данных.</li>
+            <li>Надлежащего обращения с персональными данными.</li>
+            <li>Исправления и применимых средств правовой защиты в отношении неточной или ненадлежащим образом обработанной информации.</li>
+        </ul>
+
+        <h3>11.2 Европейская экономическая зона и Соединенное Королевство</h3>
+        <p>Если применяется GDPR или GDPR Великобритании, лица могут осуществлять применимые права, включая доступ, исправление, удаление, ограничение, возражение, переносимость данных и отзыв согласия.</p>
+        <p>Лица также могут подавать жалобы в свой компетентный надзорный орган.</p>
+
+        <h3>11.3 Резиденты Калифорнии</h3>
+        <p>Если применяется Закон о конфиденциальности потребителей Калифорнии в редакции Закона о правах на конфиденциальность Калифорнии, имеющие право резиденты Калифорнии могут иметь право:</p>
+        <ul>
+            <li>Знать, какие категории персональных данных собираются.</li>
+            <li>Получать доступ к конкретным персональным данным.</li>
+            <li>Запрашивать удаление.</li>
+            <li>Запрашивать исправление.</li>
+            <li>Отказаться от продажи или обмена персональными данными, как это определено применимым законодательством.</li>
+            <li>Ограничивать определенные виды использования и раскрытия конфиденциальных персональных данных.</li>
+            <li>Получать равное обращение при осуществлении прав на конфиденциальность.</li>
+        </ul>
+        <p>Мы не будем дискриминировать лиц за осуществление прав, защищенных применимым законодательством о конфиденциальности.</p>
+
+        <h3>11.4 Другие международные юрисдикции</h3>
+        <p>Мы будем соблюдать дополнительные права на конфиденциальность, если это требуется применимым законодательством, включая бразильский Lei Geral de Proteção de Dados (LGPD), применимые федеральные и провинциальные законы Канады о конфиденциальности и другие соответствующие национальные или региональные нормативы о конфиденциальности.</p>
+
+        <h2>12. Как запросить доступ или удаление</h2>
+        <p>Вы можете запросить доступ, исправление или удаление ваших персональных данных, связавшись с:</p>
+        <div class="contact-info">
+            <p><strong>Электронная почта:</strong> <a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+        </div>
+        <p>Пожалуйста, укажите:</p>
+        <ul>
+            <li>Ваше полное имя.</li>
+            <li>Адрес электронной почты, связанный с вашей учетной записью или запросом.</li>
+            <li>Характер вашего запроса.</li>
+            <li>Достаточную информацию, чтобы помочь нам проверить вашу личность.</li>
+        </ul>
+        <p>Мы можем запросить дополнительную информацию, когда это разумно необходимо для проверки вашей личности и предотвращения несанкционированного раскрытия.</p>
+        <p>Если вы являетесь зарегистрированным пользователем, вы также можете связаться с администратором учетной записи или использовать доступные функции управления учетной записью для управления вашей информацией.</p>
+
+        <h3>12.1 Удаление сторонних учетных записей и интеграций</h3>
+        <p>Если вы подключили Google, Meta, Pinterest или другую стороннюю учетную запись к Easy Listings, вы можете отозвать соответствующую авторизацию через настройки соответствующей сторонней учетной записи.</p>
+        <p>Вы также можете запросить удаление связанной информации, связавшись с нами.</p>
+        <p>Отзыв сторонней авторизации не удаляет автоматически ранее собранную информацию. Вы должны подать запрос на удаление, где это применимо.</p>
+
+        <h3>12.2 Запросы на удаление от посетителей объявлений о недвижимости</h3>
+        <p>Посетители, которые отправляют информацию через формы запросов о недвижимости, могут запросить удаление своей информации, связавшись с нами.</p>
+        <p>Если независимый агент по недвижимости, брокер или агентство контролирует соответствующую информацию, мы можем переслать запрос этой компании или направить вас к ее контакту по вопросам конфиденциальности, в зависимости от обстоятельств.</p>
+        <p>Мы предпримем разумные шаги для помощи в запросах, касающихся информации, обрабатываемой от имени наших клиентов.</p>
+
+        <h2>13. Безопасность данных</h2>
+        <p>Мы применяем разумные технические, административные и организационные меры защиты, предназначенные для защиты персональных данных от:</p>
+        <ul>
+            <li>Несанкционированного доступа.</li>
+            <li>Случайного раскрытия.</li>
+            <li>Изменения.</li>
+            <li>Потери.</li>
+            <li>Уничтожения.</li>
+            <li>Несанкционированной обработки.</li>
+        </ul>
+        <p>В зависимости от характера информации и наших Услуг эти меры могут включать:</p>
+        <ul>
+            <li>Контроль доступа и разрешения учетной записи.</li>
+            <li>Безопасные методы аутентификации.</li>
+            <li>Шифрование, где это уместно.</li>
+            <li>Безопасный хостинг и инфраструктуру.</li>
+            <li>Мониторинг и регистрацию безопасности.</li>
+            <li>Процедуры резервного копирования.</li>
+            <li>Ограниченный административный доступ.</li>
+            <li>Внутренние процедуры безопасности.</li>
+        </ul>
+        <p>Ни одна передача через Интернет или система электронного хранения не может быть гарантирована как полностью безопасная.</p>
+        <p>Хотя мы принимаем разумные меры предосторожности, мы не можем гарантировать абсолютную безопасность.</p>
+        <p>В случае нарушения защиты персональных данных мы предпримем соответствующие шаги для расследования, смягчения последствий и предоставления уведомлений, если это требуется применимым законодательством.</p>
+
+        <h2>14. Конфиденциальность детей</h2>
+        <p>Easy Listings предназначена для взрослых и профессиональных пользователей.</p>
+        <p>Наши Услуги не предназначены для детей младше 13 лет, и мы сознательно не собираем персональные данные детей младше 13 лет без юридически действительной авторизации.</p>
+        <p>Если применимое законодательство устанавливает более высокий минимальный возраст или требует согласия родителей или опекунов, мы будем соблюдать эти требования.</p>
+        <p>Если мы узнаем, что персональные данные были собраны у ребенка в нарушение применимого законодательства, мы предпримем разумные шаги для решения ситуации, включая удаление, где это уместно.</p>
+
+        <h2>15. Веб-сайты и услуги третьих сторон</h2>
+        <p>Наши Услуги могут содержать ссылки на веб-сайты, платформы, приложения и услуги третьих сторон.</p>
+        <p>Эти услуги могут иметь независимые политики конфиденциальности и практики обработки данных.</p>
+        <p>Easy Listings не несет ответственности за практики конфиденциальности, содержание или безопасность внешних услуг, которыми мы не управляем.</p>
+        <p>Мы призываем пользователей ознакомиться с политиками конфиденциальности сторонних услуг перед предоставлением персональных данных или авторизацией интеграций.</p>
+
+        <h2>16. Публичные объявления о недвижимости и пользовательский контент</h2>
+        <p>Easy Listings позволяет пользователям публиковать информацию о недвижимости и связанный контент.</p>
+        <p>Информация, опубликованная публично, может быть доступна любому, кто посещает страницу объявления о недвижимости.</p>
+        <p>Это может включать:</p>
+        <ul>
+            <li>Фотографии и описания объектов недвижимости.</li>
+            <li>Местоположение объекта недвижимости.</li>
+            <li>Цены.</li>
+            <li>Контактную информацию агента или агентства.</li>
+            <li>Бизнес-профили.</li>
+            <li>Другую информацию, намеренно сделанную публичной владельцем учетной записи.</li>
+        </ul>
+        <p>Пользователи не должны публиковать конфиденциальные персональные данные, конфиденциальные документы или информацию, принадлежащую другому лицу, без соответствующей авторизации.</p>
+        <p>После того как информация была опубликована публично, третьи лица могут копировать, сохранять или распространять ее независимо.</p>
+        <p>Мы не можем гарантировать удаление копий, находящихся у третьих лиц вне нашего контроля.</p>
+
+        <h2>17. Обработка данных от имени клиентов</h2>
+        <p>Агенты по недвижимости, брокеры, агентства и другие деловые клиенты могут использовать Easy Listings для сбора, организации и управления персональными данными своих собственных клиентов и потенциальных клиентов.</p>
+        <p>В таких ситуациях:</p>
+        <ul>
+            <li>Клиент определяет цели, для которых собирается информация.</li>
+            <li>Клиент несет ответственность за предоставление соответствующих уведомлений о конфиденциальности и получение необходимого согласия.</li>
+            <li>Клиент несет ответственность за обеспечение наличия у него правовой основы для сбора и обработки информации.</li>
+            <li>Easy Listings обрабатывает информацию в соответствии со своими договорными обязательствами и авторизованными инструкциями.</li>
+            <li>Easy Listings может использовать авторизованных поставщиков услуг для поддержки предоставления своих Услуг.</li>
+        </ul>
+        <p>Деловые клиенты несут ответственность за свои собственные обязательства по соблюдению требований в отношении персональных данных, которые они собирают через платформу.</p>
+        <p>Когда это требуется, Easy Listings может заключать отдельные Соглашения об обработке данных со своими деловыми клиентами.</p>
+
+        <h2>18. Автоматизированная обработка и искусственный интеллект</h2>
+        <p>Определенные функции Easy Listings могут использовать автоматизированные технологии для поддержки функциональности платформы, организации контента, рекомендаций, аналитики или других запрошенных услуг.</p>
+        <p>Когда используется автоматизированная обработка, мы будем обрабатывать соответствующую информацию в соответствии с применимым законодательством о конфиденциальности.</p>
+        <p>Мы не намерены принимать решения, имеющие юридические или аналогичные существенные последствия, исключительно посредством автоматизированной обработки без гарантий, требуемых применимым законодательством.</p>
+        <p>Где это применимо, лица могут запрашивать информацию о соответствующей автоматизированной обработке и осуществлять свои права в соответствии с применимым законодательством.</p>
+
+        <h2>19. Изменения настоящей Политики конфиденциальности</h2>
+        <p>Мы можем периодически обновлять настоящую Политику конфиденциальности, чтобы отразить:</p>
+        <ul>
+            <li>Изменения в наших Услугах.</li>
+            <li>Новые интеграции и функции.</li>
+            <li>Изменения в нашей деятельности по обработке данных.</li>
+            <li>Новые юридические или нормативные требования.</li>
+            <li>Изменения в нашей коммерческой деятельности.</li>
+        </ul>
+        <p>Когда мы вносим изменения, мы обновляем дату «Последнее обновление», отображаемую в начале настоящей политики.</p>
+        <p>Если это требуется применимым законодательством, мы предоставим дополнительное уведомление или получим повторное согласие перед реализацией существенных изменений.</p>
+        <p>Мы призываем пользователей периодически просматривать эту страницу.</p>
+
+        <h2>20. Применимое право и юрисдикция</h2>
+        <p>Настоящая Политика конфиденциальности предназначена для работы в соответствии с применимыми законами о конфиденциальности и защите данных в юрисдикциях, где действует Easy Listings и где находятся ее пользователи.</p>
+        <p>По вопросам, регулируемым законодательством Доминиканской Республики, применяются соответствующие положения Конституции Доминиканской Республики, Закона № 172-13 и других применимых законодательных актов.</p>
+        <p>Ничто в настоящей Политике конфиденциальности не имеет целью исключить, ограничить или отказаться от каких-либо обязательных прав на конфиденциальность или защиты прав потребителей, которые лица могут иметь в соответствии с применимым к ним законодательством.</p>
+        <p>Если обязательное местное законодательство обеспечивает более высокую защиту, это законодательство имеет преимущественную силу в требуемой степени.</p>
+
+        <h2>21. Контактная информация</h2>
+        <p>По вопросам, опасениям, жалобам или запросам, касающимся настоящей Политики конфиденциальности или обращения с персональными данными, свяжитесь с нами:</p>
+        <div class="contact-info">
+            <p><strong>Easy Listings</strong></p>
+            <p><strong>Операционная компания:</strong> Easy Listings</p>
+            <p><strong>Адрес:</strong> Доминиканская Республика</p>
+            <p><strong>Страна:</strong> Доминиканская Республика</p>
+            <p><strong>Электронная почта:</strong> <a href="mailto:support@easylistings.website">support@easylistings.website</a></p>
+            <p><strong>Веб-сайт:</strong> <a href="https://easylistings.website" target="_blank" rel="noopener">https://easylistings.website</a></p>
+        </div>
+        <p>Мы будем рассматривать сообщения, связанные с конфиденциальностью, и отвечать в соответствии с применимыми юридическими требованиями.</p>
+
+        <p style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--muted); text-align: center;">
+            © 2026 Easy Listings. Все права защищены.
+        </p>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div class="flex flex-col gap-2 md:col-span-3">
+                <div class="flex items-center gap-2 text-white font-bold tracking-tight text-lg">
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo" class="w-8 h-8 object-contain rounded-lg">
+                    EasyListings
+                </div>
+                <div class="text-gray-300 text-sm mt-2">
+                    Покажите свои объекты. Определите свой бренд.
+                </div>
+
+                <div class="pt-2 flex flex-col items-start">
+                    <img src="https://ik.imagekit.io/bebell/Badge/google-partner-badge-pink.svg" class="self-start block h-12 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Google Partner Badge">
+                    <p class="text-[10px] text-slate-500 mt-4 mb-2 uppercase tracking-widest font-bold">Безопасная обработка платежей</p>
+                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/ba7caa40fbb46e4528aaae8b0128896c5e8ff915.png" class="self-start block h-5 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Secure PayPal Payments">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">Продукт</div>
+                    <a href="https://easylistings.website/" class="footer-link">Главная</a>
+                    <a href="https://easylistings.website/about-us" class="footer-link">О нас</a>
+                    <a href="https://easylistings.website/pricing" class="footer-link">Тарифы</a>
+                    <a href="https://easylistings.website/p/terms" class="footer-link">Условия использования</a>
+                    <a href="/russkiy/privacy" class="footer-link">Конфиденциальность</a>
+                    <a href="https://easylistings.website/contact" class="footer-link">Контакты</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">Сообщество</div>
+                    <a href="https://ayuda.easylistings.website" class="footer-link">Центр помощи</a>
+                    <a href="https://afiliados.easylistings.website" class="footer-link">Партнёры</a>
+                    <a href="https://easylistings.website/blog" class="footer-link">Блог</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading">Возможности</div>
+                    <a href="https://easylistings.website/funciones/resumen" class="footer-link">Аналитика</a>
+                    <a href="https://easylistings.website/funciones/catalogo" class="footer-link">Каталог</a>
+                    <a href="https://easylistings.website/funciones/pipeline" class="footer-link">Pipeline</a>
+                    <a href="https://easylistings.website/funciones/contactos" class="footer-link">Контакты</a>
+                    <a href="https://easylistings.website/funciones/idiomas" class="footer-link">Многоязычность</a>
+                    <a href="https://easylistings.website/funciones/seo" class="footer-link">Домен + SEO</a>
+                    <a href="https://easylistings.website/funciones/bandeja" class="footer-link">Входящие сообщения</a>
+                    <a href="https://easylistings.website/funciones/asistencia-ia" class="footer-link">Помощь ИИ</a>
+                    <a href="https://easylistings.website/funciones/automatizaciones" class="footer-link">Автоматизации</a>
+                    <a href="#" class="footer-link">Создание контента</a>
+                    <a href="https://easylistings.website/funciones/widget-incrustado" class="footer-link">Встроенный виджет</a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end">
+                <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[var(--primary)] transition-colors group" style="background: var(--bg-alt);">
+                    <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h4 class="font-bold text-lg sm:text-xl md:text-base lg:text-xl" style="color: var(--text);">Онлайн-поддержка</h4>
+                            <span class="text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider" style="background: rgba(223,23,131,0.12); color: var(--primary); border: 1px solid rgba(223,23,131,0.3);">24/7</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug" style="color: var(--text);">Свяжитесь с нами, если у вас есть вопросы. Наша команда готова помочь.</p>
+                        <button onclick="window.open('https://easylistings.website/support', '_blank')" class="bg-[#df1783] hover:bg-[#c0146f] text-white text-xs sm:text-sm md:text-[11px] lg:text-sm font-semibold py-2 px-3 md:py-1.5 md:px-2.5 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#df1783] shadow-sm w-fit">
+                            <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white"></i>
+                            <span>Написать нам</span>
+                        </button>
+                    </div>
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pink-support-agent.webp" alt="24/7 Support" class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity" />
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="border-top: 1px solid var(--text-light); color: var(--text-light);">
+            <div class="flex items-center gap-2">
+                <span>Создано в 🇩🇴 компанией Bebell Digital Solutions.</span>
+            </div>
+            <div>Copyright © 2026 EasyListings • Все права защищены.</div>
+        </div>
+    </footer>
+
+    <button id="backToTopBtn" aria-label="Наверх">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            const topMenuBar = document.getElementById('topMenuBar');
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            function updateTopMenu() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (topMenuBar) {
+                    if (scrollTop > 50) topMenuBar.classList.add('full-width');
+                    else topMenuBar.classList.remove('full-width');
+                }
+                if (backToTopBtn) {
+                    if (scrollTop > 300) backToTopBtn.classList.add('show');
+                    else backToTopBtn.classList.remove('show');
+                }
+            }
+            window.addEventListener('scroll', updateTopMenu, { passive: true });
+            updateTopMenu();
+
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
+
+            const funcionesNavItem = document.getElementById('funcionesNavItem');
+            const funcionesToggle = document.getElementById('funcionesToggle');
+
+            function closeSubmenu() {
+                if (!funcionesNavItem || !funcionesToggle) return;
+                funcionesNavItem.classList.remove('open');
+                funcionesToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            if (funcionesNavItem && funcionesToggle) {
+                funcionesToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isOpen = funcionesNavItem.classList.toggle('open');
+                    funcionesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!funcionesNavItem.contains(e.target)) closeSubmenu();
+                });
+
+                document.querySelectorAll('.submenu-link').forEach(link => {
+                    link.addEventListener('click', closeSubmenu);
+                });
+            }
+
+            const langDropdown = document.getElementById('langDropdown');
+            const langTrigger = document.getElementById('langTrigger');
+
+            function toggleLangDropdown(open) {
+                if (!langDropdown || !langTrigger) return;
+                const willOpen = open ?? !langDropdown.classList.contains('open');
+                langDropdown.classList.toggle('open', willOpen);
+                langTrigger.setAttribute('aria-expanded', String(willOpen));
+            }
+
+            if (langTrigger) {
+                langTrigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleLangDropdown();
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (langDropdown && !langDropdown.contains(e.target)) toggleLangDropdown(false);
+            });
+
+            const path = window.location.pathname;
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(opt => {
+                const href = opt.getAttribute('href');
+                const li = opt.closest('li');
+                if (href && path.startsWith(href.split('/').slice(0, 2).join('/'))) {
+                    li.setAttribute('aria-selected', 'true');
+                    document.getElementById('currentFlag').textContent = opt.getAttribute('data-flag');
+                    document.getElementById('currentCode').textContent = opt.getAttribute('data-code');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeSubmenu();
+                    if (langDropdown && langDropdown.classList.contains('open')) {
+                        toggleLangDropdown(false);
+                    }
+                }
+            });
+
+            if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                gsap.utils.toArray('.privacy-content h2').forEach((el) => {
+                    gsap.from(el, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
