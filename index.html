@@ -561,15 +561,36 @@
             /* Two-column submenu */
 /* 3-column submenu: 6 links + 6 links + preview */
 .submenu.submenu-with-preview {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: nowrap;
     gap: 12px;
-    padding: 25px;
+    padding: 12px;
     min-width: 760px;
+    max-width: calc(100vw - 2rem);
     border-radius: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 1200;
     overflow: hidden;
+}
+
+.submenu.submenu-with-preview::before {
+    display: none;
+}
+
+.nav-item.open .submenu.submenu-with-preview {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* Two link columns */
@@ -1290,33 +1311,33 @@
     <div class="submenu-col">
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Features/catalogo.webp">
-            <i data-lucide="layout-grid"></i>
-            <span data-i18n="sub_catalog">Catálogo de Propiedades</span>
+            <i data-lucide="globe"></i>
+            <span data-i18n="sub_catalog">Sitio web inmobiliario</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
-            <i data-lucide="users"></i>
-            <span data-i18n="sub_leads">Captura y Gestión de Leads</span>
-        </a>
-        <a href="#funciones" class="submenu-link" role="menuitem"
-           data-preview="...">
-            <i data-lucide="smartphone"></i>
-            <span data-i18n="sub_mobile">Optimizado para Móviles</span>
+            <i data-lucide="share-2"></i>
+            <span data-i18n="sub_leads">Publicación multicanal</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
             <i data-lucide="palette"></i>
-            <span data-i18n="sub_brand">Personalización de Marca</span>
+            <span data-i18n="sub_mobile">Personalización y SEO</span>
+        </a>
+        <a href="#funciones" class="submenu-link" role="menuitem"
+           data-preview="...">
+            <i data-lucide="code-xml"></i>
+            <span data-i18n="sub_brand">Catálogo integrable</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
             <i data-lucide="bar-chart-3"></i>
-            <span data-i18n="sub_analytics">Analíticas</span>
+            <span data-i18n="clipboard-list">Formularios de captación</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
-            <i data-lucide="globe"></i>
-            <span data-i18n="sub_website">Sitio Web Inmobiliario</span>
+            <i data-lucide="users"></i>
+            <span data-i18n="sub_website">CRM y gestión de clientes</span>
         </a>
     </div>
 
@@ -1325,33 +1346,33 @@
     <div class="submenu-col">
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
+            <i data-lucide="inbox"></i>
+            <span data-i18n="sub_visits">Bandeja de mensajes</span>
+        </a>
+        <a href="#funciones" class="submenu-link" role="menuitem"
+           data-preview="...">
             <i data-lucide="calendar-check"></i>
-            <span data-i18n="sub_visits">Agenda de Visitas</span>
+            <span data-i18n="sub_whatsapp">Agenda de visitas</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
-            <i data-lucide="message-square"></i>
-            <span data-i18n="sub_whatsapp">Integración WhatsApp</span>
+            <i data-lucide="chart-no-axes-combined"></i>
+            <span data-i18n="sub_contracts">Analítica por propiedad</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
-            <i data-lucide="file-text"></i>
-            <span data-i18n="sub_contracts">Contratos Digitales</span>
+            <i data-lucide="languages"></i>
+            <span data-i18n="sub_share">Plataforma multilingüe</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
-            <i data-lucide="share-2"></i>
-            <span data-i18n="sub_share">Compartir en Redes</span>
+            <i data-lucide="calculator"></i>
+            <span data-i18n="sub_gallery">Calculadora hipotecaria</span>
         </a>
         <a href="#funciones" class="submenu-link" role="menuitem"
            data-preview="...">
-            <i data-lucide="image"></i>
-            <span data-i18n="sub_gallery">Galería de Fotos</span>
-        </a>
-        <a href="#funciones" class="submenu-link" role="menuitem"
-           data-preview="...">
-            <i data-lucide="shield-check"></i>
-            <span data-i18n="sub_security">Seguridad y Respaldos</span>
+            <i data-lucide="diagram-flow-horizontal"></i>
+            <span data-i18n="sub_security">Automatizaciones</span>
         </a>
     </div>
     
@@ -1544,7 +1565,7 @@
     </p>
                     </div>
                     <div class="p-4 rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] shadow-sm">
-                        <div class="font-display text-3xl sm:text-4xl font-bold text-[#0F6E5C] dark:text-[#0F6E5C]">
+                        <div class="font-display text-3xl sm:text-4xl font-bold text-[#40b39a]">
                             +<span class="stat-counter" data-target="320">320</span>
                         </div>
                         <p class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[var(--muted)] mt-1">
@@ -1596,8 +1617,10 @@
         
         
         
-        
-        
+   
+
+   
+
         
         
 
@@ -1606,13 +1629,13 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-14 gsap-reveal">
                     <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="problemEyebrow">
-                        El costo de trabajar manualmente
+                        Los desafíos de la gestión inmobiliaria
                     </span>
                     <h3 class="text-3xl md:text-4xl font-bold my-3 section-headline" data-i18n="problemH2">
-                        ¿Todavía copias y pegas propiedades en cada red social?
+                  ¿Tu negocio inmobiliario sigue dependiendo de procesos manuales?
                     </h3>
                     <p class="text-base sm:text-lg text-[var(--muted)]" data-i18n="problemBody">
-                        Publicar una propiedad en WhatsApp, Facebook, Instagram y tu página web debería tomar segundos, no una tarde. Y cuando llega un cliente, ¿dónde quedó la conversación? EasyListings une tu catálogo, tus canales y tu seguimiento en un solo lugar.
+                 Gestionar propiedades, organizar clientes, publicar en distintos canales y dar seguimiento a cada oportunidad requiere tiempo y coordinación. Cuando dependes de múltiples herramientas y procesos manuales, mantener el control de tu negocio se vuelve cada vez más difícil. ¿Te suenan estos problemas?
                     </p>
                 </div>
 
@@ -1622,26 +1645,26 @@
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                     
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet1">Publicación manual en cada canal</h3>
-                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc1">Subir 20 fotos una por una en Instagram, Facebook y estados de WhatsApp consume horas valiosas.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet1">Dependencia de terceros y herramientas dispersas</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc1">Depender de desarrolladores y de herramientas dispersas para gestionar la presencia digital, las propiedades y los clientes.</p>
                     </div>
 
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet2">Clientes perdidos en el chat de WhatsApp</h3>
-                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc2">Consultas enterradas entre cientos de mensajes sin recordatorios ni pipeline de seguimiento.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet2">Publicación manual de propiedades</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc2">Aumentar las tareas al tener que publicar y actualizar la misma información en diferentes plataformas y canales.</p>
                     </div>
 
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet3">Sin datos de qué propiedad genera interés</h3>
-                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc3">Compartes enlaces sin saber cuántos compradores vieron la propiedad o hicieron clic en contactar.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet3">Operaciones desorganizadas</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc3">Falta de procesos definidos para gestionar propiedades, organizar actividades, atender consultas y dar seguimiento a potenciales clientes.</p>
                     </div>
 
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet4">Catálogos desactualizados</h3>
-                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc4">Cambiar un precio en DOP o USD implica editar decenas de publicaciones antiguas manualmente.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet4">Falta de seguimiento comercial</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc4">Ausencia de un proceso organizado para registrar consultas, dar seguimiento a potenciales clientes y gestionar oportunidades de negocio.</p>
                     </div>
                 </div>
             </div>
@@ -1664,22 +1687,27 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16 gsap-reveal">
                     <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="featuresEyebrow">
-                        Sistema para inmobiliarias
+                        Una plataforma para inmobiliarias
                     </span>
                     <h2 class="text-3xl md:text-4xl font-bold my-3 section-headline" data-i18n="featuresH2">
-                        Todo lo que tu inmobiliaria necesita, en un solo panel de control
+                       Todo lo que necesitas para gestionar tu negocio inmobiliario desde un solo lugar
                     </h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                
+                
+                
+                
+
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
                         <div>
                             <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-[#DF1783]/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/catalog.webp" alt="Catálogo en un clic" class="w-full h-full object-cover" loading="lazy">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/domain.webp" alt="Sitio web inmobiliario" class="w-full h-full object-cover" loading="lazy">
                             </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat1Title">Catálogo en un clic</h3>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat1Title">Sitio web inmobiliario</h3>
                             <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat1Desc">
-                                Sube o importa tus propiedades y publícalas donde quieras, sin reescribir nada.
+                        Crea tu propia página web con tu marca, catálogo de propiedades y herramientas para captar clientes.
                             </p>
                         </div>
                         <a href="#live-demo" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
@@ -1687,31 +1715,43 @@
                             <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
                         </a>
                     </article>
+                    
+                    
+                    
+                    
+                    
 
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
+                    
+                    <span class="absolute top-4 right-4 z-10 inline-flex items-center rounded-full bg-[#df1783] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white" data-i18n="featSoon">PRONTO</span>
+                     
                         <div>
                             <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-amber-500/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/stats-donut.webp" alt="Analítica por propiedad" class="w-full h-full object-cover" loading="lazy">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/share.webp" alt="Punlicación multicanal" class="w-full h-full object-cover" loading="lazy">
                             </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat4Title">Analítica por propiedad</h3>
-                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat4Desc">
-                                Ve vistas, clics en WhatsApp, compartidos y leads por cada listing.
-                            </p>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat2Title">Publicación multicanal</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat2Desc">
+                     Publica y comparte tus propiedades en diferentes plataformas y canales desde un mismo lugar.             </p>
                         </div>
                         <a href="#live-demo" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
                             <span data-i18n="featLinkText">Explorar función</span>
                             <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
                         </a>
                     </article>
+                    
+                    
+                    
+                    
+                    
 
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
                         <div>
                             <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-purple-500/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/contacts.webp" alt="Gestión de Contactos" class="w-full h-full object-cover" loading="lazy">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/personalizacion.webp" alt="Personalización y SEO avanzado" class="w-full h-full object-cover" loading="lazy">
                             </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat3Title">Gestión de clientes</h3>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat3Title">Personalización y SEO avanzado</h3>
                             <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat3Desc">
-                                Organiza datos e historial de cada contacto en un solo lugar.
+                    Personaliza tu sitio web, utiliza tu propio dominio y optimiza tus páginas para mejorar su visibilidad en buscadores.
                             </p>
                         </div>
                         <a href="#integrations" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
@@ -1720,14 +1760,19 @@
                         </a>
                     </article>
 
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    
+                    
+                    
+                    
+                    
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
                         <div>
                             <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-[#25D366]/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/crm.webp" alt="Pipeline integrado" class="w-full h-full object-cover" loading="lazy">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/embedding.webp" alt="Catálogo integrable" class="w-full h-full object-cover" loading="lazy">
                             </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat2Title">Pipeline integrado</h3>
-                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat2Desc">
-                                Captura clientes desde tu formulario de captación y da seguimiento con un pipeline visual.
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat4Title">Catálogo integrable</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat4Desc">
+                           Inserta tu catálogo de propiedades en cualquier página web mediante un código de integración.
                             </p>
                         </div>
                         <a href="#whatsapp-section" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
@@ -1735,15 +1780,20 @@
                             <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
                         </a>
                     </article>
+                    
+                    
+                    
+                    
+                    
 
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
                         <div>
                             <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-amber-500/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/inbox.webp" alt="Bandeja de mensajes" class="w-full h-full object-cover" loading="lazy">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/formularios.webp" alt="Formularios de captación" class="w-full h-full object-cover" loading="lazy">
                             </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat7Title">Bandeja de mensajes</h3>
-                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat7Desc">
-                                Todas tus conversaciones de múltiples canales en un solo lugar.
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat5Title">Formularios de captación</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat5Desc">
+                  Recopila información de potenciales clientes mediante formularios personalizados y centraliza sus consultas.
                             </p>
                         </div>
                         <a href="#live-demo" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
@@ -1751,64 +1801,140 @@
                             <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
                         </a>
                     </article>
-
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
-                        <div>
-                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-emerald-500/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/translations.webp" alt="Interfaz Multilingüe" class="w-full h-full object-cover" loading="lazy">
-                            </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat5Title">Interfaz Multilingüe</h3>
-                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat5Desc">
-                                Catálogo en español e inglés, con precios en DOP y USD.
-                            </p>
-                        </div>
-                        <a href="#pricing" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
-                            <span data-i18n="featLinkText">Explorar función</span>
-                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
-                        </a>
-                    </article>
-
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
-                        <div>
-                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-sky-500/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/domain.webp" alt="Dominio propio + SEO" class="w-full h-full object-cover" loading="lazy">
-                            </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat6Title">Dominio propio + SEO</h3>
-                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat6Desc">
-                                Usa tu dominio, genera sitemaps y datos estructurados para posicionar en Google.
-                            </p>
-                        </div>
-                        <a href="#pricing" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
-                            <span data-i18n="featLinkText">Explorar función</span>
-                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
-                        </a>
-                    </article>
-
-                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
-                        <div>
-                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-emerald-500/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/AI.webp" alt="Asistencia IA" class="w-full h-full object-cover" loading="lazy">
-                            </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat8Title">Asistencia IA</h3>
-                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat8Desc">
-                                Redacta respuestas, resume conversaciones y responde al instante.
-                            </p>
-                        </div>
-                        <a href="#pricing" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
-                            <span data-i18n="featLinkText">Explorar función</span>
-                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
-                        </a>
-                    </article>
+                    
+                    
+                    
+                    
+                    
 
                     <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
-                        <span class="absolute top-4 right-4 z-10 inline-flex items-center rounded-full bg-[#df1783] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">PRONTO</span>
+                        <div>
+                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-emerald-500/15 mb-5">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/crm.webp?updatedAt=1794281905925" alt="CRM y gestión de clientes" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat6Title">CRM y gestión de clientes</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat6Desc">
+                      Organiza contactos, consulta su historial y gestiona cada oportunidad mediante un pipeline visual.
+                            </p>
+                        </div>
+                        <a href="#pricing" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
+                            <span data-i18n="featLinkText">Explorar función</span>
+                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
+                        </a>
+                    </article>
+                    
+                    
+                    
+                    
+                    
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
+                        <div>
+                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-[#25D366]/15 mb-5">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/inbox.webp?updatedAt=1794204882088" alt="Bandeja de mensajes" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat7Title">Bandeja de mensajes</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat7Desc">
+                          Centraliza conversaciones de diferentes canales y utiliza asistencia IA para redactar respuestas y resumir mensajes.
+                            </p>
+                        </div>
+                        <a href="#whatsapp-section" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
+                            <span data-i18n="featLinkText">Explorar función</span>
+                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
+                        </a>
+                    </article>
+                    
+                    
+                    
+
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
+                        <div>
+                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-amber-500/15 mb-5">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/calendar.webp" alt="Agenda de visitas" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat8Title">Agenda de visitas</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat8Desc">
+                      Organiza solicitudes y citas para visitas a propiedades desde un calendario centralizado.
+                            </p>
+                        </div>
+                        <a href="#live-demo" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
+                            <span data-i18n="featLinkText">Explorar función</span>
+                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
+                        </a>
+                    </article>
+                    
+                    
+                    
+
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
+                        <div>
+                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-emerald-500/15 mb-5">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/stats-donut.webp?updatedAt=1794281905821" alt="Analítica por propiedad" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat9Title">Analítica por propiedad</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat9Desc">
+                      Consulta visitas, clics en WhatsApp, compartidos y otros indicadores de rendimiento de tus propiedades.
+                            </p>
+                        </div>
+                        <a href="#pricing" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
+                            <span data-i18n="featLinkText">Explorar función</span>
+                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
+                        </a>
+                    </article>
+                    
+                    
+                    
+                    
+
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
+                        <div>
+                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-sky-500/15 mb-5">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/translations.webp?updatedAt=1794205738923" alt="Plataforma multilingüe" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat10Title">Plataforma multilingüe</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat10Desc">
+                    Presenta tus propiedades en español e inglés, con opciones de visualización de precios en DOP y USD.
+                            </p>
+                        </div>
+                        <a href="#pricing" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
+                            <span data-i18n="featLinkText">Explorar función</span>
+                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
+                        </a>
+                    </article>
+                    
+                    
+                    
+                    
+                    
+
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
+                        <div>
+                            <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-emerald-500/15 mb-5">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/calculadora.webp" alt="Calculadora hipotecaria" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat11Title">Calculadora hipotecaria</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat11Desc">
+                       Permite a los interesados estimar cuotas hipotecarias según el precio de la propiedad, inicial, tasa de interés y plazo.
+                            </p>
+                        </div>
+                        <a href="#pricing" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
+                            <span data-i18n="featLinkText">Explorar función</span>
+                            <i class="fa-solid fa-arrow-right card-arrow text-xs"></i>
+                        </a>
+                    </article>
+                    
+                    
+                    
+                    
+
+                    <article class="feature-card p-7 flex flex-col justify-between gsap-reveal relative">
+                        <span class="absolute top-4 right-4 z-10 inline-flex items-center rounded-full bg-[#df1783] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white" data-i18n="featSoon">PRONTO</span>
                         <div>
                             <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-purple-500/15 mb-5">
-                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/share.webp" alt="Automatizaciones" class="w-full h-full object-cover" loading="lazy">
+                                <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/Integrations.webp" alt="Integraciones y  Automatizaciones" class="w-full h-full object-cover" loading="lazy">
                             </div>
-                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat9Title">Automatizaciones</h3>
-                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat9Desc">
-                                Publica en Facebook, Instagram, TikTok, Pinterest y Google desde el mismo lugar.
+                            <h3 class="text-h3 font-bold mb-2.5" data-i18n="feat12Title">Integraciones y automatizaciones</h3>
+                            <p class="text-[var(--muted)] text-sm sm:text-base mb-6" data-i18n="feat12Desc">
+                        Conecta EasyListings con Zapier, Make, Pabbly, n8n y tus propios sistemas mediante API y Webhooks.
                             </p>
                         </div>
                         <a href="#integrations" class="inline-flex items-center gap-2 text-sm font-semibold text-[#0F6E5C] dark:text-[#3FB39A] hover:underline">
@@ -2635,11 +2761,11 @@
             nav_cta: "Iniciar Sesión",
 
             /* Sub-menu */
-            sub_catalog: "Catálogo de Propiedades",
-            sub_leads: "Captura de Leads",
+            sub_catalog: "Sitio web inmobiliario",
+            sub_leads: "Publicación multicanal",
             sub_mobile: "Optimizado para Móviles",
-            sub_brand: "Personalización de Marca",
-            sub_analytics: "Analíticas",
+            sub_brand: "Personalización y SEO",
+            sub_analytics: "Catálogo integrable",
 
             /* Hero */
             hero_greeting: "¡Bienvenido!",
@@ -2657,40 +2783,49 @@
             stat3Label: "menos tiempo publicando",
 
             /* Problem */
-            problemEyebrow: "El costo de trabajar manualmente",
-            problemH2: "¿Todavía copias y pegas propiedades en cada red social?",
-            problemBody: "Publicar una propiedad en WhatsApp, Facebook, Instagram y tu página web debería tomar segundos, no una tarde. Y cuando llega un cliente, ¿dónde quedó la conversación? EasyListings une tu catálogo, tus canales y tu seguimiento en un solo lugar.",
-            probBullet1: "Publicación manual en cada canal",
-            probDesc1: "Subir 20 fotos una por una en Instagram, Facebook y estados de WhatsApp consume horas valiosas.",
-            probBullet2: "Clientes perdidos en el chat de WhatsApp",
-            probDesc2: "Consultas enterradas entre cientos de mensajes sin recordatorios ni pipeline de seguimiento.",
-            probBullet3: "Sin datos de qué propiedad genera interés",
-            probDesc3: "Compartes enlaces sin saber cuántos compradores vieron la propiedad o hicieron clic en contactar.",
-            probBullet4: "Catálogos desactualizados",
-            probDesc4: "Cambiar un precio en DOP o USD implica editar decenas de publicaciones antiguas manualmente.",
+            problemEyebrow: "Los desafíos de la gestión inmobiliaria",
+            problemH2: "¿Tu negocio inmobiliario sigue dependiendo de procesos manuales?",
+            problemBody: "Gestionar propiedades, organizar clientes, publicar en distintos canales y dar seguimiento a cada oportunidad requiere tiempo y coordinación. Cuando dependes de múltiples herramientas y procesos manuales, mantener el control de tu negocio se vuelve cada vez más difícil. ¿Te suenan estos problemas?",
+            probBullet1: "Dependencia de terceros y herramientas dispersas",
+            probDesc1: "Depender de desarrolladores y de herramientas dispersas para gestionar la presencia digital, las propiedades y los clientes.",
+            probBullet2: "Publicación manual de propiedades",
+            probDesc2: "Aumentar las tareas al tener que publicar y actualizar la misma información en diferentes plataformas y canales.",
+            probBullet3: "Operaciones desorganizadas",
+            probDesc3: "Falta de procesos definidos para gestionar propiedades, organizar actividades, atender consultas y dar seguimiento a potenciales clientes.",
+            probBullet4: "Falta de seguimiento comercial",
+            probDesc4: "Ausencia de un proceso organizado para registrar consultas, dar seguimiento a potenciales clientes y gestionar oportunidades de negocio.",
 
             /* Features */
-            featuresEyebrow: "Sistema para inmobiliarias",
-            featuresH2: "Todo lo que tu inmobiliaria necesita, en un solo panel de control",
-            feat1Title: "Catálogo en un clic",
-            feat1Desc: "Sube o importa tus propiedades y publícalas donde quieras, sin reescribir nada.",
-            feat2Title: "Pipeline integrado",
-            feat2Desc: "Captura clientes desde tu formulario de captación y da seguimiento con un pipeline visual.",
-            feat3Title: "Gestión de clientes",
-            feat3Desc: "Organiza datos e historial de cada contacto en un solo lugar.",
-            feat4Title: "Analítica por propiedad",
-            feat4Desc: "Ve vistas, clics en WhatsApp, compartidos y leads por cada listing.",
-            feat5Title: "Interfaz Multilingüe",
-            feat5Desc: "Catálogo en español e inglés, con precios en DOP y USD.",
-            feat6Title: "Dominio propio + SEO",
-            feat6Desc: "Usa tu dominio, genera sitemaps y datos estructurados para posicionar en Google.",
+            featuresEyebrow: "Una plataforma para inmobiliarias",
+            featuresH2: "Todo lo que necesitas para gestionar tu negocio inmobiliario desde un solo lugar",
+            feat1Title: "Sitio web inmobiliario",
+            feat1Desc: "Crea tu propia página web con tu marca, catálogo de propiedades y herramientas para captar clientes.",
+            feat2Title: "Publicación multicanal",
+            feat2Desc: "Publica y comparte tus propiedades en diferentes plataformas y canales desde un mismo lugar.",
+            feat3Title: "Personalización y SEO",
+            feat3Desc: "Personaliza tu sitio web, utiliza tu propio dominio y optimiza tus páginas para mejorar su visibilidad en buscadores.",
+            feat4Title: "Catálogo integrable",
+            feat4Desc: "Inserta tu catálogo de propiedades en cualquier página web mediante un código de integración.",
+            feat5Title: "Formularios de captación",
+            feat5Desc: "Recopila información de potenciales clientes mediante formularios personalizados y centraliza sus consultas.",
+            feat6Title: "CRM y gestión de clientes",
+            feat6Desc: "Organiza contactos, consulta su historial y gestiona cada oportunidad mediante un pipeline visual.",
             feat7Title: "Bandeja de mensajes",
-            feat7Desc: "Todas tus conversaciones de múltiples canales en un solo lugar.",
-            feat8Title: "Asistencia IA",
-            feat8Desc: "Redacta respuestas, resume conversaciones y responde al instante.",
-            feat9Title: "Automatizaciones",
-            feat9Desc: "Publica en Facebook, Instagram, TikTok, Pinterest y Google desde el mismo lugar.",
+            feat7Desc: "Centraliza conversaciones de diferentes canales y utiliza asistencia IA para redactar respuestas y resumir mensajes.",
+            feat8Title: "Agenda de visitas",
+            feat8Desc: "Organiza solicitudes y citas para visitas a propiedades desde un calendario centralizado.",
+            feat9Title: "Analítica por propiedad",
+            feat9Desc: "Consulta visitas, clics en WhatsApp, compartidos y otros indicadores de rendimiento de tus propiedades.",
+            feat10Title: "Plataforma multilingüe",
+            feat10Desc: "Publica en Facebook, Instagram, TikTok, Pinterest y Google desde el mismo lugar.",
+            feat11Title: "Calculadora hipotecaria",
+            feat11Desc: "Permite a los interesados estimar cuotas hipotecarias según el precio de la propiedad, inicial, tasa de interés y plazo.",
+            feat12Title: "Automatizaciones",
+            feat12Desc: "Conecta EasyListings con Zapier, Make, Pabbly, n8n y tus propios sistemas mediante API y Webhooks.",
             featLinkText: "Explorar función",
+            featSoon: "PRONTO",
+            
+            
             /* Steps */
             stepsEyebrow: "Rápido y sin código",
             stepsH2: "Publica tu catálogo en 3 pasos",
@@ -2785,6 +2920,8 @@
             stat1Label: "listings published",
             stat2Label: "active agents",
             stat3Label: "less time publishing",
+            
+            
 
             problemEyebrow: "The cost of manual posting",
             problemH2: "Still copy-pasting listings across every social channel?",
@@ -2797,29 +2934,40 @@
             probDesc3: "Sharing links blindly without knowing how many buyers viewed or clicked to chat.",
             probBullet4: "Outdated catalogs",
             probDesc4: "Updating a DOP or USD price means manually editing dozens of old social posts.",
+            
+            
 
-            featuresEyebrow: "Real estate listing management",
-            featuresH2: "Everything your real estate business needs, in one dashboard",
-            feat1Title: "One-click catalog",
-            feat1Desc: "Upload or import listings and publish them anywhere, without rewriting a thing.",
-            feat2Title: "Built-in pipeline",
-            feat2Desc: "Capture leads from your lead form and follow up with a visual pipeline.",
-            feat3Title: "Client management",
-            feat3Desc: "Organize each contact's data and history in one place.",
-            feat4Title: "Per-listing analytics",
-            feat4Desc: "See views, WhatsApp clicks, shares and leads for every listing.",
-            feat5Title: "Multilingual interface",
-            feat5Desc: "Catalog in Spanish and English, priced in DOP and USD.",
-            feat6Title: "Custom domain + SEO",
-            feat6Desc: "Use your own domain, generate sitemaps and structured data to rank on Google.",
+            /* Features */
+            featuresEyebrow: "A platform for real estate agencies",
+            featuresH2: "Everything you need to manage your real estate business from one place",
+            feat1Title: "Real estate website",
+            feat1Desc: "Create your own website with your brand, property catalog and tools to capture clients.",
+            feat2Title: "Multichannel publishing",
+            feat2Desc: "Publish and share your properties across different platforms and channels from one place.",
+            feat3Title: "Customization and SEO",
+            feat3Desc: "Customize your website, use your own domain and optimize your pages to improve their visibility in search engines.",
+            feat4Title: "Embeddable catalog",
+            feat4Desc: "Embed your property catalog on any web page using an integration code.",
+            feat5Title: "Lead capture forms",
+            feat5Desc: "Collect information from potential clients through custom forms and centralize their inquiries.",
+            feat6Title: "CRM and client management",
+            feat6Desc: "Organize contacts, view their history and manage each opportunity through a visual pipeline.",
             feat7Title: "Message inbox",
-            feat7Desc: "All your conversations from multiple channels in one place.",
-            feat8Title: "AI assistance",
-            feat8Desc: "Draft replies, summarize conversations and respond instantly.",
-            feat9Title: "Automations",
-            feat9Desc: "Publish to Facebook, Instagram, TikTok, Pinterest and Google from the same place.",
+            feat7Desc: "Centralize conversations from different channels and use AI assistance to draft replies and summarize messages.",
+            feat8Title: "Viewing schedule",
+            feat8Desc: "Organize requests and appointments for property viewings from a centralized calendar.",
+            feat9Title: "Per-property analytics",
+            feat9Desc: "View visits, WhatsApp clicks, shares and other performance indicators for your properties.",
+            feat10Title: "Multilingual platform",
+            feat10Desc: "Publish to Facebook, Instagram, TikTok, Pinterest and Google from the same place.",
+            feat11Title: "Mortgage calculator",
+            feat11Desc: "Let interested buyers estimate mortgage payments based on the property price, down payment, interest rate and term.",
+            feat12Title: "Automations",
+            feat12Desc: "Connect EasyListings with Zapier, Make, Pabbly, n8n and your own systems via API and Webhooks.",
             featLinkText: "Explore feature",
-
+            featSoon: "SOON",        
+        
+        
             stepsEyebrow: "Quick and code-free",
             stepsH2: "Publish your catalog in 3 steps",
             step1Title: "Create an account",
@@ -2926,27 +3074,36 @@
             probBullet4: "Catalogues obsolètes",
             probDesc4: "Mettre à jour un prix en DOP ou USD oblige à modifier manuellement des dizaines d’anciennes publications sur les réseaux sociaux.",
 
-            featuresEyebrow: "Gestion d’annonces immobilières",
-            featuresH2: "Tout ce dont votre activité immobilière a besoin, dans un seul tableau de bord",
-            feat1Title: "Catalogue en un clic",
-            feat1Desc: "Importez ou téléversez vos annonces et publiez-les partout, sans rien réécrire.",
-            feat2Title: "Pipeline intégré",
-            feat2Desc: "Capturez des prospects via votre formulaire et assurez le suivi avec un pipeline visuel.",
-            feat3Title: "Gestion des clients",
-            feat3Desc: "Organisez les données et l’historique de chaque contact au même endroit.",
-            feat4Title: "Analytique par annonce",
-            feat4Desc: "Consultez les vues, clics WhatsApp, partages et prospects pour chaque annonce.",
-            feat5Title: "Interface multilingue",
-            feat5Desc: "Catalogue en espagnol et en anglais, avec des prix en DOP et USD.",
-            feat6Title: "Domaine personnalisé + SEO",
-            feat6Desc: "Utilisez votre propre domaine, générez des sitemaps et des données structurées pour vous classer sur Google.",
+             /* Features */
+            featuresEyebrow: "Une plateforme pour les agences immobilières",
+            featuresH2: "Tout ce dont vous avez besoin pour gérer votre activité immobilière depuis un seul endroit",
+            feat1Title: "Site web immobilier",
+            feat1Desc: "Créez votre propre site web avec votre marque, votre catalogue de biens et des outils pour capter des clients.",
+            feat2Title: "Publication multicanale",
+            feat2Desc: "Publiez et partagez vos biens sur différentes plateformes et canaux depuis un même endroit.",
+            feat3Title: "Personnalisation et SEO",
+            feat3Desc: "Personnalisez votre site web, utilisez votre propre domaine et optimisez vos pages pour améliorer leur visibilité dans les moteurs de recherche.",
+            feat4Title: "Catalogue intégrable",
+            feat4Desc: "Intégrez votre catalogue de biens sur n'importe quelle page web grâce à un code d'intégration.",
+            feat5Title: "Formulaires de capture",
+            feat5Desc: "Recueillez les informations de clients potentiels via des formulaires personnalisés et centralisez leurs demandes.",
+            feat6Title: "CRM et gestion des clients",
+            feat6Desc: "Organisez les contacts, consultez leur historique et gérez chaque opportunité grâce à un pipeline visuel.",
             feat7Title: "Boîte de réception",
-            feat7Desc: "Toutes vos conversations issues de plusieurs canaux au même endroit.",
-            feat8Title: "Assistance IA",
-            feat8Desc: "Rédigez des réponses, résumez les conversations et répondez instantanément.",
-            feat9Title: "Automatisations",
-            feat9Desc: "Publiez sur Facebook, Instagram, TikTok, Pinterest et Google depuis un même endroit.",
+            feat7Desc: "Centralisez les conversations de différents canaux et utilisez l'assistance IA pour rédiger des réponses et résumer les messages.",
+            feat8Title: "Agenda de visites",
+            feat8Desc: "Organisez les demandes et les rendez-vous pour les visites de biens depuis un calendrier centralisé.",
+            feat9Title: "Analytique par bien",
+            feat9Desc: "Consultez les visites, les clics sur WhatsApp, les partages et d'autres indicateurs de performance de vos biens.",
+            feat10Title: "Plateforme multilingue",
+            feat10Desc: "Publiez sur Facebook, Instagram, TikTok, Pinterest et Google depuis un même endroit.",
+            feat11Title: "Calculateur hypothécaire",
+            feat11Desc: "Permettez aux personnes intéressées d'estimer les mensualités hypothécaires selon le prix du bien, l'apport, le taux d'intérêt et la durée.",
+            feat12Title: "Automatisations",
+            feat12Desc: "Connectez EasyListings à Zapier, Make, Pabbly, n8n et vos propres systèmes via API et Webhooks.",
             featLinkText: "Découvrir la fonctionnalité",
+            featSoon: "BIENTÔT",
+
 
             stepsEyebrow: "Rapide et sans code",
             stepsH2: "Publiez votre catalogue en 3 étapes",
@@ -3054,27 +3211,36 @@
             probBullet4: "Cataloghi obsoleti",
             probDesc4: "Aggiornare un prezzo in DOP o USD significa modificare manualmente decine di vecchi post sui social.",
 
-            featuresEyebrow: "Gestione degli annunci immobiliari",
-            featuresH2: "Tutto ciò che serve alla tua attività immobiliare, in un'unica dashboard",
-            feat1Title: "Catalogo con un clic",
-            feat1Desc: "Carica o importa gli annunci e pubblicali ovunque, senza riscrivere nulla.",
-            feat2Title: "Pipeline integrata",
-            feat2Desc: "Acquisisci contatti dal tuo modulo e gestisci il follow-up con una pipeline visuale.",
-            feat3Title: "Gestione clienti",
-            feat3Desc: "Organizza i dati e la cronologia di ogni contatto in un unico posto.",
-            feat4Title: "Analisi per annuncio",
-            feat4Desc: "Visualizza visualizzazioni, clic su WhatsApp, condivisioni e contatti per ogni annuncio.",
-            feat5Title: "Interfaccia multilingue",
-            feat5Desc: "Catalogo in spagnolo e inglese, con prezzi in DOP e USD.",
-            feat6Title: "Dominio personalizzato + SEO",
-            feat6Desc: "Usa il tuo dominio, genera sitemap e dati strutturati per posizionarti su Google.",
+            /* Features */
+            featuresEyebrow: "Una piattaforma per le agenzie immobiliari",
+            featuresH2: "Tutto ciò che ti serve per gestire la tua attività immobiliare da un unico posto",
+            feat1Title: "Sito web immobiliare",
+            feat1Desc: "Crea il tuo sito web con il tuo brand, il catalogo immobili e gli strumenti per acquisire clienti.",
+            feat2Title: "Pubblicazione multicanale",
+            feat2Desc: "Pubblica e condividi i tuoi immobili su diverse piattaforme e canali da un unico posto.",
+            feat3Title: "Personalizzazione e SEO",
+            feat3Desc: "Personalizza il tuo sito web, usa il tuo dominio e ottimizza le tue pagine per migliorarne la visibilità sui motori di ricerca.",
+            feat4Title: "Catalogo integrabile",
+            feat4Desc: "Incorpora il tuo catalogo immobili su qualsiasi pagina web tramite un codice di integrazione.",
+            feat5Title: "Moduli di acquisizione",
+            feat5Desc: "Raccogli informazioni da potenziali clienti tramite moduli personalizzati e centralizza le loro richieste.",
+            feat6Title: "CRM e gestione clienti",
+            feat6Desc: "Organizza i contatti, consulta la loro cronologia e gestisci ogni opportunità tramite una pipeline visuale.",
             feat7Title: "Casella dei messaggi",
-            feat7Desc: "Tutte le tue conversazioni da più canali in un unico posto.",
-            feat8Title: "Assistenza IA",
-            feat8Desc: "Scrivi risposte, riassumi le conversazioni e rispondi all'istante.",
-            feat9Title: "Automazioni",
-            feat9Desc: "Pubblica su Facebook, Instagram, TikTok, Pinterest e Google dallo stesso posto.",
+            feat7Desc: "Centralizza le conversazioni da diversi canali e usa l'assistenza IA per scrivere risposte e riassumere i messaggi.",
+            feat8Title: "Agenda delle visite",
+            feat8Desc: "Organizza richieste e appuntamenti per le visite agli immobili da un calendario centralizzato.",
+            feat9Title: "Analisi per immobile",
+            feat9Desc: "Consulta visite, clic su WhatsApp, condivisioni e altri indicatori di prestazione dei tuoi immobili.",
+            feat10Title: "Piattaforma multilingue",
+            feat10Desc: "Pubblica su Facebook, Instagram, TikTok, Pinterest e Google dallo stesso posto.",
+            feat11Title: "Calcolatore ipotecario",
+            feat11Desc: "Consenti agli interessati di stimare le rate del mutuo in base al prezzo dell'immobile, all'anticipo, al tasso di interesse e alla durata.",
+            feat12Title: "Automazioni",
+            feat12Desc: "Collega EasyListings a Zapier, Make, Pabbly, n8n e ai tuoi sistemi tramite API e Webhooks.",
             featLinkText: "Scopri la funzionalità",
+            featSoon: "PROSSIMAMENTE",
+
 
             stepsEyebrow: "Veloce e senza codice",
             stepsH2: "Pubblica il tuo catalogo in 3 passaggi",
@@ -3182,27 +3348,35 @@
             probBullet4: "Veraltete Kataloge",
             probDesc4: "Die Aktualisierung eines Preises in DOP oder USD bedeutet, Dutzende alter Social-Media-Posts manuell zu bearbeiten.",
 
-            featuresEyebrow: "Verwaltung von Immobilieninseraten",
-            featuresH2: "Alles, was Ihr Immobiliengeschäft braucht, in einem Dashboard",
-            feat1Title: "Katalog mit einem Klick",
-            feat1Desc: "Laden Sie Inserate hoch oder importieren Sie sie und veröffentlichen Sie sie überall, ohne etwas neu zu schreiben.",
-            feat2Title: "Integrierte Pipeline",
-            feat2Desc: "Erfassen Sie Leads über Ihr Formular und verfolgen Sie sie mit einer visuellen Pipeline.",
-            feat3Title: "Kundenverwaltung",
-            feat3Desc: "Organisieren Sie die Daten und den Verlauf jedes Kontakts an einem Ort.",
-            feat4Title: "Analytik pro Inserat",
-            feat4Desc: "Sehen Sie Aufrufe, WhatsApp-Klicks, Shares und Leads für jedes Inserat.",
-            feat5Title: "Mehrsprachige Oberfläche",
-            feat5Desc: "Katalog auf Spanisch und Englisch, Preise in DOP und USD.",
-            feat6Title: "Eigene Domain + SEO",
-            feat6Desc: "Verwenden Sie Ihre eigene Domain, generieren Sie Sitemaps und strukturierte Daten, um bei Google zu ranken.",
+            /* Features */
+            featuresEyebrow: "Eine Plattform für Immobilienagenturen",
+            featuresH2: "Alles, was Sie brauchen, um Ihr Immobiliengeschäft von einem einzigen Ort aus zu verwalten",
+            feat1Title: "Immobilien-Website",
+            feat1Desc: "Erstellen Sie Ihre eigene Website mit Ihrer Marke, Ihrem Immobilienkatalog und Tools zur Kundengewinnung.",
+            feat2Title: "Multichannel-Veröffentlichung",
+            feat2Desc: "Veröffentlichen und teilen Sie Ihre Immobilien auf verschiedenen Plattformen und Kanälen von einem einzigen Ort aus.",
+            feat3Title: "Anpassung und SEO",
+            feat3Desc: "Passen Sie Ihre Website an, verwenden Sie Ihre eigene Domain und optimieren Sie Ihre Seiten, um ihre Sichtbarkeit in Suchmaschinen zu verbessern.",
+            feat4Title: "Integrierbarer Katalog",
+            feat4Desc: "Binden Sie Ihren Immobilienkatalog über einen Integrationscode in jede Website ein.",
+            feat5Title: "Erfassungsformulare",
+            feat5Desc: "Sammeln Sie Informationen von potenziellen Kunden über benutzerdefinierte Formulare und bündeln Sie deren Anfragen.",
+            feat6Title: "CRM und Kundenverwaltung",
+            feat6Desc: "Organisieren Sie Kontakte, rufen Sie deren Verlauf ab und verwalten Sie jede Opportunity über eine visuelle Pipeline.",
             feat7Title: "Nachrichten-Posteingang",
-            feat7Desc: "Alle Ihre Gespräche aus mehreren Kanälen an einem Ort.",
-            feat8Title: "KI-Unterstützung",
-            feat8Desc: "Antworten entwerfen, Gespräche zusammenfassen und sofort reagieren.",
-            feat9Title: "Automatisierungen",
-            feat9Desc: "Veröffentlichen Sie auf Facebook, Instagram, TikTok, Pinterest und Google von einem Ort aus.",
+            feat7Desc: "Bündeln Sie Gespräche aus verschiedenen Kanälen und nutzen Sie KI-Unterstützung, um Antworten zu verfassen und Nachrichten zusammenzufassen.",
+            feat8Title: "Besichtigungskalender",
+            feat8Desc: "Organisieren Sie Anfragen und Termine für Besichtigungen über einen zentralen Kalender.",
+            feat9Title: "Analytik pro Immobilie",
+            feat9Desc: "Sehen Sie Aufrufe, WhatsApp-Klicks, Shares und weitere Leistungskennzahlen Ihrer Immobilien.",
+            feat10Title: "Mehrsprachige Plattform",
+            feat10Desc: "Veröffentlichen Sie auf Facebook, Instagram, TikTok, Pinterest und Google von einem einzigen Ort aus.",
+            feat11Title: "Hypothekenrechner",
+            feat11Desc: "Ermöglichen Sie Interessenten, Hypothekenraten anhand von Immobilienpreis, Anzahlung, Zinssatz und Laufzeit zu schätzen.",
+            feat12Title: "Automatisierungen",
+            feat12Desc: "Verbinden Sie EasyListings über API und Webhooks mit Zapier, Make, Pabbly, n8n und Ihren eigenen Systemen.",
             featLinkText: "Funktion entdecken",
+            featSoon: "BALD VERFÜGBAR",
 
             stepsEyebrow: "Schnell und ohne Code",
             stepsH2: "Veröffentlichen Sie Ihren Katalog in 3 Schritten",
@@ -3310,27 +3484,35 @@
             probBullet4: "Устаревшие каталоги",
             probDesc4: "Обновление цены в DOP или USD означает ручное редактирование десятков старых постов в соцсетях.",
 
-            featuresEyebrow: "Управление объявлениями недвижимости",
-            featuresH2: "Всё, что нужно вашему бизнесу недвижимости, — в одной панели",
-            feat1Title: "Каталог в один клик",
-            feat1Desc: "Загружайте или импортируйте объявления и публикуйте их где угодно, ничего не переписывая.",
-            feat2Title: "Встроенная воронка",
-            feat2Desc: "Собирайте лиды через форму и работайте с ними в визуальной воронке.",
-            feat3Title: "Управление клиентами",
-            feat3Desc: "Организуйте данные и историю каждого контакта в одном месте.",
-            feat4Title: "Аналитика по каждому объявлению",
-            feat4Desc: "Смотрите просмотры, клики по WhatsApp, репосты и лиды по каждому объявлению.",
-            feat5Title: "Многоязычный интерфейс",
-            feat5Desc: "Каталог на испанском и английском, цены в DOP и USD.",
-            feat6Title: "Собственный домен + SEO",
-            feat6Desc: "Используйте свой домен, генерируйте sitemap и структурированные данные для продвижения в Google.",
+            /* Features */
+            featuresEyebrow: "Платформа для агентств недвижимости",
+            featuresH2: "Всё, что нужно для управления бизнесом недвижимости из одного места",
+            feat1Title: "Сайт недвижимости",
+            feat1Desc: "Создайте собственный сайт с вашим брендом, каталогом объектов и инструментами для привлечения клиентов.",
+            feat2Title: "Мультиканальная публикация",
+            feat2Desc: "Публикуйте и делитесь своими объектами на разных платформах и каналах из одного места.",
+            feat3Title: "Настройка и SEO",
+            feat3Desc: "Настройте свой сайт, используйте собственный домен и оптимизируйте страницы для повышения их видимости в поисковых системах.",
+            feat4Title: "Встраиваемый каталог",
+            feat4Desc: "Встраивайте каталог объектов на любую веб-страницу с помощью кода интеграции.",
+            feat5Title: "Формы сбора",
+            feat5Desc: "Собирайте информацию о потенциальных клиентах с помощью настраиваемых форм и централизуйте их запросы.",
+            feat6Title: "CRM и управление клиентами",
+            feat6Desc: "Организуйте контакты, просматривайте их историю и управляйте каждой возможностью с помощью визуальной воронки.",
             feat7Title: "Входящие сообщения",
-            feat7Desc: "Все ваши переписки из разных каналов в одном месте.",
-            feat8Title: "Помощь ИИ",
-            feat8Desc: "Составляйте ответы, суммируйте переписки и отвечайте мгновенно.",
-            feat9Title: "Автоматизации",
-            feat9Desc: "Публикуйте в Facebook, Instagram, TikTok, Pinterest и Google из одного места.",
+            feat7Desc: "Централизуйте переписки из разных каналов и используйте помощь ИИ для составления ответов и резюмирования сообщений.",
+            feat8Title: "Календарь показов",
+            feat8Desc: "Организуйте заявки и встречи для показов объектов из единого календаря.",
+            feat9Title: "Аналитика по объекту",
+            feat9Desc: "Смотрите посещения, клики по WhatsApp, репосты и другие показатели эффективности ваших объектов.",
+            feat10Title: "Многоязычная платформа",
+            feat10Desc: "Публикуйте в Facebook, Instagram, TikTok, Pinterest и Google из одного места.",
+            feat11Title: "Ипотечный калькулятор",
+            feat11Desc: "Позвольте заинтересованным лицам рассчитывать ипотечные платежи по цене объекта, первоначальному взносу, процентной ставке и сроку.",
+            feat12Title: "Автоматизации",
+            feat12Desc: "Подключите EasyListings к Zapier, Make, Pabbly, n8n и вашим собственным системам через API и Webhooks.",
             featLinkText: "Узнать о возможности",
+            featSoon: "СКОРО",
 
             stepsEyebrow: "Быстро и без кода",
             stepsH2: "Опубликуйте каталог за 3 шага",
@@ -3437,29 +3619,40 @@
             probDesc3: "盲目分享链接，不知道有多少买家浏览或点击聊天。",
             probBullet4: "过时的目录",
             probDesc4: "更新 DOP 或 USD 价格意味着要手动编辑几十条旧的社交帖子。",
+            
 
-            featuresEyebrow: "房源管理",
-            featuresH2: "您的房产业务所需的一切，尽在一个仪表盘",
-            feat1Title: "一键目录",
-            feat1Desc: "上传或导入房源，一键发布到任何地方，无需重新撰写。",
-            feat2Title: "内置销售管道",
-            feat2Desc: "通过线索表单获取线索，并用可视化管道进行跟进。",
-            feat3Title: "客户管理",
-            feat3Desc: "在一个地方整理每位联系人的数据和历史记录。",
-            feat4Title: "每条房源的分析",
-            feat4Desc: "查看每条房源的浏览量、WhatsApp 点击、分享和线索。",
-            feat5Title: "多语言界面",
-            feat5Desc: "目录支持西班牙语和英语，价格以 DOP 和 USD 显示。",
-            feat6Title: "自定义域名 + SEO",
-            feat6Desc: "使用您自己的域名，生成站点地图和结构化数据，以在 Google 上获得排名。",
+            /* Features */
+            featuresEyebrow: "面向房地产机构的平台",
+            featuresH2: "在一个地方管理房产业务所需的一切",
+            feat1Title: "房地产网站",
+            feat1Desc: "使用您的品牌、房源目录和获客工具创建您自己的网站。",
+            feat2Title: "多渠道发布",
+            feat2Desc: "在同一处将您的房源发布并分享到不同平台和渠道。",
+            feat3Title: "定制与 SEO",
+            feat3Desc: "自定义您的网站，使用您自己的域名，并优化页面以提升在搜索引擎中的可见度。",
+            feat4Title: "可嵌入目录",
+            feat4Desc: "通过集成代码将您的房源目录嵌入任何网页。",
+            feat5Title: "线索收集表单",
+            feat5Desc: "通过自定义表单收集潜在客户的信息，并集中管理他们的咨询。",
+            feat6Title: "CRM 与客户管理",
+            feat6Desc: "整理联系人、查看其历史记录，并通过可视化销售管道管理每一个机会。",
             feat7Title: "消息收件箱",
-            feat7Desc: "来自多个渠道的所有对话集中在一个地方。",
-            feat8Title: "AI 助手",
-            feat8Desc: "起草回复、总结对话并即时响应。",
-            feat9Title: "自动化",
-            feat9Desc: "从同一处发布到 Facebook、Instagram、TikTok、Pinterest 和 Google。",
+            feat7Desc: "集中管理来自不同渠道的对话，并使用 AI 助手撰写回复和总结消息。",
+            feat8Title: "看房日程",
+            feat8Desc: "通过集中式日历安排看房请求和预约。",
+            feat9Title: "按房源分析",
+            feat9Desc: "查看您房源的访问量、WhatsApp 点击、分享及其他表现指标。",
+            feat10Title: "多语言平台",
+            feat10Desc: "从同一处发布到 Facebook、Instagram、TikTok、Pinterest 和 Google。",
+            feat11Title: "房贷计算器",
+            feat11Desc: "让有意向者根据房源价格、首付、利率和期限估算房贷月供。",
+            feat12Title: "自动化",
+            feat12Desc: "通过 API 和 Webhooks 将 EasyListings 与 Zapier、Make、Pabbly、n8n 及您自己的系统连接。",
             featLinkText: "了解功能",
+            featSoon: "即将推出",
 
+
+			/* Steps */
             stepsEyebrow: "快速且无需代码",
             stepsH2: "3 步发布您的目录",
             step1Title: "创建账户",
@@ -3566,28 +3759,38 @@
             probBullet4: "古くなったカタログ",
             probDesc4: "DOP や USD の価格を更新するには、何十件もの古いSNS投稿を手動で編集する必要があります。",
 
-            featuresEyebrow: "不動産物件管理",
-            featuresH2: "不動産ビジネスに必要なすべてを、一つのダッシュボードに",
-            feat1Title: "ワンクリックカタログ",
-            feat1Desc: "物件をアップロードまたはインポートし、何も書き直すことなくどこにでも公開できます。",
-            feat2Title: "組み込みパイプライン",
-            feat2Desc: "リードフォームからリードを獲得し、ビジュアルパイプラインでフォローアップ。",
-            feat3Title: "顧客管理",
-            feat3Desc: "各連絡先のデータと履歴を一か所で整理。",
-            feat4Title: "物件ごとの分析",
-            feat4Desc: "各物件の閲覧数、WhatsApp クリック、シェア、リードを確認できます。",
-            feat5Title: "多言語インターフェース",
-            feat5Desc: "カタログはスペイン語と英語、価格は DOP と USD で表示。",
-            feat6Title: "カスタムドメイン + SEO",
-            feat6Desc: "独自ドメインを使用し、サイトマップと構造化データを生成して Google で上位表示。",
+            /* Features */
+            featuresEyebrow: "不動産会社のためのプラットフォーム",
+            featuresH2: "不動産ビジネスの管理に必要なすべてを、一か所から",
+            feat1Title: "不動産ウェブサイト",
+            feat1Desc: "あなたのブランド、物件カタログ、顧客獲得ツールを備えた独自のウェブサイトを作成できます。",
+            feat2Title: "マルチチャネル投稿",
+            feat2Desc: "さまざまなプラットフォームやチャネルに、同じ場所から物件を公開・共有できます。",
+            feat3Title: "カスタマイズと SEO",
+            feat3Desc: "ウェブサイトをカスタマイズし、独自ドメインを使用して、検索エンジンでの可視性を高めるためにページを最適化できます。",
+            feat4Title: "埋め込み可能なカタログ",
+            feat4Desc: "埋め込みコードを使って、物件カタログを任意のウェブページに挿入できます。",
+            feat5Title: "獲得フォーム",
+            feat5Desc: "カスタムフォームで見込み客の情報を収集し、その問い合わせを一元管理できます。",
+            feat6Title: "CRM と顧客管理",
+            feat6Desc: "連絡先を整理し、履歴を確認し、ビジュアルパイプラインで各商機を管理できます。",
             feat7Title: "メッセージ受信箱",
-            feat7Desc: "複数チャネルのすべての会話を一か所に。",
-            feat8Title: "AI アシスタント",
-            feat8Desc: "返信の下書き、会話の要約、即時対応が可能。",
-            feat9Title: "自動化",
-            feat9Desc: "同じ場所から Facebook、Instagram、TikTok、Pinterest、Google に公開。",
+            feat7Desc: "さまざまなチャネルの会話を一元化し、AI アシスタントで返信の作成やメッセージの要約ができます。",
+            feat8Title: "内見スケジュール",
+            feat8Desc: "物件の内見依頼や予約を一元化されたカレンダーで管理できます。",
+            feat9Title: "物件ごとの分析",
+            feat9Desc: "物件の閲覧数、WhatsApp クリック、シェアなどのパフォーマンス指標を確認できます。",
+            feat10Title: "多言語プラットフォーム",
+            feat10Desc: "同じ場所から Facebook、Instagram、TikTok、Pinterest、Google に投稿できます。",
+            feat11Title: "住宅ローン計算ツール",
+            feat11Desc: "物件価格、頭金、金利、返済期間に基づいて、希望者が住宅ローンの返済額を見積もることができます。",
+            feat12Title: "自動化",
+            feat12Desc: "API と Webhooks を通じて、EasyListings を Zapier、Make、Pabbly、n8n、および独自システムと連携できます。",
             featLinkText: "機能を見る",
+            featSoon: "近日公開",
 
+
+			/* Steps */
             stepsEyebrow: "迅速かつコード不要",
             stepsH2: "3ステップでカタログを公開",
             step1Title: "アカウントを作成",
