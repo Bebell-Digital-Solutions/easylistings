@@ -1416,16 +1416,18 @@
         <!-- ================= TOP MENU BAR ================= -->
         <div class="top-menu-bar" id="topMenuBar">
             <div class="top-menu-content">
-                <div class="logo-container">
-                    <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Easy Listings Logo">
-                    <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
-                </div>
+                <a href="/" class="logo-link inline-flex items-center gap-2 hover:opacity-90 transition-opacity duration-200" aria-label="EasyListings — Inicio">
+    				<div class="logo-container">
+        				<img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="Easy Listings Logo">
+				        <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+    				</div>
+				</a>
 
 
 
 
 				<div class="nav-item">
-                        <a href="/" class="nav-link" data-i18n="nav_about">Inicio</a>
+                        <a href="/" class="nav-link" data-i18n="nav_home">Inicio</a>
                     </div>
 
 				
@@ -2661,7 +2663,7 @@
 
 						<a href="/blog/sala-de-prensa"
    class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:font-bold">
-    <span data-i18n="featLinkText">Sala de Prensa</span>
+    <span data-i18n="blogCta">Sala de Prensa</span>
     <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
 </a>
                     
@@ -3094,6 +3096,7 @@
             metaTitle: "EasyListings | Software Inmobiliario y CRM en República Dominicana",
 
             /* Nav */
+			nav_home: "Inicio",
             nav_about: "Acerca de",
             nav_features: "Funciones",
             nav_home: "Inicio",
@@ -3293,6 +3296,7 @@
         en: {
             metaTitle: "EasyListings | Real Estate Software & CRM in the Dominican Republic",
 
+			nav_home: "Home",
             nav_about: "About",
             nav_features: "Features",
             nav_home: "Home",
