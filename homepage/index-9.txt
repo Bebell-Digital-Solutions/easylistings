@@ -1597,7 +1597,7 @@
 
 
 
-                    <div class="nav-item" id="funcionesNavItem">
+       <div class="nav-item" id="funcionesNavItem">
     <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
         <span data-i18n="nav_features">Funciones</span>
         <i data-lucide="chevron-down" class="chevron"></i>
@@ -1711,7 +1711,8 @@
     <div class="submenu-preview" aria-hidden="true">
         <img id="submenuPreviewImg"
              src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/AUTOMATION.webp"
-             alt="Banner principal EasyListings" />
+             alt="Banner principal EasyListings" 
+             data-i18n-alt="preview_alt_banner" />
     </div>
 </div>
 </div>
