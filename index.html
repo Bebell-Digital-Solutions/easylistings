@@ -6732,7 +6732,57 @@ window.addEventListener('load', () => {
 });
 </script>
 
+<script>
+window.addEventListener('load', function () {
+    // Safety net: if GSAP/ScrollTrigger didn't load, show everything
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        document.querySelectorAll('.gsap-reveal').forEach(function (el) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+        return;
+    }
 
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.gsap-reveal').forEach(function (el) {
+        // Skip if already animated by earlier code
+        if (el.dataset.gsapDone) return;
+
+        gsap.fromTo(el,
+            { opacity: 0, y: 40 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 88%',
+                    toggleActions: 'play none none none',
+                    once: true
+                },
+                onComplete: function () {
+                    // Mark done + hard-reset so nothing stays hidden
+                    el.dataset.gsapDone = '1';
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                }
+            }
+        );
+    });
+
+    // Critical on mobile — recalc after images/fonts settle
+    ScrollTrigger.refresh();
+    setTimeout(ScrollTrigger.refresh, 500);
+    setTimeout(ScrollTrigger.refresh, 1500);
+
+    // Re-refresh on resize / orientation change
+    window.addEventListener('resize', function () {
+        ScrollTrigger.refresh();
+    });
+});
+</script>
 
 
 </body>
