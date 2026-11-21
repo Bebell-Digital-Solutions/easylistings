@@ -834,7 +834,13 @@
         
         .waving-hand { display: inline-block; animation: wave 1.5s infinite; transform-origin: 70% 70%; }
         
-        
+        @media (prefers-reduced-motion: reduce) {
+    .waving-hand {
+        animation: wave 1.5s infinite !important;
+    }
+}
+
+		
         
 
         .nav-link {
