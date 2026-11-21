@@ -713,7 +713,8 @@
 
 
         
-        
+.gsap-reveal { opacity: 1; transform: none; }
+/* Then let GSAP override with from() animations */        
 
 
 /* Hero section */
@@ -744,7 +745,16 @@
     animation: heroFade 30s infinite; /* 25s = 5 images × 5s each */
 }
 
+		
 
+.hero-slide {
+    will-change: opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+
+		
 
 
 /* Each slide offset by 5s */
@@ -758,9 +768,9 @@
 /* Fade keyframes: visible ~20% of the cycle, then fade out */
 @keyframes heroFade {
     0%   { opacity: 0; }
-    4%   { opacity: 1; }   /* quick fade in */
-    20%  { opacity: 1; }   /* stay visible for ~5s */
-    24%  { opacity: 0; }   /* fade out */
+    3%   { opacity: 1; }
+    16.6% { opacity: 1; }
+    20%  { opacity: 0; }
     100% { opacity: 0; }
 }
 
@@ -867,25 +877,31 @@
         }
         
         
-        .marquee-track:hover { a
-        nimation-play-state: paused; 
+        .marquee-track:hover { 
+			animation-play-state: paused; 
         }
         
         
         
         
 
-        @media (prefers-reduced-motion: reduce) {
-            *, ::before, ::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-            .marquee-track { animation: none !important; }
-        }
+       @media (prefers-reduced-motion: reduce) {
+    *:not(.hero-slide):not(.marquee-track)::before,
+    *:not(.hero-slide):not(.marquee-track),
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    /* Keep hero + marquee animating, or explicitly disable if preferred */
+    .hero-slide { animation-duration: 30s !important; animation-iteration-count: infinite !important; }
+}
         
-        
+
+
+
+		
         
 
         h1, h2, h3, h4 { color: var(--text); }
@@ -6676,7 +6692,39 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 </script>
 
 
+<script>
+window.addEventListener('load', () => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.warn('GSAP failed to load — animations skipped');
+        // fallback: ensure nothing is hidden
+        document.querySelectorAll('.gsap-reveal').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+        return;
+    }
 
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.gsap-reveal').forEach((el) => {
+        gsap.from(el, {
+            opacity: 0,
+            y: 40,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 85%',
+                once: true
+            }
+        });
+    });
+
+    // Critical for mobile: refresh after images load
+    ScrollTrigger.refresh();
+    window.addEventListener('resize', () => ScrollTrigger.refresh());
+});
+</script>
 
 
 
