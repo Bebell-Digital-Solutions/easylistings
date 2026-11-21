@@ -6352,22 +6352,53 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
             });
         }
 
-        /* ---------- GSAP SCROLLTRIGGER ---------- */
-        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReduced || typeof gsap === 'undefined') return;
+       /* ---------- GSAP SCROLLTRIGGER ---------- */
+(function initRevealAnimations() {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const gsapReady = typeof gsap !== 'undefined';
+    const stReady = typeof ScrollTrigger !== 'undefined';
 
-        if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+    // Fallback: show everything if GSAP missing or reduced motion
+    if (prefersReduced || !gsapReady) {
+        document.querySelectorAll('.gsap-reveal').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+    } else {
+        if (stReady) gsap.registerPlugin(ScrollTrigger);
 
         gsap.utils.toArray('.gsap-reveal').forEach((el) => {
-            gsap.from(el, {
-                y: 36,
-                opacity: 0,
-                duration: 0.75,
-                ease: 'power2.out',
-                scrollTrigger: { trigger: el, start: 'top 86%', once: true }
-            });
+            gsap.fromTo(el,
+                { opacity: 0, y: 36 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.75,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 86%',
+                        once: true
+                    },
+                    onComplete: () => {
+                        // Hard-lock final state — nothing can revert it
+                        el.style.opacity = '1';
+                        el.style.transform = 'none';
+                    }
+                }
+            );
         });
 
+        // Recalc trigger positions after images/fonts settle (critical on mobile)
+        if (stReady) {
+            ScrollTrigger.refresh();
+            setTimeout(() => ScrollTrigger.refresh(), 500);
+            setTimeout(() => ScrollTrigger.refresh(), 1500);
+        }
+    }
+
+    // Stat counters — only animate when GSAP is available, else leave as-is
+    if (gsapReady && stReady && !prefersReduced) {
         gsap.utils.toArray('.stat-counter').forEach((counter) => {
             const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
             const obj = { val: 0 };
@@ -6381,6 +6412,8 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
                 }
             });
         });
+    }
+})();
 
 
 
@@ -6698,144 +6731,7 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 </script>
 
 
-<script>
-window.addEventListener('load', () => {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        console.warn('GSAP failed to load — animations skipped');
-        // fallback: ensure nothing is hidden
-        document.querySelectorAll('.gsap-reveal').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-        return;
-    }
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.gsap-reveal').forEach((el) => {
-        gsap.from(el, {
-            opacity: 0,
-            y: 40,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 85%',
-                once: true
-            }
-        });
-    });
-
-    // Critical for mobile: refresh after images load
-    ScrollTrigger.refresh();
-    window.addEventListener('resize', () => ScrollTrigger.refresh());
-});
-</script>
-
-<script>
-window.addEventListener('load', function () {
-    // Safety net: if GSAP/ScrollTrigger didn't load, show everything
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        document.querySelectorAll('.gsap-reveal').forEach(function (el) {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-        return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.gsap-reveal').forEach(function (el) {
-        // Skip if already animated by earlier code
-        if (el.dataset.gsapDone) return;
-
-        gsap.fromTo(el,
-            { opacity: 0, y: 40 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 88%',
-                    toggleActions: 'play none none none',
-                    once: true
-                },
-                onComplete: function () {
-                    // Mark done + hard-reset so nothing stays hidden
-                    el.dataset.gsapDone = '1';
-                    el.style.opacity = '1';
-                    el.style.transform = 'none';
-                }
-            }
-        );
-    });
-
-    // Critical on mobile — recalc after images/fonts settle
-    ScrollTrigger.refresh();
-    setTimeout(ScrollTrigger.refresh, 500);
-    setTimeout(ScrollTrigger.refresh, 1500);
-
-    // Re-refresh on resize / orientation change
-    window.addEventListener('resize', function () {
-        ScrollTrigger.refresh();
-    });
-});
-</script>
-
-	<script>
-window.addEventListener('load', function () {
-    // Safety net: if GSAP/ScrollTrigger didn't load, show everything
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        document.querySelectorAll('.gsap-reveal').forEach(function (el) {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-        return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.gsap-reveal').forEach(function (el) {
-        // Skip if already animated by earlier code
-        if (el.dataset.gsapDone) return;
-
-        gsap.fromTo(el,
-            { opacity: 0, y: 40 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 88%',
-                    toggleActions: 'play none none none',
-                    once: true
-                },
-                onComplete: function () {
-                    // Mark done + hard-reset so nothing stays hidden
-                    el.dataset.gsapDone = '1';
-                    el.style.opacity = '1';
-                    el.style.transform = 'none';
-                }
-            }
-        );
-    });
-
-    // Critical on mobile — recalc after images/fonts settle
-    ScrollTrigger.refresh();
-    setTimeout(ScrollTrigger.refresh, 500);
-    setTimeout(ScrollTrigger.refresh, 1500);
-
-    // Re-refresh on resize / orientation change
-    window.addEventListener('resize', function () {
-        ScrollTrigger.refresh();
-    });
-});
-</script>
-	
 
 
 </body>
