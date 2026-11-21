@@ -2439,6 +2439,14 @@
                 <p class="text-center text-xs gsap-reveal font-mono-spec text-[var(--muted)] mt-3 px-4 sm:px-0" data-i18n="demoMacbookHint">
                     ↑ Pasa el cursor sobre el MacBook para deslizar la vista previa o haz clic para probar el catálogo real ↑
                 </p>
+
+<a href="https://demo.easylistings.website"
+   class="group/link inline-flex items-center gsap-reveal gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[#3FB39A] hover:font-bold">
+    <span data-i18n="integrationsCta">Ver Catálogo Demo</span>
+    <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
+</a>
+
+				
             </div>
 
             <!-- Phone + notifications: desktop only (they're what cause the mobile bottom gap) -->
@@ -2498,6 +2506,10 @@
         loading="lazy"
     />
 
+
+	<!-- Wrapper handles positioning + centering -->
+<div class="absolute bottom-10 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
+
     <!-- CTA button overlay, closer to the bottom -->
     <a
         href="https://casa-realestate.easylistings.website/"
@@ -2508,6 +2520,7 @@
         <span data-i18n="demoCtaBtn">Ver Catálogo Demo</span>
         <i class="fa-solid fa-arrow-right text-md"></i>
     </a>
+	</div>
 
     <!-- Gradient line pinned to the bottom edge of the banner -->
     <div class="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30 pointer-events-none"></div>
