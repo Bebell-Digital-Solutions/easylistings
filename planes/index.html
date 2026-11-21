@@ -121,7 +121,15 @@
             display: grid;
             grid-gap: 20px;
         }
-        
+
+		
+
+		.gsap-reveal { 
+			opacity: 1; 
+			transform: none; 
+		}
+
+		
         
         img { 
         max-width: 100%; 
@@ -2674,13 +2682,29 @@ support_title: "Soporte Online",                 support_text: "Contáctenos si 
             }
 
             /* ---------- GSAP SCROLLTRIGGER ---------- */
-            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!prefersReduced && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.utils.toArray('.gsap-reveal').forEach((el) => {
-                    gsap.from(el, { y: 36, opacity: 0, duration: 0.75, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
-                });
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReduced && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
+    gsap.utils.toArray('.gsap-reveal').forEach((el) => {
+        gsap.from(el, {
+            y: 36,
+            opacity: 0,
+            duration: 0.75,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 86%',
+                once: true
             }
+        });
+    });
+
+    // Recalc positions after full load (fonts, images, iframe)
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+}
+			
 
             /* ---------- CURSOR FOLLOWER ---------- */
             if (window.matchMedia('(pointer: fine)').matches && typeof gsap !== 'undefined') {
@@ -2730,6 +2754,11 @@ support_title: "Soporte Online",                 support_text: "Contáctenos si 
                 onScroll();
             }
         })();
+
+
+		
     </script>
+
+	
 </body>
 </html>
