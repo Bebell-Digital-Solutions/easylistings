@@ -713,8 +713,7 @@
 
 
         
-.gsap-reveal { opacity: 1; transform: none; }
-/* Then let GSAP override with from() animations */        
+        
 
 
 /* Hero section */
@@ -745,16 +744,7 @@
     animation: heroFade 30s infinite; /* 25s = 5 images × 5s each */
 }
 
-		
 
-.hero-slide {
-    will-change: opacity;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-}
-
-
-		
 
 
 /* Each slide offset by 5s */
@@ -768,9 +758,9 @@
 /* Fade keyframes: visible ~20% of the cycle, then fade out */
 @keyframes heroFade {
     0%   { opacity: 0; }
-    3%   { opacity: 1; }
-    16.6% { opacity: 1; }
-    20%  { opacity: 0; }
+    4%   { opacity: 1; }   /* quick fade in */
+    20%  { opacity: 1; }   /* stay visible for ~5s */
+    24%  { opacity: 0; }   /* fade out */
     100% { opacity: 0; }
 }
 
@@ -834,13 +824,7 @@
         
         .waving-hand { display: inline-block; animation: wave 1.5s infinite; transform-origin: 70% 70%; }
         
-        @media (prefers-reduced-motion: reduce) {
-    .waving-hand {
-        animation: wave 1.5s infinite !important;
-    }
-}
-
-		
+        
         
 
         .nav-link {
@@ -883,31 +867,25 @@
         }
         
         
-        .marquee-track:hover { 
-			animation-play-state: paused; 
+        .marquee-track:hover { a
+        nimation-play-state: paused; 
         }
         
         
         
         
 
-       @media (prefers-reduced-motion: reduce) {
-    *:not(.hero-slide):not(.marquee-track)::before,
-    *:not(.hero-slide):not(.marquee-track),
-    ::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    /* Keep hero + marquee animating, or explicitly disable if preferred */
-    .hero-slide { animation-duration: 30s !important; animation-iteration-count: infinite !important; }
-}
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .marquee-track { animation: none !important; }
+        }
         
-
-
-
-		
+        
         
 
         h1, h2, h3, h4 { color: var(--text); }
@@ -1638,7 +1616,7 @@
         
         
         <a href="#funciones" class="submenu-link" role="menuitem"
-           data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/EasyListings-creation-Studio.webp">
+           data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/EasyListings-Studio.webp?updatedAt=1795030720922">
             <i data-lucide="share-2"></i>
             <span data-i18n="sub_post">Publicación multicanal</span>
         </a>
@@ -1662,7 +1640,7 @@
         
         
         <a href="#funciones" class="submenu-link" role="menuitem"
-           data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/formulario-de-captacion-1.webp">
+           data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/formulario-de-captacion.webp?updatedAt=1795030720798">
             <i data-lucide="bar-chart-3"></i>
             <span data-i18n="sub_form">Formularios de captación</span>
         </a>
@@ -1715,7 +1693,7 @@
         
         
         <a href="#funciones" class="submenu-link" role="menuitem"
-           data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/PRESTAMO-1.webp">
+           data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/calculadora-banner.webp">
             <i data-lucide="calculator"></i>
             <span data-i18n="sub_calculator">Calculadora hipotecaria</span>
         </a>
@@ -1761,22 +1739,33 @@
                 <div class="top-menu-actions">
                     <div class="lang-dropdown" id="langDropdown">
                         <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
-                            <span class="flag" id="currentFlag">🇩🇴</span>
-                            <span id="currentCode">ES</span>
+                            <span class="flag" id="currentFlag">🇺🇸</span>
+                            <span id="currentCode">EN</span>
                             <i data-lucide="chevron-down" class="chevron"></i>
                         </button>
 
+
+
                         <ul class="lang-menu" id="langMenu" role="listbox" aria-label="Seleccionar idioma">
-                            <li role="option" aria-selected="true">
+                        
+                        
+                        <li role="option" aria-selected="true">
                                 <a href="#" class="lang-option" data-flag="🇩🇴" data-code="ES" data-lang="es">
                                     <span class="flag">🇩🇴</span> ES
                                 </a>
                             </li>
-                            <li role="option" aria-selected="false">
+                            
+                            
+                        
+                        <li role="option" aria-selected="false">
                                 <a href="?lang=en" class="lang-option" data-flag="🇺🇸" data-code="EN" data-lang="en">
                                     <span class="flag">🇺🇸</span> EN
                                 </a>
                             </li>
+                            
+                        
+                            
+                            
                             <li role="option" aria-selected="false">
                                 <a href="?lang=fr" class="lang-option" data-flag="🇫🇷" data-code="FR" data-lang="fr">
                                     <span class="flag">🇫🇷</span> FR
@@ -1886,19 +1875,19 @@
                 </div>
 
                 <div class="flex flex-wrap items-center justify-center gap-2 mt-6">
-                    <span class="inline-flex gsap-reveal items-center gap-2 rounded-full bg-pink-50 px-3 py-1.5 text-xs font-semibold text-gray-700">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3 py-1.5 text-xs font-semibold text-gray-700">
                         <i class="fa-solid fa-house text-[#DF1783]"></i>
                         <span data-i18n="heroLabel1">Gestión de propiedades</span>
                     </span>
                     
                     
-                    <span class="inline-flex gsap-reveal items-center gap-2 rounded-full bg-pink-50 px-3 py-1.5 text-xs font-semibold text-gray-700">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3 py-1.5 text-xs font-semibold text-gray-700">
                         <i class="fa-solid fa-users text-[#DF1783]"></i>
                         <span data-i18n="heroLabel2">CRM inmobiliario</span>
                     </span>
                     
                     
-                    <span class="inline-flex gsap-reveal items-center gap-2 rounded-full bg-pink-50 px-3 py-1.5 text-xs font-semibold text-gray-700">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3 py-1.5 text-xs font-semibold text-gray-700">
                         <i class="fa-solid fa-chart-line text-[#DF1783]"></i>
                         <span data-i18n="heroLabel3">Analítica inmobiliaria</span>
                     </span>
@@ -2003,13 +1992,13 @@
         <section class="py-20 md:py-28 border-b bg-[var(--bg-alt)]">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-14 gsap-reveal">
-                    <span class="font-mono-spec text-xs uppercase gsap-reveal tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="problemEyebrow">
+                    <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="problemEyebrow">
                         Los desafíos de la gestión inmobiliaria
                     </span>
-                    <h3 class="text-3xl md:text-4xl gsap-reveal font-bold my-3 section-headline" data-i18n="problemH2">
+                    <h3 class="text-3xl md:text-4xl font-bold my-3 section-headline" data-i18n="problemH2">
                   ¿Tu negocio inmobiliario sigue dependiendo de procesos manuales?
                     </h3>
-                    <p class="text-base gsap-reveal sm:text-lg text-[var(--muted)]" data-i18n="problemBody">
+                    <p class="text-base sm:text-lg text-[var(--muted)]" data-i18n="problemBody">
                  Gestionar propiedades, organizar clientes, publicar en distintos canales y dar seguimiento a cada oportunidad requiere tiempo y coordinación. Cuando dependes de múltiples herramientas y procesos manuales, mantener el control de tu negocio se vuelve cada vez más difícil. ¿Te suenan estos problemas?
                     </p>
                 </div>
@@ -2020,26 +2009,26 @@
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                     
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold gsap-reveal text-base mb-2" data-i18n="probBullet1">Dependencia de terceros y herramientas dispersas</h3>
-                        <p class="text-sm gsap-reveal text-[var(--muted)]" data-i18n="probDesc1">Depender de desarrolladores y de herramientas dispersas para gestionar la presencia digital, las propiedades y los clientes.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet1">Dependencia de terceros y herramientas dispersas</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc1">Depender de desarrolladores y de herramientas dispersas para gestionar la presencia digital, las propiedades y los clientes.</p>
                     </div>
 
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold gsap-reveal text-base mb-2" data-i18n="probBullet2">Publicación manual de propiedades</h3>
-                        <p class="text-sm gsap-reveal text-[var(--muted)]" data-i18n="probDesc2">Aumentar las tareas al tener que publicar y actualizar la misma información en diferentes plataformas y canales.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet2">Publicación manual de propiedades</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc2">Aumentar las tareas al tener que publicar y actualizar la misma información en diferentes plataformas y canales.</p>
                     </div>
 
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold gsap-reveal text-base mb-2" data-i18n="probBullet3">Operaciones desorganizadas</h3>
-                        <p class="text-sm gsap-reveal text-[var(--muted)]" data-i18n="probDesc3">Falta de procesos definidos para gestionar propiedades, organizar actividades, atender consultas y dar seguimiento a potenciales clientes.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet3">Operaciones desorganizadas</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc3">Falta de procesos definidos para gestionar propiedades, organizar actividades, atender consultas y dar seguimiento a potenciales clientes.</p>
                     </div>
 
                     <div class="problem-bullet feature-card p-6 border border-[var(--border)] bg-white shadow-sm rounded-2xl gsap-reveal">
                         <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
-                        <h3 class="font-bold gsap-reveal text-base mb-2" data-i18n="probBullet4">Falta de seguimiento comercial</h3>
-                        <p class="text-sm gsap-reveal text-[var(--muted)]" data-i18n="probDesc4">Ausencia de un proceso organizado para registrar consultas, dar seguimiento a potenciales clientes y gestionar oportunidades de negocio.</p>
+                        <h3 class="font-bold text-base mb-2" data-i18n="probBullet4">Falta de seguimiento comercial</h3>
+                        <p class="text-sm text-[var(--muted)]" data-i18n="probDesc4">Ausencia de un proceso organizado para registrar consultas, dar seguimiento a potenciales clientes y gestionar oportunidades de negocio.</p>
                     </div>
                 </div>
             </div>
@@ -2339,41 +2328,41 @@
 <section class="py-20 md:py-28 border-b bg-[var(--bg-alt)]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-16 gsap-reveal">
-            <span class="font-mono-spec gsap-reveal text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="stepsEyebrow">
+            <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="stepsEyebrow">
                 Comienza cuando estés listo
             </span>
-            <h2 class="text-3xl gsap-reveal md:text-4xl font-bold my-3 section-headline max-w-4xl mx-auto" data-i18n="stepsH2">
+            <h2 class="text-3xl md:text-4xl font-bold my-3 section-headline max-w-4xl mx-auto" data-i18n="stepsH2">
         Prepara tu inmobiliaria antes de salir al público
             </h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             <div class="feature-card p-8 relative gsap-reveal">
-                <div class="flex gsap-reveal items-center justify-between mb-6">
+                <div class="flex items-center justify-between mb-6">
                     <span class="font-mono-spec text-4xl font-bold text-[#DF1783]">01</span>
                 </div>
-                <h3 class="text-xl gsap-reveal font-bold mb-3" data-i18n="step1Title">Activa tu cuenta</h3>
-                <p class="text-sm sm:text-base gsap-reveal text-[var(--muted)]" data-i18n="step1Body">
+                <h3 class="text-xl font-bold mb-3" data-i18n="step1Title">Activa tu cuenta</h3>
+                <p class="text-sm sm:text-base text-[var(--muted)]" data-i18n="step1Body">
                     Realiza un único pago para obtener acceso inmediato a EasyListings y comenzar a configurar tu espacio inmobiliario.
                 </p>
             </div>
 
             <div class="feature-card p-8 relative gsap-reveal">
-                <div class="flex items-center gsap-reveal justify-between mb-6">
+                <div class="flex items-center justify-between mb-6">
                     <span class="font-mono-spec text-4xl font-bold text-[#df1783]">02</span>
                 </div>
-                <h3 class="text-xl gsap-reveal font-bold mb-3" data-i18n="step2Title">Personaliza tu plataforma</h3>
-                <p class="text-sm sm:text-base gsap-reveal text-[var(--muted)]" data-i18n="step2Body">
+                <h3 class="text-xl font-bold mb-3" data-i18n="step2Title">Personaliza tu plataforma</h3>
+                <p class="text-sm sm:text-base text-[var(--muted)]" data-i18n="step2Body">
                     Importa tus propiedades, configura tu sitio web, organiza tus contactos y personaliza tu presencia digital a tu ritmo.
                 </p>
             </div>
 
             <div class="feature-card p-8 relative gsap-reveal">
-                <div class="flex items-center gsap-reveal justify-between mb-6">
+                <div class="flex items-center justify-between mb-6">
                     <span class="font-mono-spec text-4xl font-bold text-[#df1783]">03</span>
                 </div>
-                <h3 class="text-xl gsap-reveal font-bold mb-3" data-i18n="step3Title">Elige tu plan y publica</h3>
-                <p class="text-sm sm:text-base gsap-reveal text-[var(--muted)]" data-i18n="step3Body">
+                <h3 class="text-xl font-bold mb-3" data-i18n="step3Title">Elige tu plan y publica</h3>
+                <p class="text-sm sm:text-base text-[var(--muted)]" data-i18n="step3Body">
                     Cuando estés listo para salir al público, selecciona el plan que mejor se adapte a tu negocio y activa tu suscripción para publicar tu sitio web.
                 </p>
             </div>
@@ -2420,7 +2409,7 @@
                 CATÁLOGO DE PROPIEDADES
             </span>
             <h2 class="lg:mb-4 md:mb-4 sm:mb-4 text-3xl md:text-4xl font-bold my-3 section-headline hover gsap-reveal" data-i18n="demoTitle">Mira EasyListings en Vivo</h2>
-            <p class="my-4 gsap-reveal" data-i18n="demoText">Así ven tus clientes tus propiedades: bilingüe, con precios en DOP y USD, botón de WhatsApp en cada listing y búsqueda optimizada para móvil. Prueba <strong class="hover-[#df1783]">EasyListings</strong></p>
+            <p class="my-4" data-i18n="demoText">Así ven tus clientes tus propiedades: bilingüe, con precios en DOP y USD, botón de WhatsApp en cada listing y búsqueda optimizada para móvil. Prueba <strong class="hover-[#df1783]">EasyListings</strong></p>
         </div>
         
 
@@ -2436,21 +2425,12 @@
                     <div class="base"></div>
                     <div class="notch"></div>
                 </div>
-                <p class="text-center text-xs gsap-reveal font-mono-spec text-[var(--muted)] mt-3 px-4 sm:px-0" data-i18n="demoMacbookHint">
+                <p class="text-center text-xs font-mono-spec text-[var(--muted)] mt-3 px-4 sm:px-0" data-i18n="demoMacbookHint">
                     ↑ Pasa el cursor sobre el MacBook para deslizar la vista previa o haz clic para probar el catálogo real ↑
                 </p>
-
-
-	<div class="absolute bottom-10 left-0 right-0 z-40 flex gsap-reveal justify-center px-4 pointer-events-none">			
-<a href="https://demo.easylistings.website"
-   class="group/link inline-flex items-center mx-auto w-fit mt-2rem gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[#3FB39A] hover:font-bold">
-    <span data-i18n="integrationsCta">Ver Catálogo Demo</span>
-    <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
-</a>
-	</div>
-
-				
-				
+                
+      
+                
             </div>
 
             <!-- Phone + notifications: desktop only (they're what cause the mobile bottom gap) -->
@@ -2506,25 +2486,29 @@
     <img
         src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/banner-easylistings-websites.webp?updatedAt=1794613648949"
         alt="EasyListings websites"
-        class="block gsap-reveal w-full h-auto m-0 p-0 object-cover"
+        class="block w-full h-auto m-0 p-0 object-cover"
         loading="lazy"
     />
-
-
-	<!-- Wrapper handles positioning + centering -->
-<div class="absolute bottom-10 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
-	
+    
+    
+    
+    
+ 	<div class="absolute bottom-10 left-0 right-0 z-40 flex gsap-reveal justify-center px-4 pointer-events-none">
     <!-- CTA button overlay, closer to the bottom -->
-     <a
+    <a
         href="https://casa-realestate.easylistings.website/"
         target="_blank"
         rel="noopener noreferrer"
-        class="gsap-reveal pointer-events-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-[#df1783] text-white text-md font-bold shadow-lg shadow-[#000]/30 hover:bg-[#c41474] active:scale-95 transition-all duration-200 whitespace-nowrap"
+        class="gsap-reveal group/link pointer-events-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-[#df1783] text-white text-md font-bold shadow-lg shadow-[#000]/30 hover:bg-[#c41474] active:scale-95 transition-all duration-200 whitespace-nowrap"
     >
         <span data-i18n="demoCtaBtn">Ver Catálogo Demo</span>
-        <i class="fa-solid fa-arrow-right text-md"></i>
+        <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
     </a>
-	</div>
+    
+   </div> 
+    
+    
+    
 
     <!-- Gradient line pinned to the bottom edge of the banner -->
     <div class="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30 pointer-events-none"></div>
@@ -2536,7 +2520,10 @@
 
 
 
+                
 
+
+          
         
 
 
@@ -2549,11 +2536,11 @@
 <section id="integrations" class="py-16 md:py-24 bg- border-y border-[var(--border)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
-        <span class="font-mono-spec text-xs uppercase gsap-reveal tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="integrationsEyebrow">
+        <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="integrationsEyebrow">
             INTEGRACIONES ESTRATÉGICAS
         </span>
 
-        <h2 class="mb-12 text-3xl gsap-reveal md:text-4xl font-bold my-3 section-headline gsap-reveal max-w-3xl mx-auto" data-i18n="integrationsH2">
+        <h2 class="mb-12 text-3xl md:text-4xl font-bold my-3 section-headline gsap-reveal max-w-3xl mx-auto" data-i18n="integrationsH2">
             Conecta EasyListings con las herramientas que ya usas
         </h2>
 
@@ -2561,7 +2548,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-10">
 
             <!-- WhatsApp Business -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel1">PRO</span>
                 <i class="fa-brands fa-whatsapp text-3xl text-[#25D366]"></i>
                 <span class="text-xs font-semibold">WhatsApp Business</span>
@@ -2571,7 +2558,7 @@
             
 
             <!-- Facebook -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel2">PLANEADO</span>
                 <i class="fa-brands fa-facebook text-3xl text-[#1877F2]"></i>
                 <span class="text-xs font-semibold">Facebook</span>
@@ -2582,7 +2569,7 @@
             
 
             <!-- Instagram -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"  data-i18n="integrationsLabel2">PLANEADO</span>
                 <i class="fa-brands fa-instagram text-3xl text-[#E4405F]"></i>
                 <span class="text-xs font-semibold">Instagram</span>
@@ -2593,7 +2580,7 @@
             
 
             <!-- TikTok -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel2">PLANEADO</span>
                 <i class="fa-brands fa-tiktok text-3xl text-[var(--fg)]"></i>
                 <span class="text-xs font-semibold">TikTok</span>
@@ -2603,7 +2590,7 @@
             
 
             <!-- Pinterest -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel1">PRO</span>
                 <i class="fa-brands fa-pinterest text-3xl text-[#BD081C]"></i>
                 <span class="text-xs font-semibold">Pinterest</span>
@@ -2614,7 +2601,7 @@
             
 
             <!-- LinkedIn -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel2">PLANEADO</span>
                 <i class="fa-brands fa-linkedin text-3xl text-[#0A66C2]"></i>
                 <span class="text-xs font-semibold">LinkedIn</span>
@@ -2625,7 +2612,7 @@
 
 
             <!-- Google Analytics 4 -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel1">PRO</span>
                 <i class="fa-solid fa-chart-simple text-3xl text-[#F9AB00]"></i>
                 <span class="text-xs font-semibold">Google Analytics 4</span>
@@ -2635,7 +2622,7 @@
             
 
             <!-- Meta Pixel -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel1">PRO</span>
                 <i class="fa-brands fa-meta text-3xl text-[#0081FB]"></i>
                 <span class="text-xs font-semibold">Meta Pixel</span>
@@ -2646,7 +2633,7 @@
             
 
             <!-- Google Business -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel2">PLANEADO</span>
                 <img
                     src="https://ik.imagekit.io/bebell/ICONS/logos/Google_Google_Business_0.svg"
@@ -2664,7 +2651,7 @@
             
 
             <!-- Google Calendar -->
-            <div class="integration-card gsap-reveal feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
+            <div class="integration-card feature-card group relative p-4 flex flex-col items-center justify-center gap-2">
                 <span class="absolute top-2 right-2 bg-[#DF1783] text-white text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" data-i18n="integrationsLabel2">PLANEADO</span>
                 <img
                     src="https://ik.imagekit.io/bebell/ICONS/logos/google-calendar-icon.svg"
@@ -2683,7 +2670,7 @@
 
 
 <a href="/blog/sala-de-prensa"
-   class="group/link inline-flex items-center gsap-reveal gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[#3FB39A] hover:font-bold">
+   class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[#3FB39A] hover:font-bold">
     <span data-i18n="integrationsCta">Ver todas las integraciones</span>
     <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
 </a>
@@ -2712,7 +2699,7 @@
         
  <!-- ================= Section 8: USE CASES ================= -->
 <section class="relative py-24 overflow-hidden bg-white font-sans">
-    <div class="px-4 mx-auto gsap-reveal max-w-7xl sm:px-6 lg:px-8 text-center">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 text-center">
         <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold" data-i18n="useCasesEyebrow">
             Diseñado para agentes inmobiliarios
         </span>
@@ -2721,7 +2708,7 @@
             Hecho para cada tipo de negocio inmobiliario<br/>
         </h2>
 
-        <p class="max-w-2xl mx-auto text-lg gsap-reveal text-gray-600" data-i18n="useCasesDesc">
+        <p class="max-w-2xl mx-auto text-lg text-gray-600" data-i18n="useCasesDesc">
             Cada negocio inmobiliario tiene necesidades diferentes. Easy Listings te ofrece las herramientas para publicar, administrar y presentar tus propiedades de forma profesional.
         </p>
 
@@ -2770,27 +2757,29 @@
 
         <div class="grid grid-cols-1 gap-12 mt-4 text-left sm:grid-cols-3 max-w-5xl mx-auto">
             <div>
-                <h4 class="mb-3 text-xs font-bold tracking-widest gsap-reveal text-[#df1783] uppercase" data-i18n="uc1Label">Agentes y Brokers</h4>
-                <h3 class="mb-3 text-lg font-bold gsap-reveal text-gray-900" data-i18n="uc1Title">Agentes independientes</h3>
-                <p class="text-sm text-gray-600 gsap-reveal leading-relaxed" data-i18n="uc1Desc">
+                <h4 class="mb-3 text-xs font-bold tracking-widest text-[#df1783] uppercase" data-i18n="uc1Label">Agentes y Brokers</h4>
+                <h3 class="mb-3 text-lg font-bold text-gray-900" data-i18n="uc1Title">Agentes independientes</h3>
+                <p class="text-sm text-gray-600 leading-relaxed" data-i18n="uc1Desc">
                     Publica tus propiedades, gestiona tus clientes y recibe consultas desde tu propio portal inmobiliario personalizado.
                 </p>
-                <button type="button" onclick="window.open('/audiencia/agentes-inmobiliarios', '_blank')" class="inline-flex items-center gsap-reveal mt-4 gap-2 text-sm font-semibold text-[#40b39a] dark:text-[#3FB39A] hover:underline">
-                    <span data-i18n="uc1Link">Ver solución para agentes →</span>
+                <button type="button" onclick="window.open('/publico/agentes', '_blank')" class="group/link inline-flex items-center mt-4 gap-2 text-sm font-semibold text-[#40b39a] dark:text-[#3FB39A] hover:font-bold">
+                    <span data-i18n="uc1Link">Ver solución para agentes </span>
+                    <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
                 </button>
             </div>
-
+            
 
 
 
             <div>
-                <h4 class="mb-3 text-xs font-bold gsap-reveal tracking-widest text-[#df1783] uppercase" data-i18n="uc2Label">Agencias</h4>
-                <h3 class="mb-3 text-lg gsap-reveal font-bold text-gray-900" data-i18n="uc2Title">Empresas Inmobiliarias</h3>
-                <p class="text-sm text-gray-600 gsap-reveal leading-relaxed" data-i18n="uc2Desc">
+                <h4 class="mb-3 text-xs font-bold tracking-widest text-[#df1783] uppercase" data-i18n="uc2Label">Agencias</h4>
+                <h3 class="mb-3 text-lg font-bold text-gray-900" data-i18n="uc2Title">Empresas Inmobiliarias</h3>
+                <p class="text-sm text-gray-600 leading-relaxed" data-i18n="uc2Desc">
                     Administra tu equipo, organiza tu catálogo de propiedades y centraliza las consultas de tus clientes desde un solo panel.
                 </p>
-                <button type="button" onclick="window.open('/audiencia/agencias-inmobiliarias', '_blank')" class="inline-flex gsap-reveal items-center mt-4 gap-2 text-sm font-semibold text-[#40b39a] dark:text-[#3FB39A] hover:underline">
-                    <span data-i18n="uc2Link">Ver solución para agencias →</span>
+                <button type="button" onclick="window.open('publico/agencias', '_blank')" class="group/link inline-flex items-center mt-4 gap-2 text-sm font-semibold text-[#40b39a] dark:text-[#3FB39A] hover:font-bold">
+                    <span data-i18n="uc2Link">Ver solución para agencias </span>
+                    <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
                 </button>
             </div>
 
@@ -2798,13 +2787,14 @@
 
 
             <div>
-                <h4 class="mb-3 text-xs font-bold gsap-reveal tracking-widest text-[#df1783] uppercase" data-i18n="uc3Label">Constructoras</h4>
-                <h3 class="mb-3 text-lg gsap-reveal font-bold text-gray-900" data-i18n="uc3Title">Desarrolladoras inmobiliarias</h3>
-                <p class="text-sm text-gray-600 gsap-reveal leading-relaxed" data-i18n="uc3Desc">
+                <h4 class="mb-3 text-xs font-bold tracking-widest text-[#df1783] uppercase" data-i18n="uc3Label">Constructoras</h4>
+                <h3 class="mb-3 text-lg font-bold text-gray-900" data-i18n="uc3Title">Desarrolladoras inmobiliarias</h3>
+                <p class="text-sm text-gray-600 leading-relaxed" data-i18n="uc3Desc">
                     Presenta tus proyectos, promociona unidades disponibles y recibe consultas desde un portal diseñado para tu empresa.
                 </p>
-                <button type="button" onclick="window.open('/audiencia/constructoras-desarrolladoras', '_blank')" class="inline-flex gsap-reveal items-center mt-4 gap-2 text-sm font-semibold text-[#40b39a] dark:text-[#3FB39A] hover:underline">
-                    <span data-i18n="uc3Link">Ver solución para constructoras →</span>
+                <button type="button" onclick="window.open('/publico/constructoras', '_blank')" class="group/link inline-flex items-center mt-4 gap-2 text-sm font-semibold text-[#40b39a] dark:text-[#3FB39A] hover:font-bold">
+                    <span data-i18n="uc3Link">Ver solución para constructoras </span>
+                    <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
                 </button>
             </div>
         </div>
@@ -2818,7 +2808,13 @@
         
         
      
-  
+     
+     
+     
+     
+     
+     
+     
      
      
         
@@ -2831,7 +2827,6 @@
   id="easylistings-global-stats"
   class="relative overflow-hidden bg-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-black"
 >
-	
   <!-- Capa de Mapa Mundial en el Fondo -->
   <div
   class="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-60"
@@ -2845,7 +2840,7 @@
   <!-- Contenedor Principal -->
   <div class="relative z-10 mx-auto max-w-6xl">
     <!-- Encabezado de la Sección -->
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 text-center gsap-reveal">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 text-center">
       <span
         class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 font-semibold"
         data-i18n="globalStatsEyebrow"
@@ -2864,7 +2859,7 @@
       </h2>
 
       <p
-        class="max-w-2xl mx-auto text-lg gsap-reveal text-gray-600"
+        class="max-w-2xl mx-auto text-lg text-gray-600"
         data-i18n="globalStatsDesc"
       >
         EasyListings ayuda a agentes, brókeres e inmobiliarias a publicar propiedades,
@@ -2875,112 +2870,112 @@
     <!-- Cuadrícula de Países (Abreviaturas en móvil, nombre completo en sm+) -->
     <div class="mx-auto mt-10 max-w-4xl grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-4">
       <!-- República Dominicana -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="República Dominicana">🇩🇴</span>
         <span data-i18n="countryDoShort" class="sm:hidden text-sm font-semibold tracking-wide">RD</span>
         <span data-i18n="countryDoName" class="hidden sm:inline text-sm font-medium truncate">República Dominicana</span>
       </div>
 
       <!-- Estados Unidos -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Estados Unidos">🇺🇸</span>
         <span data-i18n="countryUsShort" class="sm:hidden text-sm font-semibold tracking-wide">EE.UU.</span>
         <span data-i18n="countryUsName" class="hidden sm:inline text-sm font-medium truncate">Estados Unidos</span>
       </div>
 
       <!-- Canadá -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Canadá">🇨🇦</span>
         <span data-i18n="countryCaShort" class="sm:hidden text-sm font-semibold tracking-wide">CA</span>
         <span data-i18n="countryCaName" class="hidden sm:inline text-sm font-medium truncate">Canadá</span>
       </div>
 
       <!-- México -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="México">🇲🇽</span>
         <span data-i18n="countryMxShort" class="sm:hidden text-sm font-semibold tracking-wide">MX</span>
         <span data-i18n="countryMxName" class="hidden sm:inline text-sm font-medium truncate">México</span>
       </div>
 
       <!-- Colombia -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Colombia">🇨🇴</span>
         <span data-i18n="countryCoShort" class="sm:hidden text-sm font-semibold tracking-wide">CO</span>
         <span data-i18n="countryCoName" class="hidden sm:inline text-sm font-medium truncate">Colombia</span>
       </div>
 
       <!-- Puerto Rico -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Puerto Rico">🇵🇷</span>
         <span data-i18n="countryPrShort" class="sm:hidden text-sm font-semibold tracking-wide">PR</span>
         <span data-i18n="countryPrName" class="hidden sm:inline text-sm font-medium truncate">Puerto Rico</span>
       </div>
 
       <!-- Panamá -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Panamá">🇵🇦</span>
         <span data-i18n="countryPaShort" class="sm:hidden text-sm font-semibold tracking-wide">PA</span>
         <span data-i18n="countryPaName" class="hidden sm:inline text-sm font-medium truncate">Panamá</span>
       </div>
 
       <!-- Costa Rica -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Costa Rica">🇨🇷</span>
         <span data-i18n="countryCrShort" class="sm:hidden text-sm font-semibold tracking-wide">CR</span>
         <span data-i18n="countryCrName" class="hidden sm:inline text-sm font-medium truncate">Costa Rica</span>
       </div>
 
       <!-- España -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="España">🇪🇸</span>
         <span data-i18n="countryEsShort" class="sm:hidden text-sm font-semibold tracking-wide">ES</span>
         <span data-i18n="countryEsName" class="hidden sm:inline text-sm font-medium truncate">España</span>
       </div>
 
       <!-- Argentina -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Argentina">🇦🇷</span>
         <span data-i18n="countryArShort" class="sm:hidden text-sm font-semibold tracking-wide">AR</span>
         <span data-i18n="countryArName" class="hidden sm:inline text-sm font-medium truncate">Argentina</span>
       </div>
 
       <!-- Chile -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Chile">🇨🇱</span>
         <span data-i18n="countryClShort" class="sm:hidden text-sm font-semibold tracking-wide">CL</span>
         <span data-i18n="countryClName" class="hidden sm:inline text-sm font-medium truncate">Chile</span>
       </div>
 
       <!-- Perú -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Perú">🇵🇪</span>
         <span data-i18n="countryPeShort" class="sm:hidden text-sm font-semibold tracking-wide">PE</span>
         <span data-i18n="countryPeName" class="hidden sm:inline text-sm font-medium truncate">Perú</span>
       </div>
 
       <!-- Ecuador -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Ecuador">🇪🇨</span>
         <span data-i18n="countryEcShort" class="sm:hidden text-sm font-semibold tracking-wide">EC</span>
         <span data-i18n="countryEcName" class="hidden sm:inline text-sm font-medium truncate">Ecuador</span>
       </div>
 
       <!-- Uruguay -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Uruguay">🇺🇾</span>
         <span data-i18n="countryUyShort" class="sm:hidden text-sm font-semibold tracking-wide">UY</span>
         <span data-i18n="countryUyName" class="hidden sm:inline text-sm font-medium truncate">Uruguay</span>
       </div>
 
       <!-- Guatemala -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Guatemala">🇬🇹</span>
         <span data-i18n="countryGtShort" class="sm:hidden text-sm font-semibold tracking-wide">GT</span>
         <span data-i18n="countryGtName" class="hidden sm:inline text-sm font-medium truncate">Guatemala</span>
       </div>
 
       <!-- Honduras -->
-      <div class="flex items-center gsap-reveal justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
+      <div class="flex items-center justify-center sm:justify-start gap-2 rounded-lg border border-gray-200/80 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-md transition hover:bg-white hover:border-gray-300">
         <span class="text-xl leading-none" role="img" aria-label="Honduras">🇭🇳</span>
         <span data-i18n="countryHnShort" class="sm:hidden text-sm font-semibold tracking-wide">HN</span>
         <span data-i18n="countryHnName" class="hidden sm:inline text-sm font-medium truncate">Honduras</span>
@@ -2991,7 +2986,7 @@
     <div class="mt-10 sm:mt-12 flex justify-center">
       <a
         href="/planes"
-        class="group/link inline-flex items-center gap-2 text-sm gsap-reveal font-semibold text-[var(--primary)] dark:text-[#3FB39A] hover:font-bold"
+        class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] dark:text-[#3FB39A] hover:font-bold"
       >
         <span data-i18n="globalStatsCta">Únete a nuestra red inmobiliaria</span>
         <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-200 ease-out group-hover/link:translate-x-1"></i>
@@ -3024,6 +3019,7 @@
   id="blank-space"
   class="relative overflow-hidden bg-[#fff] py-6 sm:py-12 px-4 sm:px-6 lg:px-8 text-black"
 >
+
  </section> 
   
   
@@ -3485,7 +3481,7 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
                 <div class="flex items-center gap-2">
                     <span data-i18n="footer_credit">Desarrollado en 🇩🇴 por Bebell Digital Solutions.</span>
                 </div>
-                <div class="text-center sm:text-right" data-i18n="footer_copyright">Copyright © 2026 EasyListings • Todos los derechos reservados.</div>
+                <div data-i18n="footer_copyright">Copyright © 2026 EasyListings • Todos los derechos reservados.</div>
             </div>
         </footer>
     </div>
@@ -3718,9 +3714,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
             
             /* Use cases */
             useCasesEyebrow: "Diseñado para agentes inmobiliarios",
-            uc1Link: "Ver solución para agentes →",
-            uc2Link: "Ver solución para agencias →",
-            uc3Link: "Ver solución para constructoras →",
+            uc1Link: "Ver solución para agentes",
+            uc2Link: "Ver solución para agencias",
+            uc3Link: "Ver solución para constructoras",
             useCasesTitle: "Hecho para cada tipo de negocio inmobiliario",
             useCasesDesc: "Cada negocio inmobiliario tiene necesidades diferentes. EasyLisings te ofrece las herramientas para publicar, administrar y presentar tus propiedades de forma profesional.",
             uc1Label: "Agentes y Brokers", 
@@ -4035,9 +4031,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 			/* Use cases */
 
             useCasesEyebrow: "Designed for real estate agents",
-            uc1Link: "See solution for agents →",
-            uc2Link: "See solution for agencies →",
-            uc3Link: "See solution for developers →",
+            uc1Link: "See solution for agents",
+            uc2Link: "See solution for agencies",
+            uc3Link: "See solution for developers",
             useCasesTitle: "Made for every type of real estate business",
             useCasesDesc: "Every real estate business has different needs. EasyListings gives you the tools to publish, manage and present your properties professionally.",
             uc1Label: "Agents & Brokers",
@@ -4332,9 +4328,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 
 			/* Use cases */
             useCasesEyebrow: "Conçu pour les agents immobiliers",
-            uc1Link: "Voir la solution pour les agents →",
-            uc2Link: "Voir la solution pour les agences →",
-            uc3Link: "Voir la solution pour les promoteurs →",
+            uc1Link: "Voir la solution pour les agents",
+            uc2Link: "Voir la solution pour les agences",
+            uc3Link: "Voir la solution pour les promoteurs",
             useCasesTitle: "Fait pour chaque type d'activité immobilière",
             useCasesDesc: "Chaque activité immobilière a des besoins différents. EasyListings vous offre les outils pour publier, gérer et présenter vos biens de manière professionnelle.",
             uc1Label: "Agents et courtiers",
@@ -4635,9 +4631,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
             
             /* Use case section */
             useCasesEyebrow: "Progettato per gli agenti immobiliari",
-            uc1Link: "Scopri la soluzione per gli agenti →",
-            uc2Link: "Scopri la soluzione per le agenzie →",
-            uc3Link: "Scopri la soluzione per i costruttori →",
+            uc1Link: "Scopri la soluzione per gli agenti",
+            uc2Link: "Scopri la soluzione per le agenzie",
+            uc3Link: "Scopri la soluzione per i costruttori",
             useCasesEyebrow: "Progettato per gli agenti immobiliari",
             useCasesTitle: "Fatto per ogni tipo di attività immobiliare",
             useCasesDesc: "Ogni attività immobiliare ha esigenze diverse. EasyListings ti offre gli strumenti per pubblicare, gestire e presentare i tuoi immobili in modo professionale.",
@@ -4964,9 +4960,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 
 			/* Use Cases section */
             useCasesEyebrow: "Für Immobilienmakler entwickelt",
-            uc1Link: "Lösung für Makler ansehen →",
-            uc2Link: "Lösung für Agenturen ansehen →",
-            uc3Link: "Lösung für Bauträger ansehen →",
+            uc1Link: "Lösung für Makler ansehen",
+            uc2Link: "Lösung für Agenturen ansehen",
+            uc3Link: "Lösung für Bauträger ansehen",
             useCasesTitle: "Fatto per ogni tipo di attività immobiliare",
             useCasesDesc: "Ogni attività immobiliare ha esigenze diverse. EasyListings ti offre gli strumenti per pubblicare, gestire e presentare i tuoi immobili in modo professionale.",
             uc1Label: "Agenti e broker",
@@ -5258,9 +5254,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 
 			/* Use Case Section */
             useCasesEyebrow: "Создано для агентов по недвижимости",
-            uc1Link: "Решение для агентов →",
-            uc2Link: "Решение для агентств →",
-            uc3Link: "Решение для застройщиков →",
+            uc1Link: "Решение для агентов",
+            uc2Link: "Решение для агентств",
+            uc3Link: "Решение для застройщиков",
             useCasesTitle: "Для каждого типа бизнеса недвижимости",
             useCasesDesc: "У каждого бизнеса недвижимости разные потребности. EasyListings предоставляет инструменты для профессиональной публикации, управления и презентации ваших объектов.",
             uc1Label: "Агенты и брокеры",
@@ -5558,9 +5554,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 
             /* Use cases section */
             useCasesEyebrow: "专为房地产经纪人设计",
-            uc1Link: "查看经纪人解决方案 →",
-            uc2Link: "查看机构解决方案 →",
-            uc3Link: "查看开发商解决方案 →",
+            uc1Link: "查看经纪人解决方案",
+            uc2Link: "查看机构解决方案",
+            uc3Link: "查看开发商解决方案",
             useCasesEyebrow: "专为房地产经纪人设计",
             useCasesTitle: "适用于每一种房产业务",
             useCasesDesc: "每一种房产业务都有不同的需求。EasyListings 为您提供专业发布、管理和展示房源的工具。",
@@ -5858,9 +5854,9 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
 
 			/* Usecases */
             useCasesEyebrow: "不動産エージェントのために設計",
-            uc1Link: "エージェント向けソリューションを見る →",
-            uc2Link: "代理店向けソリューションを見る →",
-            uc3Link: "デベロッパー向けソリューションを見る →",
+            uc1Link: "エージェント向けソリューションを見る",
+            uc2Link: "代理店向けソリューションを見る",
+            uc3Link: "デベロッパー向けソリューションを見る",
             useCasesTitle: "あらゆる不動産ビジネスに対応",
             useCasesDesc: "不動産ビジネスはそれぞれ異なるニーズを持っています。EasyListings は、物件をプロフェッショナルに公開・管理・紹介するためのツールを提供します。",
             uc1Label: "エージェント＆ブローカー",
@@ -6025,13 +6021,13 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
         ja: { flag: '🇯🇵', code: 'JA' },
     };
 
-    let currentLang = 'es';
+    let currentLang = 'en';
 
     /* ==========================================================================
        2. LANGUAGE APPLICATION
        ========================================================================== */
     function setLanguage(lang) {
-        const requested = (lang || 'es').toLowerCase();
+        const requested = (lang || 'en').toLowerCase();
         const effective = SUPPORTED_LANGS.includes(requested) ? requested : 'en';
         const dict = I18N[effective];
 
@@ -6057,7 +6053,7 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
         const flagEl = document.getElementById('currentFlag');
         const codeEl = document.getElementById('currentCode');
         if (flagEl && codeEl) {
-            const meta = LANG_META[requested] || LANG_META.es;
+            const meta = LANG_META[requested] || LANG_META.en;
             flagEl.textContent = meta.flag;
             codeEl.textContent = meta.code;
         }
@@ -6369,53 +6365,22 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
             });
         }
 
-       /* ---------- GSAP SCROLLTRIGGER ---------- */
-(function initRevealAnimations() {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const gsapReady = typeof gsap !== 'undefined';
-    const stReady = typeof ScrollTrigger !== 'undefined';
+        /* ---------- GSAP SCROLLTRIGGER ---------- */
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced || typeof gsap === 'undefined') return;
 
-    // Fallback: show everything if GSAP missing or reduced motion
-    if (prefersReduced || !gsapReady) {
-        document.querySelectorAll('.gsap-reveal').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-    } else {
-        if (stReady) gsap.registerPlugin(ScrollTrigger);
+        if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
 
         gsap.utils.toArray('.gsap-reveal').forEach((el) => {
-            gsap.fromTo(el,
-                { opacity: 0, y: 36 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.75,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 86%',
-                        once: true
-                    },
-                    onComplete: () => {
-                        // Hard-lock final state — nothing can revert it
-                        el.style.opacity = '1';
-                        el.style.transform = 'none';
-                    }
-                }
-            );
+            gsap.from(el, {
+                y: 36,
+                opacity: 0,
+                duration: 0.75,
+                ease: 'power2.out',
+                scrollTrigger: { trigger: el, start: 'top 86%', once: true }
+            });
         });
 
-        // Recalc trigger positions after images/fonts settle (critical on mobile)
-        if (stReady) {
-            ScrollTrigger.refresh();
-            setTimeout(() => ScrollTrigger.refresh(), 500);
-            setTimeout(() => ScrollTrigger.refresh(), 1500);
-        }
-    }
-
-    // Stat counters — only animate when GSAP is available, else leave as-is
-    if (gsapReady && stReady && !prefersReduced) {
         gsap.utils.toArray('.stat-counter').forEach((counter) => {
             const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
             const obj = { val: 0 };
@@ -6429,8 +6394,6 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
                 }
             });
         });
-    }
-})();
 
 
 
@@ -6746,6 +6709,8 @@ Cómo crear una página web inmobiliaria profesional para tu negocio
     observer.observe(section);
   });
 </script>
+
+
 
 
 
