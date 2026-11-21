@@ -957,6 +957,79 @@
             padding: 2rem 1.5rem; 
             }
         }
+
+
+/* ============================================
+   MOBILE FIXES (max-width: 768px)
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* 1. Reduce body/main padding */
+    main {
+        width: calc(100% - 1rem);
+        padding: 0 8px;
+        grid-gap: 12px;
+    }
+
+    /* 2. Remove padding from hero showcase box */
+    .showcase {
+        padding: 0 !important;
+        min-height: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* Keep content readable inside edge-to-edge hero */
+    .showcase > * {
+        margin-left: 1.25rem;
+        margin-right: 1.25rem;
+    }
+    .showcase > *:first-child { margin-top: 1.25rem; }
+    .showcase > *:last-child  { margin-bottom: 1.25rem; }
+
+    .showcase h1 {
+        font-size: 2rem;
+        line-height: 1.15;
+    }
+    .showcase p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    /* 3. Hide iframe / browser mockup section completely */
+    .device-stage {
+        display: none !important;
+    }
+
+    /* Tidy up other elements on mobile */
+    .top-container {
+        grid-template-areas: 'showcase' 'top-box-a' 'top-box-b';
+        margin-top: 110px;
+        grid-gap: 12px;
+    }
+
+    .boxes {
+        grid-template-columns: 1fr;
+        grid-gap: 12px;
+    }
+
+    .info {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+
+    .portfolio-carousel {
+        padding: 1.5rem 0.75rem;
+    }
+}
+
+
+
+
+
+		
     </style>
 </head>
 <body class="antialiased selection:bg-[#DF1783] selection:text-white">
