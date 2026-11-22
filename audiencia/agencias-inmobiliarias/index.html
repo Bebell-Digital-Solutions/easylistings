@@ -1,0 +1,3170 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-title">EasyListings para Agencias Inmobiliarias 🏢 | Administra tu Agencia desde una Sola Plataforma</title>
+
+    <!-- === METADATOS PRINCIPALES === -->
+    <meta name="description" content="Administra tu agencia inmobiliaria desde una sola plataforma. Centraliza propiedades, clientes, agentes y operaciones comerciales bajo la identidad de tu empresa. EasyListings para agencias y brokers.">
+    <meta name="keywords" content="software para agencias inmobiliarias, plataforma para agencias de bienes raíces, CRM para agencias inmobiliarias, administración de propiedades, gestión de agentes inmobiliarios, EasyListings">
+    <meta name="author" content="EasyListings">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#DF1783">
+
+    <!-- === URL CANÓNICA === -->
+    <link rel="canonical" href="https://easylistings.website/publico/agencias">
+
+    <!-- === FAVICON & APP ICONS === -->
+    <link rel="icon" href="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp?updatedAt=1793038323330">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp?updatedAt=1793038323330">
+
+    <!-- === OPEN GRAPH / FACEBOOK === -->
+    <meta property="og:locale" content="es_DO">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://easylistings.website/publico/agencias">
+    <meta property="og:title" content="EasyListings para Agencias Inmobiliarias | Administra tu Agencia desde una Sola Plataforma">
+    <meta property="og:description" content="Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.">
+    <meta property="og:image" content="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings-Socialshare.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="EasyListings">
+    <meta property="og:locale" content="es_DO">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- === TWITTER / X CARD === -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://easylistings.website/publico/agencias">
+    <meta name="twitter:title" content="EasyListings para Agencias Inmobiliarias | Administra tu Agencia desde una Sola Plataforma">
+    <meta name="twitter:description" content="Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.">
+    <meta name="twitter:image" content="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings-Socialshare.webp">
+
+    <!-- === FONTS & ICONS === -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- === TAILWIND, GSAP & LUCIDE === -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #FAF8F5;
+            --bg-alt: #F2EFE9;
+            --card-bg: #FFFFFF;
+            --fg: #0E0E10;
+            --secondary: #2d3748;
+            --text: #2d3748;
+            --text-light: #718096;
+            --muted: #5C5C63;
+            --primary: #DF1783;
+            --primary-hover: #C21170;
+            --primary-soft: #FDEEFA;
+            --brand-emerald: #0F6E5C;
+            --brand-emerald-soft: #E6F4F1;
+            --accent-gold: #E8B44C;
+            --whatsapp: #25D366;
+            --danger: #C33A2B;
+            --border: #E5E1DA;
+            --border-color: #e2e8f0;
+            --submenu-hover: #fdeefa;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 4px 20px -2px rgba(14, 14, 16, 0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(14, 14, 16, 0.12);
+            --shadow-pink: 0 12px 28px -8px rgba(223, 23, 131, 0.38);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fbfbfb; }
+        ::-webkit-scrollbar-thumb { background: #df1783; border-radius: 4px; }
+
+        html {
+            box-sizing: border-box;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        .font-mono-spec {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .text-h2 {
+            font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+            line-height: 1.15;
+            font-weight: 900;
+        }
+
+        .text-h3 {
+            font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+            line-height: 1.3;
+        }
+
+        h1, h2, h3, h4 { color: var(--text); }
+        p { color: var(--text-light); }
+        .hero-title, .hero-subtitle { color: white !important; }
+
+        /* ================= TOP MENU BAR ================= */
+        .top-menu-bar {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 1200px;
+            z-index: 1100;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .top-menu-bar.full-width {
+            width: 100%;
+            max-width: 100%;
+            left: 0;
+            transform: translateX(0);
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            padding: 0 1.5rem;
+            top: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        .top-menu-content {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        #appLogo {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        #appBrandNameDisplay {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .brand-accent { color: #df1783; }
+
+        .top-menu-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Language Dropdown */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .lang-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #fff;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2939;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .lang-trigger:hover { border-color: #98a2b3; }
+        .lang-trigger:focus-visible {
+            outline: none;
+            border-color: #667085;
+            box-shadow: 0 0 0 3px rgba(102, 112, 133, 0.15);
+        }
+        .lang-trigger .flag { font-size: 18px; line-height: 1; }
+        .lang-trigger .chevron {
+            margin-left: 4px;
+            width: 14px;
+            height: 14px;
+            color: #667085;
+            transition: transform 0.2s ease;
+        }
+        .lang-dropdown.open .chevron { transform: rotate(180deg); }
+
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            min-width: 100%;
+            padding: 6px;
+            margin: 0;
+            list-style: none;
+            background: #fff;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            z-index: 100;
+        }
+
+        .lang-dropdown.open .lang-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2939;
+            text-align: left;
+            transition: background 0.1s ease;
+            text-decoration: none;
+        }
+
+        .lang-option:hover { background: #f2f4f7; }
+        .lang-option[aria-selected="true"] { background: #f9fafb; }
+        .lang-option .flag { font-size: 18px; line-height: 1; }
+
+        /* Buttons */
+        .primary-btn {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .primary-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        /* Nav Menu */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0 auto;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 1rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--fg);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.25s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            line-height: 1;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .nav-link:hover,
+        .nav-item.open .nav-link {
+            background: var(--bg);
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after { transform: scaleX(1); }
+
+        .nav-link .chevron {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.25s ease;
+            opacity: 0.6;
+        }
+
+        .nav-item.open .nav-link .chevron { transform: rotate(180deg); }
+
+        /* 3-Column Submenu with Preview */
+        .submenu.submenu-with-preview {
+            position: fixed;
+            top: 96px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            gap: 12px;
+            padding: 12px;
+            min-width: 760px;
+            max-width: calc(100vw - 2rem);
+            border-radius: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1200;
+            overflow: hidden;
+        }
+
+        .top-menu-bar.full-width .submenu.submenu-with-preview {
+            top: 76px;
+        }
+
+        .nav-item.open .submenu.submenu-with-preview {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .submenu.submenu-with-preview > .submenu-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1 1 0;
+            min-width: 220px;
+        }
+
+        .submenu.submenu-with-preview > .submenu-col .submenu-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 10px;
+            white-space: nowrap;
+            transition: background-color .2s ease, color .2s ease;
+        }
+
+        .submenu.submenu-with-preview > .submenu-col .submenu-link i,
+        .submenu.submenu-with-preview > .submenu-col .submenu-link svg {
+            width: 16px;
+            height: 16px;
+            color: #df1783;
+            flex-shrink: 0;
+        }
+
+        .submenu.submenu-with-preview > .submenu-col .submenu-link:hover,
+        .submenu.submenu-with-preview > .submenu-col .submenu-link:focus-visible {
+            background: rgba(223, 23, 131, 0.08);
+            color: #df1783;
+        }
+
+        .submenu.submenu-with-preview > .submenu-preview {
+            position: relative;
+            flex: 0 0 auto;
+            width: 480px;
+            aspect-ratio: 16 / 9;
+            align-self: flex-start;
+            margin-left: 4px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .submenu.submenu-with-preview > .submenu-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity .35s ease, transform .35s ease;
+        }
+
+        .submenu.submenu-with-preview > .submenu-preview img.is-swapping {
+            opacity: 0;
+            transform: scale(1.03);
+        }
+
+        /* ================= HERO BANNER ================= */
+        .header-banner {
+            width: 100%;
+            padding: 195px 2rem 6rem 2rem;
+            text-align: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+            background-image: url('https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/agencias-inmobiliarias1.webp');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(22, 28, 39, 0.84) 0%, rgba(45, 55, 72, 0.80) 100%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        /* ================= CARDS & MICRO-INTERACTIONS ================= */
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .feature-card .card-icon {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .feature-card:hover .card-icon {
+            transform: scale(1.08);
+        }
+
+        .feature-card .card-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .card-arrow {
+            transform: translateX(4px);
+        }
+
+        @keyframes shakeIcon {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            25% { transform: translateX(-4px) rotate(-5deg); }
+            75% { transform: translateX(4px) rotate(5deg); }
+        }
+
+        .problem-bullet:hover .problem-x {
+            animation: shakeIcon 0.45s ease;
+        }
+
+        /* ================= Embed Code animation ================= */
+        @keyframes embedFloat {
+            0%, 100% { transform: translate(-50%, 0); }
+            50%      { transform: translate(-50%, -6px); }
+        }
+        @keyframes embedFadeUp {
+            0%   { opacity: 0; transform: translate(-50%, 24px); }
+            100% { opacity: 1; transform: translate(-50%, 0); }
+        }
+        @keyframes dotPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(64,179,154,0.55); }
+            50%      { box-shadow: 0 0 0 6px rgba(64,179,154,0); }
+        }
+
+        .embed-float {
+            opacity: 0;
+            animation: embedFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards,
+                       embedFloat 5s ease-in-out 1.4s infinite;
+        }
+        .embed-dot { animation: dotPulse 2s ease-in-out infinite; }
+
+        /* Copy success state */
+        .embed-copy.copied { background-color: #40b39a !important; }
+        .embed-copy.copied .embed-copy-icon::before { content: "\f00c"; } /* fa-check */
+
+        /* ================= BACK TO TOP ================= */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+            box-shadow: var(--shadow-pink);
+        }
+
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #backToTopBtn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* ================= FOOTER (NO CURTAIN REVEAL) ================= */
+        .site-footer {
+            position: relative;
+            z-index: 10;
+            padding: 6rem 1.5rem 3rem 1.5rem;
+            margin-top: auto;
+            background: var(--secondary);
+            border-radius: 0;
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .footer-heading {
+            color: #a0aec0 !important;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link {
+            color: white !important;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary) !important;
+        }
+
+        /* ================= REDUCED MOTION ================= */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+            #appBrandNameDisplay { font-size: 1.25rem; }
+        }
+
+        @media (max-width: 768px) {
+            #appBrandNameDisplay { font-size: 1.15rem; }
+            #desktopCta { display: none; }
+            .header-banner { padding: 150px 1rem 4.5rem 1rem; }
+            .top-menu-bar { width: calc(100% - 1rem); }
+            .top-menu-bar.full-width { padding: 0 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            #appBrandNameDisplay { font-size: 1rem; }
+            .header-banner { padding: 130px 1rem 3.5rem 1rem; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#DF1783] selection:text-white">
+
+    <!-- ================= CURSOR FOLLOWER ================= -->
+    <div id="cursor-follower" aria-hidden="true" class="fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[999] bg-[#DF1783]/60 hidden lg:block opacity-0 transition-opacity duration-300"></div>
+
+    <!-- ================= TOP MENU BAR ================= -->
+    <div class="top-menu-bar" id="topMenuBar">
+        <div class="top-menu-content">
+            <a href="/" class="logo-link inline-flex items-center gap-2 hover:opacity-90 transition-opacity duration-200" aria-label="EasyListings — Inicio">
+                <div class="logo-container">
+                    <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo">
+                    <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+                </div>
+            </a>
+
+            <nav class="nav-menu" aria-label="Main navigation">
+                <div class="nav-item">
+                    <a href="/" class="nav-link" data-i18n="nav_home">Inicio</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="/acerca" class="nav-link" data-i18n="nav_about">Acerca de</a>
+                </div>
+
+                <div class="nav-item" id="funcionesNavItem">
+                    <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
+                        <span data-i18n="nav_features">Funciones</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+                    <div class="submenu submenu-with-preview" role="menu" aria-label="Funciones submenu">
+                        <div class="submenu-col">
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/sitio-web-inmobiliario-banner.webp?updatedAt=1795030721084">
+                                <i data-lucide="map-pin-house"></i>
+                                <span data-i18n="sub_website">Sitio web inmobiliario</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/EasyListings-Studio.webp?updatedAt=1795030720922">
+                                <i data-lucide="share-2"></i>
+                                <span data-i18n="sub_post">Publicación multicanal</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/personalizacion-banner-1.webp">
+                                <i data-lucide="palette"></i>
+                                <span data-i18n="sub_seo">Personalización y SEO</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/embed-widget-1.webp">
+                                <i data-lucide="code-xml"></i>
+                                <span data-i18n="sub_widget">Catálogo integrable</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/formulario-de-captacion.webp?updatedAt=1795030720798">
+                                <i data-lucide="bar-chart-3"></i>
+                                <span data-i18n="sub_form">Formularios de captación</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/pipeline-banner.webp?updatedAt=1795030720801">
+                                <i data-lucide="users"></i>
+                                <span data-i18n="sub_crm">CRM y gestión de clientes</span>
+                            </a>
+                        </div>
+
+                        <div class="submenu-col">
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/inbox-feature.webp">
+                                <i data-lucide="inbox"></i>
+                                <span data-i18n="sub_inbox">Bandeja de mensajes</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/agenda-de-visitas.webp?updatedAt=1795030720832">
+                                <i data-lucide="calendar-check"></i>
+                                <span data-i18n="sub_calendar">Agenda de visitas</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/analitica.webp?updatedAt=1795030720843">
+                                <i data-lucide="chart-no-axes-combined"></i>
+                                <span data-i18n="sub_analytics">Analítica por propiedad</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/traduccion.webp?updatedAt=1795030720933">
+                                <i data-lucide="languages"></i>
+                                <span data-i18n="sub_languages">Plataforma multilingüe</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/calculadora-banner.webp">
+                                <i data-lucide="calculator"></i>
+                                <span data-i18n="sub_calculator">Calculadora hipotecaria</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/AUTOMATION.webp?updatedAt=1795030720884">
+                                <i data-lucide="workflow"></i>
+                                <span data-i18n="sub_automation">Automatizaciones</span>
+                            </a>
+                        </div>
+
+                        <div class="submenu-preview" aria-hidden="true">
+                            <img id="submenuPreviewImg"
+                                 src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/easylistings-main-banner-pink.webp?updatedAt=1794600062403"
+                                 alt="Banner principal EasyListings" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="/planes" class="nav-link" data-i18n="nav_pricing">Planes</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="/contacto" class="nav-link" data-i18n="nav_contact">Contacto</a>
+                </div>
+            </nav>
+
+            <div class="top-menu-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="flag" id="currentFlag">🇩🇴</span>
+                        <span id="currentCode">ES</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+
+                    <ul class="lang-menu" id="langMenu" role="listbox" aria-label="Seleccionar idioma">
+                        <li role="option" aria-selected="true">
+                            <a href="?lang=es" class="lang-option" data-flag="🇩🇴" data-code="ES" data-lang="es"><span class="flag">🇩🇴</span> ES</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=en" class="lang-option" data-flag="🇺🇸" data-code="EN" data-lang="en"><span class="flag">🇺🇸</span> EN</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=fr" class="lang-option" data-flag="🇫🇷" data-code="FR" data-lang="fr"><span class="flag">🇫🇷</span> FR</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=it" class="lang-option" data-flag="🇮🇹" data-code="IT" data-lang="it"><span class="flag">🇮🇹</span> IT</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=de" class="lang-option" data-flag="🇩🇪" data-code="DE" data-lang="de"><span class="flag">🇩🇪</span> DE</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=ru" class="lang-option" data-flag="🇷🇺" data-code="RU" data-lang="ru"><span class="flag">🇷🇺</span> RU</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=zh" class="lang-option" data-flag="🇨🇳" data-code="ZH" data-lang="zh"><span class="flag">🇨🇳</span> ZH</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=ja" class="lang-option" data-flag="🇯🇵" data-code="JA" data-lang="ja"><span class="flag">🇯🇵</span> JA</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="/planes" class="primary-btn hidden sm:inline-flex" id="desktopCta" data-i18n="nav_cta">Activar Cuenta</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ================= HERO SECTION ================= -->
+    <header class="header-banner" id="mainHeader">
+        <div class="header-content">
+            <div class="inline-flex items-center gap-2 bg-[#DF1783] text-white font-mono-spec text-xs sm:text-sm font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-6 shadow-lg">
+                <i class="fa-solid fa-building"></i>
+                <span data-i18n="ag_hero_eyebrow">PARA AGENCIAS INMOBILIARIAS</span>
+            </div>
+
+            <h1 class="hero-title max-w-[960px] mx-auto text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6" data-i18n="ag_hero_title">
+                Administra tu agencia inmobiliaria desde una sola plataforma.
+            </h1>
+
+            <p class="hero-subtitle max-w-3xl mx-auto text-lg md:text-xl font-medium mb-4" data-i18n="ag_hero_sub1">
+                Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.
+            </p>
+
+            <p class="max-w-2xl mx-auto text-sm sm:text-base text-gray-200/90 mb-9 leading-relaxed" data-i18n="ag_hero_sub2">
+                Deja atrás las hojas de cálculo, los procesos desorganizados y las herramientas independientes. Dale a tu equipo un espacio de trabajo diseñado para gestionar el negocio inmobiliario.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="/planes" class="primary-btn text-base sm:text-lg px-7 py-3.5 w-full sm:w-auto" data-i18n="ag_hero_cta1">
+                    Crear mi plataforma inmobiliaria
+                </a>
+                <a href="#solucion" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-base sm:text-lg font-semibold px-7 py-3.5 rounded-xl transition w-full sm:w-auto inline-flex items-center justify-center gap-2" data-i18n="ag_hero_cta2">
+                    <span>Explorar funcionalidades</span>
+                    <i class="fa-solid fa-arrow-down text-xs"></i>
+                </a>
+            </div>
+
+            <!-- Target Audience Chips -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-9">
+                <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3.5 py-1.5 text-xs font-semibold text-gray-700">
+                    <i class="fa-solid fa-store text-[#DF1783]"></i>
+                    <span data-i18n="ag_chip1">Agencias pequeñas y medianas</span>
+                </span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3.5 py-1.5 text-xs font-semibold text-gray-700">
+                    <i class="fa-solid fa-building text-[#DF1783]"></i>
+                    <span data-i18n="ag_chip2">Brokerage firms independientes</span>
+                </span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3.5 py-1.5 text-xs font-semibold text-gray-700">
+                    <i class="fa-solid fa-users text-[#DF1783]"></i>
+                    <span data-i18n="ag_chip3">Agencias con múltiples agentes</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30"></div>
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ================= SECTION 2: PAIN POINTS ================= -->
+    <section id="desafios" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg-alt)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 gsap-reveal">
+                <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_prob_eyebrow">
+                    LOS DESAFÍOS DE ADMINISTRAR UNA AGENCIA
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_prob_h2">
+                    ¿Tu agencia está creciendo, pero tu administración sigue siendo la misma?
+                </h2>
+                <p class="text-base sm:text-lg text-[var(--muted)] mt-4" data-i18n="ag_prob_body1">
+                    A medida que tu agencia incorpora más propiedades y agentes, también aumenta la complejidad de administrar el negocio.
+                </p>
+                <p class="text-base font-semibold text-[var(--fg)] mt-3" data-i18n="ag_prob_body2">
+                    ¿Te identificas con alguna de estas situaciones?
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob1_t">Inventario desorganizado</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob1_d">
+                        Cada agente maneja sus propias propiedades y la información termina duplicada o desactualizada.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob2_t">Falta de seguimiento</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob2_d">
+                        No tienes una visión clara de las oportunidades comerciales y los clientes pendientes.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob3_t">Poco control del equipo</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob3_d">
+                        Necesitas saber qué está haciendo cada agente y cómo avanzan las operaciones.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob4_t">Comisiones difíciles de administrar</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob4_d">
+                        Los acuerdos y las comisiones pueden convertirse en procesos manuales.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob5_t">Dependencia de proveedores externos</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob5_d">
+                        Pagas por distintas herramientas que no necesariamente trabajan juntas.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob6_t">Presencia digital limitada</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob6_d">
+                        Tu agencia necesita una plataforma profesional que represente su propia marca.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= SECTION 3: THE SOLUTION ================= -->
+    <section id="solucion" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Copy & Checklist -->
+                <div class="lg:col-span-6 gsap-reveal">
+                    <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_sol_eyebrow">
+                        UNA PLATAFORMA CENTRALIZADA
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_sol_h2">
+                        Una plataforma para administrar toda tu operación inmobiliaria.
+                    </h2>
+                    <p class="text-base sm:text-lg text-[var(--muted)] mb-6" data-i18n="ag_sol_sub">
+                        EasyListings permite que tu agencia gestione su inventario, organice sus clientes y coordine el trabajo de sus agentes desde un entorno centralizado.
+                    </p>
+
+                    <p class="text-base text-[var(--muted)] mb-6" data-i18n="ag_sol_sub2">
+                        Tu empresa conserva su identidad comercial y puede ofrecer una experiencia digital propia a sus clientes.
+                    </p>
+
+                    <ul class="space-y-3.5 mb-7">
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li1">Inventario centralizado de propiedades.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li2">Gestión de agentes y equipo de trabajo.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li3">Pipeline comercial y seguimiento de prospectos.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li4">Control de comisiones y operaciones.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li5">Plataforma con el dominio de tu agencia.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li6">Integraciones y API para conectar tus herramientas.</span>
+                        </li>
+                    </ul>
+
+                    <div class="p-4 rounded-xl bg-white border border-[var(--border)] border-l-4 border-l-[#40b39a] shadow-sm">
+                        <p class="text-sm text-[var(--fg)] font-medium leading-relaxed" data-i18n="ag_sol_note">
+                            Y si ya tienes una página web, puedes integrar tu catálogo de EasyListings sin tener que reemplazarla.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Visual Showcase - Browser Mockup -->
+                <div class="lg:col-span-6 gsap-reveal">
+                    <div class="relative rounded-3xl overflow-hidden border border-[var(--border)] bg-white shadow-xl">
+                        <!-- Browser Top Bar -->
+                        <div class="bg-[#f2f2f2] border-b border-[#dcdcdc] px-3 py-2 flex items-center gap-2">
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                <span class="w-3 h-3 rounded-full bg-[#ff5f57] border border-[#e0443e]"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#febc2e] border border-[#d6a226]"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#28c840] border border-[#24ab37]"></span>
+                            </div>
+
+                            <div class="flex items-center gap-1 shrink-0 ml-2">
+                                <button type="button" aria-label="Back" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Forward" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Reload" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M20 9A8 8 0 006.3 5.7L4 8m16 8l-2.3 2.3A8 8 0 014 15"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="flex-1 mx-1">
+                                <form onsubmit="return false;" class="relative">
+                                    <div class="flex items-center gap-2 bg-white border border-[#cfcfcf] rounded-full px-3 py-1.5 hover:border-[#a8a8a8] focus-within:border-[#40b39a] focus-within:ring-2 focus-within:ring-[#40b39a]/20 transition-all">
+                                        <svg class="w-3 h-3 text-[#5f6368] shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                            <rect x="4" y="11" width="16" height="10" rx="2"/>
+                                            <path stroke-linecap="round" d="M8 11V7a4 4 0 118 0v4"/>
+                                        </svg>
+                                        <span id="browserUrlValueI18n" data-i18n="browser_url" hidden>tu-agencia.easylistings.website</span>
+                                        <input type="text"
+                                               id="browserUrlInput"
+                                               value="https://tu-agencia.com"
+                                               spellcheck="false"
+                                               class="flex-1 bg-transparent border-0 outline-none text-[12px] text-[#202124] placeholder-[#5f6368] font-mono-spec truncate" />
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="flex items-center gap-1 shrink-0">
+                                <button type="button" aria-label="Bookmark" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.5l2.31 4.68 5.16.75-3.74 3.64.88 5.14L11.48 15.3l-4.61 2.42.88-5.14L4.01 8.93l5.16-.75L11.48 3.5z"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Bookmark" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M6 4h12a1 1 0 011 1v15l-7-4-7 4V5a1 1 0 011-1z"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Menu" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="5" r="1.8"/>
+                                        <circle cx="12" cy="12" r="1.8"/>
+                                        <circle cx="12" cy="19" r="1.8"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Browser Content -->
+                        <div class="p-3">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/real-estate-agency-webpage.webp"
+                                 alt="Plataforma inmobiliaria para agencias EasyListings"
+                                 class="w-full h-auto rounded-2xl object-cover"
+                                 loading="lazy">
+                            <div class="mt-3 px-3 py-2 flex items-center justify-between text-xs text-[var(--muted)] font-mono-spec">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-[#40b39a]"></span>
+                                    <span data-i18n="ag_sol_badge1">Tu marca · Tu dominio</span>
+                                </span>
+                                <span class="text-[#DF1783] font-semibold" data-i18n="ag_sol_badge2">100% de tu agencia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= SECTION 4: FEATURES ================= -->
+    <section id="funciones-agentes" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg-alt)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 gsap-reveal">
+                <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_feat_eyebrow">
+                    FUNCIONES CLAVE PARA AGENCIAS
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold my-3" data-i18n="ag_feat_h2">
+                    Las herramientas que tu agencia necesita para operar.
+                </h2>
+            </div>
+            
+            
+            
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                <!-- Feature 1 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-[#DF1783]/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/property-management-1.webp" alt="Administración centralizada de propiedades" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f1_t">Administración centralizada de propiedades</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f1_d">
+                            Organiza el inventario de tu agencia y mantén la información de las propiedades en un solo sistema.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 2 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-emerald-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/team.webp" alt="Gestión de agentes y equipo" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f2_t">Gestión de agentes y equipo</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f2_d">
+                            Administra los usuarios de tu agencia y facilita el trabajo de tus colaboradores desde una misma plataforma.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 3 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-amber-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pipeline-2.webp" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f3_t">Pipeline comercial</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f3_d">
+                            Supervisa las oportunidades de venta y el seguimiento de los prospectos.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 4 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-amber-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/calculadora.webp" alt="Control de comisiones" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f4_t">Control de comisiones</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f4_d">
+                            Organiza y administra las comisiones relacionadas con las operaciones de tu agencia.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 5 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-purple-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/personalizacion.webp" alt="Plataforma con marca propia" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f5_t">Tu plataforma con marca propia</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f5_d">
+                            Utiliza tu dominio, personaliza la presentación de tu negocio y ofrece una experiencia alineada con tu identidad corporativa.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 6 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-sky-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/uploads.webp" alt="Importación de propiedades" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f6_t">Importación de propiedades</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f6_d">
+                            Importa tu inventario mediante archivos CSV y simplifica la incorporación de propiedades.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 7 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-rose-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/calendar.webp" alt="Calendario y visitas" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f7_t">Calendario y visitas</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f7_d">
+                        
+Cada agente recibe su propio espacio de trabajo con catálogo personal y calendario de reservas, para que coordines la disponibilidad de tu equipo bajo la marca de tu agencia.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 8 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-indigo-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/Integrations.webp?updatedAt=1794590880403" alt="Integraciones y API" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f8_t">Integraciones y API</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f8_d">
+                            Conecta tu plataforma con otros servicios como Zapier o Pabbly usando las integraciones disponibles, webhooks y API, y automatiza el flujo de trabajo de tu agencia.
+                        </p>
+                    </div>
+                </article>
+                
+                <!-- Feature 9 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-indigo-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/share.webp" alt="Integraciones y API" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f9_t">Publicación cruzada en redes y portales</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f9_d">
+                            Publica cada propiedad en Facebook, Instagram, WhatsApp y los principales portales inmobiliarios desde un solo lugar, sin duplicar esfuerzo.
+                        </p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="mt-12 text-center gsap-reveal">
+                <a href="/funciones"
+                   class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:font-bold">
+                    <span data-i18n="featureCta">Descubre todas las funciones</span>
+                    <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
+                </a>
+            </div>
+           
+               
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= SECTION 5: OWN YOUR BRAND ================= -->
+    <section id="redes-inmobiliarias" class="py-20 md:py-28 border-b border-[var(--border)] bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 gsap-reveal">
+                    <div class="relative rounded-3xl overflow-hidden border border-[var(--border)] shadow-xl">
+                        <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/agencias-banner-1.webp"
+                             alt="Plataforma con marca propia para agencias inmobiliarias"
+                             class="w-full h-auto object-cover"
+                             loading="lazy">
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 gsap-reveal">
+                    <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_brand_eyebrow">
+                        TU AGENCIA, TU IDENTIDAD
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_brand_h2">
+                        Tu agencia necesita su propia plataforma, no depender de la de otros.
+                    </h2>
+                    <p class="text-base text-[var(--muted)] leading-relaxed mt-4 mb-6" data-i18n="ag_brand_sub">
+                        Ofrece a tus clientes una experiencia digital que represente a tu empresa.
+                    </p>
+
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li1">Utiliza tu propio dominio.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li2">Personaliza la presentación de tu catálogo.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li3">Oculta la marca EasyListings con el plan correspondiente.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li4">Integra tus propiedades en tu página web actual.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li5">Administra tu presencia digital desde un solo lugar.</span>
+                        </li>
+                    </ul>
+
+                    <div class="p-4 rounded-xl bg-white border border-[var(--border)] border-l-4 border-l-[#40b39a] shadow-sm mb-8">
+                        <p class="text-sm text-[var(--fg)] font-medium leading-relaxed" data-i18n="ag_brand_note">
+                            No tienes que reemplazar tu sitio web actual. Puedes utilizar EasyListings como el sistema que administra tu catálogo y operaciones mientras mantienes tu página existente.
+                        </p>
+                    </div>
+
+                    <a href="/planes" class="group/link primary-btn text-base px-7 py-3.5" data-i18n="ag_brand_cta">
+                        <span>Quiero mi propia plataforma</span>
+                        <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  <!-- ================= SECTION 6: TEAM MANAGEMENT ================= -->
+    <section id="integracion-web" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg-alt)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 gsap-reveal order-2 lg:order-1 pt-12 sm:pt-20 lg:pt-0">
+                    <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_team_eyebrow">
+                        GESTIÓN DE EQUIPO
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_team_h2">
+                        Dale a cada agente las herramientas para trabajar mejor.
+                    </h2>
+                    <div class="space-y-4 text-base text-[var(--muted)] leading-relaxed mt-4 mb-8">
+                        <p data-i18n="ag_team_p1">
+                            Tu agencia necesita que sus agentes puedan gestionar su actividad comercial sin perder la organización general del negocio.
+                        </p>
+                        <p data-i18n="ag_team_p2">
+                            EasyListings permite incorporar usuarios adicionales y administrar el trabajo del equipo desde una misma cuenta.
+                        </p>
+                        <p data-i18n="ag_team_p3">
+                            Desde la administración de propiedades hasta el seguimiento de clientes y las comisiones, puedes organizar tus operaciones en un mismo entorno.
+                        </p>
+                    </div>
+
+                    <a href="/planes" class="group/link primary-btn text-base px-7 py-3.5" data-i18n="ag_team_cta">
+                        <span>Crear mi plataforma para agencias</span>
+                        <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+
+                <div class="lg:col-span-6 gsap-reveal order-1 lg:order-2">
+                    <div class="relative">
+                        <!-- Banner image -->
+                        <div class="rounded-3xl overflow-hidden border border-[var(--border)] bg-white p-3 shadow-xl">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/commission-management.webp"
+                                 alt="Gestión de equipo para agencias inmobiliarias EasyListings"
+                                 class="w-full h-auto rounded-2xl object-cover"
+                                 loading="lazy">
+                        </div>
+
+                        <!-- Floating team member cards (3 columns) -->
+                        <div class="embed-float absolute left-1/2 -translate-x-1/2 -bottom-10 sm:-bottom-14 w-[98%] sm:w-[96%] md:w-[92%] max-w-2xl z-10">
+                            <div class="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+
+                                <!-- Member 1 -->
+                                <div class="team-card flex flex-col items-center text-center bg-white/95 backdrop-blur rounded-2xl border border-[var(--border)] shadow-lg shadow-black/10 px-1.5 py-2.5 sm:px-2.5 sm:py-3 transition-all duration-300 hover:shadow-xl hover:border-[#DF1783]/40">
+                                    <div class="relative shrink-0 mb-1.5">
+                                        <img src="https://ik.imagekit.io/bebell/Image%20Files%20&%20Assets/Profile-Pictures/pimage-25-443-photo.jpg" alt="María González"
+                                             class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-white shadow-sm">
+                                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#25D366] border-2 border-white" title="En línea"></span>
+                                    </div>
+                                    <p class="font-bold text-[11px] sm:text-[13px] text-[var(--fg)] leading-tight truncate w-full" data-i18n="team_m1_name">María González</p>
+                                    <p class="text-[8.5px] sm:text-[10px] text-[var(--muted)] font-medium leading-tight truncate w-full mt-0.5" data-i18n="team_m1_role">Agente Senior</p>
+                                    <div class="flex flex-col items-center gap-0.5 mt-1.5 w-full">
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full">
+                                            <i class="fa-solid fa-phone text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="font-mono-spec truncate">+1 (809) 555-0142</span>
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full min-w-0">
+                                            <i class="fa-regular fa-envelope text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="truncate">maria@agencia.com</span>
+                                        </span>
+                                    </div>
+                                    <a href="https://wa.me/18095550142" target="_blank" rel="noopener"
+                                       class="mt-2 inline-flex items-center justify-center gap-1 rounded-lg bg-[#25D366] hover:bg-[#1ebe5b] active:scale-95 text-white font-semibold w-full px-1.5 py-1.5 sm:px-2 transition-all duration-200 shadow-md shadow-[#25D366]/30"
+                                       aria-label="Contactar a María González por WhatsApp">
+                                        <i class="fa-brands fa-whatsapp text-[11px] sm:text-sm"></i>
+                                        <span class="text-[9px] sm:text-[11px]" data-i18n="team_whatsapp">WhatsApp</span>
+                                    </a>
+                                </div>
+
+                                <!-- Member 2 -->
+                                <div class="team-card flex flex-col items-center text-center bg-white/95 backdrop-blur rounded-2xl border border-[var(--border)] shadow-lg shadow-black/10 px-1.5 py-2.5 sm:px-2.5 sm:py-3 transition-all duration-300 hover:shadow-xl hover:border-[#DF1783]/40">
+                                    <div class="relative shrink-0 mb-1.5">
+                                        <img src="https://ik.imagekit.io/bebell/Image%20Files%20&%20Assets/Profile-Pictures/pimage-22-495-photo.jpg" alt="Carlos Ramírez"
+                                             class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-white shadow-sm">
+                                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#25D366] border-2 border-white" title="En línea"></span>
+                                    </div>
+                                    <p class="font-bold text-[11px] sm:text-[13px] text-[var(--fg)] leading-tight truncate w-full" data-i18n="team_m2_name">Carlos Ramírez</p>
+                                    <p class="text-[8.5px] sm:text-[10px] text-[var(--muted)] font-medium leading-tight truncate w-full mt-0.5" data-i18n="team_m2_role">Broker Asociado</p>
+                                    <div class="flex flex-col items-center gap-0.5 mt-1.5 w-full">
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full">
+                                            <i class="fa-solid fa-phone text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="font-mono-spec truncate">+1 (809) 555-0198</span>
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full min-w-0">
+                                            <i class="fa-regular fa-envelope text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="truncate">carlos@agencia.com</span>
+                                        </span>
+                                    </div>
+                                    <a href="https://wa.me/18095550198" target="_blank" rel="noopener"
+                                       class="mt-2 inline-flex items-center justify-center gap-1 rounded-lg bg-[#25D366] hover:bg-[#1ebe5b] active:scale-95 text-white font-semibold w-full px-1.5 py-1.5 sm:px-2 transition-all duration-200 shadow-md shadow-[#25D366]/30"
+                                       aria-label="Contactar a Carlos Ramírez por WhatsApp">
+                                        <i class="fa-brands fa-whatsapp text-[11px] sm:text-sm"></i>
+                                        <span class="text-[9px] sm:text-[11px]" data-i18n="team_whatsapp">WhatsApp</span>
+                                    </a>
+                                </div>
+
+                                <!-- Member 3 -->
+                                <div class="team-card flex flex-col items-center text-center bg-white/95 backdrop-blur rounded-2xl border border-[var(--border)] shadow-lg shadow-black/10 px-1.5 py-2.5 sm:px-2.5 sm:py-3 transition-all duration-300 hover:shadow-xl hover:border-[#DF1783]/40">
+                                    <div class="relative shrink-0 mb-1.5">
+                                        <img src="https://ik.imagekit.io/bebell/Image%20Files%20&%20Assets/Profile-Pictures/pimage-23-379-photo.jpg" alt="Ana Martínez"
+                                             class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-white shadow-sm">
+                                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#E8B44C] border-2 border-white" title="En visita"></span>
+                                    </div>
+                                    <p class="font-bold text-[11px] sm:text-[13px] text-[var(--fg)] leading-tight truncate w-full" data-i18n="team_m3_name">Ana Martínez</p>
+                                    <p class="text-[8.5px] sm:text-[10px] text-[var(--muted)] font-medium leading-tight truncate w-full mt-0.5" data-i18n="team_m3_role">Coordinadora</p>
+                                    <div class="flex flex-col items-center gap-0.5 mt-1.5 w-full">
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full">
+                                            <i class="fa-solid fa-phone text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="font-mono-spec truncate">+1 (809) 555-0177</span>
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full min-w-0">
+                                            <i class="fa-regular fa-envelope text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="truncate">ana@agencia.com</span>
+                                        </span>
+                                    </div>
+                                    <a href="https://wa.me/18095550177" target="_blank" rel="noopener"
+                                       class="mt-2 inline-flex items-center justify-center gap-1 rounded-lg bg-[#25D366] hover:bg-[#1ebe5b] active:scale-95 text-white font-semibold w-full px-1.5 py-1.5 sm:px-2 transition-all duration-200 shadow-md shadow-[#25D366]/30"
+                                       aria-label="Contactar a Ana Martínez por WhatsApp">
+                                        <i class="fa-brands fa-whatsapp text-[11px] sm:text-sm"></i>
+                                        <span class="text-[9px] sm:text-[11px]" data-i18n="team_whatsapp">WhatsApp</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ================= FINAL CTA ================= -->
+    <section id="cta-final" class="py-20 md:py-24 bg-[var(--bg)]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative rounded-3xl overflow-hidden bg-[#2d3748] px-6 py-14 sm:px-12 sm:py-16 text-center shadow-2xl border border-[#DF1783]/40 gsap-reveal">
+                <div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent"></div>
+
+                <div class="inline-flex items-center gap-2 bg-[#DF1783] text-white font-mono-spec text-xs sm:text-sm font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-6 shadow-lg">
+                    <i class="fa-solid fa-building"></i>
+                    <span data-i18n="cta_web_eyebrow">ADMINISTRA TU AGENCIA</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight max-w-3xl mx-auto mt-4 mb-5" style="color: #ffffff;" data-i18n="ag_final_h2">
+                    Administra tu agencia con herramientas diseñadas para inmobiliarias.
+                </h2>
+
+                <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-9 leading-relaxed" style="color: #cbd5e1;" data-i18n="ag_final_sub">
+                    Centraliza tus propiedades, organiza tu equipo y construye una presencia digital bajo tu propia marca.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="/planes" class="primary-btn text-lg px-9 py-4 w-full sm:w-auto" data-i18n="ag_final_cta">
+                        Activar mi cuenta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+ <!-- FOOTER -->
+    <footer class="site-footer gsap-reveal">
+    
+    <div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30"></div>
+    
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div class="flex flex-col gap-2 md:col-span-3">
+                <div class="flex items-center gap-2 text-white font-bold tracking-tight text-lg">
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo" class="w-8 h-8 object-contain rounded-lg">
+                    EasyListings
+                </div>
+                <div class="text-gray-300 text-sm mt-2" data-i18n="footer_tagline">Exhibe Tus Propiedades. Define Tu Marca.</div>
+                <div class="pt-2 flex flex-col items-start">
+                    <img src="https://ik.imagekit.io/bebell/Badge/google-partner-badge-pink.svg" class="self-start block h-12 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Google Partner Badge">
+                    
+                    
+                    <p class="text-[10px] text-slate-500 mt-4 mb-2 uppercase tracking-widest font-bold" data-i18n="foot_payment_title">Pagos Procesados Seguros</p>
+                    
+                    
+                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/ba7caa40fbb46e4528aaae8b0128896c5e8ff915.png" class="self-start block h-5 w-auto opacity-100 hover:opacity-70 transition filter hover:grayscale-0" alt="Secure PayPal Payments">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_about">Producto</div>
+                    <a href="#" class="footer-link" data-i18n="nav_home">Inicio</a>
+                    <a href="/sobre-nosotros" class="footer-link" data-i18n="footer_about_us">Sobre nosotros</a>
+                    <a href="/planes" class="footer-link" data-i18n="nav_pricing">Planes</a>
+                    <a href="/contacto" class="footer-link" data-i18n="footer_contact">Contacto</a>
+                </div>
+                
+                
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_community">Comunidad</div>
+                    <a href="https://ayuda.easylistings.website" class="footer-link" data-i18n="footer_help">Centro de Ayuda</a>
+                    <a href="https://afiliados.easylistings.website" class="footer-link" data-i18n="footer_affiliates">Afiliados</a>
+                    <a href="/blog" class="footer-link" data-i18n="footer_blog">Blog</a>
+                    <a href="/audiencia/agentes-inmobiliarias" class="footer-link" data-i18n="footer_agent">Agentes y brokers</a>
+                    <a href="/audiencia/agencias-inmobiliarias" class="footer-link" data-i18n="footer_agency">Agencias</a>
+                    <a href="/audiencia/constructoras-desarrolladoras" class="footer-link" data-i18n="footer_const">Constructoras</a>
+                </div>
+                
+                
+                <div class="flex flex-col gap-3">
+                
+                    <div class="footer-heading" data-i18n="footer_col_features">Funciones</div>
+                    
+                        <a href="/funciones/resumen" class="footer-link" data-i18n="footer_feature_catalog">Catálogo Inmobiliario</a>
+                        
+                        <a href="/funciones/catalogo" class="footer-link" data-i18n="footer_feature_multichannel">Publicación Multicanal</a>
+                        
+                        <a href="/funciones/pipeline" class="footer-link" data-i18n="footer_feature_personalization">Personalización y SEO</a>
+                        
+                        <a href="/funciones/contactos" class="footer-link" data-i18n="footer_feature_widget">Catálogo Integrable</a>
+                        
+                        <a href="/funciones/formularios" class="footer-link" data-i18n="footer_feature_forms">Formularios de captación</a>
+                        
+                        <a href="/funciones/seo" class="footer-link" data-i18n="footer_feature_crm">CRM y Gestión de clientes</a>
+                        
+                        <a href="/funciones/bandeja" class="footer-link" data-i18n="footer_feature_inbox">Bandeja de Mensajes</a>
+                        
+                        <a href="/funciones/asistencia-ia" class="footer-link" data-i18n="footer_feature_booking">Agenda de visitas</a>
+                        
+                        <a href="/funciones/automatizaciones" class="footer-link" data-i18n="footer_feature_analytics">Analítica por Propiedad</a>
+                        
+                        <a href="#" class="footer-link" data-i18n="footer_feature_languages">Plataforma Multilingüe</a>
+                        
+                        <a href="/funciones/widget-incrustado" class="footer-link" data-i18n="footer_feature_calculator">Calculadora hipotecaria</a>
+                        
+                        <a href="/funciones/widget-incrustado" class="footer-link" data-i18n="footer_feature_automation">Automatizaciones</a>
+                        
+                    </div>
+                </div>
+
+
+
+            <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end gsap-reveal">
+                    <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[#df1783] transition-colors group" style="background: #f3f1eb;">
+                        <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h4 class="font-bold text-lg sm:text-xl md:text-base lg:text-xl" style="color: var(--text);" data-i18n="support_title">Soporte Online</h4>
+                                <span class="text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider" style="background: rgba(223,23,131,0.12); color: var(--primary); border: 1px solid rgba(223,23,131,0.3);">24/7</span>
+                            </div>
+                            <p class="text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug" style="color: var(--text);" data-i18n="support_text">Contáctenos si tiene alguna pregunta. Nuestro equipo de soporte está aquí para atenderte.</p>
+                            <button onclick="window.open('/soporte', '_blank')" class="bg-[#df1783] hover:bg-[#c0146f] text-white text-xs sm:text-sm md:text-[11px] lg:text-sm font-semibold py-2 px-3 md:py-1.5 md:px-2.5 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#df1783] shadow-sm w-fit">
+                                <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white"></i>
+                                <span data-i18n="support_cta">Escríbanos</span>
+                            </button>
+                        </div>
+                        <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pink-support-agent.webp" alt="24/7 Support" class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                </div>
+            </div>
+
+        <div class="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="border-top: 1px solid var(--text-light); color: var(--text-light);">
+            <div class="flex items-center gap-2">
+                <span data-i18n="footer_credit">Desarrollado en 🇩🇴 por Bebell Digital Solutions.</span>
+            </div>
+            <div class="text-center sm:text-right" data-i18n="footer_copyright">Copyright © 2026 EasyListings • Todos los derechos reservados.</div>
+        </div>
+    </footer>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= BACK TO TOP ================= -->
+    <button id="backToTopBtn" aria-label="Volver arriba">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <script>if (typeof lucide !== 'undefined') lucide.createIcons();</script>
+    
+    
+    
+    
+
+    <!-- ================= APPLICATION LOGIC ================= -->
+    <script>
+    const I18N = {
+        es: {
+            metaTitle: "EasyListings para Agencias Inmobiliarias 🏢 | Administra tu Agencia desde una Sola Plataforma",
+            nav_home: "Inicio",
+            nav_about: "Acerca de",
+            nav_features: "Funciones",
+            nav_pricing: "Planes",
+            nav_contact: "Contacto",
+            nav_cta: "Activar Cuenta",
+            sub_website: "Sitio web inmobiliario",
+            sub_post: "Publicación multicanal",
+            sub_seo: "Personalización y SEO",
+            sub_widget: "Catálogo integrable",
+            sub_form: "Formularios de captación",
+            sub_crm: "CRM y gestión de clientes",
+            sub_inbox: "Bandeja de mensajes",
+            sub_calendar: "Agenda de visitas",
+            sub_analytics: "Analítica por propiedad",
+            sub_languages: "Plataforma multilingüe",
+            sub_calculator: "Calculadora hipotecaria",
+            sub_automation: "Automatizaciones",
+
+            ag_hero_eyebrow: "PARA AGENCIAS INMOBILIARIAS",
+            ag_hero_title: "Administra tu agencia inmobiliaria desde una sola plataforma.",
+            ag_hero_sub1: "Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.",
+            ag_hero_sub2: "Deja atrás las hojas de cálculo, los procesos desorganizados y las herramientas independientes. Dale a tu equipo un espacio de trabajo diseñado para gestionar el negocio inmobiliario.",
+            ag_hero_cta1: "Crear mi plataforma inmobiliaria",
+            ag_hero_cta2: "Explorar funcionalidades",
+            ag_chip1: "Agencias pequeñas y medianas",
+            ag_chip2: "Brokerage firms independientes",
+            ag_chip3: "Agencias con múltiples agentes",
+
+            ag_prob_eyebrow: "LOS DESAFÍOS DE ADMINISTRAR UNA AGENCIA",
+            ag_prob_h2: "¿Tu agencia está creciendo, pero tu administración sigue siendo la misma?",
+            ag_prob_body1: "A medida que tu agencia incorpora más propiedades y agentes, también aumenta la complejidad de administrar el negocio.",
+            ag_prob_body2: "¿Te identificas con alguna de estas situaciones?",
+            ag_prob1_t: "Inventario desorganizado",
+            ag_prob1_d: "Cada agente maneja sus propias propiedades y la información termina duplicada o desactualizada.",
+            ag_prob2_t: "Falta de seguimiento",
+            ag_prob2_d: "No tienes una visión clara de las oportunidades comerciales y los clientes pendientes.",
+            ag_prob3_t: "Poco control del equipo",
+            ag_prob3_d: "Necesitas saber qué está haciendo cada agente y cómo avanzan las operaciones.",
+            ag_prob4_t: "Comisiones difíciles de administrar",
+            ag_prob4_d: "Los acuerdos y las comisiones pueden convertirse en procesos manuales.",
+            ag_prob5_t: "Dependencia de proveedores externos",
+            ag_prob5_d: "Pagas por distintas herramientas que no necesariamente trabajan juntas.",
+            ag_prob6_t: "Presencia digital limitada",
+            ag_prob6_d: "Tu agencia necesita una plataforma profesional que represente su propia marca.",
+
+            ag_sol_eyebrow: "UNA PLATAFORMA CENTRALIZADA",
+            ag_sol_h2: "Una plataforma para administrar toda tu operación inmobiliaria.",
+            ag_sol_sub: "EasyListings permite que tu agencia gestione su inventario, organice sus clientes y coordine el trabajo de sus agentes desde un entorno centralizado.",
+            ag_sol_sub2: "Tu empresa conserva su identidad comercial y puede ofrecer una experiencia digital propia a sus clientes.",
+            ag_sol_li1: "Inventario centralizado de propiedades.",
+            ag_sol_li2: "Gestión de agentes y equipo de trabajo.",
+            ag_sol_li3: "Pipeline comercial y seguimiento de prospectos.",
+            ag_sol_li4: "Control de comisiones y operaciones.",
+            ag_sol_li5: "Plataforma con el dominio de tu agencia.",
+            ag_sol_li6: "Integraciones y API para conectar tus herramientas.",
+            ag_sol_note: "Y si ya tienes una página web, puedes integrar tu catálogo de EasyListings sin tener que reemplazarla.",
+            browser_url: "https://tu-agencia.com",
+            ag_sol_badge1: "Tu marca · Tu dominio",
+            ag_sol_badge2: "100% de tu agencia",
+
+            ag_feat_eyebrow: "FUNCIONES CLAVE PARA AGENCIAS",
+            ag_feat_h2: "Las herramientas que tu agencia necesita para operar.",
+            ag_f1_t: "Administración centralizada de propiedades",
+            ag_f1_d: "Organiza el inventario de tu agencia y mantén la información de las propiedades en un solo sistema.",
+            ag_f2_t: "Gestión de agentes y equipo",
+            ag_f2_d: "Administra los usuarios de tu agencia y facilita el trabajo de tus colaboradores desde una misma plataforma.",
+            ag_f3_t: "Pipeline comercial",
+            ag_f3_d: "Supervisa las oportunidades de venta y el seguimiento de los prospectos.",
+            ag_f4_t: "Control de comisiones",
+            ag_f4_d: "Organiza y administra las comisiones relacionadas con las operaciones de tu agencia.",
+            ag_f5_t: "Tu plataforma con marca propia",
+            ag_f5_d: "Utiliza tu dominio, personaliza la presentación de tu negocio y ofrece una experiencia alineada con tu identidad corporativa.",
+            ag_f6_t: "Importación de propiedades",
+            ag_f6_d: "Importa tu inventario mediante archivos CSV y simplifica la incorporación de propiedades.",
+            ag_f7_t: "Calendario y visitas",
+            ag_f7_d: "Cada agente recibe su propio espacio de trabajo con catálogo personal y calendario de reservas, para que coordines la disponibilidad de tu equipo bajo la marca de tu agencia.",
+            ag_f8_t: "Integraciones y API",
+            ag_f8_d: "Conecta tu plataforma con otros servicios como Zapier o Pabbly usando las integraciones disponibles, webhooks y API, y automatiza el flujo de trabajo de tu agencia.",
+            ag_f9_t: "Publicación cruzada en redes y portales",
+            ag_f9_d: "Publica cada propiedad en Facebook, Instagram, WhatsApp y los principales portales inmobiliarios desde un solo lugar, sin duplicar esfuerzo.",
+            featureCta: "Descubre todas las funciones",
+
+            ag_brand_eyebrow: "TU AGENCIA, TU IDENTIDAD",
+            ag_brand_h2: "Tu agencia necesita su propia plataforma, no depender de la de otros.",
+            ag_brand_sub: "Ofrece a tus clientes una experiencia digital que represente a tu empresa.",
+            ag_brand_li1: "Utiliza tu propio dominio.",
+            ag_brand_li2: "Personaliza la presentación de tu catálogo.",
+            ag_brand_li3: "Oculta la marca EasyListings con el plan correspondiente.",
+            ag_brand_li4: "Integra tus propiedades en tu página web actual.",
+            ag_brand_li5: "Administra tu presencia digital desde un solo lugar.",
+            ag_brand_note: "No tienes que reemplazar tu sitio web actual. Puedes utilizar EasyListings como el sistema que administra tu catálogo y operaciones mientras mantienes tu página existente.",
+            ag_brand_cta: "Quiero mi propia plataforma",
+
+            ag_team_eyebrow: "GESTIÓN DE EQUIPO",
+            ag_team_h2: "Dale a cada agente las herramientas para trabajar mejor.",
+            ag_team_p1: "Tu agencia necesita que sus agentes puedan gestionar su actividad comercial sin perder la organización general del negocio.",
+            ag_team_p2: "EasyListings permite incorporar usuarios adicionales y administrar el trabajo del equipo desde una misma cuenta.",
+            ag_team_p3: "Desde la administración de propiedades hasta el seguimiento de clientes y las comisiones, puedes organizar tus operaciones en un mismo entorno.",
+            ag_team_cta: "Crear mi plataforma para agencias",
+            team_m1_name: "María González",
+			team_m1_role: "Agente Senior",
+			team_m2_name: "Carlos Ramírez",
+			team_m2_role: "Broker Asociado",
+			team_m3_name: "Ana Martínez",
+			team_m3_role: "Coordinadora",
+
+            ag_web_embed_label: "Código incrustrable",
+            ag_web_embed_badge: "1 línea",
+            embed_copy_text: "Copiar código",
+
+            cta_web_eyebrow: "ADMINISTRA TU AGENCIA",
+            ag_final_h2: "Administra tu agencia con herramientas diseñadas para inmobiliarias.",
+            ag_final_sub: "Centraliza tus propiedades, organiza tu equipo y construye una presencia digital bajo tu propia marca.",
+            ag_final_cta: "Activar mi cuenta",
+
+            footer_tagline: "Exhibe Tus Propiedades. Define Tu Marca.",
+            footer_col_about: "Producto",
+            footer_col_community: "Comunidad",
+            footer_col_features: "Funciones",
+            footer_about_us: "Sobre nosotros",
+            footer_terms: "Términos de Uso",
+            footer_privacy: "Privacidad",
+            footer_contact: "Contacto",
+            footer_help: "Centro de Ayuda",
+            footer_affiliates: "Afiliados",
+            footer_blog: "Blog",
+            footer_agent: "Agentes",
+ 			footer_agency: "Agencias",
+ 			footer_const: "Constructoras",
+            foot_payment_title: "Pagos Procesados Seguros",
+            footer_col_features: "Funciones", 
+			footer_feature_catalog: "Catálogo Inmobiliario",  
+			footer_feature_multichannel: "Publicación Multicanal",
+			footer_feature_personalization: "Personalización y SEO",
+			footer_feature_widget: "Catálogo Integrable",
+			footer_feature_forms: "Formularios de captación",
+			footer_feature_crm: "CRM y Gestión de clientes",
+			footer_feature_inbox: "Bandeja de Mensajes",
+			footer_feature_booking: "Agenda de visitas",
+			footer_feature_analytics: "Analítica por Propiedad",
+			footer_feature_languages: "Plataforma Multilingüe", 
+			footer_feature_calculator: "Calculadora hipotecaria",
+			footer_feature_automation: "Automatizaciones",
+            support_title: "Soporte Online",
+            support_text: "Contáctenos si tiene alguna pregunta. Nuestro equipo de soporte está aquí para atenderte.",
+            support_cta: "Escríbanos",
+            footer_credit: "Desarrollado en 🇩🇴 por Bebell Digital Solutions.",
+            footer_copyright: "Copyright © 2026 EasyListings • Todos los derechos reservados."
+        },
+
+        en: {
+         metaTitle: "EasyListings for Real Estate Agencies 🏢 | Manage Your Agency from a Single Platform",
+            nav_home: "Home",
+            nav_about: "About",
+            nav_features: "Features",
+            nav_pricing: "Plans",
+            nav_contact: "Contact",
+            nav_cta: "Activate Account",
+            sub_website: "Real estate website",
+            sub_post: "Multi-channel publishing",
+            sub_seo: "Customization and SEO",
+            sub_widget: "Embeddable catalog",
+            sub_form: "Lead capture forms",
+            sub_crm: "CRM and client management",
+            sub_inbox: "Message inbox",
+            sub_calendar: "Visit scheduling",
+            sub_analytics: "Per-property analytics",
+            sub_languages: "Multilingual platform",
+            sub_calculator: "Mortgage calculator",
+            sub_automation: "Automations",
+
+            ag_hero_eyebrow: "FOR REAL ESTATE AGENCIES",
+            ag_hero_title: "Manage your real estate agency from a single platform.",
+            ag_hero_sub1: "Centralize your properties, clients, agents, and commercial operations in a system under your company's identity.",
+            ag_hero_sub2: "Leave behind spreadsheets, disorganized processes, and standalone tools. Give your team a workspace designed to manage the real estate business.",
+            ag_hero_cta1: "Create my real estate platform",
+            ag_hero_cta2: "Explore features",
+            ag_chip1: "Small and medium agencies",
+            ag_chip2: "Independent brokerage firms",
+            ag_chip3: "Agencies with multiple agents",
+
+            ag_prob_eyebrow: "THE CHALLENGES OF MANAGING AN AGENCY",
+            ag_prob_h2: "Is your agency growing, but your administration staying the same?",
+            ag_prob_body1: "As your agency takes on more properties and agents, the complexity of managing the business also increases.",
+            ag_prob_body2: "Do you identify with any of these situations?",
+            ag_prob1_t: "Disorganized inventory",
+            ag_prob1_d: "Each agent manages their own properties and the information ends up duplicated or outdated.",
+            ag_prob2_t: "Lack of follow-up",
+            ag_prob2_d: "You don't have a clear view of commercial opportunities and pending clients.",
+            ag_prob3_t: "Little team control",
+            ag_prob3_d: "You need to know what each agent is doing and how operations are progressing.",
+            ag_prob4_t: "Commissions hard to manage",
+            ag_prob4_d: "Agreements and commissions can turn into manual processes.",
+            ag_prob5_t: "Dependence on external providers",
+            ag_prob5_d: "You pay for different tools that don't necessarily work together.",
+            ag_prob6_t: "Limited digital presence",
+            ag_prob6_d: "Your agency needs a professional platform that represents its own brand.",
+
+            ag_sol_eyebrow: "A CENTRALIZED PLATFORM",
+            ag_sol_h2: "One platform to manage your entire real estate operation.",
+            ag_sol_sub: "EasyListings lets your agency manage its inventory, organize its clients, and coordinate the work of its agents from a centralized environment.",
+            ag_sol_sub2: "Your company retains its commercial identity and can offer its own digital experience to its clients.",
+            ag_sol_li1: "Centralized property inventory.",
+            ag_sol_li2: "Agent and team management.",
+            ag_sol_li3: "Sales pipeline and prospect tracking.",
+            ag_sol_li4: "Commission and operation control.",
+            ag_sol_li5: "Platform with your agency's domain.",
+            ag_sol_li6: "Integrations and API to connect your tools.",
+            ag_sol_note: "And if you already have a website, you can integrate your EasyListings catalog without having to replace it.",
+            browser_url: "https://your-agency.com",
+            ag_sol_badge1: "Your brand · Your domain",
+            ag_sol_badge2: "100% your agency",
+
+            ag_feat_eyebrow: "KEY FEATURES FOR AGENCIES",
+            ag_feat_h2: "The tools your agency needs to operate.",
+            ag_f1_t: "Centralized property management",
+            ag_f1_d: "Organize your agency's inventory and keep property information in a single system.",
+            ag_f2_t: "Agent and team management",
+            ag_f2_d: "Manage your agency's users and facilitate your collaborators' work from the same platform.",
+            ag_f3_t: "Sales pipeline",
+            ag_f3_d: "Supervise sales opportunities and prospect follow-up.",
+            ag_f4_t: "Commission control",
+            ag_f4_d: "Organize and manage commissions related to your agency's operations.",
+            ag_f5_t: "Your platform with your own brand",
+            ag_f5_d: "Use your domain, customize your business presentation, and offer an experience aligned with your corporate identity.",
+            ag_f6_t: "Property import",
+            ag_f6_d: "Import your inventory via CSV files and simplify the onboarding of properties.",
+            ag_f7_t: "Calendar and visits",
+            ag_f7_d: "Each agent receives their own workspace with a personal catalog and booking calendar, so you can coordinate your team's availability under your agency's brand.",
+            ag_f8_t: "Integrations and API",
+            ag_f8_d: "Connect your platform with other services like Zapier or Pabbly using the available integrations, webhooks, and API, and automate your agency's workflow.",
+            ag_f9_t: "Cross-posting on networks and portals",
+            ag_f9_d: "Publish each property on Facebook, Instagram, WhatsApp, and the main real estate portals from a single place, without duplicating effort.",
+            featureCta: "Discover all features",
+
+            ag_brand_eyebrow: "YOUR AGENCY, YOUR IDENTITY",
+            ag_brand_h2: "Your agency needs its own platform, not to depend on someone else's.",
+            ag_brand_sub: "Offer your clients a digital experience that represents your company.",
+            ag_brand_li1: "Use your own domain.",
+            ag_brand_li2: "Customize your catalog's presentation.",
+            ag_brand_li3: "Hide the EasyListings brand with the corresponding plan.",
+            ag_brand_li4: "Integrate your properties into your current website.",
+            ag_brand_li5: "Manage your digital presence from a single place.",
+            ag_brand_note: "You don't have to replace your current website. You can use EasyListings as the system that manages your catalog and operations while keeping your existing page.",
+            ag_brand_cta: "I want my own platform",
+
+            ag_team_eyebrow: "TEAM MANAGEMENT",
+            ag_team_h2: "Give each agent the tools to work better.",
+            ag_team_p1: "Your agency needs its agents to be able to manage their commercial activity without losing the overall organization of the business.",
+            ag_team_p2: "EasyListings lets you add additional users and manage the team's work from the same account.",
+            ag_team_p3: "From property management to client tracking and commissions, you can organize your operations in a single environment.",
+            ag_team_cta: "Create my agency platform",
+            team_m1_name: "Mary Smith",
+			team_m1_role: "Senior Agent",
+			team_m2_name: "Carl Bennett",
+			team_m2_role: "Broker Associate",
+			team_m3_name: "Ana Cooper",
+			team_m3_role: "Coordinator",
+
+            ag_web_embed_label: "Embeddable code",
+            ag_web_embed_badge: "1 line",
+            embed_copy_text: "Copy code",
+
+            cta_web_eyebrow: "MANAGE YOUR AGENCY",
+            ag_final_h2: "Manage your agency with tools designed for real estate.",
+            ag_final_sub: "Centralize your properties, organize your team, and build a digital presence under your own brand.",
+            ag_final_cta: "Activate my account",
+
+            footer_tagline: "Showcase Your Properties. Define Your Brand.",
+            footer_col_about: "Product",
+            footer_col_community: "Community",
+            footer_col_features: "Features",
+            footer_about_us: "About us",
+            footer_terms: "Terms of Use",
+            footer_privacy: "Privacy",
+            footer_contact: "Contact",
+            footer_help: "Help Center",
+            footer_affiliates: "Affiliates",
+            footer_blog: "Blog",
+            footer_agent: "Agents",
+			footer_agency: "Agencies",
+			footer_const: "Developers",            			footer_col_features: "Features", 
+  			footer_feature_catalog: "Property Catalog",
+            footer_feature_multichannel: "Multichannel Publishing",
+            footer_feature_personalization: "Customization & SEO",
+            footer_feature_widget: "Embeddable Catalog",
+            footer_feature_forms: "Lead Capture Forms",
+            footer_feature_crm: "CRM & Client Management",
+            footer_feature_inbox: "Message Inbox",
+            footer_feature_booking: "Viewing Schedule",
+            footer_feature_analytics: "Per-Property Analytics",
+            footer_feature_languages: "Multilingual Platform",
+            footer_feature_calculator: "Mortgage Calculator",
+            footer_feature_automation: "Automations", 
+            foot_payment_title: "Secure Processed Payments",
+            support_title: "Online Support",
+            support_text: "Contact us if you have any questions. Our support team is here to help you.",
+            support_cta: "Write to us",
+            footer_credit: "Developed in 🇩🇴 by Bebell Digital Solutions.",
+            footer_copyright: "Copyright © 2026 EasyListings • All rights reserved."
+        },
+        fr: {
+            metaTitle: "EasyListings pour les agences immobilières 🏢 | Gérez votre agence depuis une seule plateforme",
+            nav_home: "Accueil",
+            nav_about: "À propos",
+            nav_features: "Fonctionnalités",
+            nav_pricing: "Formules",
+            nav_contact: "Contact",
+            nav_cta: "Activer le compte",
+            sub_website: "Site web immobilier",
+            sub_post: "Publication multicanale",
+            sub_seo: "Personnalisation et SEO",
+            sub_widget: "Catalogue intégrable",
+            sub_form: "Formulaires de capture de prospects",
+            sub_crm: "CRM et gestion des clients",
+            sub_inbox: "Boîte de réception des messages",
+            sub_calendar: "Planification des visites",
+            sub_analytics: "Analyse par bien",
+            sub_languages: "Plateforme multilingue",
+            sub_calculator: "Calculateur de prêt hypothécaire",
+            sub_automation: "Automatisations",
+
+            ag_hero_eyebrow: "POUR LES AGENCES IMMOBILIÈRES",
+            ag_hero_title: "Gérez votre agence immobilière depuis une seule plateforme.",
+            ag_hero_sub1: "Centralisez vos biens, vos clients, vos agents et vos opérations commerciales dans un système à l'identité de votre entreprise.",
+            ag_hero_sub2: "Abandonnez les tableurs, les processus désorganisés et les outils isolés. Offrez à votre équipe un espace de travail conçu pour gérer le métier immobilier.",
+            ag_hero_cta1: "Créer ma plateforme immobilière",
+            ag_hero_cta2: "Explorer les fonctionnalités",
+            ag_chip1: "Agences de petite et moyenne taille",
+            ag_chip2: "Cabinets de courtage indépendants",
+            ag_chip3: "Agences multi-agents",
+
+            ag_prob_eyebrow: "LES DÉFIS DE LA GESTION D'UNE AGENCE",
+            ag_prob_h2: "Votre agence se développe, mais votre administration reste la même ?",
+            ag_prob_body1: "À mesure que votre agence gère davantage de biens et d'agents, la complexité de la gestion de l'activité augmente également.",
+            ag_prob_body2: "Vous reconnaissez-vous dans l'une de ces situations ?",
+            ag_prob1_t: "Inventaire désorganisé",
+            ag_prob1_d: "Chaque agent gère ses propres biens et les informations finissent dupliquées ou obsolètes.",
+            ag_prob2_t: "Absence de suivi",
+            ag_prob2_d: "Vous n'avez pas une vision claire des opportunités commerciales et des clients en attente.",
+            ag_prob3_t: "Peu de contrôle sur l'équipe",
+            ag_prob3_d: "Vous avez besoin de savoir ce que fait chaque agent et comment les opérations avancent.",
+            ag_prob4_t: "Commissions difficiles à gérer",
+            ag_prob4_d: "Les accords et les commissions peuvent devenir des processus manuels.",
+            ag_prob5_t: "Dépendance envers des prestataires externes",
+            ag_prob5_d: "Vous payez pour différents outils qui ne travaillent pas nécessairement ensemble.",
+            ag_prob6_t: "Présence numérique limitée",
+            ag_prob6_d: "Votre agence a besoin d'une plateforme professionnelle qui représente sa propre marque.",
+
+            ag_sol_eyebrow: "UNE PLATEFORME CENTRALISÉE",
+            ag_sol_h2: "Une plateforme pour gérer toute votre activité immobilière.",
+            ag_sol_sub: "EasyListings permet à votre agence de gérer son inventaire, d'organiser ses clients et de coordonner le travail de ses agents depuis un environnement centralisé.",
+            ag_sol_sub2: "Votre entreprise conserve son identité commerciale et peut offrir sa propre expérience numérique à ses clients.",
+            ag_sol_li1: "Inventaire centralisé des biens.",
+            ag_sol_li2: "Gestion des agents et de l'équipe.",
+            ag_sol_li3: "Pipeline commercial et suivi des prospects.",
+            ag_sol_li4: "Contrôle des commissions et des opérations.",
+            ag_sol_li5: "Plateforme avec le domaine de votre agence.",
+            ag_sol_li6: "Intégrations et API pour connecter vos outils.",
+            ag_sol_note: "Et si vous avez déjà un site web, vous pouvez intégrer votre catalogue EasyListings sans avoir à le remplacer.",
+            browser_url: "https://votre-agence.com",
+            ag_sol_badge1: "Votre marque · Votre domaine",
+            ag_sol_badge2: "100 % votre agence",
+
+            ag_feat_eyebrow: "FONCTIONNALITÉS CLÉS POUR LES AGENCES",
+            ag_feat_h2: "Les outils dont votre agence a besoin pour fonctionner.",
+            ag_f1_t: "Gestion centralisée des biens",
+            ag_f1_d: "Organisez l'inventaire de votre agence et conservez les informations des biens dans un seul système.",
+            ag_f2_t: "Gestion des agents et de l'équipe",
+            ag_f2_d: "Gérez les utilisateurs de votre agence et facilitez le travail de vos collaborateurs depuis une même plateforme.",
+            ag_f3_t: "Pipeline commercial",
+            ag_f3_d: "Supervisez les opportunités de vente et le suivi des prospects.",
+            ag_f4_t: "Contrôle des commissions",
+            ag_f4_d: "Organisez et gérez les commissions liées aux opérations de votre agence.",
+            ag_f5_t: "Votre plateforme à votre marque",
+            ag_f5_d: "Utilisez votre domaine, personnalisez la présentation de votre activité et offrez une expérience alignée sur votre identité corporate.",
+            ag_f6_t: "Importation de biens",
+            ag_f6_d: "Importez votre inventaire via des fichiers CSV et simplifiez l'intégration des biens.",
+            ag_f7_t: "Calendrier et visites",
+            ag_f7_d: "Chaque agent reçoit son propre espace de travail avec un catalogue personnel et un calendrier de réservation, pour que vous puissiez coordonner la disponibilité de votre équipe sous la marque de votre agence.",
+            ag_f8_t: "Intégrations et API",
+            ag_f8_d: "Connectez votre plateforme à d'autres services comme Zapier ou Pabbly grâce aux intégrations disponibles, aux webhooks et à l'API, et automatisez le flux de travail de votre agence.",
+            ag_f9_t: "Publication croisée sur les réseaux et portails",
+            ag_f9_d: "Publiez chaque bien sur Facebook, Instagram, WhatsApp et les principaux portails immobiliers depuis un seul endroit, sans dupliquer les efforts.",
+            featureCta: "Découvrez toutes les fonctionnalités",
+
+            ag_brand_eyebrow: "VOTRE AGENCE, VOTRE IDENTITÉ",
+            ag_brand_h2: "Votre agence a besoin de sa propre plateforme, et non de dépendre de celle des autres.",
+            ag_brand_sub: "Offrez à vos clients une expérience numérique qui représente votre entreprise.",
+            ag_brand_li1: "Utilisez votre propre domaine.",
+            ag_brand_li2: "Personnalisez la présentation de votre catalogue.",
+            ag_brand_li3: "Masquez la marque EasyListings avec la formule correspondante.",
+            ag_brand_li4: "Intégrez vos biens dans votre site web actuel.",
+            ag_brand_li5: "Gérez votre présence numérique depuis un seul endroit.",
+            ag_brand_note: "Vous n'avez pas à remplacer votre site web actuel. Vous pouvez utiliser EasyListings comme le système qui gère votre catalogue et vos opérations tout en conservant votre page existante.",
+            ag_brand_cta: "Je veux ma propre plateforme",
+
+            ag_team_eyebrow: "GESTION D'ÉQUIPE",
+            ag_team_h2: "Donnez à chaque agent les outils pour mieux travailler.",
+            ag_team_p1: "Votre agence a besoin que ses agents puissent gérer leur activité commerciale sans perdre l'organisation générale de l'entreprise.",
+            ag_team_p2: "EasyListings permet d'ajouter des utilisateurs supplémentaires et de gérer le travail de l'équipe depuis un même compte.",
+            ag_team_p3: "De la gestion des biens au suivi des clients et aux commissions, vous pouvez organiser vos opérations dans un même environnement.",
+            ag_team_cta: "Créer ma plateforme pour agences",
+            ag_team_cta: "Créez ma plateforme d'agence",
+		team_m1_name: "Mary Smith",
+		team_m1_role: "Agent senior",
+		team_m2_name: "Carl Bennett",
+		team_m2_role: "Courtier associé",
+		team_m3_name: "Ana Cooper",
+		team_m3_role: "Coordinatrice",
+
+            ag_web_embed_label: "Code intégrable",
+            ag_web_embed_badge: "1 ligne",
+            embed_copy_text: "Copier le code",
+
+            cta_web_eyebrow: "GÉREZ VOTRE AGENCE",
+            ag_final_h2: "Gérez votre agence avec des outils conçus pour l'immobilier.",
+            ag_final_sub: "Centralisez vos biens, organisez votre équipe et construisez une présence numérique sous votre propre marque.",
+            ag_final_cta: "Activer mon compte",
+
+            footer_tagline: "Exposez vos biens. Affirmez votre marque.",
+            footer_col_about: "Produit",
+            footer_col_community: "Communauté",
+            footer_col_features: "Fonctionnalités",
+            footer_about_us: "À propos",
+            footer_terms: "Conditions",
+            footer_privacy: "Confidentialité",
+            footer_contact: "Contact",
+            footer_help: "Centre d'aide",
+            footer_affiliates: "Affiliés",
+            footer_blog: "Blog",
+            footer_agent: "Agents",
+			footer_agency: "Agences",
+			footer_const: "Constructeurs",
+            footer_feature_catalog: "Catalogue de biens",				footer_feature_multichannel: "Publication multicanal",
+	footer_feature_personalization: "Personnalisation et SEO",
+			footer_feature_widget: "Catalogue intégrable",
+			footer_feature_forms: "Formulaires de capture de prospects",
+			footer_feature_crm: "CRM et gestion des clients",
+			footer_feature_inbox: "Boîte de réception",
+			footer_feature_booking: "Planning des visites",
+			footer_feature_analytics: "Statistiques par bien",
+			footer_feature_languages: "Plateforme multilingue",			
+            footer_feature_calculator: "Calculateur de prêt immobilier",
+			footer_feature_automation: "Automatisations",
+            
+            foot_payment_title: "Paiements traités en toute sécurité",
+            
+            support_title: "Assistance en ligne",
+            support_text: "Contactez-nous si vous avez des questions. Notre équipe d'assistance est là pour vous aider.",
+            support_cta: "Écrivez-nous",
+            footer_credit: "Développé en 🇩🇴 par Bebell Digital Solutions.",
+            footer_copyright: "Copyright © 2026 EasyListings • Tous droits réservés."
+        },
+        it: {
+         	metaTitle: "EasyListings per Agenzie Immobiliari 🏢 | Gestisci la tua Agenzia da un'unica Piattaforma",
+            nav_home: "Home",
+            nav_about: "Chi siamo",
+            nav_features: "Funzionalità",
+            nav_pricing: "Piani",
+            nav_contact: "Contatti",
+            nav_cta: "Attiva Account",
+            sub_website: "Sito web immobiliare",
+            sub_post: "Pubblicazione multicanale",
+            sub_seo: "Personalizzazione e SEO",
+            sub_widget: "Catalogo integrabile",
+            sub_form: "Moduli di acquisizione contatti",
+            sub_crm: "CRM e gestione clienti",
+            sub_inbox: "Casella messaggi",
+            sub_calendar: "Pianificazione visite",
+            sub_analytics: "Analisi per immobile",
+            sub_languages: "Piattaforma multilingue",
+            sub_calculator: "Calcolatore mutuo",
+            sub_automation: "Automazioni",
+
+            ag_hero_eyebrow: "PER AGENZIE IMMOBILIARI",
+            ag_hero_title: "Gestisci la tua agenzia immobiliare da un'unica piattaforma.",
+            ag_hero_sub1: "Centralizza i tuoi immobili, clienti, agenti e operazioni commerciali in un sistema sotto l'identità della tua azienda.",
+            ag_hero_sub2: "Lascia alle spalle i fogli di calcolo, i processi disorganizzati e gli strumenti separati. Offri al tuo team uno spazio di lavoro progettato per gestire il business immobiliare.",
+            ag_hero_cta1: "Crea la mia piattaforma immobiliare",
+            ag_hero_cta2: "Esplora le funzionalità",
+            ag_chip1: "Agenzie piccole e medie",
+            ag_chip2: "Società di intermediazione indipendenti",
+            ag_chip3: "Agenzie con più agenti",
+
+            ag_prob_eyebrow: "LE SFIDE DELLA GESTIONE DI UN'AGENZIA",
+            ag_prob_h2: "La tua agenzia sta crescendo, ma la tua amministrazione è sempre la stessa?",
+            ag_prob_body1: "Man mano che la tua agenzia acquisisce più immobili e agenti, aumenta anche la complessità di gestire il business.",
+            ag_prob_body2: "Ti riconosci in qualcuna di queste situazioni?",
+            ag_prob1_t: "Inventario disorganizzato",
+            ag_prob1_d: "Ogni agente gestisce i propri immobili e le informazioni finiscono duplicate o obsolete.",
+            ag_prob2_t: "Mancanza di follow-up",
+            ag_prob2_d: "Non hai una visione chiara delle opportunità commerciali e dei clienti in sospeso.",
+            ag_prob3_t: "Scarso controllo del team",
+            ag_prob3_d: "Devi sapere cosa sta facendo ogni agente e come procedono le operazioni.",
+            ag_prob4_t: "Commissioni difficili da gestire",
+            ag_prob4_d: "Gli accordi e le commissioni possono trasformarsi in processi manuali.",
+            ag_prob5_t: "Dipendenza da fornitori esterni",
+            ag_prob5_d: "Paghi per strumenti diversi che non necessariamente funzionano insieme.",
+            ag_prob6_t: "Presenza digitale limitata",
+            ag_prob6_d: "La tua agenzia ha bisogno di una piattaforma professionale che rappresenti il proprio marchio.",
+
+            ag_sol_eyebrow: "UNA PIATTAFORMA CENTRALIZZATA",
+            ag_sol_h2: "Un'unica piattaforma per gestire tutta la tua operatività immobiliare.",
+            ag_sol_sub: "EasyListings consente alla tua agenzia di gestire il proprio inventario, organizzare i clienti e coordinare il lavoro degli agenti da un ambiente centralizzato.",
+            ag_sol_sub2: "La tua azienda conserva la propria identità commerciale e può offrire ai propri clienti un'esperienza digitale propria.",
+            ag_sol_li1: "Inventario immobiliare centralizzato.",
+            ag_sol_li2: "Gestione agenti e team di lavoro.",
+            ag_sol_li3: "Pipeline commerciale e monitoraggio dei potenziali clienti.",
+            ag_sol_li4: "Controllo delle commissioni e delle operazioni.",
+            ag_sol_li5: "Piattaforma con il dominio della tua agenzia.",
+            ag_sol_li6: "Integrazioni e API per collegare i tuoi strumenti.",
+            ag_sol_note: "E se hai già un sito web, puoi integrare il tuo catalogo EasyListings senza doverlo sostituire.",
+            browser_url: "https://tua-agenzia.com",
+            ag_sol_badge1: "Il tuo marchio · Il tuo dominio",
+            ag_sol_badge2: "100% della tua agenzia",
+
+            ag_feat_eyebrow: "FUNZIONALITÀ CHIAVE PER LE AGENZIE",
+            ag_feat_h2: "Gli strumenti di cui la tua agenzia ha bisogno per operare.",
+            ag_f1_t: "Gestione centralizzata degli immobili",
+            ag_f1_d: "Organizza l'inventario della tua agenzia e mantieni le informazioni sugli immobili in un unico sistema.",
+            ag_f2_t: "Gestione agenti e team",
+            ag_f2_d: "Gestisci gli utenti della tua agenzia e agevola il lavoro dei tuoi collaboratori da un'unica piattaforma.",
+            ag_f3_t: "Pipeline commerciale",
+            ag_f3_d: "Supervisiona le opportunità di vendita e il monitoraggio dei potenziali clienti.",
+            ag_f4_t: "Controllo delle commissioni",
+            ag_f4_d: "Organizza e gestisci le commissioni relative alle operazioni della tua agenzia.",
+            ag_f5_t: "La tua piattaforma con il tuo marchio",
+            ag_f5_d: "Usa il tuo dominio, personalizza la presentazione della tua attività e offri un'esperienza allineata alla tua identità aziendale.",
+            ag_f6_t: "Importazione immobili",
+            ag_f6_d: "Importa il tuo inventario tramite file CSV e semplifica l'inserimento degli immobili.",
+            ag_f7_t: "Calendario e visite",
+            ag_f7_d: "Ogni agente riceve il proprio spazio di lavoro con catalogo personale e calendario delle prenotazioni, così puoi coordinare la disponibilità del tuo team sotto il marchio della tua agenzia.",
+            ag_f8_t: "Integrazioni e API",
+            ag_f8_d: "Collega la tua piattaforma ad altri servizi come Zapier o Pabbly usando le integrazioni disponibili, i webhook e l'API, e automatizza il flusso di lavoro della tua agenzia.",
+            ag_f9_t: "Pubblicazione incrociata su social e portali",
+            ag_f9_d: "Pubblica ogni immobile su Facebook, Instagram, WhatsApp e i principali portali immobiliari da un unico posto, senza duplicare gli sforzi.",
+            featureCta: "Scopri tutte le funzionalità",
+
+            ag_brand_eyebrow: "LA TUA AGENZIA, LA TUA IDENTITÀ",
+            ag_brand_h2: "La tua agenzia ha bisogno della propria piattaforma, non di dipendere da quella di altri.",
+            ag_brand_sub: "Offri ai tuoi clienti un'esperienza digitale che rappresenti la tua azienda.",
+            ag_brand_li1: "Usa il tuo dominio personale.",
+            ag_brand_li2: "Personalizza la presentazione del tuo catalogo.",
+            ag_brand_li3: "Nascondi il marchio EasyListings con il piano corrispondente.",
+            ag_brand_li4: "Integra i tuoi immobili nel tuo sito web attuale.",
+            ag_brand_li5: "Gestisci la tua presenza digitale da un unico posto.",
+            ag_brand_note: "Non devi sostituire il tuo sito web attuale. Puoi utilizzare EasyListings come sistema che gestisce il tuo catalogo e le tue operazioni mantenendo la tua pagina esistente.",
+            ag_brand_cta: "Voglio la mia piattaforma",
+
+            ag_team_eyebrow: "GESTIONE DEL TEAM",
+            ag_team_h2: "Dai a ogni agente gli strumenti per lavorare meglio.",
+            ag_team_p1: "La tua agenzia ha bisogno che i suoi agenti possano gestire la propria attività commerciale senza perdere l'organizzazione generale del business.",
+            ag_team_p2: "EasyListings consente di aggiungere utenti aggiuntivi e gestire il lavoro del team da un unico account.",
+            ag_team_p3: "Dalla gestione degli immobili al monitoraggio dei clienti e alle commissioni, puoi organizzare le tue operazioni in un unico ambiente.",
+            ag_team_cta: "Crea la mia piattaforma per agenzie",
+            ag_team_cta: "Crea la mia piattaforma per agenzie",
+			team_m1_name: "Mary Smith",
+			team_m1_role: "Agente senior",
+			team_m2_name: "Carl Bennett",
+			team_m2_role: "Broker associato",
+			team_m3_name: "Ana Cooper",
+			team_m3_role: "Coordinatrice",
+
+            ag_web_embed_label: "Codice integrabile",
+            ag_web_embed_badge: "1 riga",
+            embed_copy_text: "Copia codice",
+
+            cta_web_eyebrow: "GESTISCI LA TUA AGENZIA",
+            ag_final_h2: "Gestisci la tua agenzia con strumenti progettati per l'immobiliare.",
+            ag_final_sub: "Centralizza i tuoi immobili, organizza il tuo team e costruisci una presenza digitale sotto il tuo marchio.",
+            ag_final_cta: "Attiva il mio account",
+
+            footer_tagline: "Mostra i tuoi immobili. Definisci il tuo marchio.",
+            footer_col_about: "Prodotto",
+            footer_col_community: "Community",
+            footer_col_features: "Funzionalità",
+            footer_about_us: "Chi siamo",
+            footer_terms: "Termini di utilizzo",
+            footer_privacy: "Privacy",
+            footer_contact: "Contatti",
+            footer_help: "Centro assistenza",
+            footer_affiliates: "Affiliati",
+            footer_blog: "Blog",
+            footer_agent: "Agenti",
+			footer_agency: "Agenzie",
+			footer_const: "Costruttori",
+            footer_feature_catalog: "Catalogo immobili",
+			footer_feature_multichannel: "Pubblicazione multicanale",           		footer_feature_personalization: "Personalizzazione e SEO",
+			footer_feature_widget: "Catalogo incorporabile",
+			footer_feature_forms: "Moduli di acquisizione contatti",
+			footer_feature_crm: "CRM e gestione clienti",
+			footer_feature_inbox: "Casella dei messaggi",
+			footer_feature_booking: "Calendario visite",
+			footer_feature_analytics: "Statistiche per immobile",
+			footer_feature_languages: "Piattaforma multilingue",
+			footer_feature_calculator: "Calcolatore mutuo",
+			footer_feature_automation: "Automazioni",
+            foot_payment_title: "Pagamenti elaborati in modo sicuro",
+            
+            support_title: "Supporto online",
+            support_text: "Contattaci se hai domande. Il nostro team di supporto è qui per aiutarti.",
+            support_cta: "Scrivici",
+            footer_credit: "Sviluppato in 🇩🇴 da Bebell Digital Solutions.",
+            footer_copyright: "Copyright © 2026 EasyListings • Tutti i diritti riservati."
+
+        },
+        de: {
+        metaTitle: "EasyListings für Immobilienagenturen 🏢 | Verwalten Sie Ihre Agentur von einer einzigen Plattform aus",
+            nav_home: "Startseite",
+            nav_about: "Über uns",
+            nav_features: "Funktionen",
+            nav_pricing: "Tarife",
+            nav_contact: "Kontakt",
+            nav_cta: "Konto aktivieren",
+            sub_website: "Immobilien-Website",
+            sub_post: "Multichannel-Veröffentlichung",
+            sub_seo: "Personalisierung und SEO",
+            sub_widget: "Einbindbarer Katalog",
+            sub_form: "Formulare zur Lead-Erfassung",
+            sub_crm: "CRM und Kundenverwaltung",
+            sub_inbox: "Nachrichten-Posteingang",
+            sub_calendar: "Besichtigungsplanung",
+            sub_analytics: "Analyse pro Immobilie",
+            sub_languages: "Mehrsprachige Plattform",
+            sub_calculator: "Hypothekenrechner",
+            sub_automation: "Automatisierungen",
+
+            ag_hero_eyebrow: "FÜR IMMOBILIENAGENTUREN",
+            ag_hero_title: "Verwalten Sie Ihre Immobilienagentur von einer einzigen Plattform aus.",
+            ag_hero_sub1: "Zentralisieren Sie Ihre Immobilien, Kunden, Makler und Geschäftsabläufe in einem System unter der Identität Ihres Unternehmens.",
+            ag_hero_sub2: "Lassen Sie Tabellenkalkulationen, unorganisierte Prozesse und isolierte Tools hinter sich. Geben Sie Ihrem Team einen Arbeitsbereich, der für die Verwaltung des Immobiliengeschäfts konzipiert ist.",
+            ag_hero_cta1: "Meine Immobilienplattform erstellen",
+            ag_hero_cta2: "Funktionen entdecken",
+            ag_chip1: "Kleine und mittlere Agenturen",
+            ag_chip2: "Unabhängige Maklerfirmen",
+            ag_chip3: "Agenturen mit mehreren Maklern",
+
+            ag_prob_eyebrow: "DIE HERAUSFORDERUNGEN BEI DER VERWALTUNG EINER AGENTUR",
+            ag_prob_h2: "Ihre Agentur wächst, aber Ihre Verwaltung bleibt gleich?",
+            ag_prob_body1: "Je mehr Immobilien und Makler Ihre Agentur betreut, desto komplexer wird auch die Verwaltung des Geschäfts.",
+            ag_prob_body2: "Erkennen Sie sich in einer dieser Situationen wieder?",
+            ag_prob1_t: "Unorganisierter Bestand",
+            ag_prob1_d: "Jeder Makler verwaltet seine eigenen Immobilien und die Informationen werden doppelt oder veraltet.",
+            ag_prob2_t: "Fehlende Nachverfolgung",
+            ag_prob2_d: "Sie haben keinen klaren Überblick über Geschäftsmöglichkeiten und ausstehende Kunden.",
+            ag_prob3_t: "Wenig Kontrolle über das Team",
+            ag_prob3_d: "Sie müssen wissen, was jeder Makler tut und wie die Vorgänge voranschreiten.",
+            ag_prob4_t: "Schwer zu verwaltende Provisionen",
+            ag_prob4_d: "Vereinbarungen und Provisionen können zu manuellen Prozessen werden.",
+            ag_prob5_t: "Abhängigkeit von externen Anbietern",
+            ag_prob5_d: "Sie zahlen für verschiedene Tools, die nicht unbedingt zusammenarbeiten.",
+            ag_prob6_t: "Begrenzte digitale Präsenz",
+            ag_prob6_d: "Ihre Agentur braucht eine professionelle Plattform, die ihre eigene Marke repräsentiert.",
+
+            ag_sol_eyebrow: "EINE ZENTRALISIERTE PLATTFORM",
+            ag_sol_h2: "Eine Plattform zur Verwaltung Ihres gesamten Immobiliengeschäfts.",
+            ag_sol_sub: "EasyListings ermöglicht Ihrer Agentur, ihren Bestand zu verwalten, ihre Kunden zu organisieren und die Arbeit ihrer Makler aus einer zentralisierten Umgebung zu koordinieren.",
+            ag_sol_sub2: "Ihr Unternehmen behält seine geschäftliche Identität und kann seinen Kunden ein eigenes digitales Erlebnis bieten.",
+            ag_sol_li1: "Zentralisierter Immobilienbestand.",
+            ag_sol_li2: "Verwaltung von Maklern und Team.",
+            ag_sol_li3: "Vertriebspipeline und Nachverfolgung von Interessenten.",
+            ag_sol_li4: "Kontrolle von Provisionen und Vorgängen.",
+            ag_sol_li5: "Plattform mit der Domain Ihrer Agentur.",
+            ag_sol_li6: "Integrationen und API zur Anbindung Ihrer Tools.",
+            ag_sol_note: "Und wenn Sie bereits eine Website haben, können Sie Ihren EasyListings-Katalog integrieren, ohne sie ersetzen zu müssen.",
+            browser_url: "https://ihre-agentur.com",
+            ag_sol_badge1: "Ihre Marke · Ihre Domain",
+            ag_sol_badge2: "100 % Ihre Agentur",
+
+            ag_feat_eyebrow: "WICHTIGSTE FUNKTIONEN FÜR AGENTUREN",
+            ag_feat_h2: "Die Tools, die Ihre Agentur zum Arbeiten braucht.",
+            ag_f1_t: "Zentralisierte Immobilienverwaltung",
+            ag_f1_d: "Organisieren Sie den Bestand Ihrer Agentur und halten Sie die Immobilieninformationen in einem einzigen System.",
+            ag_f2_t: "Makler- und Teamverwaltung",
+            ag_f2_d: "Verwalten Sie die Benutzer Ihrer Agentur und erleichtern Sie die Arbeit Ihrer Mitarbeiter von einer gemeinsamen Plattform aus.",
+            ag_f3_t: "Vertriebspipeline",
+            ag_f3_d: "Überwachen Sie Verkaufschancen und die Nachverfolgung von Interessenten.",
+            ag_f4_t: "Provisionskontrolle",
+            ag_f4_d: "Organisieren und verwalten Sie die Provisionen im Zusammenhang mit den Vorgängen Ihrer Agentur.",
+            ag_f5_t: "Ihre Plattform mit eigener Marke",
+            ag_f5_d: "Nutzen Sie Ihre Domain, passen Sie die Präsentation Ihres Geschäfts an und bieten Sie ein Erlebnis, das mit Ihrer Unternehmensidentität übereinstimmt.",
+            ag_f6_t: "Immobilienimport",
+            ag_f6_d: "Importieren Sie Ihren Bestand über CSV-Dateien und vereinfachen Sie die Aufnahme von Immobilien.",
+            ag_f7_t: "Kalender und Besichtigungen",
+            ag_f7_d: "Jeder Makler erhält seinen eigenen Arbeitsbereich mit persönlichem Katalog und Buchungskalender, damit Sie die Verfügbarkeit Ihres Teams unter der Marke Ihrer Agentur koordinieren können.",
+            ag_f8_t: "Integrationen und API",
+            ag_f8_d: "Verbinden Sie Ihre Plattform mit anderen Diensten wie Zapier oder Pabbly über die verfügbaren Integrationen, Webhooks und API und automatisieren Sie den Workflow Ihrer Agentur.",
+            ag_f9_t: "Cross-Posting in Netzwerken und Portalen",
+            ag_f9_d: "Veröffentlichen Sie jede Immobilie auf Facebook, Instagram, WhatsApp und den wichtigsten Immobilienportalen von einem einzigen Ort aus, ohne doppelten Aufwand.",
+            featureCta: "Alle Funktionen entdecken",
+
+            ag_brand_eyebrow: "IHRE AGENTUR, IHRE IDENTITÄT",
+            ag_brand_h2: "Ihre Agentur braucht ihre eigene Plattform und muss nicht von der anderer abhängen.",
+            ag_brand_sub: "Bieten Sie Ihren Kunden ein digitales Erlebnis, das Ihr Unternehmen repräsentiert.",
+            ag_brand_li1: "Verwenden Sie Ihre eigene Domain.",
+            ag_brand_li2: "Passen Sie die Präsentation Ihres Katalogs an.",
+            ag_brand_li3: "Blenden Sie die Marke EasyListings mit dem entsprechenden Tarif aus.",
+            ag_brand_li4: "Integrieren Sie Ihre Immobilien in Ihre aktuelle Website.",
+            ag_brand_li5: "Verwalten Sie Ihre digitale Präsenz von einem einzigen Ort aus.",
+            ag_brand_note: "Sie müssen Ihre aktuelle Website nicht ersetzen. Sie können EasyListings als System nutzen, das Ihren Katalog und Ihre Vorgänge verwaltet, während Sie Ihre bestehende Seite behalten.",
+            ag_brand_cta: "Ich möchte meine eigene Plattform",
+
+            ag_team_eyebrow: "TEAMVERWALTUNG",
+            ag_team_h2: "Geben Sie jedem Makler die Tools, um besser zu arbeiten.",
+            ag_team_p1: "Ihre Agentur braucht Makler, die ihre Geschäftstätigkeit verwalten können, ohne die allgemeine Organisation des Geschäfts zu verlieren.",
+            ag_team_p2: "EasyListings ermöglicht es, zusätzliche Benutzer hinzuzufügen und die Arbeit des Teams von einem gemeinsamen Konto aus zu verwalten.",
+            ag_team_p3: "Von der Immobilienverwaltung über die Kundenbetreuung bis hin zu Provisionen können Sie Ihre Vorgänge in einer gemeinsamen Umgebung organisieren.",
+            ag_team_cta: "Meine Agenturplattform erstellen",
+            ag_team_cta: "Meine Agenturplattform erstellen",
+			team_m1_name: "Mary Smith",
+			team_m1_role: "Senior-Agent",
+			team_m2_name: "Carl Bennett",
+			team_m2_role: "Assoziierter Makler",
+			team_m3_name: "Ana Cooper",
+			team_m3_role: "Koordinatorin",
+
+            ag_web_embed_label: "Einbindbarer Code",
+            ag_web_embed_badge: "1 Zeile",
+            embed_copy_text: "Code kopieren",
+
+            cta_web_eyebrow: "VERWALTEN SIE IHRE AGENTUR",
+            ag_final_h2: "Verwalten Sie Ihre Agentur mit Tools, die für Immobilien konzipiert sind.",
+            ag_final_sub: "Zentralisieren Sie Ihre Immobilien, organisieren Sie Ihr Team und bauen Sie eine digitale Präsenz unter Ihrer eigenen Marke auf.",
+            ag_final_cta: "Mein Konto aktivieren",
+
+            footer_tagline: "Zeigen Sie Ihre Immobilien. Definieren Sie Ihre Marke.",
+            footer_col_about: "Produkt",
+            footer_col_community: "Community",
+            footer_col_features: "Funktionen",
+            footer_about_us: "Über uns",
+            footer_terms: "Nutzungsbedingungen",
+            footer_privacy: "Datenschutz",
+            footer_contact: "Kontakt",
+            footer_help: "Hilfe-Center",
+            footer_affiliates: "Partner",
+            footer_blog: "Blog",
+            footer_agent: "Agenten",
+			footer_agency: "Agenturen",
+			footer_const: "Bauträger",
+            footer_feature_catalog: "Immobilienkatalog",
+footer_feature_multichannel: "Multichannel-Veröffentlichung",
+footer_feature_personalization: "Anpassung & SEO",
+footer_feature_widget: "Einbettbarer Katalog",
+footer_feature_forms: "Lead-Erfassungsformulare",
+footer_feature_crm: "CRM & Kundenverwaltung",
+footer_feature_inbox: "Nachrichten-Posteingang",
+footer_feature_booking: "Besichtigungskalender",
+footer_feature_analytics: "Analysen pro Immobilie",
+footer_feature_languages: "Mehrsprachige Plattform",
+footer_feature_calculator: "Hypothekenrechner",
+footer_feature_automation: "Automatisierungen",
+            foot_payment_title: "Sichere Zahlungsabwicklung",
+            support_title: "Online-Support",
+            support_text: "Kontaktieren Sie uns bei Fragen. Unser Support-Team ist für Sie da.",
+            support_cta: "Schreiben Sie uns",
+            footer_credit: "Entwickelt in 🇩🇴 von Bebell Digital Solutions.",
+            footer_copyright: "Copyright © 2026 EasyListings • Alle Rechte vorbehalten."
+        },
+        ru: {
+        metaTitle: "EasyListings для агентств недвижимости 🏢 | Управляйте агентством с единой платформы",
+            nav_home: "Главная",
+            nav_about: "О нас",
+            nav_features: "Функции",
+            nav_pricing: "Тарифы",
+            nav_contact: "Контакты",
+            nav_cta: "Активировать аккаунт",
+            sub_website: "Сайт недвижимости",
+            sub_post: "Мультиканальная публикация",
+            sub_seo: "Персонализация и SEO",
+            sub_widget: "Встраиваемый каталог",
+            sub_form: "Формы захвата лидов",
+            sub_crm: "CRM и управление клиентами",
+            sub_inbox: "Входящие сообщения",
+            sub_calendar: "Планирование показов",
+            sub_analytics: "Аналитика по объектам",
+            sub_languages: "Многоязычная платформа",
+            sub_calculator: "Ипотечный калькулятор",
+            sub_automation: "Автоматизации",
+
+            ag_hero_eyebrow: "ДЛЯ АГЕНТСТВ НЕДВИЖИМОСТИ",
+            ag_hero_title: "Управляйте агентством недвижимости с единой платформы.",
+            ag_hero_sub1: "Централизуйте объекты, клиентов, агентов и коммерческие операции в системе под брендом вашей компании.",
+            ag_hero_sub2: "Откажитесь от таблиц, неорганизованных процессов и разрозненных инструментов. Дайте команде рабочее пространство, созданное для управления бизнесом недвижимости.",
+            ag_hero_cta1: "Создать мою платформу недвижимости",
+            ag_hero_cta2: "Изучить функции",
+            ag_chip1: "Малые и средние агентства",
+            ag_chip2: "Независимые брокерские фирмы",
+            ag_chip3: "Агентства с несколькими агентами",
+
+            ag_prob_eyebrow: "ПРОБЛЕМЫ УПРАВЛЕНИЯ АГЕНТСТВОМ",
+            ag_prob_h2: "Ваше агентство растёт, а управление остаётся прежним?",
+            ag_prob_body1: "По мере того как агентство берёт на себя больше объектов и агентов, сложность управления бизнесом также возрастает.",
+            ag_prob_body2: "Узнаёте себя в одной из этих ситуаций?",
+            ag_prob1_t: "Неорганизованный инвентарь",
+            ag_prob1_d: "Каждый агент ведёт свои объекты, и информация дублируется или устаревает.",
+            ag_prob2_t: "Отсутствие отслеживания",
+            ag_prob2_d: "У вас нет чёткого представления о коммерческих возможностях и клиентах в ожидании.",
+            ag_prob3_t: "Слабый контроль над командой",
+            ag_prob3_d: "Вам нужно знать, чем занимается каждый агент и как продвигаются операции.",
+            ag_prob4_t: "Сложности с комиссиями",
+            ag_prob4_d: "Соглашения и комиссии могут превращаться в ручные процессы.",
+            ag_prob5_t: "Зависимость от внешних поставщиков",
+            ag_prob5_d: "Вы платите за разные инструменты, которые не обязательно работают вместе.",
+            ag_prob6_t: "Ограниченное цифровое присутствие",
+            ag_prob6_d: "Вашему агентству нужна профессиональная платформа, представляющая его собственный бренд.",
+
+            ag_sol_eyebrow: "ЦЕНТРАЛИЗОВАННАЯ ПЛАТФОРМА",
+            ag_sol_h2: "Единая платформа для управления всей вашей деятельностью в сфере недвижимости.",
+            ag_sol_sub: "EasyListings позволяет вашему агентству управлять инвентарём, организовывать клиентов и координировать работу агентов из централизованной среды.",
+            ag_sol_sub2: "Ваша компания сохраняет свою коммерческую идентичность и может предложить клиентам собственный цифровой опыт.",
+            ag_sol_li1: "Централизованный инвентарь объектов.",
+            ag_sol_li2: "Управление агентами и командой.",
+            ag_sol_li3: "Коммерческая воронка и отслеживание потенциальных клиентов.",
+            ag_sol_li4: "Контроль комиссий и операций.",
+            ag_sol_li5: "Платформа на домене вашего агентства.",
+            ag_sol_li6: "Интеграции и API для подключения ваших инструментов.",
+            ag_sol_note: "А если у вас уже есть сайт, вы можете интегрировать каталог EasyListings, не заменяя его.",
+            browser_url: "https://ваше-агентство.com",
+            ag_sol_badge1: "Ваш бренд · Ваш домен",
+            ag_sol_badge2: "100% ваше агентство",
+
+            ag_feat_eyebrow: "КЛЮЧЕВЫЕ ФУНКЦИИ ДЛЯ АГЕНТСТВ",
+            ag_feat_h2: "Инструменты, необходимые вашему агентству для работы.",
+            ag_f1_t: "Централизованное управление объектами",
+            ag_f1_d: "Организуйте инвентарь агентства и храните информацию об объектах в единой системе.",
+            ag_f2_t: "Управление агентами и командой",
+            ag_f2_d: "Управляйте пользователями агентства и облегчайте работу сотрудников с единой платформы.",
+            ag_f3_t: "Коммерческая воронка",
+            ag_f3_d: "Контролируйте возможности продаж и отслеживание потенциальных клиентов.",
+            ag_f4_t: "Контроль комиссий",
+            ag_f4_d: "Организуйте и управляйте комиссиями, связанными с операциями вашего агентства.",
+            ag_f5_t: "Ваша платформа под собственным брендом",
+            ag_f5_d: "Используйте свой домен, настраивайте презентацию бизнеса и предлагайте опыт, соответствующий вашей корпоративной идентичности.",
+            ag_f6_t: "Импорт объектов",
+            ag_f6_d: "Импортируйте инвентарь через CSV-файлы и упростите добавление объектов.",
+            ag_f7_t: "Календарь и показы",
+            ag_f7_d: "Каждый агент получает собственное рабочее пространство с персональным каталогом и календарём бронирования, чтобы вы могли координировать доступность команды под брендом агентства.",
+            ag_f8_t: "Интеграции и API",
+            ag_f8_d: "Подключайте платформу к другим сервисам, таким как Zapier или Pabbly, используя доступные интеграции, вебхуки и API, и автоматизируйте рабочий процесс агентства.",
+            ag_f9_t: "Кросс-постинг в соцсетях и на порталах",
+            ag_f9_d: "Публикуйте каждый объект на Facebook, Instagram, WhatsApp и основных порталах недвижимости из одного места без дублирования усилий.",
+            featureCta: "Узнать все функции",
+
+            ag_brand_eyebrow: "ВАШЕ АГЕНТСТВО, ВАША ИДЕНТИЧНОСТЬ",
+            ag_brand_h2: "Вашему агентству нужна собственная платформа, а не зависимость от чужой.",
+            ag_brand_sub: "Предложите клиентам цифровой опыт, представляющий вашу компанию.",
+            ag_brand_li1: "Используйте собственный домен.",
+            ag_brand_li2: "Настраивайте презентацию каталога.",
+            ag_brand_li3: "Скрывайте бренд EasyListings с соответствующим тарифом.",
+            ag_brand_li4: "Интегрируйте объекты в текущий сайт.",
+            ag_brand_li5: "Управляйте цифровым присутствием из одного места.",
+            ag_brand_note: "Вам не нужно заменять текущий сайт. Вы можете использовать EasyListings как систему, управляющую каталогом и операциями, сохраняя существующую страницу.",
+            ag_brand_cta: "Хочу свою платформу",
+
+            ag_team_eyebrow: "УПРАВЛЕНИЕ КОМАНДОЙ",
+            ag_team_h2: "Дайте каждому агенту инструменты для лучшей работы.",
+            ag_team_p1: "Вашему агентству нужно, чтобы агенты могли управлять своей коммерческой деятельностью, не теряя общей организации бизнеса.",
+            ag_team_p2: "EasyListings позволяет добавлять дополнительных пользователей и управлять работой команды из одного аккаунта.",
+            ag_team_p3: "От управления объектами до отслеживания клиентов и комиссий — вы можете организовывать операции в единой среде.",
+            ag_team_cta: "Создать мою платформу для агентств",
+            ag_team_cta: "Создать мою платформу для агентства",
+			team_m1_name: "Мэри Смит",
+			team_m1_role: "Старший агент",
+			team_m2_name: "Карл Беннетт",
+			team_m2_role: "Ассоциированный брокер",
+			team_m3_name: "Ана Купер",
+			team_m3_role: "Координатор",
+
+            ag_web_embed_label: "Встраиваемый код",
+            ag_web_embed_badge: "1 строка",
+            embed_copy_text: "Копировать код",
+
+            cta_web_eyebrow: "УПРАВЛЯЙТЕ АГЕНТСТВОМ",
+            ag_final_h2: "Управляйте агентством с инструментами, созданными для недвижимости.",
+            ag_final_sub: "Централизуйте объекты, организуйте команду и создавайте цифровое присутствие под собственным брендом.",
+            ag_final_cta: "Активировать мой аккаунт",
+
+            footer_tagline: "Показывайте объекты. Определяйте бренд.",
+            footer_col_about: "Продукт",
+            footer_col_community: "Сообщество",
+            footer_col_features: "Функции",
+            footer_about_us: "О нас",
+            footer_terms: "Условия использования",
+            footer_privacy: "Конфиденциальность",
+            footer_contact: "Контакты",
+            footer_help: "Центр помощи",
+            footer_affiliates: "Партнёры",
+            footer_blog: "Блог",
+            footer_agent: "Агенты и брокеры",
+			footer_agency: "Агентства",
+			footer_const: "Застройщики",
+            footer_col_features: "Возможности",
+footer_feature_catalog: "Каталог недвижимости",
+footer_feature_multichannel: "Многоканальная публикация",
+footer_feature_personalization: "Настройка и SEO",
+footer_feature_widget: "Встраиваемый каталог",
+footer_feature_forms: "Формы сбора лидов",
+footer_feature_crm: "CRM и управление клиентами",
+footer_feature_inbox: "Входящие сообщения",
+footer_feature_booking: "Расписание показов",
+footer_feature_analytics: "Аналитика по объектам",
+footer_feature_languages: "Многоязычная платформа",
+footer_feature_calculator: "Ипотечный калькулятор",
+footer_feature_automation: "Автоматизации",
+            foot_payment_title: "Безопасная обработка платежей",
+            support_title: "Онлайн-поддержка",
+            support_text: "Свяжитесь с нами, если у вас есть вопросы. Наша служба поддержки готова помочь.",
+            support_cta: "Напишите нам",
+            footer_credit: "Разработано в 🇩🇴 компанией Bebell Digital Solutions.",
+            footer_copyright: "Copyright © 2026 EasyListings • Все права защищены."
+        },
+        
+        zh: {
+        metaTitle: "EasyListings 房产中介平台 🏢 | 在一个平台上管理您的整个机构",
+            nav_home: "首页",
+            nav_about: "关于我们",
+            nav_features: "功能",
+            nav_pricing: "套餐",
+            nav_contact: "联系我们",
+            nav_cta: "激活账户",
+            sub_website: "房产网站",
+            sub_post: "多渠道发布",
+            sub_seo: "个性化与 SEO",
+            sub_widget: "可嵌入目录",
+            sub_form: "线索收集表单",
+            sub_crm: "CRM 与客户管理",
+            sub_inbox: "消息收件箱",
+            sub_calendar: "看房预约",
+            sub_analytics: "房源数据分析",
+            sub_languages: "多语言平台",
+            sub_calculator: "房贷计算器",
+            sub_automation: "自动化",
+
+            ag_hero_eyebrow: "专为房产中介打造",
+            ag_hero_title: "在一个平台上管理您的房产中介机构。",
+            ag_hero_sub1: "将您的房源、客户、经纪人和业务运营集中在一个以您公司品牌呈现的系统中。",
+            ag_hero_sub2: "告别电子表格、混乱的流程和零散的工具。为您的团队提供一个专为房产管理而设计的工作空间。",
+            ag_hero_cta1: "创建我的房产平台",
+            ag_hero_cta2: "探索功能",
+            ag_chip1: "中小型中介机构",
+            ag_chip2: "独立经纪公司",
+            ag_chip3: "多经纪人中介机构",
+
+            ag_prob_eyebrow: "管理中介机构面临的挑战",
+            ag_prob_h2: "您的机构在成长，但管理方式却一成不变？",
+            ag_prob_body1: "随着您的机构承接更多房源和经纪人，业务管理的复杂度也随之增加。",
+            ag_prob_body2: "您是否遇到过以下情况？",
+            ag_prob1_t: "房源管理混乱",
+            ag_prob1_d: "每位经纪人各自管理自己的房源，信息最终重复或过期。",
+            ag_prob2_t: "缺乏跟进",
+            ag_prob2_d: "您无法清晰掌握商机和待处理客户的情况。",
+            ag_prob3_t: "团队管控不足",
+            ag_prob3_d: "您需要了解每位经纪人的工作进展以及业务的推进情况。",
+            ag_prob4_t: "佣金难以管理",
+            ag_prob4_d: "协议和佣金往往沦为手工流程。",
+            ag_prob5_t: "依赖外部供应商",
+            ag_prob5_d: "您为各种工具付费，但它们未必能协同工作。",
+            ag_prob6_t: "线上存在感有限",
+            ag_prob6_d: "您的机构需要一个能够代表自身品牌的专业平台。",
+
+            ag_sol_eyebrow: "集中式平台",
+            ag_sol_h2: "一个平台，管理您的全部房产业务。",
+            ag_sol_sub: "EasyListings 让您的机构能够在集中式环境中管理房源、组织客户并协调经纪人的工作。",
+            ag_sol_sub2: "您的公司保留自身的商业品牌形象，并能为客户提供专属的数字化体验。",
+            ag_sol_li1: "集中式房源管理。",
+            ag_sol_li2: "经纪人与团队管理。",
+            ag_sol_li3: "销售管道与潜在客户跟进。",
+            ag_sol_li4: "佣金与业务管控。",
+            ag_sol_li5: "使用您机构域名的平台。",
+            ag_sol_li6: "集成与 API，连接您的各类工具。",
+            ag_sol_note: "如果您已有网站，也可以直接集成 EasyListings 目录，无需替换现有网站。",
+            browser_url: "https://your-agency.com",
+            ag_sol_badge1: "您的品牌 · 您的域名",
+            ag_sol_badge2: "100% 属于您的机构",
+
+            ag_feat_eyebrow: "中介机构的核心功能",
+            ag_feat_h2: "您的机构运营所需的工具。",
+            ag_f1_t: "集中式房源管理",
+            ag_f1_d: "整理机构的房源库，将房源信息统一保存在一个系统中。",
+            ag_f2_t: "经纪人与团队管理",
+            ag_f2_d: "管理机构的用户，让团队成员在同一平台上高效协作。",
+            ag_f3_t: "销售管道",
+            ag_f3_d: "监督销售机会并跟进潜在客户。",
+            ag_f4_t: "佣金管控",
+            ag_f4_d: "组织并管理机构业务相关的佣金。",
+            ag_f5_t: "属于您自己品牌的平台",
+            ag_f5_d: "使用您的域名，自定义业务展示，并提供与您企业形象一致的体验。",
+            ag_f6_t: "房源导入",
+            ag_f6_d: "通过 CSV 文件导入房源，简化房源录入流程。",
+            ag_f7_t: "日历与看房",
+            ag_f7_d: "每位经纪人都拥有独立的工作空间，包含个人目录和预约日历，让您能够以机构品牌统一协调团队的可用时间。",
+            ag_f8_t: "集成与 API",
+            ag_f8_d: "通过可用的集成、Webhook 和 API 将平台连接到 Zapier、Pabbly 等其他服务，实现机构工作流程自动化。",
+            ag_f9_t: "社交媒体与门户网站交叉发布",
+            ag_f9_d: "从一个地方将每套房源发布到 Facebook、Instagram、WhatsApp 及各大房产门户网站，无需重复操作。",
+            featureCta: "了解全部功能",
+
+            ag_brand_eyebrow: "您的机构，您的品牌",
+            ag_brand_h2: "您的机构需要自己的平台，而不是依赖他人。",
+            ag_brand_sub: "为客户提供能够代表您公司的数字化体验。",
+            ag_brand_li1: "使用您自己的域名。",
+            ag_brand_li2: "自定义目录的展示方式。",
+            ag_brand_li3: "通过相应套餐隐藏 EasyListings 品牌。",
+            ag_brand_li4: "将房源集成到您现有的网站中。",
+            ag_brand_li5: "在一个地方管理您的线上形象。",
+            ag_brand_note: "您无需替换现有网站。您可以将 EasyListings 作为管理房源目录和业务的系统，同时保留现有网站。",
+            ag_brand_cta: "我想要自己的平台",
+
+            ag_team_eyebrow: "团队管理",
+            ag_team_h2: "为每位经纪人提供更好的工作工具。",
+            ag_team_p1: "您的机构需要让经纪人能够管理自己的业务活动，同时不失去整体的组织性。",
+            ag_team_p2: "EasyListings 允许添加更多用户，并在同一个账户中管理团队的工作。",
+            ag_team_p3: "从房源管理到客户跟进和佣金，您都可以在同一个环境中组织业务。",
+            ag_team_cta: "创建我的中介平台",
+            ag_team_cta: "创建我的代理平台",
+			team_m1_name: "玛丽·史密斯",
+			team_m1_role: "高级代理",
+			team_m2_name: "卡尔·贝内特",
+			team_m2_role: "副经纪人",
+			team_m3_name: "安娜·库珀",
+			team_m3_role: "协调员",
+
+            ag_web_embed_label: "可嵌入代码",
+            ag_web_embed_badge: "1 行",
+            embed_copy_text: "复制代码",
+
+            cta_web_eyebrow: "管理您的机构",
+            ag_final_h2: "用专为房产行业打造的工具管理您的机构。",
+            ag_final_sub: "集中管理房源，组织团队，并在自有品牌下建立线上形象。",
+            ag_final_cta: "激活我的账户",
+
+            footer_tagline: "展示您的房源，定义您的品牌。",
+            footer_col_about: "产品",
+            footer_col_community: "社区",
+            footer_col_features: "功能",
+            footer_about_us: "关于我们",
+            footer_terms: "使用条款",
+            footer_privacy: "隐私政策",
+            footer_contact: "联系我们",
+            footer_help: "帮助中心",
+            footer_affiliates: "联盟伙伴",
+            footer_blog: "博客",
+            footer_agent: "代理人和经纪人",
+			footer_agency: "代理机构",
+			footer_const: "建筑开发商",
+            footer_col_features: "功能",
+footer_feature_catalog: "房源目录",
+footer_feature_multichannel: "多渠道发布",
+footer_feature_personalization: "自定义与 SEO",
+footer_feature_widget: "可嵌入目录",
+footer_feature_forms: "潜在客户收集表单",
+footer_feature_crm: "CRM 与客户管理",
+footer_feature_inbox: "消息收件箱",
+footer_feature_booking: "看房日程",
+footer_feature_analytics: "房源数据分析",
+footer_feature_languages: "多语言平台",
+footer_feature_calculator: "房贷计算器",
+footer_feature_automation: "自动化",
+            foot_payment_title: "安全的支付处理",
+            support_title: "在线支持",
+            support_text: "如有任何问题，请联系我们。我们的支持团队随时为您服务。",
+            support_cta: "给我们留言",
+            footer_credit: "由 Bebell Digital Solutions 在 🇩🇴 开发。",
+            footer_copyright: "Copyright © 2026 EasyListings • 保留所有权利。"
+        },
+        ja: {
+         metaTitle: "EasyListings 不動産エージェンシー向け 🏢 | ひとつのプラットフォームでエージェンシーを管理",
+            nav_home: "ホーム",
+            nav_about: "会社概要",
+            nav_features: "機能",
+            nav_pricing: "プラン",
+            nav_contact: "お問い合わせ",
+            nav_cta: "アカウントを有効化",
+            sub_website: "不動産ウェブサイト",
+            sub_post: "マルチチャネル配信",
+            sub_seo: "カスタマイズとSEO",
+            sub_widget: "埋め込み可能なカタログ",
+            sub_form: "リード獲得フォーム",
+            sub_crm: "CRMと顧客管理",
+            sub_inbox: "メッセージ受信トレイ",
+            sub_calendar: "内見スケジュール",
+            sub_analytics: "物件別アナリティクス",
+            sub_languages: "多言語プラットフォーム",
+            sub_calculator: "住宅ローン計算ツール",
+            sub_automation: "自動化",
+
+            ag_hero_eyebrow: "不動産エージェンシー向け",
+            ag_hero_title: "ひとつのプラットフォームで不動産エージェンシーを管理。",
+            ag_hero_sub1: "物件、顧客、エージェント、商取引を、御社のブランドのもとにあるひとつのシステムに集約します。",
+            ag_hero_sub2: "スプレッドシート、煩雑なプロセス、バラバラのツールから卒業しましょう。不動産ビジネスの管理のために設計されたワークスペースをチームに提供します。",
+            ag_hero_cta1: "不動産プラットフォームを作成する",
+            ag_hero_cta2: "機能を見る",
+            ag_chip1: "中小規模のエージェンシー",
+            ag_chip2: "独立系ブローカー会社",
+            ag_chip3: "複数エージェントのエージェンシー",
+
+            ag_prob_eyebrow: "エージェンシー管理の課題",
+            ag_prob_h2: "エージェンシーは成長しているのに、管理体制は変わらないままですか？",
+            ag_prob_body1: "エージェンシーが扱う物件やエージェントが増えるにつれて、ビジネス管理の複雑さも増していきます。",
+            ag_prob_body2: "次のような状況に心当たりはありませんか？",
+            ag_prob1_t: "整理されていない物件情報",
+            ag_prob1_d: "各エージェントが自分の物件を個別に管理しているため、情報が重複したり古くなったりします。",
+            ag_prob2_t: "フォローアップの不足",
+            ag_prob2_d: "商談機会や対応待ちの顧客を明確に把握できていません。",
+            ag_prob3_t: "チームの管理が不十分",
+            ag_prob3_d: "各エージェントが何をしているのか、取引がどう進んでいるのかを把握する必要があります。",
+            ag_prob4_t: "手数料の管理が難しい",
+            ag_prob4_d: "契約や手数料の管理が手作業のプロセスになってしまいがちです。",
+            ag_prob5_t: "外部ベンダーへの依存",
+            ag_prob5_d: "連携しないツールに個別に費用を支払っています。",
+            ag_prob6_t: "デジタルプレゼンスの不足",
+            ag_prob6_d: "エージェンシーには、自社ブランドを表現するプロフェッショナルなプラットフォームが必要です。",
+
+            ag_sol_eyebrow: "一元化されたプラットフォーム",
+            ag_sol_h2: "不動産業務のすべてを管理するひとつのプラットフォーム。",
+            ag_sol_sub: "EasyListings は、エージェンシーが物件情報を管理し、顧客を整理し、エージェントの仕事を一元化された環境から調整できるようにします。",
+            ag_sol_sub2: "企業は自社の商業的アイデンティティを保ち、顧客に自社独自のデジタル体験を提供できます。",
+            ag_sol_li1: "一元化された物件情報。",
+            ag_sol_li2: "エージェントとチームの管理。",
+            ag_sol_li3: "商談パイプラインと見込み顧客の追跡。",
+            ag_sol_li4: "手数料と取引の管理。",
+            ag_sol_li5: "エージェンシーのドメインを使ったプラットフォーム。",
+            ag_sol_li6: "ツールを接続するための連携とAPI。",
+            ag_sol_note: "既にウェブサイトをお持ちの場合は、置き換えることなく EasyListings のカタログを統合できます。",
+            browser_url: "https://your-agency.com",
+            ag_sol_badge1: "あなたのブランド · あなたのドメイン",
+            ag_sol_badge2: "100% あなたのエージェンシー",
+
+            ag_feat_eyebrow: "エージェンシー向けの主要機能",
+            ag_feat_h2: "エージェンシーの運営に必要なツール。",
+            ag_f1_t: "一元化された物件管理",
+            ag_f1_d: "エージェンシーの物件情報を整理し、物件情報をひとつのシステムで保持します。",
+            ag_f2_t: "エージェントとチームの管理",
+            ag_f2_d: "エージェンシーのユーザーを管理し、スタッフの仕事を同じプラットフォームから円滑にします。",
+            ag_f3_t: "商談パイプライン",
+            ag_f3_d: "販売機会と見込み顧客のフォローアップを監督します。",
+            ag_f4_t: "手数料の管理",
+            ag_f4_d: "エージェンシーの取引に関連する手数料を整理・管理します。",
+            ag_f5_t: "自社ブランドのプラットフォーム",
+            ag_f5_d: "自社ドメインを使用し、ビジネスの見せ方をカスタマイズし、企業アイデンティティに沿った体験を提供します。",
+            ag_f6_t: "物件のインポート",
+            ag_f6_d: "CSVファイルで物件情報をインポートし、物件の登録を簡素化します。",
+            ag_f7_t: "カレンダーと内見",
+            ag_f7_d: "各エージェントは個人カタログと予約カレンダーを備えた専用ワークスペースを受け取り、エージェンシーのブランドのもとでチームの空き状況を調整できます。",
+            ag_f8_t: "連携とAPI",
+            ag_f8_d: "利用可能な連携、Webhook、API を使って、Zapier や Pabbly などの他のサービスにプラットフォームを接続し、エージェンシーのワークフローを自動化します。",
+            ag_f9_t: "SNS・ポータルへのクロスポスト",
+            ag_f9_d: "各物件を Facebook、Instagram、WhatsApp、主要な不動産ポータルに一箇所から公開し、作業を重複させません。",
+            featureCta: "すべての機能を見る",
+
+            ag_brand_eyebrow: "あなたのエージェンシー、あなたのアイデンティティ",
+            ag_brand_h2: "エージェンシーには他社に依存しない、自社専用のプラットフォームが必要です。",
+            ag_brand_sub: "御社を表現するデジタル体験を顧客に提供しましょう。",
+            ag_brand_li1: "自社ドメインを使用する。",
+            ag_brand_li2: "カタログの見せ方をカスタマイズする。",
+            ag_brand_li3: "該当プランで EasyListings ブランドを非表示にする。",
+            ag_brand_li4: "既存のウェブサイトに物件を統合する。",
+            ag_brand_li5: "デジタルプレゼンスを一箇所から管理する。",
+            ag_brand_note: "現在のウェブサイトを置き換える必要はありません。既存ページを維持しながら、EasyListings をカタログと業務を管理するシステムとして利用できます。",
+            ag_brand_cta: "自社プラットフォームが欲しい",
+
+            ag_team_eyebrow: "チーム管理",
+            ag_team_h2: "各エージェントがより良く働くためのツールを。",
+            ag_team_p1: "エージェンシーでは、ビジネス全体の組織性を損なうことなく、エージェントが自身の営業活動を管理できる必要があります。",
+            ag_team_p2: "EasyListings では、追加ユーザーを登録し、同じアカウントからチームの仕事を管理できます。",
+            ag_team_p3: "物件管理から顧客追跡、手数料に至るまで、業務を同じ環境で整理できます。",
+            ag_team_cta: "エージェンシー向けプラットフォームを作成する",
+            ag_team_cta: "代理店プラットフォームを作成する",
+			team_m1_name: "メアリー・スミス",
+			team_m1_role: "シニアエージェント",
+			team_m2_name: "カール・ベネット",
+			team_m2_role: "ブローカーアソシエイト",
+			team_m3_name: "アナ・クーパー",
+			team_m3_role: "コーディネーター",
+
+            ag_web_embed_label: "埋め込みコード",
+            ag_web_embed_badge: "1行",
+            embed_copy_text: "コードをコピー",
+
+            cta_web_eyebrow: "エージェンシーを管理する",
+            ag_final_h2: "不動産向けに設計されたツールでエージェンシーを管理。",
+            ag_final_sub: "物件を一元化し、チームを整理し、自社ブランドのもとでデジタルプレゼンスを構築しましょう。",
+            ag_final_cta: "アカウントを有効化する",
+
+            footer_tagline: "物件を魅せる。ブランドを定義する。",
+            footer_col_about: "製品",
+            footer_col_community: "コミュニティ",
+            footer_col_features: "機能",
+            footer_about_us: "会社概要",
+            footer_terms: "利用規約",
+            footer_privacy: "プライバシー",
+            footer_contact: "お問い合わせ",
+            footer_help: "ヘルプセンター",
+            footer_affiliates: "アフィリエイト",
+            footer_blog: "ブログ",
+            footer_agent: "エージェントとブローカー",
+			footer_agency: "代理店",
+			footer_const: "建設業者",
+            footer_col_features: "機能",
+footer_feature_catalog: "物件カタログ",
+footer_feature_multichannel: "マルチチャネル配信",
+footer_feature_personalization: "カスタマイズとSEO",
+footer_feature_widget: "埋め込み可能なカタログ",
+footer_feature_forms: "リード獲得フォーム",
+footer_feature_crm: "CRMと顧客管理",
+footer_feature_inbox: "メッセージ受信箱",
+footer_feature_booking: "内覧スケジュール",
+footer_feature_analytics: "物件別分析",
+footer_feature_languages: "多言語プラットフォーム",
+footer_feature_calculator: "住宅ローン計算ツール",
+footer_feature_automation: "自動化",
+            foot_payment_title: "安全な決済処理",
+            support_title: "オンラインサポート",
+            support_text: "ご不明な点がございましたらお問い合わせください。サポートチームが対応いたします。",
+            support_cta: "お問い合わせする",
+            footer_credit: "🇩🇴 にて Bebell Digital Solutions が開発。",
+            footer_copyright: "Copyright © 2026 EasyListings • All rights reserved."
+        }
+    };
+
+    const LANG_META = {
+        es: { flag: '🇩🇴', code: 'ES' },
+        en: { flag: '🇺🇸', code: 'EN' },
+        fr: { flag: '🇫🇷', code: 'FR' },
+        it: { flag: '🇮🇹', code: 'IT' },
+        de: { flag: '🇩🇪', code: 'DE' },
+        ru: { flag: '🇷🇺', code: 'RU' },
+        zh: { flag: '🇨🇳', code: 'ZH' },
+        ja: { flag: '🇯🇵', code: 'JA' }
+    };
+
+    function setLanguage(lang) {
+        const requested = (lang || 'es').toLowerCase();
+        const effective = I18N[requested] ? requested : 'es';
+        const dict = I18N[effective];
+
+        document.documentElement.setAttribute('lang', requested);
+        if (dict.metaTitle) document.title = dict.metaTitle;
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key] !== undefined) {
+                const span = el.querySelector(':scope > span');
+                if (span && el.children.length > 1) {
+                    span.textContent = dict[key];
+                } else {
+                    el.textContent = dict[key];
+                }
+            }
+        });
+
+        const carrier = document.getElementById('browserUrlValueI18n');
+        const urlInput = document.getElementById('browserUrlInput');
+        if (carrier && urlInput) urlInput.value = carrier.textContent;
+
+        const flagEl = document.getElementById('currentFlag');
+        const codeEl = document.getElementById('currentCode');
+        if (flagEl && codeEl) {
+            const meta = LANG_META[requested] || LANG_META.es;
+            flagEl.textContent = meta.flag;
+            codeEl.textContent = meta.code;
+        }
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            const optLang = (opt.getAttribute('data-lang') || '').toLowerCase();
+            const li = opt.closest('li');
+            if (li) li.setAttribute('aria-selected', optLang === requested ? 'true' : 'false');
+        });
+
+        try { localStorage.setItem('language', requested); } catch (_) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let savedLang = 'es';
+        try { savedLang = localStorage.getItem('language') || 'es'; } catch (_) {}
+        const urlLang = new URLSearchParams(window.location.search).get('lang');
+        if (urlLang) savedLang = urlLang.toLowerCase();
+        setLanguage(savedLang);
+
+        const topMenuBar = document.getElementById('topMenuBar');
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        function updateScrollUI() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (topMenuBar) topMenuBar.classList.toggle('full-width', scrollTop > 50);
+            if (backToTopBtn) backToTopBtn.classList.toggle('show', scrollTop > 300);
+        }
+        window.addEventListener('scroll', updateScrollUI, { passive: true });
+        updateScrollUI();
+
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+
+        const funcionesNavItem = document.getElementById('funcionesNavItem');
+        const funcionesToggle = document.getElementById('funcionesToggle');
+
+        function closeSubmenu() {
+            if (!funcionesNavItem || !funcionesToggle) return;
+            funcionesNavItem.classList.remove('open');
+            funcionesToggle.setAttribute('aria-expanded', 'false');
+        }
+
+        if (funcionesNavItem && funcionesToggle) {
+            funcionesToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = funcionesNavItem.classList.toggle('open');
+                funcionesToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!funcionesNavItem.contains(e.target)) closeSubmenu();
+            });
+
+            document.querySelectorAll('.submenu-link').forEach(link => {
+                link.addEventListener('click', closeSubmenu);
+            });
+
+            const previewImg = document.getElementById('submenuPreviewImg');
+            const previewLinks = funcionesNavItem.querySelectorAll('.submenu-link[data-preview]');
+            let swapTimer = null;
+
+            previewLinks.forEach(link => {
+                const img = new Image();
+                img.src = link.dataset.preview;
+
+                const swap = () => {
+                    const src = link.dataset.preview;
+                    if (!src || !previewImg || previewImg.src === src) return;
+                    clearTimeout(swapTimer);
+                    previewImg.classList.add('is-swapping');
+                    swapTimer = setTimeout(() => {
+                        previewImg.src = src;
+                        const done = () => previewImg.classList.remove('is-swapping');
+                        if (previewImg.complete) requestAnimationFrame(done);
+                        else { previewImg.onload = done; previewImg.onerror = done; }
+                    }, 180);
+                };
+
+                link.addEventListener('mouseenter', swap);
+                link.addEventListener('focus', swap);
+            });
+        }
+
+        const langDropdown = document.getElementById('langDropdown');
+        const langTrigger = document.getElementById('langTrigger');
+        const langMenu = document.getElementById('langMenu');
+
+        function toggleLangDropdown(open) {
+            if (!langDropdown || !langTrigger) return;
+            const willOpen = open ?? !langDropdown.classList.contains('open');
+            langDropdown.classList.toggle('open', willOpen);
+            langTrigger.setAttribute('aria-expanded', String(willOpen));
+        }
+
+        if (langTrigger) {
+            langTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleLangDropdown();
+            });
+        }
+
+        if (langMenu) {
+            langMenu.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setLanguage(option.getAttribute('data-lang'));
+                    toggleLangDropdown(false);
+                });
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (langDropdown && !langDropdown.contains(e.target)) toggleLangDropdown(false);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSubmenu();
+                toggleLangDropdown(false);
+            }
+        });
+
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced || typeof gsap === 'undefined') return;
+
+        if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.gsap-reveal').forEach((el) => {
+            gsap.from(el, {
+                y: 36,
+                opacity: 0,
+                duration: 0.75,
+                ease: 'power2.out',
+                scrollTrigger: { trigger: el, start: 'top 86%', once: true }
+            });
+        });
+
+        if (window.matchMedia('(pointer: fine)').matches) {
+            const follower = document.getElementById('cursor-follower');
+            if (follower) {
+                follower.classList.remove('opacity-0');
+                const xTo = gsap.quickTo(follower, 'x', { duration: 0.4, ease: 'power3' });
+                const yTo = gsap.quickTo(follower, 'y', { duration: 0.4, ease: 'power3' });
+                window.addEventListener('mousemove', (e) => {
+                    xTo(e.clientX - 12);
+                    yTo(e.clientY - 12);
+                }, { passive: true });
+            }
+        }
+    });
+    </script>
+
+    <!-- ===== Copy-to-clipboard behavior ===== -->
+    <script>
+        (function () {
+            document.querySelectorAll('.embed-copy').forEach(function (btn) {
+                btn.addEventListener('click', async function () {
+                    var code = btn.getAttribute('data-copy') || '';
+                    try {
+                        await navigator.clipboard.writeText(code);
+                    } catch (e) {
+                        var ta = document.createElement('textarea');
+                        ta.value = code;
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(ta);
+                    }
+                    var label = btn.querySelector('.embed-copy-text');
+                    var original = label.textContent;
+                    btn.classList.add('copied');
+                    label.textContent = '¡Copiado!';
+                    setTimeout(function () {
+                        btn.classList.remove('copied');
+                        label.textContent = original;
+                    }, 1800);
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>
