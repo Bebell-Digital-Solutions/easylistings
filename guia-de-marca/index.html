@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EasyListings · Design System & Brand Assets</title>
+<meta name="description" content="Kit de marca EasyListings: colores, tipografía, logos descargables (SVG/PNG/WEBP) y componentes listos para copiar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23DF1783'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Caveat:wght@700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#DF1783', primaryHover: '#C21170', primarySoft: '#FDEEFA',
+          accent: '#40B39A', accentDeep: '#0F6E5C',
+          ink: '#2D3748', canvas: '#FAF8F5', canvasAlt: '#F2EFE9'
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          script: ['Caveat', 'cursive'],
+          mono: ['JetBrains Mono', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{
+    --primary:#DF1783;
+    --primary-hover:#C21170;
+    --primary-soft:#FDEEFA;
+    --secondary:#2D3748;
+    --accent:#40B39A;
+    --accent-deep:#0F6E5C;
+    --bg:#FAF8F5;
+    --bg-alt:#F2EFE9;
+    --card-bg:#FFFFFF;
+    --text:#2D3748;
+    --text-strong:#0E0E10;
+    --muted:#5C5C63;
+    --muted-2:#718096;
+    --border:#E5E1DA;
+    --border-2:#E2E8F0;
+    --shadow-sm:0 1px 3px rgba(45,55,72,.06), 0 1px 2px rgba(45,55,72,.04);
+    --shadow-lg:0 20px 40px -12px rgba(45,55,72,.18);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:120px}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:rgba(223,23,131,.22);color:var(--text-strong)}
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-track{background:var(--bg-alt)}
+  ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:8px}
+
+  .container-x{width:100%;max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* ---------- Top bar ---------- */
+  #topMenuBar{
+    position:fixed;top:32px;left:50%;transform:translateX(-50%);
+    width:calc(100% - 32px);max-width:1200px;height:70px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:0 20px;background:#fff;border:1px solid var(--border);border-radius:12px;
+    box-shadow:var(--shadow-sm);z-index:200;
+    transition:top .35s ease,width .35s ease,max-width .35s ease,border-radius .35s ease,
+               box-shadow .35s ease,border-color .35s ease;
+  }
+  #topMenuBar.full-width{
+    top:0;width:100%;max-width:100%;border-radius:0;
+    border-left:none;border-right:none;border-top:none;
+    box-shadow:0 4px 20px rgba(0,0,0,.12);
+  }
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;flex:none}
+  .brand svg{width:38px;height:38px;display:block}
+  .brand-text{font-size:1.125rem;font-weight:800;letter-spacing:-.02em;color:var(--text)}
+  .brand-text em{font-style:normal;color:var(--primary)}
+  .nav-links{display:flex;align-items:center;gap:2px}
+  .nav-links a{
+    position:relative;padding:10px 13px;font-size:.9375rem;font-weight:500;
+    color:var(--text);text-decoration:none;border-radius:8px;transition:color .2s;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;left:13px;right:13px;bottom:6px;height:2px;
+    background:var(--primary);transform:scaleX(0);transform-origin:left;transition:transform .25s ease;
+  }
+  .nav-links a:hover{color:var(--primary)}
+  .nav-links a:hover::after{transform:scaleX(1)}
+  @media(max-width:1024px){.nav-links{display:none}}
+  @media(max-width:560px){.brand-text{display:none}.nav-cta{display:none}}
+
+  /* ---------- Buttons ---------- */
+  .primary-btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;
+    padding:12px 22px;border-radius:12px;font-weight:600;font-size:.9375rem;
+    text-decoration:none;border:none;cursor:pointer;font-family:inherit;
+    transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+  }
+  .primary-btn:hover{background:var(--primary-hover);transform:translateY(-3px);
+    box-shadow:0 12px 24px -8px rgba(223,23,131,.55)}
+  .primary-btn.small{padding:9px 16px;font-size:.875rem;border-radius:10px}
+  .ghost-btn{
+    display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.2);
+    backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.35);
+    padding:12px 22px;border-radius:12px;font-weight:600;text-decoration:none;
+    transition:.2s;font-size:.9375rem;
+  }
+  .ghost-btn:hover{background:rgba(255,255,255,.3);transform:translateY(-3px)}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:180px 0 92px;background:#2d3748;color:#fff;overflow:hidden}
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(60% 60% at 18% 18%, rgba(223,23,131,.32), transparent 70%),
+      radial-gradient(55% 55% at 85% 28%, rgba(64,179,154,.22), transparent 70%);
+  }
+  .hero-inner{position:relative;max-width:920px;margin:0 auto;padding:0 24px;text-align:center}
+  .caveat-badge{
+    display:inline-flex;align-items:center;gap:8px;font-family:'Caveat',cursive;font-weight:700;
+    font-size:1.5rem;line-height:1.4;color:#fff;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);padding:2px 20px;border-radius:999px;
+    backdrop-filter:blur(8px);
+  }
+  .hero h1{font-size:clamp(2.25rem,5.5vw,4rem);line-height:1.04;letter-spacing:-.03em;
+    font-weight:900;margin:22px 0 18px}
+  .hero h1 .pink{color:#FF6FBB}
+  .hero .lead{font-size:1.0625rem;line-height:1.7;color:rgba(255,255,255,.78);
+    max-width:660px;margin:0 auto 32px}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:38px}
+  .hero-chips button{
+    font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600;letter-spacing:.08em;
+    color:#fff;background:rgba(223,23,131,.18);border:1px solid rgba(255,90,170,.4);
+    padding:8px 15px;border-radius:999px;cursor:pointer;transition:.2s;
+  }
+  .hero-chips button:hover{background:rgba(223,23,131,.4);transform:translateY(-2px)}
+
+  /* ---------- Sections ---------- */
+  .section{padding:84px 0;border-top:1px solid var(--border)}
+  .section.alt{background:var(--bg-alt)}
+  .section.white{background:#fff}
+  .section-head{max-width:760px;margin:0 auto 48px;text-align:center}
+  .section-head h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:800;
+    letter-spacing:-.02em;margin:14px 0 12px;line-height:1.15}
+  .section-head p{color:var(--muted);font-size:1.0625rem;line-height:1.7;margin:0}
+
+  .eyebrow{
+    display:inline-block;font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:700;padding:6px 13px;border-radius:999px;
+    background:rgba(223,23,131,.08);color:var(--primary);
+  }
+  .font-mono-spec{
+    font-family:'JetBrains Mono',monospace;font-size:.6875rem;letter-spacing:.18em;
+    text-transform:uppercase;font-weight:600;color:var(--muted);
+  }
+  .gradient-bar{height:4px;width:100%;
+    background:linear-gradient(90deg,transparent 0%,#DF1783 50%,transparent 100%)}
+
+  /* ---------- Type scale ---------- */
+  .text-display{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.03;letter-spacing:-.03em;font-weight:800}
+  .text-h1{font-size:clamp(2rem,4.5vw,3.25rem);line-height:1.08;letter-spacing:-.025em;font-weight:800}
+  .text-h2{font-size:clamp(1.75rem,3.4vw,2.5rem);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  .text-h3{font-size:clamp(1.25rem,2.2vw,1.5rem);line-height:1.25;letter-spacing:-.015em;font-weight:700}
+  .section-sub{color:var(--muted);font-size:1rem;line-height:1.7;max-width:640px;margin:0 auto}
+
+  /* ---------- Swatches ---------- */
+  .swatch{
+    display:block;text-align:left;background:var(--card-bg);border:1px solid var(--border);
+    border-radius:16px;overflow:hidden;cursor:pointer;padding:0;font-family:inherit;
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;width:100%;
+  }
+  .swatch:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--primary)}
+  .swatch-chip{display:block;height:76px;position:relative}
+  .swatch-chip::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07)}
+  .swatch-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px}
+  .swatch-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .swatch-txt strong{font-size:.8125rem;font-weight:600;color:var(--text);white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .swatch-txt code{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);
+    text-transform:uppercase}
+  .swatch-ico{
+    width:26px;height:26px;border-radius:8px;background:var(--bg-alt);display:grid;place-items:center;
+    color:var(--muted);font-size:.8rem;flex:none;transition:.2s;
+  }
+  .swatch:hover .swatch-ico{background:var(--primary-soft);color:var(--primary)}
+  .check-ico{display:none;color:var(--accent-deep);font-weight:700}
+  .copied .copy-ico{display:none}
+  .copied .check-ico{display:inline}
+  .copied .swatch-ico{background:rgba(64,179,154,.16)!important;color:var(--accent-deep)!important}
+
+  /* ---------- Cards / tiles ---------- */
+  .font-card,.demo-tile,.logo-card,.scale-item,.note-card{
+    background:#fff;border:1px solid var(--border);border-radius:18px;
+  }
+  .font-card{padding:22px}
+  .font-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+  .font-sample{font-size:2.25rem;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+  .font-card p{margin:0;color:var(--muted);font-size:.875rem;line-height:1.6}
+
+  .scale-item{padding:20px 22px;margin-bottom:14px}
+  .scale-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-bottom:8px;flex-wrap:wrap}
+  .scale-head code{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:600;
+    color:var(--primary)}
+  .scale-head span{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted)}
+  .scale-sample{color:var(--text-strong);word-break:break-word}
+
+  .demo-tile{padding:20px;display:flex;flex-direction:column;gap:14px}
+  .demo-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .demo-head h3{font-size:.95rem;font-weight:700;margin:0}
+  .demo-body{
+    background:var(--bg-alt);border-radius:12px;padding:24px;display:flex;
+    align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;
+    border:1px dashed rgba(45,55,72,.12);
+  }
+  .demo-body.dark{background:#2d3748;border-color:transparent}
+
+  .feature-card{
+    background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px;
+    box-shadow:var(--shadow-sm);transition:.28s;max-width:300px;width:100%;
+  }
+  .feature-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--primary)}
+  .card-icon{
+    width:48px;height:48px;border-radius:14px;background:var(--primary-soft);color:var(--primary);
+    display:grid;place-items:center;font-size:1.35rem;margin-bottom:14px;transition:transform .25s ease;
+  }
+  .feature-card:hover .card-icon{transform:scale(1.08)}
+  .feature-card h4{margin:0 0 6px;font-size:1.0625rem;font-weight:700}
+  .feature-card p{margin:0 0 14px;color:var(--muted);font-size:.875rem;line-height:1.6}
+  .explore-link{color:var(--accent);font-size:.85rem;font-weight:600;text-decoration:none;
+    display:inline-flex;align-items:center;gap:6px}
+  .explore-link span{transition:transform .2s ease;display:inline-block}
+  .explore-link:hover span{transform:translateX(4px)}
+
+  .pill-pronto{
+    background:var(--primary);color:#fff;font-size:.625rem;font-weight:800;
+    letter-spacing:.12em;padding:4px 10px;border-radius:999px;display:inline-block;
+  }
+  .pill-soft{
+    background:var(--primary-soft);color:var(--primary);font-size:.625rem;font-weight:800;
+    letter-spacing:.12em;padding:4px 10px;border-radius:999px;display:inline-block;
+  }
+  .pill-247{
+    background:var(--primary);color:#fff;font-size:.7rem;font-weight:800;letter-spacing:.1em;
+    padding:5px 12px;border-radius:999px;display:inline-block;
+  }
+
+  /* ---------- Code blocks ---------- */
+  .code-wrap{position:relative;margin-top:14px}
+  .code-block{
+    background:#222b38;color:#dfe7f1;border-radius:12px;padding:16px 18px;margin:0;
+    font-family:'JetBrains Mono',monospace;font-size:.755rem;line-height:1.75;
+    overflow-x:auto;white-space:pre;border:1px solid rgba(255,255,255,.07);
+    -webkit-overflow-scrolling:touch;
+  }
+  .code-block .cm{color:#7f8fa6}
+  .copy-btn{
+    position:absolute;top:10px;right:10px;background:rgba(255,255,255,.1);color:#fff;
+    border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:5px 11px;
+    font-size:.68rem;font-weight:700;font-family:'JetBrains Mono',monospace;
+    letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:.2s;
+  }
+  .copy-btn:hover{background:var(--primary);border-color:var(--primary)}
+  .chip-btn{
+    display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);
+    border-radius:9px;padding:7px 12px;font-size:.75rem;font-weight:700;color:var(--text);
+    cursor:pointer;transition:.2s;font-family:inherit;white-space:nowrap;
+  }
+  .chip-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-soft)}
+  .chip-btn.copied{border-color:var(--accent);color:var(--accent-deep);background:rgba(64,179,154,.1)}
+
+
+
+
+
+  /* ---------- Logo cards ---------- */
+  .logo-card{overflow:hidden;transition:.25s}
+  
+  
+  .logo-card:hover{box-shadow:var(--shadow-lg);border-color:rgba(223,23,131,.4);transform:translateY(-4px)}
+  
+  
+  .logo-stage{height:170px;display:grid;place-items:center;padding:26px;
+    border-bottom:1px solid var(--border)}
+    
+    
+  .logo-stage.light{background:var(--bg-alt)}
+  
+  
+  .logo-stage.dark{background:#2d3748}
+  
+  
+  .logo-stage img{max-width:100%;max-height:64px;width:auto;display:block}
+  
+  
+  
+  .logo-body{padding:20px}
+  
+  
+  .logo-body h3{margin:0 0 4px;font-size:1rem;font-weight:800}
+  
+  
+  .logo-body p{margin:0;font-size:.8125rem;color:var(--muted);line-height:1.55}
+  
+  
+  .dl-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+  
+  
+  .dl-btn{
+    flex:1 1 0;min-width:66px;display:inline-flex;align-items:center;justify-content:center;gap:5px;
+    background:var(--primary);color:#fff;border:none;border-radius:10px;padding:9px 8px;
+    font-size:.7rem;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:.2s;
+    font-family:'JetBrains Mono',monospace;
+  }
+  
+  
+  .dl-btn:hover{background:var(--primary-hover);transform:translateY(-2px)}
+  
+  
+  .dl-btn[disabled]{opacity:.55;cursor:wait;transform:none}
+
+  .note-card{padding:22px;background:var(--bg-alt);border-style:dashed}
+  
+  .note-card h4{margin:0 0 8px;font-size:.95rem;font-weight:800}
+  
+  .note-card p{margin:0 0 12px;font-size:.875rem;color:var(--muted);line-height:1.65}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  /* ---------- Footer ---------- */
+  .site-footer{background:var(--secondary);color:#fff;position:relative}
+  .site-footer h4{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a0aec0;
+    font-weight:700;margin:0 0 14px}
+  .site-footer a.f-link{display:block;color:#fff;text-decoration:none;font-size:.9rem;
+    padding:5px 0;transition:color .2s}
+  .site-footer a.f-link:hover{color:var(--primary)}
+  .support-card{
+    background:var(--bg-alt);border:1px solid var(--primary);border-radius:16px;padding:22px;
+    color:var(--text);position:relative;overflow:hidden;
+  }
+  .support-card h5{margin:0 0 6px;font-size:1rem;font-weight:800}
+  .support-card p{margin:0 0 16px;font-size:.83rem;color:var(--muted);line-height:1.55}
+  .support-btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;
+    padding:10px 16px;border-radius:10px;font-weight:700;font-size:.85rem;text-decoration:none;
+    transition:.2s;
+  }
+  .support-btn:hover{background:var(--primary-hover);transform:translateY(-2px)}
+  .legal{border-top:1px solid rgba(255,255,255,.12);padding:22px 0;display:flex;flex-wrap:wrap;
+    gap:10px;justify-content:space-between;font-size:.8rem;color:#a0aec0}
+    
+    
+    
+    
+    
+    
+    
+    
+
+  /* ---------- Toast + reveal ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:32px;transform:translate(-50%,20px);background:#2d3748;
+    color:#fff;padding:12px 20px;border-radius:12px;font-size:.85rem;font-weight:600;
+    box-shadow:0 20px 40px -12px rgba(0,0,0,.45);opacity:0;pointer-events:none;
+    transition:.3s;z-index:999;border-left:3px solid var(--primary);max-width:90vw;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  .reveal{opacity:0;transform:translateY(28px);
+    transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+    *{animation:none!important;transition-duration:.01ms!important}
+  }
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+
+<body id="top">
+
+<!-- ══════════════════ TOP BAR ══════════════════ -->
+<header id="topMenuBar">
+
+  <a class="brand" href="#top">
+    <span id="navMark"></span>
+    <span class="brand-text">Easy<em>Listings</em></span>
+  </a>
+  
+  
+  <nav class="nav-links">
+    <a href="#colors">Colores</a>
+    <a href="#type">Tipografía</a>
+    <a href="#logos">Logos</a>
+    <a href="#components">Componentes</a>
+    <a href="#tokens">Tokens</a>
+  </nav>
+  <a href="#logos" class="primary-btn small nav-cta">Descargar assets</a>
+</header>
+
+
+
+
+
+<main>
+
+
+
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="caveat-badge">👋 Kit de marca</span>
+      <h1>Design System &amp; <span class="pink">Brand Assets</span></h1>
+      <p class="lead">
+        Colores, tipografía, logos y componentes listos para copiar. Todo calibrado para que
+        cualquier página nueva de EasyListings se sienta parte de la misma marca.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="#logos" class="primary-btn">Descargar logos</a>
+        <a href="#tokens" class="ghost-btn">Copiar tokens CSS</a>
+      </div>
+      <div class="hero-chips">
+        <button data-copy="#DF1783" data-copy-label="Primary #DF1783">#DF1783</button>
+        <button data-copy="#40B39A" data-copy-label="Accent #40B39A">#40B39A</button>
+        <button data-copy="#FAF8F5" data-copy-label="Canvas #FAF8F5">#FAF8F5</button>
+        <button data-copy="'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif" data-copy-label="Font stack Inter">Inter</button>
+      </div>
+    </div>
+    <div class="gradient-bar" style="position:absolute;bottom:0;left:0"></div>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- ══════════════════ COLORS ══════════════════ -->
+  <section id="colors" class="section">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <span class="eyebrow">01 · Color</span>
+        <h2>Paleta de marca</h2>
+        <p>Haz clic en cualquier muestra para copiar el valor HEX al portapapeles.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 reveal">
+
+        <button class="swatch" data-copy="#DF1783" data-copy-label="#DF1783 · Primary">
+          <span class="swatch-chip" style="background:#DF1783"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Primary</strong><code>#DF1783</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#C21170" data-copy-label="#C21170 · Primary Hover">
+          <span class="swatch-chip" style="background:#C21170"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Primary Hover</strong><code>#C21170</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#FDEEFA" data-copy-label="#FDEEFA · Primary Soft">
+          <span class="swatch-chip" style="background:#FDEEFA"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Primary Soft</strong><code>#FDEEFA</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#40B39A" data-copy-label="#40B39A · Accent">
+          <span class="swatch-chip" style="background:#40B39A"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Accent</strong><code>#40B39A</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#0F6E5C" data-copy-label="#0F6E5C · Accent Deep">
+          <span class="swatch-chip" style="background:#0F6E5C"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Accent Deep</strong><code>#0F6E5C</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#FAF8F5" data-copy-label="#FAF8F5 · Page Canvas">
+          <span class="swatch-chip" style="background:#FAF8F5"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Page Canvas</strong><code>#FAF8F5</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#F2EFE9" data-copy-label="#F2EFE9 · Alternate Section">
+          <span class="swatch-chip" style="background:#F2EFE9"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Alternate</strong><code>#F2EFE9</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#FFFFFF" data-copy-label="#FFFFFF · Card Surface">
+          <span class="swatch-chip" style="background:#FFFFFF"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Card Surface</strong><code>#FFFFFF</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#2D3748" data-copy-label="#2D3748 · Dark Surface">
+          <span class="swatch-chip" style="background:#2D3748"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Dark Surface</strong><code>#2D3748</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#0E0E10" data-copy-label="#0E0E10 · Text Strong">
+          <span class="swatch-chip" style="background:#0E0E10"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Text Strong</strong><code>#0E0E10</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#5C5C63" data-copy-label="#5C5C63 · Muted Text">
+          <span class="swatch-chip" style="background:#5C5C63"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Muted Text</strong><code>#5C5C63</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#718096" data-copy-label="#718096 · Muted Light">
+          <span class="swatch-chip" style="background:#718096"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Muted Light</strong><code>#718096</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#E5E1DA" data-copy-label="#E5E1DA · Border Warm">
+          <span class="swatch-chip" style="background:#E5E1DA"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Border Warm</strong><code>#E5E1DA</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#E2E8F0" data-copy-label="#E2E8F0 · Border Cool">
+          <span class="swatch-chip" style="background:#E2E8F0"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Border Cool</strong><code>#E2E8F0</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#25D366" data-copy-label="#25D366 · WhatsApp">
+          <span class="swatch-chip" style="background:#25D366"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>WhatsApp</strong><code>#25D366</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#C33A2B" data-copy-label="#C33A2B · Problem X">
+          <span class="swatch-chip" style="background:#C33A2B"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Problem X</strong><code>#C33A2B</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#E8B44C" data-copy-label="#E8B44C · Gold">
+          <span class="swatch-chip" style="background:#E8B44C"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Gold</strong><code>#E8B44C</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+        <button class="swatch" data-copy="#F5D547" data-copy-label="#F5D547 · Ping">
+          <span class="swatch-chip" style="background:#F5D547"></span>
+          <span class="swatch-meta"><span class="swatch-txt"><strong>Ping</strong><code>#F5D547</code></span>
+          <span class="swatch-ico"><span class="copy-ico">⧉</span><span class="check-ico">✓</span></span></span>
+        </button>
+
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- ══════════════════ TYPOGRAPHY ══════════════════ -->
+  <section id="type" class="section alt">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <span class="eyebrow">02 · Tipografía</span>
+        <h2>Tres voces, una marca</h2>
+        <p><strong>Inter</strong> para todo el UI · <strong>Caveat</strong> solo para el saludo del hero ·
+           <strong>JetBrains Mono</strong> para eyebrows, pasos y notas técnicas.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3 reveal" style="margin-bottom:44px">
+
+        <div class="font-card">
+          <div class="font-card-top">
+            <span class="font-mono-spec">Inter · 400–900</span>
+            <button class="chip-btn" data-copy="font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;" data-copy-label="Inter font stack">Copiar</button>
+          </div>
+          <div class="font-sample" style="font-family:'Inter',sans-serif">Aa Bb Cc</div>
+          <p>UI, titulares y cuerpo de texto. Pesos 400 a 900.</p>
+        </div>
+
+        <div class="font-card">
+          <div class="font-card-top">
+            <span class="font-mono-spec">Caveat · 700</span>
+            <button class="chip-btn" data-copy="font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.5rem;" data-copy-label="Caveat font stack">Copiar</button>
+          </div>
+          <div class="font-sample" style="font-family:'Caveat',cursive;font-weight:700">¡Hola!</div>
+          <p>Exclusivamente para el badge de saludo del hero.</p>
+        </div>
+
+        <div class="font-card">
+          <div class="font-card-top">
+            <span class="font-mono-spec">JetBrains Mono</span>
+            <button class="chip-btn" data-copy="font-family: 'JetBrains Mono', monospace; font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;" data-copy-label="JetBrains Mono stack">Copiar</button>
+          </div>
+          <div class="font-sample" style="font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:.02em">01 02 03</div>
+          <p>Eyebrows, numeración de pasos y notas técnicas.</p>
+        </div>
+
+      </div>
+
+      <div class="reveal">
+        <div class="scale-item">
+          <div class="scale-head">
+            <div><code>.text-display</code> <span>clamp(2.5rem, 6vw, 4.5rem) · 800</span></div>
+            <button class="chip-btn" data-copy=".text-display{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.03;letter-spacing:-.03em;font-weight:800}" data-copy-label=".text-display">Copiar</button>
+          </div>
+          <div class="scale-sample text-display">Listings que venden</div>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-head">
+            <div><code>.text-h1</code> <span>clamp(2rem, 4.5vw, 3.25rem) · 800</span></div>
+            <button class="chip-btn" data-copy=".text-h1{font-size:clamp(2rem,4.5vw,3.25rem);line-height:1.08;letter-spacing:-.025em;font-weight:800}" data-copy-label=".text-h1">Copiar</button>
+          </div>
+          <div class="scale-sample text-h1">Publica en minutos</div>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-head">
+            <div><code>.text-h2</code> <span>clamp(1.75rem, 3.4vw, 2.5rem) · 800</span></div>
+            <button class="chip-btn" data-copy=".text-h2{font-size:clamp(1.75rem,3.4vw,2.5rem);line-height:1.15;letter-spacing:-.02em;font-weight:800}" data-copy-label=".text-h2">Copiar</button>
+          </div>
+          <div class="scale-sample text-h2">Todo lo que necesitas</div>
+        </div>
+
+        <div class="scale-item" style="margin-bottom:0">
+          <div class="scale-head">
+            <div><code>.text-h3</code> <span>clamp(1.25rem, 2.2vw, 1.5rem) · 700</span></div>
+            <button class="chip-btn" data-copy=".text-h3{font-size:clamp(1.25rem,2.2vw,1.5rem);line-height:1.25;letter-spacing:-.015em;font-weight:700}" data-copy-label=".text-h3">Copiar</button>
+          </div>
+          <div class="scale-sample text-h3">Subtítulo de sección</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- ══════════════════ LOGOS ══════════════════ -->
+  <section id="logos" class="section white">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <span class="eyebrow">03 · Logos</span>
+        <h2>Descarga en un clic</h2>
+        <p>Cada variante está disponible en <strong>SVG</strong> (vectorial), <strong>PNG</strong> (1200px, fondo transparente)
+           y <strong>WEBP</strong> (ligero, para web).</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 reveal">
+
+        <!-- Color -->
+        <div class="logo-card">
+          <div class="logo-stage light">
+            <img data-logo-preview="color" alt="EasyListings logo a color">
+          </div>
+          <div class="logo-body">
+            <h3>Color</h3>
+            <p>Uso principal sobre fondos claros y neutros.</p>
+            <div class="dl-row">
+              <button class="dl-btn" data-logo="color" data-format="svg">↓ SVG</button>
+              <button class="dl-btn" data-logo="color" data-format="png">↓ PNG</button>
+              <button class="dl-btn" data-logo="color" data-format="webp">↓ WEBP</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- White -->
+        <div class="logo-card">
+          <div class="logo-stage dark">
+            <img data-logo-preview="white" alt="EasyListings logo en blanco">
+          </div>
+          <div class="logo-body">
+            <h3>Blanco</h3>
+            <p>Para fondos oscuros, hero y footer.</p>
+            <div class="dl-row">
+              <button class="dl-btn" data-logo="white" data-format="svg">↓ SVG</button>
+              <button class="dl-btn" data-logo="white" data-format="png">↓ PNG</button>
+              <button class="dl-btn" data-logo="white" data-format="webp">↓ WEBP</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Black -->
+        <div class="logo-card">
+          <div class="logo-stage light">
+            <img data-logo-preview="black" alt="EasyListings logo en negro">
+          </div>
+          <div class="logo-body">
+            <h3>Negro</h3>
+            <p>Impresión, documentos y fondos claros.</p>
+            <div class="dl-row">
+              <button class="dl-btn" data-logo="black" data-format="svg">↓ SVG</button>
+              <button class="dl-btn" data-logo="black" data-format="png">↓ PNG</button>
+              <button class="dl-btn" data-logo="black" data-format="webp">↓ WEBP</button>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+
+        <!-- Icon -->
+        <div class="logo-card">
+          <div class="logo-stage light">
+            <img data-logo-preview="icon" alt="EasyListings icono" style="max-height:64px">
+          </div>
+          <div class="logo-body">
+            <h3>Icono</h3>
+            <p>Favicon, avatares y app icons (512px).</p>
+            <div class="dl-row">
+              <button class="dl-btn" data-logo="icon" data-format="svg">↓ SVG</button>
+              <button class="dl-btn" data-logo="icon" data-format="png">↓ PNG</button>
+              <button class="dl-btn" data-logo="icon" data-format="webp">↓ WEBP</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note-card reveal" style="margin-top:28px">
+        <h4>⚡ Cómo usar estos logos en tus proyectos</h4>
+        <p>
+          Los archivos de esta página son <strong>placeholders generados en vivo</strong>. Sustitúyelos por tus
+          archivos finales guardándolos en <code style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--primary)">/assets/</code>
+          y actualizando la ruta en el snippet de abajo.
+        </p>
+        <div class="code-wrap">
+          <pre class="code-block" id="code-logos">&lt;!-- Logo a color --&gt;
+&lt;img src="assets/easylistings-color.svg" alt="EasyListings" width="150" height="32"&gt;
+
+&lt;!-- Logo blanco (fondos oscuros) --&gt;
+&lt;img src="assets/easylistings-white.svg" alt="EasyListings" width="150" height="32"&gt;
+
+&lt;!-- Logo negro (impresión) --&gt;
+&lt;img src="assets/easylistings-black.svg" alt="EasyListings" width="150" height="32"&gt;
+
+&lt;!-- Icono / favicon --&gt;
+&lt;link rel="icon" href="assets/easylistings-icon.svg"&gt;
+
+&lt;!-- Fallback WebP con PNG de respaldo --&gt;
+&lt;picture&gt;
+  &lt;source srcset="assets/easylistings-color.webp" type="image/webp"&gt;
+  &lt;img src="assets/easylistings-color.png" alt="EasyListings" width="150" height="32"&gt;
+&lt;/picture&gt;</pre>
+          <button class="copy-btn" data-copy-target="code-logos">Copiar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- ══════════════════ COMPONENTS ══════════════════ -->
+  <section id="components" class="section">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <span class="eyebrow">04 · Componentes</span>
+        <h2>Piezas reutilizables</h2>
+        <p>Copiá el HTML o el CSS de cada componente y pegalo directo en tu página nueva.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 reveal">
+
+        <!-- Primary button -->
+        <div class="demo-tile">
+          <div class="demo-head">
+            <h3>Primary button</h3>
+            <button class="chip-btn" data-copy-target="code-btn-primary">Copiar</button>
+          </div>
+          <div class="demo-body">
+            <a href="#" class="primary-btn" onclick="return false">Iniciar Sesión</a>
+          </div>
+          <pre class="code-block" id="code-btn-primary">&lt;a href="#" class="primary-btn"&gt;Iniciar Sesión&lt;/a&gt;</pre>
+        </div>
+
+        <!-- Ghost button -->
+        <div class="demo-tile">
+          <div class="demo-head">
+            <h3>Frosted secondary</h3>
+            <button class="chip-btn" data-copy-target="code-btn-ghost">Copiar</button>
+          </div>
+          <div class="demo-body dark">
+            <a href="#" class="ghost-btn" onclick="return false">Ver demo</a>
+          </div>
+          <pre class="code-block" id="code-btn-ghost">&lt;a href="#" class="ghost-btn"&gt;Ver demo&lt;/a&gt;</pre>
+        </div>
+
+        <!-- Section header stack -->
+        <div class="demo-tile">
+          <div class="demo-head">
+            <h3>Section header stack</h3>
+            <button class="chip-btn" data-copy-target="code-eyebrow">Copiar</button>
+          </div>
+          <div class="demo-body" style="flex-direction:column;text-align:center;gap:8px">
+            <span class="eyebrow">Funciones</span>
+            <div class="text-h3" style="margin:6px 0">Todo lo que necesitas</div>
+            <p class="section-sub" style="font-size:.85rem">Subtítulo de apoyo, máximo dos líneas.</p>
+          </div>
+          <pre class="code-block" id="code-eyebrow">&lt;span class="eyebrow"&gt;Funciones&lt;/span&gt;
+&lt;h2 class="text-h2"&gt;Todo lo que necesitas&lt;/h2&gt;
+&lt;p class="section-sub"&gt;Subtítulo de apoyo.&lt;/p&gt;</pre>
+        </div>
+
+        <!-- Feature card -->
+        <div class="demo-tile">
+          <div class="demo-head">
+            <h3>Feature card</h3>
+            <button class="chip-btn" data-copy-target="code-card">Copiar</button>
+          </div>
+          <div class="demo-body">
+            <div class="feature-card">
+              <div class="card-icon">🏠</div>
+              <h4>Publicación inteligente</h4>
+              <p>Subí tu propiedad una vez y publicala en todos los portales.</p>
+              <a href="#" class="explore-link" onclick="return false">Explorar función <span>→</span></a>
+            </div>
+          </div>
+          <pre class="code-block" id="code-card">&lt;div class="feature-card"&gt;
+  &lt;div class="card-icon"&gt;🏠&lt;/div&gt;
+  &lt;h4&gt;Publicación inteligente&lt;/h4&gt;
+  &lt;p&gt;Subí tu propiedad una vez y publicala
+     en todos los portales.&lt;/p&gt;
+  &lt;a href="#" class="explore-link"&gt;
+    Explorar función &lt;span&gt;→&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;</pre>
+        </div>
+
+        <!-- Badges -->
+        <div class="demo-tile">
+          <div class="demo-head">
+            <h3>Badges &amp; pills</h3>
+            <button class="chip-btn" data-copy-target="code-badges">Copiar</button>
+          </div>
+          <div class="demo-body">
+            <span class="pill-pronto">PRONTO</span>
+            <span class="pill-soft">PRO</span>
+            <span class="pill-247">24/7</span>
+          </div>
+          <pre class="code-block" id="code-badges">&lt;span class="pill-pronto"&gt;PRONTO&lt;/span&gt;
+&lt;span class="pill-soft"&gt;PRO&lt;/span&gt;
+&lt;span class="pill-247"&gt;24/7&lt;/span&gt;</pre>
+        </div>
+
+        <!-- Gradient bar -->
+        <div class="demo-tile">
+          <div class="demo-head">
+            <h3>Gradient accent bar</h3>
+            <button class="chip-btn" data-copy-target="code-bar">Copiar</button>
+          </div>
+          <div class="demo-body" style="padding:0;overflow:hidden;background:#2d3748;border:none">
+            <div style="width:100%;height:64px;display:grid;place-items:end">
+              <div class="gradient-bar"></div>
+            </div>
+          </div>
+          <pre class="code-block" id="code-bar">.gradient-bar{
+  height:4px;
+  background:linear-gradient(90deg,
+    transparent 0%, #DF1783 50%, transparent 100%);
+}</pre>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- ══════════════════ TOKENS ══════════════════ -->
+  <section id="tokens" class="section alt">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <span class="eyebrow">05 · Tokens</span>
+        <h2>Variables CSS globales</h2>
+        <p>Pegalas en el <code style="font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--primary)">:root</code>
+           de cualquier página nueva y todos los componentes funcionan igual.</p>
+      </div>
+
+      <div class="reveal">
+        <div class="code-wrap">
+          <pre class="code-block" id="code-tokens">:root{
+  /* Brand */
+  --primary:#DF1783;
+  --primary-hover:#C21170;
+  --primary-soft:#FDEEFA;
+
+  /* Accents */
+  --secondary:#2D3748;
+  --accent:#40B39A;
+  --accent-deep:#0F6E5C;
+
+  /* Surfaces */
+  --bg:#FAF8F5;
+  --bg-alt:#F2EFE9;
+  --card-bg:#FFFFFF;
+
+  /* Text */
+  --text:#2D3748;
+  --text-strong:#0E0E10;
+  --muted:#5C5C63;
+  --muted-2:#718096;
+
+  /* Lines & depth */
+  --border:#E5E1DA;
+  --border-2:#E2E8F0;
+  --shadow-sm:0 1px 3px rgba(45,55,72,.06), 0 1px 2px rgba(45,55,72,.04);
+  --shadow-lg:0 20px 40px -12px rgba(45,55,72,.18);
+
+  /* Shape */
+  --radius-card:20px;
+  --radius-btn:12px;
+  --gradient-accent:linear-gradient(90deg,transparent 0%,#DF1783 50%,transparent 100%);
+}</pre>
+          <button class="copy-btn" data-copy-target="code-tokens">Copiar</button>
+        </div>
+
+        <div class="code-wrap">
+          <pre class="code-block" id="code-global">/* Scrollbar de marca */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#F2EFE9}
+::-webkit-scrollbar-thumb{background:#DF1783;border-radius:8px}
+
+/* Selección de texto */
+::selection{background:rgba(223,23,131,.22);color:#0E0E10}
+
+/* Reveal on scroll */
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1),
+             transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.reveal.in{opacity:1;transform:none}
+
+/* Respeto por reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation:none!important;transition-duration:.01ms!important}
+}</pre>
+          <button class="copy-btn" data-copy-target="code-global">Copiar</button>
+        </div>
+
+        <div style="text-align:center;margin-top:32px">
+          <button class="primary-btn" data-copy-target="code-tokens">Copiar todos los tokens</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ══════════════════ MOTION ══════════════════ -->
+  <section id="motion" class="section white">
+    <div class="container-x">
+      <div class="section-head reveal">
+        <span class="eyebrow">06 · Motion</span>
+        <h2>Micro-interacciones</h2>
+        <p>Movimiento sutil, siempre al servicio del contenido. Todo se desactiva con
+           <code style="font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--primary)">prefers-reduced-motion</code>.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 reveal">
+        <div>
+          <div class="code-wrap" style="margin-top:0">
+            <pre class="code-block" id="code-motion-card">/* Hover lift de tarjetas */
+.feature-card{transition:.28s}
+.feature-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--primary);
+}
+.feature-card:hover .card-icon{transform:scale(1.08)}
+.feature-card:hover .explore-link span{transform:translateX(4px)}</pre>
+            <button class="copy-btn" data-copy-target="code-motion-card">Copiar</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="code-wrap" style="margin-top:0">
+            <pre class="code-block" id="code-motion-btn">/* Botón primario con glow */
+.primary-btn{transition:transform .2s, background .2s, box-shadow .2s}
+.primary-btn:hover{
+  background:var(--primary-hover);
+  transform:translateY(-3px);
+  box-shadow:0 12px 24px -8px rgba(223,23,131,.55);
+}
+
+/* Underline animado del nav */
+.nav-links a::after{
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .25s ease;
+}
+.nav-links a:hover::after{transform:scaleX(1)}</pre>
+            <button class="copy-btn" data-copy-target="code-motion-btn">Copiar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="site-footer">
+  <div class="gradient-bar"></div>
+  <div class="container-x">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10" style="padding:64px 0 44px">
+
+      <div class="md:col-span-3">
+        <img id="footerLogo" alt="EasyListings" style="height:34px;width:auto;margin-bottom:16px">
+        <p style="color:#a0aec0;font-size:.875rem;line-height:1.7;margin:0 0 20px">
+          La plataforma que simplifica la publicación de propiedades en todos tus portales.
+        </p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;font-size:.7rem;font-weight:700;color:#a0aec0">Google Partner</span>
+          <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;font-size:.7rem;font-weight:700;color:#a0aec0">PayPal Seguro</span>
+        </div>
+      </div>
+
+      <div class="md:col-span-5 grid grid-cols-3 gap-6">
+        <div>
+          <h4>Producto</h4>
+          <a href="#" class="f-link">Funciones</a>
+          <a href="#" class="f-link">Planes</a>
+          <a href="#" class="f-link">Demo</a>
+        </div>
+        <div>
+          <h4>Comunidad</h4>
+          <a href="#" class="f-link">Blog</a>
+          <a href="#" class="f-link">Soporte</a>
+          <a href="#" class="f-link">WhatsApp</a>
+        </div>
+        <div>
+          <h4>Funciones</h4>
+          <a href="#" class="f-link">Publicación</a>
+          <a href="#" class="f-link">Analítica</a>
+          <a href="#" class="f-link">API</a>
+        </div>
+      </div>
+
+      <div class="md:col-span-4">
+        <div class="support-card">
+          <span class="pill-247">24/7</span>
+          <h5 style="margin-top:12px">¿Necesitás ayuda?</h5>
+          <p>Nuestro equipo responde en minutos, todos los días del año.</p>
+          <a href="#" class="support-btn" onclick="return false">🎧 Escríbanos</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="legal">
+      <span>Desarrollado en 🇩🇴 por Bebell Digital Solutions.</span>
+      <span>Copyright © 2026 EasyListings · Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+
+
+
+
+
+
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   1. LOGO BUILDER (demo — reemplazá por tus archivos reales)
+   ═══════════════════════════════════════════════════════════ */
+
+const LOGO_DEFS = {
+  color: { mark:'#DF1783', easy:'#2D3748', listings:'#DF1783', type:'lockup' },
+  white: { mark:'#FFFFFF', easy:'#FFFFFF', listings:'#FFFFFF', type:'lockup' },
+  black: { mark:'#0E0E10', easy:'#0E0E10', listings:'#0E0E10', type:'lockup' },
+  icon:  { mark:'#DF1783', type:'mark' }
+};
+
+let uid = 0;
+
+function markBlock(color){
+  const id = 'mk' + (++uid);
+  return `<defs>
+    <mask id="${id}">
+      <rect width="64" height="64" rx="17" fill="#ffffff"/>
+      <path d="M17 31 L32 17.5 L47 31" fill="none" stroke="#000000" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M23 32.5 V46.5 a3.5 3.5 0 0 0 3.5 3.5 h11 a3.5 3.5 0 0 0 3.5 -3.5 V32.5"
+            fill="none" stroke="#000000" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <rect width="64" height="64" rx="17" fill="${color}" mask="url(#${id})"/>`;
+}
+
+function buildSVG(key){
+  const d = LOGO_DEFS[key];
+
+  if(d.type === 'mark'){
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">${markBlock(d.mark)}</svg>`;
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64">
+  <g>${markBlock(d.mark)}</g>
+  <text x="80" y="43" font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+        font-size="28" font-weight="800" letter-spacing="-0.5">
+    <tspan fill="${d.easy}">Easy</tspan><tspan fill="${d.listings}" dx="7">Listings</tspan>
+  </text>
+</svg>`;
+}
+
+const svgDataURL = key => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(buildSVG(key));
+
+/* Render previews */
+document.querySelectorAll('[data-logo-preview]').forEach(img => {
+  img.src = svgDataURL(img.dataset.logoPreview);
+});
+document.getElementById('navMark').innerHTML = buildSVG('icon');
+document.getElementById('footerLogo').src = svgDataURL('white');
+
+/* ═══════════════════════════════════════════════════════════
+   2. DOWNLOAD ENGINE (SVG / PNG / WEBP)
+   ═══════════════════════════════════════════════════════════ */
+
+function downloadBlob(blob, filename){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 3000);
+}
+
+function svgToImage(svg){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  });
+}
+
+async function exportLogo(key, format){
+  const svg  = buildSVG(key);
+  const def  = LOGO_DEFS[key];
+  const base = key === 'icon' ? 'easylistings-icon' : 'easylistings-' + key;
+
+  /* SVG: descarga directa */
+  if(format === 'svg'){
+    downloadBlob(new Blob([svg], {type:'image/svg+xml;charset=utf-8'}), base + '.svg');
+    return;
+  }
+
+  /* PNG / WEBP: rasterizar en canvas */
+  const baseW = def.type === 'mark' ? 64 : 300;
+  const baseH = 64;
+  const targetW = def.type === 'mark' ? 512 : 1200;
+  const scale = targetW / baseW;
+
+  const img = await svgToImage(svg);
+  const canvas = document.createElement('canvas');
+  canvas.width  = Math.round(baseW * scale);
+  canvas.height = Math.round(baseH * scale);
+
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  const mime = format === 'webp' ? 'image/webp' : 'image/png';
+  const blob = await new Promise(res => canvas.toBlob(res, mime, 0.95));
+
+  if(!blob){ showToast('⚠ Este navegador no soporta ese formato'); return; }
+
+  const realExt = blob.type.includes('webp') ? 'webp' : 'png';
+  downloadBlob(blob, base + '.' + realExt);
+}
+
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('[data-logo]');
+  if(!btn) return;
+
+  const key    = btn.dataset.logo;
+  const format = btn.dataset.format;
+  const label  = btn.textContent;
+
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  try{
+    await exportLogo(key, format);
+    showToast('✓ Descargado: easylistings-' + (key === 'icon' ? 'icon' : key) + '.' + format);
+  }catch(err){
+    console.error(err);
+    showToast('⚠ No se pudo generar el archivo');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = label;
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════
+   3. COPY SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+
+let toastEl;
+
+function showToast(msg){
+  if(!toastEl) toastEl = document.getElementById('toast');
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(() => toastEl.classList.remove('show'), 1900);
+}
+
+async function copyText(text){
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    throw new Error('fallback');
+  }catch(err){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+  }
+}
+
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('[data-copy], [data-copy-target]');
+  if(!btn) return;
+
+  let text = btn.dataset.copy;
+
+  if(!text && btn.dataset.copyTarget){
+    const src = document.getElementById(btn.dataset.copyTarget);
+    text = src ? src.textContent : '';
+  }
+  if(!text) return;
+
+  await copyText(text);
+
+  const label = btn.dataset.copyLabel || (text.length > 26 ? 'código' : text);
+  showToast('✓ Copiado: ' + (label.length > 42 ? label.slice(0, 42) + '…' : label));
+
+  /* Feedback visual */
+  btn.classList.add('copied');
+
+  if(btn.classList.contains('copy-btn')){
+    if(!btn.dataset.orig) btn.dataset.orig = btn.textContent;
+    btn.textContent = '¡Copiado!';
+    setTimeout(() => { btn.textContent = btn.dataset.orig; }, 1400);
+  }
+
+  setTimeout(() => btn.classList.remove('copied'), 1300);
+});
+
+/* ═══════════════════════════════════════════════════════════
+   4. NAV MORPH + SCROLL REVEAL
+   ═══════════════════════════════════════════════════════════ */
+
+const topBar = document.getElementById('topMenuBar');
+window.addEventListener('scroll', () => {
+  topBar.classList.toggle('full-width', window.scrollY > 50);
+}, { passive: true });
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
