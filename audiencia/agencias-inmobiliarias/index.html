@@ -1,1 +1,2053 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-title">EasyListings para Agencias Inmobiliarias 🏢 | Administra tu Agencia desde una Sola Plataforma</title>
+
+    <!-- === METADATOS PRINCIPALES === -->
+    <meta name="description" content="Administra tu agencia inmobiliaria desde una sola plataforma. Centraliza propiedades, clientes, agentes y operaciones comerciales bajo la identidad de tu empresa. EasyListings para agencias y brokers.">
+    <meta name="keywords" content="software para agencias inmobiliarias, plataforma para agencias de bienes raíces, CRM para agencias inmobiliarias, administración de propiedades, gestión de agentes inmobiliarios, EasyListings">
+    <meta name="author" content="EasyListings">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#DF1783">
+
+    <!-- === URL CANÓNICA === -->
+    <link rel="canonical" href="https://easylistings.website/publico/agencias">
+
+    <!-- === FAVICON & APP ICONS === -->
+    <link rel="icon" href="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp?updatedAt=1793038323330">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp?updatedAt=1793038323330">
+
+    <!-- === OPEN GRAPH / FACEBOOK === -->
+    <meta property="og:locale" content="es_DO">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://easylistings.website/publico/agencias">
+    <meta property="og:title" content="EasyListings para Agencias Inmobiliarias | Administra tu Agencia desde una Sola Plataforma">
+    <meta property="og:description" content="Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.">
+    <meta property="og:image" content="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings-Socialshare.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="EasyListings">
+    <meta property="og:locale" content="es_DO">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- === TWITTER / X CARD === -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://easylistings.website/publico/agencias">
+    <meta name="twitter:title" content="EasyListings para Agencias Inmobiliarias | Administra tu Agencia desde una Sola Plataforma">
+    <meta name="twitter:description" content="Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.">
+    <meta name="twitter:image" content="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings-Socialshare.webp">
+
+    <!-- === FONTS & ICONS === -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- === TAILWIND, GSAP & LUCIDE === -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #FAF8F5;
+            --bg-alt: #F2EFE9;
+            --card-bg: #FFFFFF;
+            --fg: #0E0E10;
+            --secondary: #2d3748;
+            --text: #2d3748;
+            --text-light: #718096;
+            --muted: #5C5C63;
+            --primary: #DF1783;
+            --primary-hover: #C21170;
+            --primary-soft: #FDEEFA;
+            --brand-emerald: #0F6E5C;
+            --brand-emerald-soft: #E6F4F1;
+            --accent-gold: #E8B44C;
+            --whatsapp: #25D366;
+            --danger: #C33A2B;
+            --border: #E5E1DA;
+            --border-color: #e2e8f0;
+            --submenu-hover: #fdeefa;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 4px 20px -2px rgba(14, 14, 16, 0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(14, 14, 16, 0.12);
+            --shadow-pink: 0 12px 28px -8px rgba(223, 23, 131, 0.38);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fbfbfb; }
+        ::-webkit-scrollbar-thumb { background: #df1783; border-radius: 4px; }
+
+        html {
+            box-sizing: border-box;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        .font-mono-spec {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .text-h2 {
+            font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+            line-height: 1.15;
+            font-weight: 900;
+        }
+
+        .text-h3 {
+            font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+            line-height: 1.3;
+        }
+
+        h1, h2, h3, h4 { color: var(--text); }
+        p { color: var(--text-light); }
+        .hero-title, .hero-subtitle { color: white !important; }
+
+        /* ================= TOP MENU BAR ================= */
+        .top-menu-bar {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 1200px;
+            z-index: 1100;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .top-menu-bar.full-width {
+            width: 100%;
+            max-width: 100%;
+            left: 0;
+            transform: translateX(0);
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            padding: 0 1.5rem;
+            top: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        .top-menu-content {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        #appLogo {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        #appBrandNameDisplay {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .brand-accent { color: #df1783; }
+
+        .top-menu-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Language Dropdown */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .lang-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #fff;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2939;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .lang-trigger:hover { border-color: #98a2b3; }
+        .lang-trigger:focus-visible {
+            outline: none;
+            border-color: #667085;
+            box-shadow: 0 0 0 3px rgba(102, 112, 133, 0.15);
+        }
+        .lang-trigger .flag { font-size: 18px; line-height: 1; }
+        .lang-trigger .chevron {
+            margin-left: 4px;
+            width: 14px;
+            height: 14px;
+            color: #667085;
+            transition: transform 0.2s ease;
+        }
+        .lang-dropdown.open .chevron { transform: rotate(180deg); }
+
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            min-width: 100%;
+            padding: 6px;
+            margin: 0;
+            list-style: none;
+            background: #fff;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            z-index: 100;
+        }
+
+        .lang-dropdown.open .lang-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2939;
+            text-align: left;
+            transition: background 0.1s ease;
+            text-decoration: none;
+        }
+
+        .lang-option:hover { background: #f2f4f7; }
+        .lang-option[aria-selected="true"] { background: #f9fafb; }
+        .lang-option .flag { font-size: 18px; line-height: 1; }
+
+        /* Buttons */
+        .primary-btn {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .primary-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        /* Nav Menu */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0 auto;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 1rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--fg);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.25s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            line-height: 1;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .nav-link:hover,
+        .nav-item.open .nav-link {
+            background: var(--bg);
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after { transform: scaleX(1); }
+
+        .nav-link .chevron {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.25s ease;
+            opacity: 0.6;
+        }
+
+        .nav-item.open .nav-link .chevron { transform: rotate(180deg); }
+
+        /* 3-Column Submenu with Preview */
+        .submenu.submenu-with-preview {
+            position: fixed;
+            top: 96px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            gap: 12px;
+            padding: 12px;
+            min-width: 760px;
+            max-width: calc(100vw - 2rem);
+            border-radius: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1200;
+            overflow: hidden;
+        }
+
+        .top-menu-bar.full-width .submenu.submenu-with-preview {
+            top: 76px;
+        }
+
+        .nav-item.open .submenu.submenu-with-preview {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .submenu.submenu-with-preview > .submenu-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1 1 0;
+            min-width: 220px;
+        }
+
+        .submenu.submenu-with-preview > .submenu-col .submenu-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 10px;
+            white-space: nowrap;
+            transition: background-color .2s ease, color .2s ease;
+        }
+
+        .submenu.submenu-with-preview > .submenu-col .submenu-link i,
+        .submenu.submenu-with-preview > .submenu-col .submenu-link svg {
+            width: 16px;
+            height: 16px;
+            color: #df1783;
+            flex-shrink: 0;
+        }
+
+        .submenu.submenu-with-preview > .submenu-col .submenu-link:hover,
+        .submenu.submenu-with-preview > .submenu-col .submenu-link:focus-visible {
+            background: rgba(223, 23, 131, 0.08);
+            color: #df1783;
+        }
+
+        .submenu.submenu-with-preview > .submenu-preview {
+            position: relative;
+            flex: 0 0 auto;
+            width: 480px;
+            aspect-ratio: 16 / 9;
+            align-self: flex-start;
+            margin-left: 4px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .submenu.submenu-with-preview > .submenu-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity .35s ease, transform .35s ease;
+        }
+
+        .submenu.submenu-with-preview > .submenu-preview img.is-swapping {
+            opacity: 0;
+            transform: scale(1.03);
+        }
+
+        /* ================= HERO BANNER ================= */
+        .header-banner {
+            width: 100%;
+            padding: 195px 2rem 6rem 2rem;
+            text-align: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+            background-image: url('https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/agencias-inmobiliarias1.webp');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(22, 28, 39, 0.84) 0%, rgba(45, 55, 72, 0.80) 100%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        /* ================= CARDS & MICRO-INTERACTIONS ================= */
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .feature-card .card-icon {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .feature-card:hover .card-icon {
+            transform: scale(1.08);
+        }
+
+        .feature-card .card-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .card-arrow {
+            transform: translateX(4px);
+        }
+
+        @keyframes shakeIcon {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            25% { transform: translateX(-4px) rotate(-5deg); }
+            75% { transform: translateX(4px) rotate(5deg); }
+        }
+
+        .problem-bullet:hover .problem-x {
+            animation: shakeIcon 0.45s ease;
+        }
+
+        /* ================= Embed Code animation ================= */
+        @keyframes embedFloat {
+            0%, 100% { transform: translate(-50%, 0); }
+            50%      { transform: translate(-50%, -6px); }
+        }
+        @keyframes embedFadeUp {
+            0%   { opacity: 0; transform: translate(-50%, 24px); }
+            100% { opacity: 1; transform: translate(-50%, 0); }
+        }
+        @keyframes dotPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(64,179,154,0.55); }
+            50%      { box-shadow: 0 0 0 6px rgba(64,179,154,0); }
+        }
+
+        .embed-float {
+            opacity: 0;
+            animation: embedFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards,
+                       embedFloat 5s ease-in-out 1.4s infinite;
+        }
+        .embed-dot { animation: dotPulse 2s ease-in-out infinite; }
+
+        /* Copy success state */
+        .embed-copy.copied { background-color: #40b39a !important; }
+        .embed-copy.copied .embed-copy-icon::before { content: "\f00c"; } /* fa-check */
+
+        /* ================= BACK TO TOP ================= */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+            box-shadow: var(--shadow-pink);
+        }
+
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #backToTopBtn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* ================= FOOTER (NO CURTAIN REVEAL) ================= */
+        .site-footer {
+            position: relative;
+            z-index: 10;
+            padding: 6rem 1.5rem 3rem 1.5rem;
+            margin-top: auto;
+            background: var(--secondary);
+            border-radius: 0;
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .footer-heading {
+            color: #a0aec0 !important;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link {
+            color: white !important;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary) !important;
+        }
+
+        /* ================= REDUCED MOTION ================= */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+            #appBrandNameDisplay { font-size: 1.25rem; }
+        }
+
+        @media (max-width: 768px) {
+            #appBrandNameDisplay { font-size: 1.15rem; }
+            #desktopCta { display: none; }
+            .header-banner { padding: 150px 1rem 4.5rem 1rem; }
+            .top-menu-bar { width: calc(100% - 1rem); }
+            .top-menu-bar.full-width { padding: 0 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            #appBrandNameDisplay { font-size: 1rem; }
+            .header-banner { padding: 130px 1rem 3.5rem 1rem; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#DF1783] selection:text-white">
+
+    <!-- ================= CURSOR FOLLOWER ================= -->
+    <div id="cursor-follower" aria-hidden="true" class="fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[999] bg-[#DF1783]/60 hidden lg:block opacity-0 transition-opacity duration-300"></div>
+
+    <!-- ================= TOP MENU BAR ================= -->
+    <div class="top-menu-bar" id="topMenuBar">
+        <div class="top-menu-content">
+            <a href="/" class="logo-link inline-flex items-center gap-2 hover:opacity-90 transition-opacity duration-200" aria-label="EasyListings — Inicio">
+                <div class="logo-container">
+                    <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo">
+                    <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+                </div>
+            </a>
+
+            <nav class="nav-menu" aria-label="Main navigation">
+                <div class="nav-item">
+                    <a href="/" class="nav-link" data-i18n="nav_home">Inicio</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="/acerca" class="nav-link" data-i18n="nav_about">Acerca de</a>
+                </div>
+
+                <div class="nav-item" id="funcionesNavItem">
+                    <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
+                        <span data-i18n="nav_features">Funciones</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+                    <div class="submenu submenu-with-preview" role="menu" aria-label="Funciones submenu">
+                        <div class="submenu-col">
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/sitio-web-inmobiliario-banner.webp?updatedAt=1795030721084">
+                                <i data-lucide="map-pin-house"></i>
+                                <span data-i18n="sub_website">Sitio web inmobiliario</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/EasyListings-Studio.webp?updatedAt=1795030720922">
+                                <i data-lucide="share-2"></i>
+                                <span data-i18n="sub_post">Publicación multicanal</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/personalizacion-banner-1.webp">
+                                <i data-lucide="palette"></i>
+                                <span data-i18n="sub_seo">Personalización y SEO</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/embed-widget-1.webp">
+                                <i data-lucide="code-xml"></i>
+                                <span data-i18n="sub_widget">Catálogo integrable</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/formulario-de-captacion.webp?updatedAt=1795030720798">
+                                <i data-lucide="bar-chart-3"></i>
+                                <span data-i18n="sub_form">Formularios de captación</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/pipeline-banner.webp?updatedAt=1795030720801">
+                                <i data-lucide="users"></i>
+                                <span data-i18n="sub_crm">CRM y gestión de clientes</span>
+                            </a>
+                        </div>
+
+                        <div class="submenu-col">
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/inbox-feature.webp">
+                                <i data-lucide="inbox"></i>
+                                <span data-i18n="sub_inbox">Bandeja de mensajes</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/agenda-de-visitas.webp?updatedAt=1795030720832">
+                                <i data-lucide="calendar-check"></i>
+                                <span data-i18n="sub_calendar">Agenda de visitas</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/analitica.webp?updatedAt=1795030720843">
+                                <i data-lucide="chart-no-axes-combined"></i>
+                                <span data-i18n="sub_analytics">Analítica por propiedad</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/traduccion.webp?updatedAt=1795030720933">
+                                <i data-lucide="languages"></i>
+                                <span data-i18n="sub_languages">Plataforma multilingüe</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/calculadora-banner.webp">
+                                <i data-lucide="calculator"></i>
+                                <span data-i18n="sub_calculator">Calculadora hipotecaria</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/AUTOMATION.webp?updatedAt=1795030720884">
+                                <i data-lucide="workflow"></i>
+                                <span data-i18n="sub_automation">Automatizaciones</span>
+                            </a>
+                        </div>
+
+                        <div class="submenu-preview" aria-hidden="true">
+                            <img id="submenuPreviewImg"
+                                 src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/easylistings-main-banner-pink.webp?updatedAt=1794600062403"
+                                 alt="Banner principal EasyListings" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="/planes" class="nav-link" data-i18n="nav_pricing">Planes</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="/contacto" class="nav-link" data-i18n="nav_contact">Contacto</a>
+                </div>
+            </nav>
+
+            <div class="top-menu-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="flag" id="currentFlag">🇩🇴</span>
+                        <span id="currentCode">ES</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+
+                    <ul class="lang-menu" id="langMenu" role="listbox" aria-label="Seleccionar idioma">
+                        <li role="option" aria-selected="true">
+                            <a href="?lang=es" class="lang-option" data-flag="🇩🇴" data-code="ES" data-lang="es"><span class="flag">🇩🇴</span> ES</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=en" class="lang-option" data-flag="🇺🇸" data-code="EN" data-lang="en"><span class="flag">🇺🇸</span> EN</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=fr" class="lang-option" data-flag="🇫🇷" data-code="FR" data-lang="fr"><span class="flag">🇫🇷</span> FR</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=it" class="lang-option" data-flag="🇮🇹" data-code="IT" data-lang="it"><span class="flag">🇮🇹</span> IT</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=de" class="lang-option" data-flag="🇩🇪" data-code="DE" data-lang="de"><span class="flag">🇩🇪</span> DE</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=ru" class="lang-option" data-flag="🇷🇺" data-code="RU" data-lang="ru"><span class="flag">🇷🇺</span> RU</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=zh" class="lang-option" data-flag="🇨🇳" data-code="ZH" data-lang="zh"><span class="flag">🇨🇳</span> ZH</a>
+                        </li>
+                        <li role="option" aria-selected="false">
+                            <a href="?lang=ja" class="lang-option" data-flag="🇯🇵" data-code="JA" data-lang="ja"><span class="flag">🇯🇵</span> JA</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="/planes" class="primary-btn hidden sm:inline-flex" id="desktopCta" data-i18n="nav_cta">Activar Cuenta</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ================= HERO SECTION ================= -->
+    <header class="header-banner" id="mainHeader">
+        <div class="header-content">
+            <div class="inline-flex items-center gap-2 bg-[#DF1783] text-white font-mono-spec text-xs sm:text-sm font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-6 shadow-lg">
+                <i class="fa-solid fa-building"></i>
+                <span data-i18n="ag_hero_eyebrow">PARA AGENCIAS INMOBILIARIAS</span>
+            </div>
+
+            <h1 class="hero-title max-w-[960px] mx-auto text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6" data-i18n="ag_hero_title">
+                Administra tu agencia inmobiliaria desde una sola plataforma.
+            </h1>
+
+            <p class="hero-subtitle max-w-3xl mx-auto text-lg md:text-xl font-medium mb-4" data-i18n="ag_hero_sub1">
+                Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.
+            </p>
+
+            <p class="max-w-2xl mx-auto text-sm sm:text-base text-gray-200/90 mb-9 leading-relaxed" data-i18n="ag_hero_sub2">
+                Deja atrás las hojas de cálculo, los procesos desorganizados y las herramientas independientes. Dale a tu equipo un espacio de trabajo diseñado para gestionar el negocio inmobiliario.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="/planes" class="primary-btn text-base sm:text-lg px-7 py-3.5 w-full sm:w-auto" data-i18n="ag_hero_cta1">
+                    Crear mi plataforma inmobiliaria
+                </a>
+                <a href="#solucion" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-base sm:text-lg font-semibold px-7 py-3.5 rounded-xl transition w-full sm:w-auto inline-flex items-center justify-center gap-2" data-i18n="ag_hero_cta2">
+                    <span>Explorar funcionalidades</span>
+                    <i class="fa-solid fa-arrow-down text-xs"></i>
+                </a>
+            </div>
+
+            <!-- Target Audience Chips -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-9">
+                <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3.5 py-1.5 text-xs font-semibold text-gray-700">
+                    <i class="fa-solid fa-store text-[#DF1783]"></i>
+                    <span data-i18n="ag_chip1">Agencias pequeñas y medianas</span>
+                </span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3.5 py-1.5 text-xs font-semibold text-gray-700">
+                    <i class="fa-solid fa-building text-[#DF1783]"></i>
+                    <span data-i18n="ag_chip2">Brokerage firms independientes</span>
+                </span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-pink-50 px-3.5 py-1.5 text-xs font-semibold text-gray-700">
+                    <i class="fa-solid fa-users text-[#DF1783]"></i>
+                    <span data-i18n="ag_chip3">Agencias con múltiples agentes</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30"></div>
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ================= SECTION 2: PAIN POINTS ================= -->
+    <section id="desafios" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg-alt)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 gsap-reveal">
+                <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_prob_eyebrow">
+                    LOS DESAFÍOS DE ADMINISTRAR UNA AGENCIA
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_prob_h2">
+                    ¿Tu agencia está creciendo, pero tu administración sigue siendo la misma?
+                </h2>
+                <p class="text-base sm:text-lg text-[var(--muted)] mt-4" data-i18n="ag_prob_body1">
+                    A medida que tu agencia incorpora más propiedades y agentes, también aumenta la complejidad de administrar el negocio.
+                </p>
+                <p class="text-base font-semibold text-[var(--fg)] mt-3" data-i18n="ag_prob_body2">
+                    ¿Te identificas con alguna de estas situaciones?
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob1_t">Inventario desorganizado</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob1_d">
+                        Cada agente maneja sus propias propiedades y la información termina duplicada o desactualizada.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob2_t">Falta de seguimiento</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob2_d">
+                        No tienes una visión clara de las oportunidades comerciales y los clientes pendientes.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob3_t">Poco control del equipo</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob3_d">
+                        Necesitas saber qué está haciendo cada agente y cómo avanzan las operaciones.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob4_t">Comisiones difíciles de administrar</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob4_d">
+                        Los acuerdos y las comisiones pueden convertirse en procesos manuales.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob5_t">Dependencia de proveedores externos</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob5_d">
+                        Pagas por distintas herramientas que no necesariamente trabajan juntas.
+                    </p>
+                </div>
+
+                <div class="problem-bullet feature-card p-6 gsap-reveal">
+                    <div class="problem-x w-11 h-11 rounded-full bg-rose-500/15 text-[#C33A2B] flex items-center justify-center font-bold text-lg mb-4">✕</div>
+                    <h3 class="font-bold text-base mb-2" data-i18n="ag_prob6_t">Presencia digital limitada</h3>
+                    <p class="text-sm text-[var(--muted)] leading-relaxed" data-i18n="ag_prob6_d">
+                        Tu agencia necesita una plataforma profesional que represente su propia marca.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= SECTION 3: THE SOLUTION ================= -->
+    <section id="solucion" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Copy & Checklist -->
+                <div class="lg:col-span-6 gsap-reveal">
+                    <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_sol_eyebrow">
+                        UNA PLATAFORMA CENTRALIZADA
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_sol_h2">
+                        Una plataforma para administrar toda tu operación inmobiliaria.
+                    </h2>
+                    <p class="text-base sm:text-lg text-[var(--muted)] mb-6" data-i18n="ag_sol_sub">
+                        EasyListings permite que tu agencia gestione su inventario, organice sus clientes y coordine el trabajo de sus agentes desde un entorno centralizado.
+                    </p>
+
+                    <p class="text-base text-[var(--muted)] mb-6" data-i18n="ag_sol_sub2">
+                        Tu empresa conserva su identidad comercial y puede ofrecer una experiencia digital propia a sus clientes.
+                    </p>
+
+                    <ul class="space-y-3.5 mb-7">
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li1">Inventario centralizado de propiedades.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li2">Gestión de agentes y equipo de trabajo.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li3">Pipeline comercial y seguimiento de prospectos.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li4">Control de comisiones y operaciones.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li5">Plataforma con el dominio de tu agencia.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </span>
+                            <span class="text-base font-medium text-[var(--fg)]" data-i18n="ag_sol_li6">Integraciones y API para conectar tus herramientas.</span>
+                        </li>
+                    </ul>
+
+                    <div class="p-4 rounded-xl bg-white border border-[var(--border)] border-l-4 border-l-[#40b39a] shadow-sm">
+                        <p class="text-sm text-[var(--fg)] font-medium leading-relaxed" data-i18n="ag_sol_note">
+                            Y si ya tienes una página web, puedes integrar tu catálogo de EasyListings sin tener que reemplazarla.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Visual Showcase - Browser Mockup -->
+                <div class="lg:col-span-6 gsap-reveal">
+                    <div class="relative rounded-3xl overflow-hidden border border-[var(--border)] bg-white shadow-xl">
+                        <!-- Browser Top Bar -->
+                        <div class="bg-[#f2f2f2] border-b border-[#dcdcdc] px-3 py-2 flex items-center gap-2">
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                <span class="w-3 h-3 rounded-full bg-[#ff5f57] border border-[#e0443e]"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#febc2e] border border-[#d6a226]"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#28c840] border border-[#24ab37]"></span>
+                            </div>
+
+                            <div class="flex items-center gap-1 shrink-0 ml-2">
+                                <button type="button" aria-label="Back" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Forward" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Reload" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M20 9A8 8 0 006.3 5.7L4 8m16 8l-2.3 2.3A8 8 0 014 15"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="flex-1 mx-1">
+                                <form onsubmit="return false;" class="relative">
+                                    <div class="flex items-center gap-2 bg-white border border-[#cfcfcf] rounded-full px-3 py-1.5 hover:border-[#a8a8a8] focus-within:border-[#40b39a] focus-within:ring-2 focus-within:ring-[#40b39a]/20 transition-all">
+                                        <svg class="w-3 h-3 text-[#5f6368] shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                            <rect x="4" y="11" width="16" height="10" rx="2"/>
+                                            <path stroke-linecap="round" d="M8 11V7a4 4 0 118 0v4"/>
+                                        </svg>
+                                        <span id="browserUrlValueI18n" data-i18n="browser_url" hidden>tu-agencia.easylistings.website</span>
+                                        <input type="text"
+                                               id="browserUrlInput"
+                                               value="https://tu-agencia.com"
+                                               spellcheck="false"
+                                               class="flex-1 bg-transparent border-0 outline-none text-[12px] text-[#202124] placeholder-[#5f6368] font-mono-spec truncate" />
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="flex items-center gap-1 shrink-0">
+                                <button type="button" aria-label="Bookmark" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.5l2.31 4.68 5.16.75-3.74 3.64.88 5.14L11.48 15.3l-4.61 2.42.88-5.14L4.01 8.93l5.16-.75L11.48 3.5z"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Bookmark" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path d="M6 4h12a1 1 0 011 1v15l-7-4-7 4V5a1 1 0 011-1z"/>
+                                    </svg>
+                                </button>
+                                <button type="button" aria-label="Menu" class="w-6 h-6 flex items-center justify-center rounded text-[#5f6368] hover:bg-[#e4e4e4] transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="5" r="1.8"/>
+                                        <circle cx="12" cy="12" r="1.8"/>
+                                        <circle cx="12" cy="19" r="1.8"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Browser Content -->
+                        <div class="p-3">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/real-estate-agency-webpage.webp"
+                                 alt="Plataforma inmobiliaria para agencias EasyListings"
+                                 class="w-full h-auto rounded-2xl object-cover"
+                                 loading="lazy">
+                            <div class="mt-3 px-3 py-2 flex items-center justify-between text-xs text-[var(--muted)] font-mono-spec">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-[#40b39a]"></span>
+                                    <span data-i18n="ag_sol_badge1">Tu marca · Tu dominio</span>
+                                </span>
+                                <span class="text-[#DF1783] font-semibold" data-i18n="ag_sol_badge2">100% de tu agencia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= SECTION 4: FEATURES ================= -->
+    <section id="funciones-agentes" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg-alt)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 gsap-reveal">
+                <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_feat_eyebrow">
+                    FUNCIONES CLAVE PARA AGENCIAS
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold my-3" data-i18n="ag_feat_h2">
+                    Las herramientas que tu agencia necesita para operar.
+                </h2>
+            </div>
+            
+            
+            
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                <!-- Feature 1 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-[#DF1783]/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/property-management-1.webp" alt="Administración centralizada de propiedades" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f1_t">Administración centralizada de propiedades</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f1_d">
+                            Organiza el inventario de tu agencia y mantén la información de las propiedades en un solo sistema.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 2 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-emerald-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/team.webp" alt="Gestión de agentes y equipo" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f2_t">Gestión de agentes y equipo</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f2_d">
+                            Administra los usuarios de tu agencia y facilita el trabajo de tus colaboradores desde una misma plataforma.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 3 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-amber-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pipeline-2.webp" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f3_t">Pipeline comercial</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f3_d">
+                            Supervisa las oportunidades de venta y el seguimiento de los prospectos.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 4 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-amber-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/calculadora.webp" alt="Control de comisiones" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f4_t">Control de comisiones</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f4_d">
+                            Organiza y administra las comisiones relacionadas con las operaciones de tu agencia.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 5 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-purple-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/personalizacion.webp" alt="Plataforma con marca propia" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f5_t">Tu plataforma con marca propia</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f5_d">
+                            Utiliza tu dominio, personaliza la presentación de tu negocio y ofrece una experiencia alineada con tu identidad corporativa.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 6 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-sky-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/uploads.webp" alt="Importación de propiedades" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f6_t">Importación de propiedades</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f6_d">
+                            Importa tu inventario mediante archivos CSV y simplifica la incorporación de propiedades.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 7 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-rose-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/calendar.webp" alt="Calendario y visitas" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f7_t">Calendario y visitas</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f7_d">
+                        
+Cada agente recibe su propio espacio de trabajo con catálogo personal y calendario de reservas, para que coordines la disponibilidad de tu equipo bajo la marca de tu agencia.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Feature 8 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-indigo-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/Integrations.webp?updatedAt=1794590880403" alt="Integraciones y API" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f8_t">Integraciones y API</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f8_d">
+                            Conecta tu plataforma con otros servicios como Zapier o Pabbly usando las integraciones disponibles, webhooks y API, y automatiza el flujo de trabajo de tu agencia.
+                        </p>
+                    </div>
+                </article>
+                
+                <!-- Feature 9 -->
+                <article class="feature-card p-7 flex flex-col justify-between gsap-reveal">
+                    <div>
+                        <div class="card-icon w-12 h-12 rounded-2xl overflow-hidden bg-indigo-500/15 mb-5">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/share.webp" alt="Integraciones y API" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <h3 class="text-h3 font-bold mb-2.5" data-i18n="ag_f9_t">Publicación cruzada en redes y portales</h3>
+                        <p class="text-[var(--muted)] text-sm sm:text-base" data-i18n="ag_f9_d">
+                            Publica cada propiedad en Facebook, Instagram, WhatsApp y los principales portales inmobiliarios desde un solo lugar, sin duplicar esfuerzo.
+                        </p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="mt-12 text-center gsap-reveal">
+                <a href="/funciones"
+                   class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:font-bold">
+                    <span data-i18n="featureCta">Descubre todas las funciones</span>
+                    <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
+                </a>
+            </div>
+           
+               
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= SECTION 5: OWN YOUR BRAND ================= -->
+    <section id="redes-inmobiliarias" class="py-20 md:py-28 border-b border-[var(--border)] bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 gsap-reveal">
+                    <div class="relative rounded-3xl overflow-hidden border border-[var(--border)] shadow-xl">
+                        <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/agencias-banner-1.webp"
+                             alt="Plataforma con marca propia para agencias inmobiliarias"
+                             class="w-full h-auto object-cover"
+                             loading="lazy">
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 gsap-reveal">
+                    <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_brand_eyebrow">
+                        TU AGENCIA, TU IDENTIDAD
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_brand_h2">
+                        Tu agencia necesita su propia plataforma, no depender de la de otros.
+                    </h2>
+                    <p class="text-base text-[var(--muted)] leading-relaxed mt-4 mb-6" data-i18n="ag_brand_sub">
+                        Ofrece a tus clientes una experiencia digital que represente a tu empresa.
+                    </p>
+
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li1">Utiliza tu propio dominio.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li2">Personaliza la presentación de tu catálogo.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li3">Oculta la marca EasyListings con el plan correspondiente.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li4">Integra tus propiedades en tu página web actual.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-5 h-5 rounded-full bg-[#DF1783]/15 text-[#DF1783] flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </span>
+                            <span class="text-sm font-medium text-[var(--fg)]" data-i18n="ag_brand_li5">Administra tu presencia digital desde un solo lugar.</span>
+                        </li>
+                    </ul>
+
+                    <div class="p-4 rounded-xl bg-white border border-[var(--border)] border-l-4 border-l-[#40b39a] shadow-sm mb-8">
+                        <p class="text-sm text-[var(--fg)] font-medium leading-relaxed" data-i18n="ag_brand_note">
+                            No tienes que reemplazar tu sitio web actual. Puedes utilizar EasyListings como el sistema que administra tu catálogo y operaciones mientras mantienes tu página existente.
+                        </p>
+                    </div>
+
+                    <a href="/planes" class="group/link primary-btn text-base px-7 py-3.5" data-i18n="ag_brand_cta">
+                        <span>Quiero mi propia plataforma</span>
+                        <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  <!-- ================= SECTION 6: TEAM MANAGEMENT ================= -->
+    <section id="integracion-web" class="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--bg-alt)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 gsap-reveal order-2 lg:order-1 pt-12 sm:pt-20 lg:pt-0">
+                    <span class="font-mono-spec text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 font-semibold" data-i18n="ag_team_eyebrow">
+                        GESTIÓN DE EQUIPO
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold my-3 leading-tight" data-i18n="ag_team_h2">
+                        Dale a cada agente las herramientas para trabajar mejor.
+                    </h2>
+                    <div class="space-y-4 text-base text-[var(--muted)] leading-relaxed mt-4 mb-8">
+                        <p data-i18n="ag_team_p1">
+                            Tu agencia necesita que sus agentes puedan gestionar su actividad comercial sin perder la organización general del negocio.
+                        </p>
+                        <p data-i18n="ag_team_p2">
+                            EasyListings permite incorporar usuarios adicionales y administrar el trabajo del equipo desde una misma cuenta.
+                        </p>
+                        <p data-i18n="ag_team_p3">
+                            Desde la administración de propiedades hasta el seguimiento de clientes y las comisiones, puedes organizar tus operaciones en un mismo entorno.
+                        </p>
+                    </div>
+
+                    <a href="/planes" class="group/link primary-btn text-base px-7 py-3.5" data-i18n="ag_team_cta">
+                        <span>Crear mi plataforma para agencias</span>
+                        <i class="fa-solid fa-arrow-right card-arrow text-xs inline-block transition-transform duration-250 ease-out group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+
+                <div class="lg:col-span-6 gsap-reveal order-1 lg:order-2">
+                    <div class="relative">
+                        <!-- Banner image -->
+                        <div class="rounded-3xl overflow-hidden border border-[var(--border)] bg-white p-3 shadow-xl">
+                            <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/commission-management.webp"
+                                 alt="Gestión de equipo para agencias inmobiliarias EasyListings"
+                                 class="w-full h-auto rounded-2xl object-cover"
+                                 loading="lazy">
+                        </div>
+
+                        <!-- Floating team member cards (3 columns) -->
+                        <div class="embed-float absolute left-1/2 -translate-x-1/2 -bottom-10 sm:-bottom-14 w-[98%] sm:w-[96%] md:w-[92%] max-w-2xl z-10">
+                            <div class="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+
+                                <!-- Member 1 -->
+                                <div class="team-card flex flex-col items-center text-center bg-white/95 backdrop-blur rounded-2xl border border-[var(--border)] shadow-lg shadow-black/10 px-1.5 py-2.5 sm:px-2.5 sm:py-3 transition-all duration-300 hover:shadow-xl hover:border-[#DF1783]/40">
+                                    <div class="relative shrink-0 mb-1.5">
+                                        <img src="https://ik.imagekit.io/bebell/Image%20Files%20&%20Assets/Profile-Pictures/pimage-25-443-photo.jpg" alt="María González"
+                                             class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-white shadow-sm">
+                                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#25D366] border-2 border-white" title="En línea"></span>
+                                    </div>
+                                    <p class="font-bold text-[11px] sm:text-[13px] text-[var(--fg)] leading-tight truncate w-full" data-i18n="team_m1_name">María González</p>
+                                    <p class="text-[8.5px] sm:text-[10px] text-[var(--muted)] font-medium leading-tight truncate w-full mt-0.5" data-i18n="team_m1_role">Agente Senior</p>
+                                    <div class="flex flex-col items-center gap-0.5 mt-1.5 w-full">
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full">
+                                            <i class="fa-solid fa-phone text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="font-mono-spec truncate">+1 (809) 555-0142</span>
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full min-w-0">
+                                            <i class="fa-regular fa-envelope text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="truncate">maria@agencia.com</span>
+                                        </span>
+                                    </div>
+                                    <a href="https://wa.me/18095550142" target="_blank" rel="noopener"
+                                       class="mt-2 inline-flex items-center justify-center gap-1 rounded-lg bg-[#25D366] hover:bg-[#1ebe5b] active:scale-95 text-white font-semibold w-full px-1.5 py-1.5 sm:px-2 transition-all duration-200 shadow-md shadow-[#25D366]/30"
+                                       aria-label="Contactar a María González por WhatsApp">
+                                        <i class="fa-brands fa-whatsapp text-[11px] sm:text-sm"></i>
+                                        <span class="text-[9px] sm:text-[11px]" data-i18n="team_whatsapp">WhatsApp</span>
+                                    </a>
+                                </div>
+
+                                <!-- Member 2 -->
+                                <div class="team-card flex flex-col items-center text-center bg-white/95 backdrop-blur rounded-2xl border border-[var(--border)] shadow-lg shadow-black/10 px-1.5 py-2.5 sm:px-2.5 sm:py-3 transition-all duration-300 hover:shadow-xl hover:border-[#DF1783]/40">
+                                    <div class="relative shrink-0 mb-1.5">
+                                        <img src="https://ik.imagekit.io/bebell/Image%20Files%20&%20Assets/Profile-Pictures/pimage-22-495-photo.jpg" alt="Carlos Ramírez"
+                                             class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-white shadow-sm">
+                                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#25D366] border-2 border-white" title="En línea"></span>
+                                    </div>
+                                    <p class="font-bold text-[11px] sm:text-[13px] text-[var(--fg)] leading-tight truncate w-full" data-i18n="team_m2_name">Carlos Ramírez</p>
+                                    <p class="text-[8.5px] sm:text-[10px] text-[var(--muted)] font-medium leading-tight truncate w-full mt-0.5" data-i18n="team_m2_role">Broker Asociado</p>
+                                    <div class="flex flex-col items-center gap-0.5 mt-1.5 w-full">
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full">
+                                            <i class="fa-solid fa-phone text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="font-mono-spec truncate">+1 (809) 555-0198</span>
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full min-w-0">
+                                            <i class="fa-regular fa-envelope text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="truncate">carlos@agencia.com</span>
+                                        </span>
+                                    </div>
+                                    <a href="https://wa.me/18095550198" target="_blank" rel="noopener"
+                                       class="mt-2 inline-flex items-center justify-center gap-1 rounded-lg bg-[#25D366] hover:bg-[#1ebe5b] active:scale-95 text-white font-semibold w-full px-1.5 py-1.5 sm:px-2 transition-all duration-200 shadow-md shadow-[#25D366]/30"
+                                       aria-label="Contactar a Carlos Ramírez por WhatsApp">
+                                        <i class="fa-brands fa-whatsapp text-[11px] sm:text-sm"></i>
+                                        <span class="text-[9px] sm:text-[11px]" data-i18n="team_whatsapp">WhatsApp</span>
+                                    </a>
+                                </div>
+
+                                <!-- Member 3 -->
+                                <div class="team-card flex flex-col items-center text-center bg-white/95 backdrop-blur rounded-2xl border border-[var(--border)] shadow-lg shadow-black/10 px-1.5 py-2.5 sm:px-2.5 sm:py-3 transition-all duration-300 hover:shadow-xl hover:border-[#DF1783]/40">
+                                    <div class="relative shrink-0 mb-1.5">
+                                        <img src="https://ik.imagekit.io/bebell/Image%20Files%20&%20Assets/Profile-Pictures/pimage-23-379-photo.jpg" alt="Ana Martínez"
+                                             class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-white shadow-sm">
+                                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#E8B44C] border-2 border-white" title="En visita"></span>
+                                    </div>
+                                    <p class="font-bold text-[11px] sm:text-[13px] text-[var(--fg)] leading-tight truncate w-full" data-i18n="team_m3_name">Ana Martínez</p>
+                                    <p class="text-[8.5px] sm:text-[10px] text-[var(--muted)] font-medium leading-tight truncate w-full mt-0.5" data-i18n="team_m3_role">Coordinadora</p>
+                                    <div class="flex flex-col items-center gap-0.5 mt-1.5 w-full">
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full">
+                                            <i class="fa-solid fa-phone text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="font-mono-spec truncate">+1 (809) 555-0177</span>
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 text-[8px] sm:text-[9.5px] text-[var(--muted)] max-w-full min-w-0">
+                                            <i class="fa-regular fa-envelope text-[#DF1783] text-[7px] sm:text-[8px] shrink-0"></i>
+                                            <span class="truncate">ana@agencia.com</span>
+                                        </span>
+                                    </div>
+                                    <a href="https://wa.me/18095550177" target="_blank" rel="noopener"
+                                       class="mt-2 inline-flex items-center justify-center gap-1 rounded-lg bg-[#25D366] hover:bg-[#1ebe5b] active:scale-95 text-white font-semibold w-full px-1.5 py-1.5 sm:px-2 transition-all duration-200 shadow-md shadow-[#25D366]/30"
+                                       aria-label="Contactar a Ana Martínez por WhatsApp">
+                                        <i class="fa-brands fa-whatsapp text-[11px] sm:text-sm"></i>
+                                        <span class="text-[9px] sm:text-[11px]" data-i18n="team_whatsapp">WhatsApp</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ================= FINAL CTA ================= -->
+    <section id="cta-final" class="py-20 md:py-24 bg-[var(--bg)]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative rounded-3xl overflow-hidden bg-[#2d3748] px-6 py-14 sm:px-12 sm:py-16 text-center shadow-2xl border border-[#DF1783]/40 gsap-reveal">
+                <div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent"></div>
+
+                <div class="inline-flex items-center gap-2 bg-[#DF1783] text-white font-mono-spec text-xs sm:text-sm font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-6 shadow-lg">
+                    <i class="fa-solid fa-building"></i>
+                    <span data-i18n="cta_web_eyebrow">ADMINISTRA TU AGENCIA</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight max-w-3xl mx-auto mt-4 mb-5" style="color: #ffffff;" data-i18n="ag_final_h2">
+                    Administra tu agencia con herramientas diseñadas para inmobiliarias.
+                </h2>
+
+                <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-9 leading-relaxed" style="color: #cbd5e1;" data-i18n="ag_final_sub">
+                    Centraliza tus propiedades, organiza tu equipo y construye una presencia digital bajo tu propia marca.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="/planes" class="primary-btn text-lg px-9 py-4 w-full sm:w-auto" data-i18n="ag_final_cta">
+                        Activar mi cuenta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div class="flex flex-col gap-2 md:col-span-3">
+                <div class="flex items-center gap-2 text-white font-bold tracking-tight text-lg">
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo" class="w-8 h-8 object-contain rounded-lg">
+                    EasyListings
+                </div>
+                <div class="text-gray-300 text-sm mt-2" data-i18n="footer_tagline">
+                    Exhibe Tus Propiedades. Define Tu Marca.
+                </div>
+
+                <div class="pt-2 flex flex-col items-start">
+                    <img src="https://ik.imagekit.io/bebell/Badge/google-partner-badge-pink.svg" class="self-start block h-12 w-auto opacity-100 hover:opacity-70 transition" alt="Google Partner Badge">
+                    <p class="text-[10px] text-slate-400 mt-4 mb-2 uppercase tracking-widest font-bold" data-i18n="foot_payment_title">Pagos Procesados Seguros</p>
+                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/ba7caa40fbb46e4528aaae8b0128896c5e8ff915.png" class="self-start block h-5 w-auto opacity-100 hover:opacity-70 transition" alt="Secure PayPal Payments">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_about">Producto</div>
+                    <a href="/" class="footer-link" data-i18n="nav_home">Inicio</a>
+                    <a href="/acerca" class="footer-link" data-i18n="footer_about_us">Sobre nosotros</a>
+                    <a href="/planes" class="footer-link" data-i18n="nav_pricing">Planes</a>
+                    <a href="/p/terminos" class="footer-link" data-i18n="footer_terms">Términos de Uso</a>
+                    <a href="/p/privacidad" class="footer-link" data-i18n="footer_privacy">Privacidad</a>
+                    <a href="/contacto" class="footer-link" data-i18n="footer_contact">Contacto</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_community">Comunidad</div>
+                    <a href="https://ayuda.easylistings.website" class="footer-link" data-i18n="footer_help">Centro de Ayuda</a>
+                    <a href="https://afiliados.easylistings.website" class="footer-link" data-i18n="footer_affiliates">Afiliados</a>
+                    <a href="/blog" class="footer-link" data-i18n="footer_blog">Blog</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_features">Funciones</div>
+                    <a href="/funciones/resumen" class="footer-link" data-i18n="footer_feature_catalog">Catálogo Inmobiliario</a>
+                    <a href="/funciones/catalogo" class="footer-link" data-i18n="footer_feature_multichannel">Publicación Multicanal</a>
+                    <a href="/funciones/pipeline" class="footer-link" data-i18n="footer_feature_personalization">Personalización y SEO</a>
+                    <a href="/funciones/contactos" class="footer-link" data-i18n="footer_feature_widget">Catálogo Integrable</a>
+                    <a href="/funciones/formularios" class="footer-link" data-i18n="footer_feature_forms">Formularios de captación</a>
+                    <a href="/funciones/seo" class="footer-link" data-i18n="footer_feature_crm">CRM y Gestión de clientes</a>
+                    <a href="/funciones/bandeja" class="footer-link" data-i18n="footer_feature_inbox">Bandeja de Mensajes</a>
+                    <a href="/funciones/asistencia-ia" class="footer-link" data-i18n="footer_feature_booking">Agenda de visitas</a>
+                    <a href="/funciones/automatizaciones" class="footer-link" data-i18n="footer_feature_analytics">Analítica por Propiedad</a>
+                    <a href="/#features" class="footer-link" data-i18n="footer_feature_languages">Plataforma Multilingüe</a>
+                    <a href="/funciones/widget-incrustado" class="footer-link" data-i18n="footer_feature_calculator">Calculadora hipotecaria</a>
+                    <a href="/funciones/widget-incrustado" class="footer-link" data-i18n="footer_feature_automation">Automatizaciones</a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end">
+                <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[var(--primary)] transition-colors group" style="background: var(--bg-alt);">
+                    <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h4 class="font-bold text-lg sm:text-xl md:text-base lg:text-xl" style="color: var(--text);" data-i18n="support_title">Soporte Online</h4>
+                            <span class="text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider" style="background: rgba(223,23,131,0.12); color: var(--primary); border: 1px solid rgba(223,23,131,0.3);">24/7</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug" style="color: var(--text);" data-i18n="support_text">Contáctenos si tiene alguna pregunta. Nuestro equipo de soporte está aquí para atenderte.</p>
+                        <button onclick="window.open('/soporte', '_blank')" class="bg-[#df1783] hover:bg-[#c0146f] text-white text-xs sm:text-sm md:text-[11px] lg:text-sm font-semibold py-2 px-3 md:py-1.5 md:px-2.5 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#df1783] shadow-sm w-fit">
+                            <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white"></i>
+                            <span data-i18n="support_cta">Escríbanos</span>
+                        </button>
+                    </div>
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pink-support-agent.webp" alt="24/7 Support" class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity" />
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="border-top: 1px solid var(--text-light); color: var(--text-light);">
+            <div class="flex items-center gap-2">
+                <span data-i18n="footer_credit">Desarrollado en 🇩🇴 por Bebell Digital Solutions.</span>
+            </div>
+            <div data-i18n="footer_copyright">Copyright © 2026 EasyListings • Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <!-- ================= BACK TO TOP ================= -->
+    <button id="backToTopBtn" aria-label="Volver arriba">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <script>if (typeof lucide !== 'undefined') lucide.createIcons();</script>
+    
+    
+    
+    
+
+    <!-- ================= APPLICATION LOGIC ================= -->
+    <script>
+    const I18N = {
+        es: {
+            metaTitle: "EasyListings para Agencias Inmobiliarias 🏢 | Administra tu Agencia desde una Sola Plataforma",
+            nav_home: "Inicio",
+            nav_about: "Acerca de",
+            nav_features: "Funciones",
+            nav_pricing: "Planes",
+            nav_contact: "Contacto",
+            nav_cta: "Activar Cuenta",
+            sub_website: "Sitio web inmobiliario",
+            sub_post: "Publicación multicanal",
+            sub_seo: "Personalización y SEO",
+            sub_widget: "Catálogo integrable",
+            sub_form: "Formularios de captación",
+            sub_crm: "CRM y gestión de clientes",
+            sub_inbox: "Bandeja de mensajes",
+            sub_calendar: "Agenda de visitas",
+            sub_analytics: "Analítica por propiedad",
+            sub_languages: "Plataforma multilingüe",
+            sub_calculator: "Calculadora hipotecaria",
+            sub_automation: "Automatizaciones",
+
+            ag_hero_eyebrow: "PARA AGENCIAS INMOBILIARIAS",
+            ag_hero_title: "Administra tu agencia inmobiliaria desde una sola plataforma.",
+            ag_hero_sub1: "Centraliza tus propiedades, clientes, agentes y operaciones comerciales en un sistema bajo la identidad de tu empresa.",
+            ag_hero_sub2: "Deja atrás las hojas de cálculo, los procesos desorganizados y las herramientas independientes. Dale a tu equipo un espacio de trabajo diseñado para gestionar el negocio inmobiliario.",
+            ag_hero_cta1: "Crear mi plataforma inmobiliaria",
+            ag_hero_cta2: "Explorar funcionalidades",
+            ag_chip1: "Agencias pequeñas y medianas",
+            ag_chip2: "Brokerage firms independientes",
+            ag_chip3: "Agencias con múltiples agentes",
+
+            ag_prob_eyebrow: "LOS DESAFÍOS DE ADMINISTRAR UNA AGENCIA",
+            ag_prob_h2: "¿Tu agencia está creciendo, pero tu administración sigue siendo la misma?",
+            ag_prob_body1: "A medida que tu agencia incorpora más propiedades y agentes, también aumenta la complejidad de administrar el negocio.",
+            ag_prob_body2: "¿Te identificas con alguna de estas situaciones?",
+            ag_prob1_t: "Inventario desorganizado",
+            ag_prob1_d: "Cada agente maneja sus propias propiedades y la información termina duplicada o desactualizada.",
+            ag_prob2_t: "Falta de seguimiento",
+            ag_prob2_d: "No tienes una visión clara de las oportunidades comerciales y los clientes pendientes.",
+            ag_prob3_t: "Poco control del equipo",
+            ag_prob3_d: "Necesitas saber qué está haciendo cada agente y cómo avanzan las operaciones.",
+            ag_prob4_t: "Comisiones difíciles de administrar",
+            ag_prob4_d: "Los acuerdos y las comisiones pueden convertirse en procesos manuales.",
+            ag_prob5_t: "Dependencia de proveedores externos",
+            ag_prob5_d: "Pagas por distintas herramientas que no necesariamente trabajan juntas.",
+            ag_prob6_t: "Presencia digital limitada",
+            ag_prob6_d: "Tu agencia necesita una plataforma profesional que represente su propia marca.",
+
+            ag_sol_eyebrow: "UNA PLATAFORMA CENTRALIZADA",
+            ag_sol_h2: "Una plataforma para administrar toda tu operación inmobiliaria.",
+            ag_sol_sub: "EasyListings permite que tu agencia gestione su inventario, organice sus clientes y coordine el trabajo de sus agentes desde un entorno centralizado.",
+            ag_sol_sub2: "Tu empresa conserva su identidad comercial y puede ofrecer una experiencia digital propia a sus clientes.",
+            ag_sol_li1: "Inventario centralizado de propiedades.",
+            ag_sol_li2: "Gestión de agentes y equipo de trabajo.",
+            ag_sol_li3: "Pipeline comercial y seguimiento de prospectos.",
+            ag_sol_li4: "Control de comisiones y operaciones.",
+            ag_sol_li5: "Plataforma con el dominio de tu agencia.",
+            ag_sol_li6: "Integraciones y API para conectar tus herramientas.",
+            ag_sol_note: "Y si ya tienes una página web, puedes integrar tu catálogo de EasyListings sin tener que reemplazarla.",
+            browser_url: "https://tu-agencia.com",
+            ag_sol_badge1: "Tu marca · Tu dominio",
+            ag_sol_badge2: "100% de tu agencia",
+
+            ag_feat_eyebrow: "FUNCIONES CLAVE PARA AGENCIAS",
+            ag_feat_h2: "Las herramientas que tu agencia necesita para operar.",
+            ag_f1_t: "Administración centralizada de propiedades",
+            ag_f1_d: "Organiza el inventario de tu agencia y mantén la información de las propiedades en un solo sistema.",
+            ag_f2_t: "Gestión de agentes y equipo",
+            ag_f2_d: "Administra los usuarios de tu agencia y facilita el trabajo de tus colaboradores desde una misma plataforma.",
+            ag_f3_t: "Pipeline comercial",
+            ag_f3_d: "Supervisa las oportunidades de venta y el seguimiento de los prospectos.",
+            ag_f4_t: "Control de comisiones",
+            ag_f4_d: "Organiza y administra las comisiones relacionadas con las operaciones de tu agencia.",
+            ag_f5_t: "Tu plataforma con marca propia",
+            ag_f5_d: "Utiliza tu dominio, personaliza la presentación de tu negocio y ofrece una experiencia alineada con tu identidad corporativa.",
+            ag_f6_t: "Importación de propiedades",
+            ag_f6_d: "Importa tu inventario mediante archivos CSV y simplifica la incorporación de propiedades.",
+            ag_f7_t: "Calendario y visitas",
+            ag_f7_d: "Cada agente recibe su propio espacio de trabajo con catálogo personal y calendario de reservas, para que coordines la disponibilidad de tu equipo bajo la marca de tu agencia.",
+            ag_f8_t: "Integraciones y API",
+            ag_f8_d: "Conecta tu plataforma con otros servicios como Zapier o Pabbly usando las integraciones disponibles, webhooks y API, y automatiza el flujo de trabajo de tu agencia.",
+            ag_f9_t: "Publicación cruzada en redes y portales",
+            ag_f9_d: "Publica cada propiedad en Facebook, Instagram, WhatsApp y los principales portales inmobiliarios desde un solo lugar, sin duplicar esfuerzo.",
+            featureCta: "Descubre todas las funciones",
+
+            ag_brand_eyebrow: "TU AGENCIA, TU IDENTIDAD",
+            ag_brand_h2: "Tu agencia necesita su propia plataforma, no depender de la de otros.",
+            ag_brand_sub: "Ofrece a tus clientes una experiencia digital que represente a tu empresa.",
+            ag_brand_li1: "Utiliza tu propio dominio.",
+            ag_brand_li2: "Personaliza la presentación de tu catálogo.",
+            ag_brand_li3: "Oculta la marca EasyListings con el plan correspondiente.",
+            ag_brand_li4: "Integra tus propiedades en tu página web actual.",
+            ag_brand_li5: "Administra tu presencia digital desde un solo lugar.",
+            ag_brand_note: "No tienes que reemplazar tu sitio web actual. Puedes utilizar EasyListings como el sistema que administra tu catálogo y operaciones mientras mantienes tu página existente.",
+            ag_brand_cta: "Quiero mi propia plataforma",
+
+            ag_team_eyebrow: "GESTIÓN DE EQUIPO",
+            ag_team_h2: "Dale a cada agente las herramientas para trabajar mejor.",
+            ag_team_p1: "Tu agencia necesita que sus agentes puedan gestionar su actividad comercial sin perder la organización general del negocio.",
+            ag_team_p2: "EasyListings permite incorporar usuarios adicionales y administrar el trabajo del equipo desde una misma cuenta.",
+            ag_team_p3: "Desde la administración de propiedades hasta el seguimiento de clientes y las comisiones, puedes organizar tus operaciones en un mismo entorno.",
+            ag_team_cta: "Crear mi plataforma para agencias",
+
+            ag_web_embed_label: "Código incrustrable",
+            ag_web_embed_badge: "1 línea",
+            embed_copy_text: "Copiar código",
+
+            cta_web_eyebrow: "ADMINISTRA TU AGENCIA",
+            ag_final_h2: "Administra tu agencia con herramientas diseñadas para inmobiliarias.",
+            ag_final_sub: "Centraliza tus propiedades, organiza tu equipo y construye una presencia digital bajo tu propia marca.",
+            ag_final_cta: "Activar mi cuenta",
+
+            footer_tagline: "Exhibe Tus Propiedades. Define Tu Marca.",
+            footer_col_about: "Producto",
+            footer_col_community: "Comunidad",
+            footer_col_features: "Funciones",
+            footer_about_us: "Sobre nosotros",
+            footer_terms: "Términos de Uso",
+            footer_privacy: "Privacidad",
+            footer_contact: "Contacto",
+            footer_help: "Centro de Ayuda",
+            footer_affiliates: "Afiliados",
+            footer_blog: "Blog",
+            foot_payment_title: "Pagos Procesados Seguros",
+            support_title: "Soporte Online",
+            support_text: "Contáctenos si tiene alguna pregunta. Nuestro equipo de soporte está aquí para atenderte.",
+            support_cta: "Escríbanos",
+            footer_credit: "Desarrollado en 🇩🇴 por Bebell Digital Solutions.",
+            footer_copyright: "Copyright © 2026 EasyListings • Todos los derechos reservados."
+        },
+
+        en: {},
+        fr: {},
+        it: {},
+        de: {},
+        ru: {},
+        zh: {},
+        ja: {}
+    };
+
+    const LANG_META = {
+        es: { flag: '🇩🇴', code: 'ES' },
+        en: { flag: '🇺🇸', code: 'EN' },
+        fr: { flag: '🇫🇷', code: 'FR' },
+        it: { flag: '🇮🇹', code: 'IT' },
+        de: { flag: '🇩🇪', code: 'DE' },
+        ru: { flag: '🇷🇺', code: 'RU' },
+        zh: { flag: '🇨🇳', code: 'ZH' },
+        ja: { flag: '🇯🇵', code: 'JA' }
+    };
+
+    function setLanguage(lang) {
+        const requested = (lang || 'es').toLowerCase();
+        const effective = I18N[requested] ? requested : 'es';
+        const dict = I18N[effective];
+
+        document.documentElement.setAttribute('lang', requested);
+        if (dict.metaTitle) document.title = dict.metaTitle;
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key] !== undefined) {
+                const span = el.querySelector(':scope > span');
+                if (span && el.children.length > 1) {
+                    span.textContent = dict[key];
+                } else {
+                    el.textContent = dict[key];
+                }
+            }
+        });
+
+        const carrier = document.getElementById('browserUrlValueI18n');
+        const urlInput = document.getElementById('browserUrlInput');
+        if (carrier && urlInput) urlInput.value = carrier.textContent;
+
+        const flagEl = document.getElementById('currentFlag');
+        const codeEl = document.getElementById('currentCode');
+        if (flagEl && codeEl) {
+            const meta = LANG_META[requested] || LANG_META.es;
+            flagEl.textContent = meta.flag;
+            codeEl.textContent = meta.code;
+        }
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            const optLang = (opt.getAttribute('data-lang') || '').toLowerCase();
+            const li = opt.closest('li');
+            if (li) li.setAttribute('aria-selected', optLang === requested ? 'true' : 'false');
+        });
+
+        try { localStorage.setItem('language', requested); } catch (_) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let savedLang = 'es';
+        try { savedLang = localStorage.getItem('language') || 'es'; } catch (_) {}
+        const urlLang = new URLSearchParams(window.location.search).get('lang');
+        if (urlLang) savedLang = urlLang.toLowerCase();
+        setLanguage(savedLang);
+
+        const topMenuBar = document.getElementById('topMenuBar');
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        function updateScrollUI() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (topMenuBar) topMenuBar.classList.toggle('full-width', scrollTop > 50);
+            if (backToTopBtn) backToTopBtn.classList.toggle('show', scrollTop > 300);
+        }
+        window.addEventListener('scroll', updateScrollUI, { passive: true });
+        updateScrollUI();
+
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+
+        const funcionesNavItem = document.getElementById('funcionesNavItem');
+        const funcionesToggle = document.getElementById('funcionesToggle');
+
+        function closeSubmenu() {
+            if (!funcionesNavItem || !funcionesToggle) return;
+            funcionesNavItem.classList.remove('open');
+            funcionesToggle.setAttribute('aria-expanded', 'false');
+        }
+
+        if (funcionesNavItem && funcionesToggle) {
+            funcionesToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = funcionesNavItem.classList.toggle('open');
+                funcionesToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!funcionesNavItem.contains(e.target)) closeSubmenu();
+            });
+
+            document.querySelectorAll('.submenu-link').forEach(link => {
+                link.addEventListener('click', closeSubmenu);
+            });
+
+            const previewImg = document.getElementById('submenuPreviewImg');
+            const previewLinks = funcionesNavItem.querySelectorAll('.submenu-link[data-preview]');
+            let swapTimer = null;
+
+            previewLinks.forEach(link => {
+                const img = new Image();
+                img.src = link.dataset.preview;
+
+                const swap = () => {
+                    const src = link.dataset.preview;
+                    if (!src || !previewImg || previewImg.src === src) return;
+                    clearTimeout(swapTimer);
+                    previewImg.classList.add('is-swapping');
+                    swapTimer = setTimeout(() => {
+                        previewImg.src = src;
+                        const done = () => previewImg.classList.remove('is-swapping');
+                        if (previewImg.complete) requestAnimationFrame(done);
+                        else { previewImg.onload = done; previewImg.onerror = done; }
+                    }, 180);
+                };
+
+                link.addEventListener('mouseenter', swap);
+                link.addEventListener('focus', swap);
+            });
+        }
+
+        const langDropdown = document.getElementById('langDropdown');
+        const langTrigger = document.getElementById('langTrigger');
+        const langMenu = document.getElementById('langMenu');
+
+        function toggleLangDropdown(open) {
+            if (!langDropdown || !langTrigger) return;
+            const willOpen = open ?? !langDropdown.classList.contains('open');
+            langDropdown.classList.toggle('open', willOpen);
+            langTrigger.setAttribute('aria-expanded', String(willOpen));
+        }
+
+        if (langTrigger) {
+            langTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleLangDropdown();
+            });
+        }
+
+        if (langMenu) {
+            langMenu.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setLanguage(option.getAttribute('data-lang'));
+                    toggleLangDropdown(false);
+                });
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (langDropdown && !langDropdown.contains(e.target)) toggleLangDropdown(false);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSubmenu();
+                toggleLangDropdown(false);
+            }
+        });
+
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced || typeof gsap === 'undefined') return;
+
+        if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.gsap-reveal').forEach((el) => {
+            gsap.from(el, {
+                y: 36,
+                opacity: 0,
+                duration: 0.75,
+                ease: 'power2.out',
+                scrollTrigger: { trigger: el, start: 'top 86%', once: true }
+            });
+        });
+
+        if (window.matchMedia('(pointer: fine)').matches) {
+            const follower = document.getElementById('cursor-follower');
+            if (follower) {
+                follower.classList.remove('opacity-0');
+                const xTo = gsap.quickTo(follower, 'x', { duration: 0.4, ease: 'power3' });
+                const yTo = gsap.quickTo(follower, 'y', { duration: 0.4, ease: 'power3' });
+                window.addEventListener('mousemove', (e) => {
+                    xTo(e.clientX - 12);
+                    yTo(e.clientY - 12);
+                }, { passive: true });
+            }
+        }
+    });
+    </script>
+
+    <!-- ===== Copy-to-clipboard behavior ===== -->
+    <script>
+        (function () {
+            document.querySelectorAll('.embed-copy').forEach(function (btn) {
+                btn.addEventListener('click', async function () {
+                    var code = btn.getAttribute('data-copy') || '';
+                    try {
+                        await navigator.clipboard.writeText(code);
+                    } catch (e) {
+                        var ta = document.createElement('textarea');
+                        ta.value = code;
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(ta);
+                    }
+                    var label = btn.querySelector('.embed-copy-text');
+                    var original = label.textContent;
+                    btn.classList.add('copied');
+                    label.textContent = '¡Copiado!';
+                    setTimeout(function () {
+                        btn.classList.remove('copied');
+                        label.textContent = original;
+                    }, 1800);
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>
