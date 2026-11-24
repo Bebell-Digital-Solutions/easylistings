@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-title">EasyListings 🏗️ | Plantilla Base</title>
+
+    <meta name="description" content="Plantilla base EasyListings — Nav, Footer y componentes compartidos.">
+    <meta name="author" content="EasyListings">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#DF1783">
+    <link rel="canonical" href="https://easylistings.website/">
+
+    <link rel="icon" href="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp?updatedAt=1793038323330">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp?updatedAt=1793038323330">
+
+    <!-- Open Graph / Twitter (customize per page) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="EasyListings">
+    <meta property="og:locale" content="es_DO">
+    <meta property="og:title" content="EasyListings 🏗️ | Plantilla Base">
+    <meta property="og:description" content="Plantilla base EasyListings — Nav, Footer y componentes compartidos.">
+    <meta property="og:image" content="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings-Socialshare.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- Tailwind, GSAP, Lucide -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #FAF8F5;
+            --bg-alt: #F2EFE9;
+            --card-bg: #FFFFFF;
+            --fg: #0E0E10;
+            --secondary: #2d3748;
+            --text: #2d3748;
+            --text-light: #718096;
+            --muted: #5C5C63;
+            --primary: #DF1783;
+            --primary-hover: #C21170;
+            --primary-soft: #FDEEFA;
+            --brand-emerald: #0F6E5C;
+            --brand-emerald-soft: #E6F4F1;
+            --accent-gold: #E8B44C;
+            --whatsapp: #25D366;
+            --danger: #C33A2B;
+            --border: #E5E1DA;
+            --border-color: #e2e8f0;
+            --submenu-hover: #fdeefa;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 4px 20px -2px rgba(14, 14, 16, 0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(14, 14, 16, 0.12);
+            --shadow-pink: 0 12px 28px -8px rgba(223, 23, 131, 0.38);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fbfbfb; }
+        ::-webkit-scrollbar-thumb { background: #df1783; border-radius: 4px; }
+
+        html { box-sizing: border-box; overflow-x: hidden; scroll-behavior: smooth; }
+        *, *:before, *:after { box-sizing: inherit; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .font-mono-spec { font-family: 'JetBrains Mono', monospace; }
+        h1, h2, h3, h4 { color: var(--text); }
+        p { color: var(--text-light); }
+
+        /* ================= TOP MENU BAR ================= */
+        .top-menu-bar {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 1200px;
+            z-index: 1100;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+        .top-menu-bar.full-width {
+            width: 100%;
+            max-width: 100%;
+            left: 0;
+            transform: translateX(0);
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            padding: 0 1.5rem;
+            top: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .top-menu-content {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .logo-container { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        #appLogo {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        #appBrandNameDisplay {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            white-space: nowrap;
+        }
+        .brand-accent { color: #df1783; }
+        .top-menu-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+
+        /* Language Dropdown */
+        .lang-dropdown { position: relative; display: inline-block; font-family: system-ui, -apple-system, sans-serif; }
+        .lang-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #fff;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2939;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .lang-trigger:hover { border-color: #98a2b3; }
+        .lang-trigger:focus-visible {
+            outline: none;
+            border-color: #667085;
+            box-shadow: 0 0 0 3px rgba(102, 112, 133, 0.15);
+        }
+        .lang-trigger .flag { font-size: 18px; line-height: 1; }
+        .lang-trigger .chevron {
+            margin-left: 4px;
+            width: 14px;
+            height: 14px;
+            color: #667085;
+            transition: transform 0.2s ease;
+        }
+        .lang-dropdown.open .chevron { transform: rotate(180deg); }
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            min-width: 100%;
+            padding: 6px;
+            margin: 0;
+            list-style: none;
+            background: #fff;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+            z-index: 100;
+        }
+        .lang-dropdown.open .lang-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2939;
+            text-align: left;
+            transition: background 0.1s ease;
+            text-decoration: none;
+        }
+        .lang-option:hover { background: #f2f4f7; }
+        .lang-option[aria-selected="true"] { background: #f9fafb; }
+        .lang-option .flag { font-size: 18px; line-height: 1; }
+
+        /* Primary button */
+        .primary-btn {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+            padding: 12px 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .primary-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        /* Nav menu */
+        .nav-menu { display: flex; align-items: center; gap: 0.25rem; margin: 0 auto; }
+        .nav-item { position: relative; }
+        .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 1rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--fg);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.25s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            line-height: 1;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .nav-link:hover,
+        .nav-item.open .nav-link { background: var(--bg); color: var(--primary); }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .nav-link .chevron {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.25s ease;
+            opacity: 0.6;
+        }
+        .nav-item.open .nav-link .chevron { transform: rotate(180deg); }
+
+        /* 3-Column Submenu with Preview */
+        .submenu.submenu-with-preview {
+            position: fixed;
+            top: 96px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            gap: 12px;
+            padding: 12px;
+            min-width: 760px;
+            max-width: calc(100vw - 2rem);
+            border-radius: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25), 0 4px 10px -4px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            z-index: 1200;
+            overflow: hidden;
+        }
+        .top-menu-bar.full-width .submenu.submenu-with-preview { top: 76px; }
+        .nav-item.open .submenu.submenu-with-preview {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .submenu.submenu-with-preview > .submenu-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1 1 0;
+            min-width: 220px;
+        }
+        .submenu.submenu-with-preview > .submenu-col .submenu-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 10px;
+            white-space: nowrap;
+            transition: background-color .2s ease, color .2s ease;
+        }
+        .submenu.submenu-with-preview > .submenu-col .submenu-link i,
+        .submenu.submenu-with-preview > .submenu-col .submenu-link svg {
+            width: 16px;
+            height: 16px;
+            color: #df1783;
+            flex-shrink: 0;
+        }
+        .submenu.submenu-with-preview > .submenu-col .submenu-link:hover,
+        .submenu.submenu-with-preview > .submenu-col .submenu-link:focus-visible {
+            background: rgba(223, 23, 131, 0.08);
+            color: #df1783;
+        }
+        .submenu.submenu-with-preview > .submenu-preview {
+            position: relative;
+            flex: 0 0 auto;
+            width: 480px;
+            aspect-ratio: 16 / 9;
+            align-self: flex-start;
+            margin-left: 4px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        .submenu.submenu-with-preview > .submenu-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity .35s ease, transform .35s ease;
+        }
+        .submenu.submenu-with-preview > .submenu-preview img.is-swapping {
+            opacity: 0;
+            transform: scale(1.03);
+        }
+
+        /* ================= BACK TO TOP ================= */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+            box-shadow: var(--shadow-pink);
+        }
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #backToTopBtn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* ================= FOOTER ================= */
+        .site-footer {
+            position: relative;
+            z-index: 10;
+            padding: 6rem 1.5rem 3rem 1.5rem;
+            margin-top: auto;
+            background: var(--secondary);
+            border-radius: 0;
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+        .footer-heading {
+            color: #a0aec0 !important;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .footer-link {
+            color: white !important;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-link:hover { color: var(--primary) !important; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+            #appBrandNameDisplay { font-size: 1.25rem; }
+        }
+        @media (max-width: 768px) {
+            #appBrandNameDisplay { font-size: 1.15rem; }
+            #desktopCta { display: none; }
+            .top-menu-bar { width: calc(100% - 1rem); }
+            .top-menu-bar.full-width { padding: 0 1rem; }
+        }
+        @media (max-width: 480px) {
+            #appBrandNameDisplay { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#DF1783] selection:text-white">
+
+    <!-- ================= CURSOR FOLLOWER ================= -->
+    <div id="cursor-follower" aria-hidden="true"
+         class="fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[999] bg-[#DF1783]/60 hidden lg:block opacity-0 transition-opacity duration-300"></div>
+
+    <!-- ================= TOP MENU BAR ================= -->
+    <div class="top-menu-bar" id="topMenuBar">
+        <div class="top-menu-content">
+            <a href="/" class="logo-link inline-flex items-center gap-2 hover:opacity-90 transition-opacity duration-200" aria-label="EasyListings — Inicio">
+                <div class="logo-container">
+                    <img id="appLogo" src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo">
+                    <span id="appBrandNameDisplay">Easy<span class="brand-accent">Listings</span></span>
+                </div>
+            </a>
+
+            <nav class="nav-menu" aria-label="Main navigation">
+                <div class="nav-item">
+                    <a href="/" class="nav-link" data-i18n="nav_home">Inicio</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/acerca" class="nav-link" data-i18n="nav_about">Acerca de</a>
+                </div>
+
+                <div class="nav-item" id="funcionesNavItem">
+                    <button class="nav-link" id="funcionesToggle" aria-haspopup="true" aria-expanded="false">
+                        <span data-i18n="nav_features">Funciones</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+                    <div class="submenu submenu-with-preview" role="menu" aria-label="Funciones submenu">
+                        <div class="submenu-col">
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/sitio-web-inmobiliario-banner.webp?updatedAt=1795030721084">
+                                <i data-lucide="map-pin-house"></i><span data-i18n="sub_website">Sitio web inmobiliario</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/EasyListings-Studio.webp?updatedAt=1795030720922">
+                                <i data-lucide="share-2"></i><span data-i18n="sub_post">Publicación multicanal</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/personalizacion-banner-1.webp">
+                                <i data-lucide="palette"></i><span data-i18n="sub_seo">Personalización y SEO</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/embed-widget-1.webp">
+                                <i data-lucide="code-xml"></i><span data-i18n="sub_widget">Catálogo integrable</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/formulario-de-captacion.webp?updatedAt=1795030720798">
+                                <i data-lucide="bar-chart-3"></i><span data-i18n="sub_form">Formularios de captación</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/pipeline-banner.webp?updatedAt=1795030720801">
+                                <i data-lucide="users"></i><span data-i18n="sub_crm">CRM y gestión de clientes</span>
+                            </a>
+                        </div>
+                        <div class="submenu-col">
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/inbox-feature.webp">
+                                <i data-lucide="inbox"></i><span data-i18n="sub_inbox">Bandeja de mensajes</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/agenda-de-visitas.webp?updatedAt=1795030720832">
+                                <i data-lucide="calendar-check"></i><span data-i18n="sub_calendar">Agenda de visitas</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/analitica.webp?updatedAt=1795030720843">
+                                <i data-lucide="chart-no-axes-combined"></i><span data-i18n="sub_analytics">Analítica por propiedad</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/traduccion.webp?updatedAt=1795030720933">
+                                <i data-lucide="languages"></i><span data-i18n="sub_languages">Plataforma multilingüe</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/calculadora-banner.webp">
+                                <i data-lucide="calculator"></i><span data-i18n="sub_calculator">Calculadora hipotecaria</span>
+                            </a>
+                            <a href="/#features" class="submenu-link" role="menuitem"
+                               data-preview="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/AUTOMATION.webp?updatedAt=1795030720884">
+                                <i data-lucide="workflow"></i><span data-i18n="sub_automation">Automatizaciones</span>
+                            </a>
+                        </div>
+                        <div class="submenu-preview" aria-hidden="true">
+                            <img id="submenuPreviewImg"
+                                 src="https://ik.imagekit.io/bebell/Easy%20Listings/Banners-&-Backgrounds/easylistings-main-banner-pink.webp?updatedAt=1794600062403"
+                                 alt="Banner principal EasyListings" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="/planes" class="nav-link" data-i18n="nav_pricing">Planes</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/contacto" class="nav-link" data-i18n="nav_contact">Contacto</a>
+                </div>
+            </nav>
+
+            <div class="top-menu-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="flag" id="currentFlag">🇩🇴</span>
+                        <span id="currentCode">ES</span>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+                    <ul class="lang-menu" id="langMenu" role="listbox" aria-label="Seleccionar idioma">
+                        <li role="option" aria-selected="true"><a href="?lang=es" class="lang-option" data-flag="🇩🇴" data-code="ES" data-lang="es"><span class="flag">🇩🇴</span> ES</a></li>
+                        <li role="option" aria-selected="false"><a href="?lang=en" class="lang-option" data-flag="🇺🇸" data-code="EN" data-lang="en"><span class="flag">🇺🇸</span> EN</a></li>
+                        <li role="option" aria-selected="false"><a href="?lang=fr" class="lang-option" data-flag="🇫🇷" data-code="FR" data-lang="fr"><span class="flag">🇫🇷</span> FR</a></li>
+                        <li role="option" aria-selected="false"><a href="?lang=it" class="lang-option" data-flag="🇮🇹" data-code="IT" data-lang="it"><span class="flag">🇮🇹</span> IT</a></li>
+                        <li role="option" aria-selected="false"><a href="?lang=de" class="lang-option" data-flag="🇩🇪" data-code="DE" data-lang="de"><span class="flag">🇩🇪</span> DE</a></li>
+                        <li role="option" aria-selected="false"><a href="?lang=ru" class="lang-option" data-flag="🇷🇺" data-code="RU" data-lang="ru"><span class="flag">🇷🇺</span> RU</a></li>
+                        <li role="option" aria-selected="false"><a href="?lang=zh" class="lang-option" data-flag="🇨🇳" data-code="ZH" data-lang="zh"><span class="flag">🇨🇳</span> ZH</a></li>
+                        <li role="option" aria-selected="false"><a href="?lang=ja" class="lang-option" data-flag="🇯🇵" data-code="JA" data-lang="ja"><span class="flag">🇯🇵</span> JA</a></li>
+                    </ul>
+                </div>
+                <a href="/planes" class="primary-btn hidden sm:inline-flex" id="desktopCta" data-i18n="nav_cta">Activar Cuenta</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MAIN CONTENT PLACEHOLDER ================= -->
+    <main id="mainContent" style="min-height: 60vh;">
+        <!-- INSERT PAGE CONTENT HERE -->
+        <div style="height: 130vh;"></div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer gsap-reveal">
+        <div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-[#df1783] to-transparent z-30"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div class="flex flex-col gap-2 md:col-span-3">
+                <div class="flex items-center gap-2 text-white font-bold tracking-tight text-lg">
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/EasyListings.webp" alt="EasyListings Logo" class="w-8 h-8 object-contain rounded-lg">
+                    EasyListings
+                </div>
+                <div class="text-gray-300 text-sm mt-2" data-i18n="footer_tagline">Exhibe Tus Propiedades. Define Tu Marca.</div>
+                <div class="pt-2 flex flex-col items-start">
+                    <img src="https://ik.imagekit.io/bebell/Badge/google-partner-badge-pink.svg" class="self-start block h-12 w-auto opacity-100 hover:opacity-70 transition" alt="Google Partner Badge">
+                    <p class="text-[10px] text-slate-500 mt-4 mb-2 uppercase tracking-widest font-bold" data-i18n="foot_payment_title">Pagos Procesados Seguros</p>
+                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/ba7caa40fbb46e4528aaae8b0128896c5e8ff915.png" class="self-start block h-5 w-auto opacity-100 hover:opacity-70 transition" alt="Secure PayPal Payments">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-12 text-sm md:col-span-5 md:justify-center">
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_about">Producto</div>
+                    <a href="#" class="footer-link" data-i18n="nav_home">Inicio</a>
+                    <a href="/sobre-nosotros" class="footer-link" data-i18n="footer_about_us">Sobre nosotros</a>
+                    <a href="/planes" class="footer-link" data-i18n="nav_pricing">Planes</a>
+                    <a href="/contacto" class="footer-link" data-i18n="footer_contact">Contacto</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_community">Comunidad</div>
+                    <a href="https://ayuda.easylistings.website" class="footer-link" data-i18n="footer_help">Centro de Ayuda</a>
+                    <a href="https://afiliados.easylistings.website" class="footer-link" data-i18n="footer_affiliates">Afiliados</a>
+                    <a href="/blog" class="footer-link" data-i18n="footer_blog">Blog</a>
+                    <a href="/audiencia/agentes-inmobiliarias" class="footer-link" data-i18n="footer_agent">Agentes y brokers</a>
+                    <a href="/audiencia/agencias-inmobiliarias" class="footer-link" data-i18n="footer_agency">Agencias</a>
+                    <a href="/audiencia/constructoras-desarrolladoras" class="footer-link" data-i18n="footer_const">Constructoras</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="footer-heading" data-i18n="footer_col_features">Funciones</div>
+                    <a href="/funciones/resumen" class="footer-link" data-i18n="footer_feature_catalog">Catálogo Inmobiliario</a>
+                    <a href="/funciones/catalogo" class="footer-link" data-i18n="footer_feature_multichannel">Publicación Multicanal</a>
+                    <a href="/funciones/pipeline" class="footer-link" data-i18n="footer_feature_personalization">Personalización y SEO</a>
+                    <a href="/funciones/contactos" class="footer-link" data-i18n="footer_feature_widget">Catálogo Integrable</a>
+                    <a href="/funciones/formularios" class="footer-link" data-i18n="footer_feature_forms">Formularios de captación</a>
+                    <a href="/funciones/seo" class="footer-link" data-i18n="footer_feature_crm">CRM y Gestión de clientes</a>
+                    <a href="/funciones/bandeja" class="footer-link" data-i18n="footer_feature_inbox">Bandeja de Mensajes</a>
+                    <a href="/funciones/asistencia-ia" class="footer-link" data-i18n="footer_feature_booking">Agenda de visitas</a>
+                    <a href="/funciones/automatizaciones" class="footer-link" data-i18n="footer_feature_analytics">Analítica por Propiedad</a>
+                    <a href="#" class="footer-link" data-i18n="footer_feature_languages">Plataforma Multilingüe</a>
+                    <a href="/funciones/widget-incrustado" class="footer-link" data-i18n="footer_feature_calculator">Calculadora hipotecaria</a>
+                    <a href="/funciones/widget-incrustado" class="footer-link" data-i18n="footer_feature_automation">Automatizaciones</a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 mt-6 md:mt-0 w-full flex justify-center md:justify-end gsap-reveal">
+                <div class="w-full max-w-full sm:max-w-[360px] aspect-[3/2] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-6 relative overflow-hidden flex flex-col justify-center shadow-lg border border-[#df1783] transition-colors group" style="background: #f3f1eb;">
+                    <div class="relative z-10 w-[65%] sm:w-3/4 lg:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h4 class="font-bold text-lg sm:text-xl md:text-base lg:text-xl" style="color: var(--text);" data-i18n="support_title">Soporte Online</h4>
+                            <span class="text-[10px] md:text-[9px] lg:text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider" style="background: rgba(223,23,131,0.12); color: var(--primary); border: 1px solid rgba(223,23,131,0.3);">24/7</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-[10px] lg:text-sm mb-4 md:mb-2 lg:mb-4 leading-snug" style="color: var(--text);" data-i18n="support_text">Contáctenos si tiene alguna pregunta. Nuestro equipo de soporte está aquí para atenderte.</p>
+                        <button onclick="window.open('/soporte', '_blank')" class="bg-[#df1783] hover:bg-[#c0146f] text-white text-xs sm:text-sm md:text-[11px] lg:text-sm font-semibold py-2 px-3 md:py-1.5 md:px-2.5 lg:py-2 lg:px-3 rounded-lg flex items-center gap-2 transition-colors border border-[#df1783] shadow-sm w-fit">
+                            <i data-lucide="headset" class="w-4 h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white"></i>
+                            <span data-i18n="support_cta">Escríbanos</span>
+                        </button>
+                    </div>
+                    <img src="https://ik.imagekit.io/bebell/Easy%20Listings/Branding/pink-support-agent.webp" alt="24/7 Support" class="absolute bottom-0 right-0 h-full w-auto pt-[1.5rem] object-contain z-0 pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity" />
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs" style="border-top: 1px solid var(--text-light); color: var(--text-light);">
+            <div class="flex items-center gap-2">
+                <span data-i18n="footer_credit">Desarrollado en 🇩🇴 por Bebell Digital Solutions.</span>
+            </div>
+            <div class="text-center sm:text-right" data-i18n="footer_copyright">Copyright © 2026 EasyListings • Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <!-- ================= BACK TO TOP ================= -->
+    <button id="backToTopBtn" aria-label="Volver arriba">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        /* ---------- Shared i18n (extend per page) ---------- */
+        const I18N = {
+            es: {
+                metaTitle: "EasyListings 🏗️ | Plantilla Base",
+                nav_home: "Inicio",
+                nav_about: "Acerca de",
+                nav_features: "Funciones",
+                nav_pricing: "Planes",
+                nav_contact: "Contacto",
+                nav_cta: "Activar Cuenta",
+                sub_website: "Sitio web inmobiliario",
+                sub_post: "Publicación multicanal",
+                sub_seo: "Personalización y SEO",
+                sub_widget: "Catálogo integrable",
+                sub_form: "Formularios de captación",
+                sub_crm: "CRM y gestión de clientes",
+                sub_inbox: "Bandeja de mensajes",
+                sub_calendar: "Agenda de visitas",
+                sub_analytics: "Analítica por propiedad",
+                sub_languages: "Plataforma multilingüe",
+                sub_calculator: "Calculadora hipotecaria",
+                sub_automation: "Automatizaciones",
+                footer_tagline: "Exhibe Tus Propiedades. Define Tu Marca.",
+                footer_col_about: "Producto",
+                footer_col_community: "Comunidad",
+                footer_col_features: "Funciones",
+                footer_about_us: "Sobre nosotros",
+                footer_contact: "Contacto",
+                footer_help: "Centro de Ayuda",
+                footer_affiliates: "Afiliados",
+                footer_blog: "Blog",
+                footer_agent: "Agentes y brokers",
+                footer_agency: "Agencias",
+                footer_const: "Constructoras",
+                foot_payment_title: "Pagos Procesados Seguros",
+                footer_feature_catalog: "Catálogo Inmobiliario",
+                footer_feature_multichannel: "Publicación Multicanal",
+                footer_feature_personalization: "Personalización y SEO",
+                footer_feature_widget: "Catálogo Integrable",
+                footer_feature_forms: "Formularios de captación",
+                footer_feature_crm: "CRM y Gestión de clientes",
+                footer_feature_inbox: "Bandeja de Mensajes",
+                footer_feature_booking: "Agenda de visitas",
+                footer_feature_analytics: "Analítica por Propiedad",
+                footer_feature_languages: "Plataforma Multilingüe",
+                footer_feature_calculator: "Calculadora hipotecaria",
+                footer_feature_automation: "Automatizaciones",
+                support_title: "Soporte Online",
+                support_text: "Contáctenos si tiene alguna pregunta. Nuestro equipo de soporte está aquí para atenderte.",
+                support_cta: "Escríbanos",
+                footer_credit: "Desarrollado en 🇩🇴 por Bebell Digital Solutions.",
+                footer_copyright: "Copyright © 2026 EasyListings • Todos los derechos reservados."
+            },
+            en: {
+                metaTitle: "EasyListings 🏗️ | Base Template",
+                nav_home: "Home",
+                nav_about: "About",
+                nav_features: "Features",
+                nav_pricing: "Pricing",
+                nav_contact: "Contact",
+                nav_cta: "Activate Account",
+                sub_website: "Real estate website",
+                sub_post: "Multichannel publishing",
+                sub_seo: "Customization & SEO",
+                sub_widget: "Embeddable catalog",
+                sub_form: "Lead capture forms",
+                sub_crm: "CRM & client management",
+                sub_inbox: "Message inbox",
+                sub_calendar: "Viewing schedule",
+                sub_analytics: "Per-property analytics",
+                sub_languages: "Multilingual platform",
+                sub_calculator: "Mortgage calculator",
+                sub_automation: "Automations",
+                footer_tagline: "Showcase Your Properties. Define Your Brand.",
+                footer_col_about: "Product",
+                footer_col_community: "Community",
+                footer_col_features: "Features",
+                footer_about_us: "About us",
+                footer_contact: "Contact",
+                footer_help: "Help Center",
+                footer_affiliates: "Affiliates",
+                footer_blog: "Blog",
+                footer_agent: "Agents",
+                footer_agency: "Agencies",
+                footer_const: "Developers",
+                foot_payment_title: "Secure Payment Processing",
+                footer_feature_catalog: "Property Catalog",
+                footer_feature_multichannel: "Multichannel Publishing",
+                footer_feature_personalization: "Customization & SEO",
+                footer_feature_widget: "Embeddable Catalog",
+                footer_feature_forms: "Lead Capture Forms",
+                footer_feature_crm: "CRM & Client Management",
+                footer_feature_inbox: "Message Inbox",
+                footer_feature_booking: "Viewing Schedule",
+                footer_feature_analytics: "Per-Property Analytics",
+                footer_feature_languages: "Multilingual Platform",
+                footer_feature_calculator: "Mortgage Calculator",
+                footer_feature_automation: "Automations",
+                support_title: "Online Support",
+                support_text: "Contact us if you have any questions. Our support team is here to help you.",
+                support_cta: "Write to us",
+                footer_credit: "Developed in 🇩🇴 by Bebell Digital Solutions.",
+                footer_copyright: "Copyright © 2026 EasyListings • All rights reserved."
+            }
+            // Add fr, it, de, ru, zh, ja here (same shared keys)
+        };
+
+        const LANG_META = {
+            es: { flag: "🇩🇴", code: "ES" },
+            en: { flag: "🇺🇸", code: "EN" },
+            fr: { flag: "🇫🇷", code: "FR" },
+            it: { flag: "🇮🇹", code: "IT" },
+            de: { flag: "🇩🇪", code: "DE" },
+            ru: { flag: "🇷🇺", code: "RU" },
+            zh: { flag: "🇨🇳", code: "ZH" },
+            ja: { flag: "🇯🇵", code: "JA" }
+        };
+
+        /* ---------- Language application ---------- */
+        function applyLanguage(lang) {
+            const dict = I18N[lang] || I18N.es;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.textContent = dict[key];
+            });
+            if (dict.metaTitle) document.title = dict.metaTitle;
+            document.documentElement.lang = lang;
+
+            const meta = LANG_META[lang] || LANG_META.es;
+            document.getElementById('currentFlag').textContent = meta.flag;
+            document.getElementById('currentCode').textContent = meta.code;
+
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                const isMatch = opt.dataset.lang === lang;
+                opt.parentElement.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+            });
+
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        /* ---------- Init i18n ---------- */
+        (function () {
+            const saved = localStorage.getItem('preferredLang') || 'es';
+            applyLanguage(saved);
+        })();
+
+        /* ---------- Lucide icons ---------- */
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+
+        /* ---------- Top menu full-width on scroll ---------- */
+        const topMenuBar = document.getElementById('topMenuBar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) topMenuBar.classList.add('full-width');
+            else topMenuBar.classList.remove('full-width');
+        }, { passive: true });
+
+        /* ---------- Language dropdown ---------- */
+        const langDropdown = document.getElementById('langDropdown');
+        const langTrigger = document.getElementById('langTrigger');
+
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langDropdown.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.dataset.lang;
+                applyLanguage(lang);
+                langDropdown.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        /* ---------- Funciones submenu: hover + click ---------- */
+        const funcionesNavItem = document.getElementById('funcionesNavItem');
+        const funcionesToggle = document.getElementById('funcionesToggle');
+
+        if (funcionesNavItem && funcionesToggle) {
+            funcionesNavItem.addEventListener('mouseenter', () => {
+                funcionesNavItem.classList.add('open');
+                funcionesToggle.setAttribute('aria-expanded', 'true');
+            });
+            funcionesNavItem.addEventListener('mouseleave', () => {
+                funcionesNavItem.classList.remove('open');
+                funcionesToggle.setAttribute('aria-expanded', 'false');
+            });
+            funcionesToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isOpen = funcionesNavItem.classList.toggle('open');
+                funcionesToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+
+        /* ---------- Submenu preview image swap ---------- */
+        const submenuPreviewImg = document.getElementById('submenuPreviewImg');
+        document.querySelectorAll('.submenu-link[data-preview]').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                const src = link.getAttribute('data-preview');
+                if (!src || !submenuPreviewImg) return;
+                submenuPreviewImg.classList.add('is-swapping');
+                const preload = new Image();
+                preload.onload = () => {
+                    setTimeout(() => {
+                        submenuPreviewImg.src = src;
+                        submenuPreviewImg.classList.remove('is-swapping');
+                    }, 160);
+                };
+                preload.src = src;
+            });
+        });
+
+        /* ---------- Back to top ---------- */
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) backToTopBtn.classList.add('show');
+            else backToTopBtn.classList.remove('show');
+        }, { passive: true });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ---------- Cursor follower ---------- */
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursorFollower && window.matchMedia('(min-width: 1024px)').matches) {
+            let raf = null;
+            window.addEventListener('mousemove', (e) => {
+                cursorFollower.style.opacity = '1';
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(() => {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                });
+            });
+            document.addEventListener('mouseleave', () => {
+                cursorFollower.style.opacity = '0';
+            });
+        }
+
+        /* ---------- GSAP reveals ---------- */
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            document.querySelectorAll('.gsap-reveal').forEach(el => {
+                gsap.fromTo(el,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+                    }
+                );
+            });
+        }
+    </script>
+</body>
+</html>
